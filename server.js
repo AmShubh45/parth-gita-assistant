@@ -138,7 +138,7 @@ class KrishnaSpeechProcessor {
             throw new Error('Gemini AI not initialized');
         }
         this.model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
+            model: "gemini-flash-latest",
             systemInstruction: KRISHNA_SYSTEM_INSTRUCTIONS
         });
         this.knowledgeBase = knowledgeBase;
