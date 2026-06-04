@@ -3,14 +3,28 @@
 Thumbs.db
 *.log
 
-# Node.js
+# Node.js (legacy)
 node_modules/
 npm-debug.log
 yarn-error.log
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+.pytest_cache/
+htmlcov/
+
 # Environment & Secrets
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 
@@ -18,3 +32,9 @@ yarn-error.log
 dist/
 build/
 coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

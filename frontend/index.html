@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>पार्थ - श्री कृष्ण सहायक</title>
+    <meta name="description" content="पार्थ - भगवद्गीता पर आधारित AI वॉइस असिस्टेंट। श्री कृष्ण से अपने जीवन के प्रश्नों के उत्तर पाएं।">
+    <meta name="keywords" content="Bhagavad Gita, Krishna, AI Assistant, Voice Chat, Spiritual Guidance">
+    <meta property="og:title" content="पार्थ - श्री कृष्ण AI सहायक">
+    <meta property="og:description" content="भगवद्गीता के ज्ञान से अपने जीवन के प्रश्नों के उत्तर पाएं।">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="om-symbol">🕉</div>
+
+    <div class="connection-status" id="connectionStatus">
+        <span class="disconnected">कनेक्ट हो रहा है...</span>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <div class="krishna-symbol">🪶</div>
+            <h1 class="title">पार्थ</h1>
+            <p class="subtitle">अपने मन के प्रश्न • गीता के उत्तर</p>
+        </header>
+
+        <section class="main-interface">
+            <div class="status-text" id="statusText">
+                हे पार्थ! तुम्हारे संशयों को दूर करने मैं उपस्थित हूँ। अपना प्रश्न बोलो।
+            </div>
+
+            <button id="voiceButton" class="voice-button" onclick="toggleVoiceRecording()">
+                <div class="mic-icon">🎤</div>
+            </button>
+
+            <div class="audio-visualizer" id="audioVisualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="loading-spinner" id="loadingSpinner"></div>
+
+            <div class="response-area" id="responseArea">
+                <div class="krishna-message">
+                    <div class="krishna-greeting">॥ श्री कृष्ण कहते हैं ॥</div>
+                    प्रिय पार्थ, मैं यहां आपके हर प्रश्न का उत्तर देने के लिए हूं। जीवन की कोई भी चुनौती हो, धर्म की कोई भी उलझन हो, या मन में कोई भी दुविधा हो - निःसंकोच पूछें। गीता का ज्ञान सदैव आपके साथ है।
+                    <div class="verse-section">
+                        <div class="sanskrit-text">सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज</div>
+                        सभी धर्मों को छोड़कर मेरी शरण में आओ
+                    </div>
+                </div>
+            </div>
+
+            <div class="volume-control">
+                <span>🔊</span>
+                <input type="range" id="volumeSlider" class="volume-slider"
+                       min="0" max="1" step="0.1" value="0.8" onchange="setVolume(this.value)">
+                <span>आवाज़</span>
+            </div>
+
+            <nav class="controls">
+                <button class="control-btn" onclick="clearConversation()">
+                    🗑️ साफ़ करें
+                </button>
+                <button class="control-btn" onclick="getRandomVerse()">
+                    📿 श्लोक सुनें
+                </button>
+                <button class="control-btn" onclick="stopSpeaking()" id="stopBtn" style="display: none;">
+                    ⏹️ रोकें
+                </button>
+            </nav>
+        </section>
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
