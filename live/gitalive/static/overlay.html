@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gita Sarathi Live · overlay</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Tiro+Devanagari+Hindi&display=swap">
+<style>
+/* A 1920x1080 broadcast page for OBS. It scales itself down in a smaller window (preview).
+   Scenes: verse (recitation), asking (a viewer's question arrived), answer. Header and footer stay. */
+:root{
+  --night:#070B1A; --night2:#0D1530; --ink:#F2EEDF; --muted:#A3AECF; --line:rgba(255,255,255,.10);
+  --gold:#E8A33D; --gold-soft:rgba(232,163,61,.14); --peacock:#5CC4CB; --peacock-soft:rgba(92,196,203,.12);
+  --alert:#F27A8C; --alert-soft:rgba(242,122,140,.14);
+  --f-ui:"Mukta","Noto Sans Devanagari",system-ui,sans-serif;
+  --f-verse:"Tiro Devanagari Sanskrit","Noto Serif Devanagari",serif;
+  --f-head:"Tiro Devanagari Hindi","Noto Serif Devanagari",Georgia,serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--night);overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;color:var(--ink);font-family:var(--f-ui);
+  background:
+    radial-gradient(ellipse 900px 520px at 50% 52%, rgba(232,163,61,.10), transparent 70%),
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff8 50%, transparent 51%), radial-gradient(1px 1px at 28% 72%, #fff6 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 66% 14%, #fff7 50%, transparent 51%), radial-gradient(1px 1px at 82% 64%, #fff5 50%, transparent 51%),
+    radial-gradient(1px 1px at 91% 26%, #fff6 50%, transparent 51%), radial-gradient(1.5px 1.5px at 6% 86%, #fff5 50%, transparent 51%),
+    radial-gradient(1px 1px at 47% 8%, #fff5 50%, transparent 51%), radial-gradient(1px 1px at 58% 90%, #fff4 50%, transparent 51%),
+    linear-gradient(180deg, var(--night) 0%, var(--night2) 100%)}
+
+header{position:absolute;left:80px;right:80px;top:44px;display:flex;justify-content:space-between;align-items:flex-start}
+.brand .mark{font-family:var(--f-head);font-size:58px;line-height:1;color:var(--gold)}
+.brand .sub{margin-top:8px;font-size:21px;letter-spacing:.24em;color:var(--muted);display:flex;align-items:center;gap:14px}
+.brand .live{color:#fff;background:#D93A4F;border-radius:6px;padding:1px 10px;letter-spacing:.12em;font-weight:600;font-size:18px}
+.askbox{text-align:right;background:var(--gold-soft);border:1px solid rgba(232,163,61,.35);border-radius:18px;padding:14px 22px}
+.askbox .t{font-size:24px;font-weight:600}
+.askbox .t code{font-family:var(--f-ui);background:var(--gold);color:#1B1203;border-radius:8px;padding:0 10px;font-weight:700}
+.askbox .e{font-size:20px;color:var(--muted);margin-top:2px}
+
+main{position:absolute;left:80px;right:80px;top:200px;bottom:120px}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transition:opacity .6s ease}
+.scene.on{opacity:1}
+[hidden]{display:none !important}
+
+/* recitation */
+#verse{align-items:center;text-align:center;--fs:1}
+.meta{display:flex;gap:28px;align-items:baseline;justify-content:center;font-size:calc(30px*var(--fs))}
+.meta .hi{font-family:var(--f-head);color:var(--gold)}
+.meta .en{color:var(--muted);font-size:calc(23px*var(--fs))}
+.who{margin-top:6px;font-size:calc(24px*var(--fs));color:var(--muted)}
+.shloka{font-family:var(--f-verse);font-size:calc(66px*var(--fs));line-height:1.55;white-space:pre-line;margin:calc(28px*var(--fs)) 0 calc(10px*var(--fs));color:#F8F1DC;text-shadow:0 2px 24px rgba(232,163,61,.18)}
+.translit{font-family:var(--f-verse);font-style:italic;font-size:calc(28px*var(--fs));color:var(--muted);white-space:pre-line;line-height:1.5}
+.trans{margin-top:calc(30px*var(--fs));max-width:1450px;text-align:left;background:rgba(255,255,255,.05);border-left:5px solid var(--gold);border-radius:14px;padding:calc(20px*var(--fs)) calc(28px*var(--fs))}
+.trans p{margin:0;font-size:calc(34px*var(--fs));line-height:1.45}
+.trans small{display:block;margin-top:8px;font-size:calc(20px*var(--fs));color:var(--muted)}
+.review{margin-top:24px;font-size:24px;color:var(--muted)}
+
+/* a question arrives */
+#asking{align-items:center;text-align:center}
+#asking .by{font-size:30px;color:var(--gold)}
+#asking .q{font-size:54px;line-height:1.35;max-width:1500px;margin-top:18px;font-weight:500}
+#asking .wait{margin-top:34px;font-size:28px;color:var(--muted);display:flex;gap:12px;align-items:center}
+.dots i{display:inline-block;width:12px;height:12px;margin:0 4px;border-radius:50%;background:var(--gold);animation:p 1.2s infinite}
+.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes p{50%{opacity:.2}}
+
+/* the answer */
+#answer{flex-direction:row;gap:48px;align-items:stretch;justify-content:flex-start;--fs:1}
+.qcol{flex:0 0 520px;display:flex;flex-direction:column;justify-content:center}
+.qcol .lab{font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.qcol .name{font-size:30px;margin-top:6px}
+.qcol .q{margin-top:16px;background:var(--peacock-soft);border:1px solid rgba(92,196,203,.3);border-radius:22px 22px 22px 6px;padding:22px 26px;font-size:34px;line-height:1.4}
+.acol{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.opening{font-size:calc(32px*var(--fs));line-height:1.4;margin:0 0 calc(18px*var(--fs))}
+.card{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:calc(16px*var(--fs)) calc(24px*var(--fs));margin-bottom:calc(14px*var(--fs))}
+.card .head{display:flex;justify-content:space-between;font-size:calc(21px*var(--fs));color:var(--muted)}
+.card .head b{color:var(--gold);font-weight:600}
+.card .sa{font-family:var(--f-verse);font-size:calc(31px*var(--fs));line-height:1.5;white-space:pre-line;text-align:center;margin:calc(8px*var(--fs)) 0;color:#F8F1DC}
+.card .mean{font-size:calc(27px*var(--fs));line-height:1.42;margin:calc(6px*var(--fs)) 0 0}
+.card .apply{font-size:calc(25px*var(--fs));line-height:1.42;margin-top:calc(10px*var(--fs));background:var(--peacock-soft);border-radius:12px;padding:calc(8px*var(--fs)) calc(16px*var(--fs))}
+.closing{font-size:calc(28px*var(--fs));line-height:1.4;margin:calc(6px*var(--fs)) 0 0;color:#E9E2CC}
+.crisis{background:var(--alert-soft);border:2px solid var(--alert);border-radius:20px;padding:26px 30px;font-size:30px;line-height:1.45;white-space:pre-line}
+.crisis .lines{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;white-space:normal}
+.crisis .lines span{background:var(--alert);color:#2A0A10;font-weight:700;border-radius:12px;padding:8px 18px}
+
+footer{position:absolute;left:80px;right:80px;bottom:40px;display:flex;justify-content:space-between;align-items:center;gap:40px;font-size:22px;color:var(--muted)}
+.prog{flex:0 0 640px}
+.prog .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:10px;overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .8s}
+.queue{text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.queue b{color:var(--ink);font-weight:600}
+#sound{position:absolute;left:50%;top:16px;transform:translateX(-50%);background:#000c;color:#fff;border:1px solid var(--gold);border-radius:99px;padding:8px 18px;font-size:20px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="stage">
+  <header>
+    <div class="brand">
+      <div class="mark">गीता सारथी</div>
+      <div class="sub">GITA SARATHI <span class="live">● LIVE</span></div>
+    </div>
+    <div class="askbox">
+      <div class="t">प्रश्न पूछें: चैट में लिखें <code id="trig">@gitalive</code> और अपना सवाल</div>
+      <div class="e">Ask anything: type <span id="trig2">@gitalive</span> + your question in chat · हिंदी · Hinglish · English</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="scene on" id="verse">
+      <div class="meta"><span class="hi" id="v-hi">अध्याय · श्लोक</span><span class="en" id="v-en"></span></div>
+      <div class="who" id="v-who"></div>
+      <p class="shloka" lang="sa" id="v-sa"></p>
+      <p class="translit" id="v-tl"></p>
+      <div class="trans" id="v-trbox"><p id="v-tr" lang="en"></p><small id="v-src"></small></div>
+      <div class="review" id="v-review" hidden>अनुवाद की जाँच चल रही है · translation under review</div>
+    </section>
+
+    <section class="scene" id="asking">
+      <div class="by" id="a-by"></div>
+      <div class="q" id="a-q"></div>
+      <div class="wait"><span class="dots"><i></i><i></i><i></i></span><span>गीता में उत्तर खोज रहे हैं · Finding the verses</span></div>
+    </section>
+
+    <section class="scene" id="answer">
+      <div class="qcol"><div class="lab">प्रश्न · Question</div><div class="name" id="r-name"></div><div class="q" id="r-q"></div></div>
+      <div class="acol" id="r-body"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="prog"><span id="p-text">भगवद्गीता · 18 अध्याय · 700 श्लोक</span><div class="bar"><i id="p-bar"></i></div></div>
+    <div class="queue" id="queue">प्रश्न पूछने के लिए चैट में <b>@gitalive</b> लिखें</div>
+  </footer>
+  <button id="sound" hidden>🔊 Click to turn sound on</button>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const stage = $("stage");
+  const fit = () => { const s = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `translate(${(innerWidth - 1920 * s) / 2}px, ${(innerHeight - 1080 * s) / 2}px) scale(${s})`; };
+  addEventListener("resize", fit); fit();
+
+  const SP = { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" };
+  const voice = new Audio(), music = new Audio();
+  music.loop = true; music.volume = 0.12;
+  let current = null, ws = null, timer = 0;
+
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function scene(id) { document.querySelectorAll(".scene").forEach((s) => s.classList.toggle("on", s.id === id)); }
+  // shrink a scene's text until it fits (long answers)
+  function shrink(box, scope) { let f = 1; scope.style.setProperty("--fs", f); while (box.scrollHeight > box.clientHeight + 2 && f > 0.55) { f -= 0.05; scope.style.setProperty("--fs", f.toFixed(2)); } }
+
+  function showVerse(m) {
+    const v = m.verse;
+    $("v-hi").textContent = `अध्याय ${v.chapter} · श्लोक ${v.verse} · ${v.chapter_name_sanskrit}`;
+    $("v-en").textContent = `Chapter ${v.chapter} · Verse ${v.verse} · ${v.chapter_name}`;
+    $("v-who").textContent = `${v.speaker_hindi || SP[v.speaker] || v.speaker} → ${v.listener_hindi || SP[v.addressed_to] || v.addressed_to}`;
+    $("v-sa").textContent = v.sanskrit; $("v-tl").textContent = v.transliteration;
+    $("v-tr").textContent = v.translation || ""; $("v-src").textContent = v.translation ? `Translation · ${v.translation_source}` : "";
+    $("v-trbox").hidden = !v.translation; $("v-review").hidden = !!v.translation;
+    if (m.progress) {
+      $("p-text").textContent = `श्लोक ${m.progress.index} / ${m.progress.total} · अध्याय ${v.chapter}`;
+      $("p-bar").style.width = `${(100 * m.progress.index / m.progress.total).toFixed(2)}%`;
+    }
+    scene("verse");
+    shrink($("verse"), $("verse"));
+  }
+  function showAsking(m) { $("a-by").textContent = `🙏 ${m.name} पूछते हैं · asks`; $("a-q").textContent = m.question; scene("asking"); }
+  function showAnswer(m) {
+    const a = m.answer, body = $("r-body");
+    $("r-name").textContent = m.name; $("r-q").textContent = m.question;
+    body.replaceChildren();
+    if (a.kind === "crisis" || a.kind === "harm_others") {
+      const box = el("div", "crisis", a.opening); const lines = el("div", "lines");
+      ["Tele-MANAS 14416", "KIRAN 1800-599-0019", "112"].forEach((t) => lines.append(el("span", null, t)));
+      box.append(lines); body.append(box);
+    } else {
+      if (a.opening) body.append(el("p", "opening", a.opening));
+      (a.verses || []).forEach((v) => {
+        const c = el("div", "card"), head = el("div", "head");
+        const left = el("span"); left.append(el("b", null, v.id), document.createTextNode(` · ${a.lang === "en" ? "Chapter" : "अध्याय"} ${v.chapter}`));
+        head.append(left, el("span", null, a.lang === "en" ? `${v.speaker} → ${v.addressed_to}` : `${SP[v.speaker] || v.speaker} → ${SP[v.addressed_to] || v.addressed_to}`));
+        c.append(head, el("p", "sa", v.sanskrit));
+        if (v.meaning) c.append(el("p", "mean", v.meaning)); else if (v.translation) c.append(el("p", "mean", v.translation));
+        if (v.application) c.append(el("div", "apply", v.application));
+        body.append(c);
+      });
+      if (a.closing) body.append(el("p", "closing", a.closing));
+    }
+    scene("answer");
+    shrink(body, $("answer"));
+  }
+
+  function done(id) { if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: "done", id })); }
+  function play(m) {
+    clearTimeout(timer); voice.pause();
+    const urls = (m.audio || []).slice(); let finished = false;
+    const end = () => { if (finished) return; finished = true; music.volume = 0.12; if (current === m) done(m.id); };
+    const fallback = () => { timer = setTimeout(end, Math.max(4, m.seconds || 15) * 1000); };
+    if (!urls.length || m.late) return fallback();
+    const next = () => {
+      if (current !== m) return;
+      const u = urls.shift(); if (!u) return end();
+      voice.src = u; music.volume = 0.05;
+      voice.onended = next; voice.onerror = next;
+      voice.play().then(() => { $("sound").hidden = true; }).catch(() => { $("sound").hidden = false; voice.onended = voice.onerror = null; fallback(); });
+    };
+    next();
+  }
+  $("sound").onclick = () => { $("sound").hidden = true; if (music.src) music.play().catch(() => {}); voice.play().catch(() => {}); };
+
+  function onMessage(m) {
+    if (m.type === "config") {
+      if (m.trigger) { $("trig").textContent = m.trigger; $("trig2").textContent = m.trigger; }
+      if (m.music && !music.src) { music.src = "/music"; music.play().catch(() => {}); }
+      return;
+    }
+    if (m.type === "queue") {
+      const w = m.waiting || [];
+      $("queue").innerHTML = "";
+      if (w.length) { $("queue").append("अगले प्रश्न · Next: "); const b = el("b", null, w.slice(0, 4).join(" · ")); $("queue").append(b); }
+      else { $("queue").append("प्रश्न पूछने के लिए चैट में "); $("queue").append(el("b", null, $("trig").textContent)); $("queue").append(" लिखें"); }
+      return;
+    }
+    current = m;
+    if (m.type === "verse") showVerse(m);
+    else if (m.type === "asking") { showAsking(m); return; }
+    else if (m.type === "answer") showAnswer(m);
+    play(m);
+  }
+  function connect() {
+    ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws`);
+    ws.onmessage = (ev) => { try { onMessage(JSON.parse(ev.data)); } catch (e) { console.warn(e); } };
+    ws.onclose = () => setTimeout(connect, 2000);
+  }
+  connect();
+})();
+</script>
+</body>
+</html>

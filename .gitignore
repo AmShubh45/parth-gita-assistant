@@ -23,3 +23,13 @@ __pycache__/
 .venv/
 .env
 .pytest_cache/
+
+# Gita Sarathi Live (live/): secrets and local state stay on the streaming laptop
+!.env.example
+live/cache/
+live/logs/
+live/state.json
+live/token.json
+live/client_secret*.json
+live/assets/*.mp3
+live/.venv/

@@ -65,6 +65,15 @@ def _shloka(text: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[।॥]+", "।", text)).strip()
 
 
+def recitation(v, chapter_name: str) -> str:
+    """What the live stream says for one verse: the Sanskrit, then the authentic translation (one TTS piece)."""
+    num = v.ref.split(".")[1]
+    parts = [f"Chapter {v.chapter}, verse {num}.", _shloka(v.sanskrit)]
+    if v.translation:
+        parts.append(f"{v.speaker} says: {v.translation}")
+    return "\n\n".join(parts)
+
+
 def script(answer: dict) -> str:
     return " ".join(segments(answer))
 

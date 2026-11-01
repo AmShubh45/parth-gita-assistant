@@ -67,13 +67,14 @@ question
   - **Limits:** a daily voice-session cap, a per-visitor rate limit, and 10-minute sessions.
   - **Honest limit:** spoken words are grounded and instructed, not verified word by word like the spoken answers above.
 - **Testing:** `scripts/e2e_voice_mock.py` drives both modes in Chromium with a fake microphone and mocked Gemini: record → auto-stop → transcript → cards → every piece played → conversation mode's second question; and Live's half duplex, echo handling and tool call.
-- **Parth Live** (YouTube, 24/7).
-  - Built like the MarketLab live channel: a separate folder on the laptop, OBS with its own **ParthLive** profile and **GitaLive** scene, controlled from Python over OBS WebSocket. The stream key is in that folder's `.env`, and a Windows Task Scheduler autopilot starts it.
-  - OBS shows a Browser Source page from the Parth server.
-  - **Recitation loop:** the Gita in order, verse by verse. Sanskrit is shown and spoken, followed by the translation and a short context card ("Krishna to Arjuna, after Arjuna lays down his bow…").
-  - **Viewer questions:** a chat message containing `@gitalive` (or `!gita`) passes moderation and runs through the same pipeline. It appears on stream as "Asked by <name>", spoken and shown with its verses, then the recitation resumes.
-  - **Chat reading:** YouTube Data API `liveChatMessages.streamList`, a long-lived connection at 5 quota units per call. This fits the free 10,000 units a day.
-  - **Limits:** per-viewer rate limits, de-duplication, a profanity filter, and a cap on answers per hour.
+- **Gita Sarathi Live** (YouTube, 24/7, built: `live/`, setup in [live/README.md](../live/README.md)).
+  - Runs on the laptop next to OBS, like the cricket stream. A local page (`/overlay`, 1920×1080) is the OBS Browser Source; OBS gets its own **GitaLive** profile, scene collection and scene, created over OBS WebSocket, and a watchdog keeps it streaming (and restarts OBS). A Windows Task Scheduler autopilot starts everything at sign-in.
+  - **The conductor decides what is on air** (the page only plays it): recitation in order, resuming where it stopped; between verses, viewer questions. With no page connected it keeps time itself.
+  - **Recitation:** `GET /api/recite` gives every verse with one signed piece (chapter and verse, the Sanskrit, then the verified translation; Sanskrit only while a translation is unverified). Each piece is voiced once through `/api/speak` and kept on the laptop for ever, with a daily ration of new recordings; until all 701 are recorded the stream loops over the recorded ones.
+  - **Viewer questions:** a chat message with `@gitalive` (or `!gita`, `#gitalive`) passes moderation (links, abuse, length, repeats, one per viewer every 5 minutes, a per-hour cap, Super Chats and moderators first) and goes through `/api/ask`, the same pipeline as the website. It appears as "Asha asks …", then the answer with its verses, spoken. Crisis questions get helplines.
+  - **Chat reading:** `liveChatMessages.list` (5 units) with a quota governor that spreads the free 10,000 units a day (Pacific-time reset), reading faster for ten minutes after a question. The sign-in token is refreshed over plain HTTP.
+  - **Budgets:** the laptop sends `X-Live-Token` (`PARTH_LIVE_TOKEN` on Render) and gets separate AI and TTS budgets, so the stream and the website never use up each other's.
+  - **Testing:** `tests/test_live.py` (moderation, quota, chat parsing with a mocked API, the conductor, OBS against a fake obs-websocket server, the endpoints) and `scripts/e2e_live_overlay.py` (the overlay in Chromium: verses with voice, a question answered, recitation resumes).
 
 ## 5. Stack
 
@@ -81,7 +82,7 @@ question
 - **Knowledge base:** versioned JSON in the repo, rebuilt by scripts and gated by tests. Embeddings are precomputed at deploy time (701 verses fit in memory; no vector database needed).
 - **Models:**
   - Gemini for selection, writing, verification and embeddings, on a separate key from Samajh.
-  - Gemini TTS for spoken answers (browser speech as the fallback); Google Cloud TTS (as in the cricket engine) for Parth Live speech.
+  - Gemini TTS for spoken answers and the live stream's recitation (browser speech as the website's fallback).
 - **Storage:** Postgres (Neon) for questions, answers, feedback and moderation logs. No personal data beyond what the user types; questions are stored anonymously.
 - **Observability:** Langfuse traces per stage, plus a daily evaluation run.
 - **Deploy:** Render (Docker).
@@ -107,9 +108,9 @@ A change that lowers any of these does not ship.
 
 1. **Knowledge base L1–L3**: done. Authentic Swarupananda translation (L2): 487/700 verses verified.
 2. **Remaining translations:** review the 213 unverified verses against page images, and add Telang and Besant. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
-3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 86 tests, plus the browser end-to-end voice check.
+3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 105 tests (86 for the app, 19 for the live stream), plus browser end-to-end checks for voice and the live overlay.
 4. **Web app**: done and deployed on Render as Gita Sarathi, with spoken answers, conversation mode and Live (beta). The Node.js version is kept on the `legacy-node` branch.
-5. **Parth Live**: OBS automation, recitation loop and YouTube chat Q&A.
+5. **Gita Sarathi Live**: built (`live/`): OBS automation, recitation loop and YouTube chat Q&A. Next: run it on the laptop.
 6. **Growth**: voice, more languages, sharing cards.
 
 ## 9. Needed from the owner

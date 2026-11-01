@@ -10,3 +10,5 @@ services:
         sync: false
       - key: PARTH_DAILY_AI_LIMIT  # AI-written answers per day; after this Parth shows verses only
         value: "300"
+      - key: PARTH_LIVE_TOKEN      # optional: the YouTube stream's secret (same as LIVE_TOKEN in live/.env)
+        sync: false

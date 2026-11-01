@@ -5,6 +5,8 @@ POST /api/ask          {"question": "..."} -> grounded answer (JSON), with the p
 POST /api/voice        {"audio": base64 WAV, "history": [...]} -> transcript + grounded answer, to be spoken
 POST /api/speak        {"text", "lang", "sig"} -> WAV of a piece of an answer this server wrote (204: use the browser voice)
 POST /api/live/token   ephemeral, config-locked token for a real-time Gemini Live session (beta)
+GET  /api/recite       every verse with its signed recitation piece, for the YouTube live stream
+                       (the stream's laptop sends X-Live-Token: it gets its own AI and TTS budgets)
 GET  /api/verses?q=    verified verses for the voice model's find_verses tool (and the page's cards)
 POST /api/triage       {"text": "..."} -> crisis check on what the person said
 POST /api/live/event   voice-session milestones from the page, logged (no audio, no transcripts)
@@ -52,6 +54,12 @@ speaker = speech.Speaker(_gemini.key)
 turn_limiter = RateLimiter(per_minute=6)     # spoken questions per visitor per minute
 speak_limiter = RateLimiter(per_minute=40)   # spoken answer pieces per visitor per minute
 MAX_WAV = 1_100_000                           # about 34 s of 16 kHz mono 16-bit audio
+# The YouTube live stream (live/ on the streaming laptop) identifies itself with this shared secret and gets
+# separate budgets, so the stream never uses up website visitors' answers or voice, and vice versa.
+LIVE_TOKEN = os.environ.get("PARTH_LIVE_TOKEN", "").strip()
+live_budget = DailyBudget(int(os.environ.get("PARTH_LIVE_AI_LIMIT", "100")))
+live_speaker = speech.Speaker(_gemini.key, daily_limit=int(os.environ.get("PARTH_LIVE_TTS_LIMIT", "300")))
+live_limiter = RateLimiter(per_minute=60)
 
 RATE_MSG = {
     "en": "You're asking very quickly. Please wait a minute and try again.",
@@ -104,6 +112,11 @@ def _client(request: Request) -> str:
     return fwd.split(",")[0].strip() or (request.client.host if request.client else "?")
 
 
+def _broadcaster(request: Request) -> bool:
+    got = request.headers.get("x-live-token", "")
+    return bool(LIVE_TOKEN) and hmac.compare_digest(got.encode(), LIVE_TOKEN.encode())
+
+
 def _history(items: list[str]) -> list[str]:
     return [h.strip()[:300] for h in items if h and h.strip()][-2:]
 
@@ -135,19 +148,21 @@ def home() -> FileResponse:
 @app.get("/healthz")
 def healthz() -> dict:
     return {"ok": True, "answerable_verses": len(_kb.answerable), "model": bool(engine.llm),
-            "ai_answers_today": budget.used, "ai_daily_limit": budget.limit, "tts_today": speaker.used}
+            "ai_answers_today": budget.used, "ai_daily_limit": budget.limit, "tts_today": speaker.used,
+            "live_stream": {"enabled": bool(LIVE_TOKEN), "ai_today": live_budget.used, "tts_today": live_speaker.used}}
 
 
 @app.post("/api/ask")
 async def ask(body: Ask, request: Request):
-    if not limiter.allow(_client(request)):
+    live = _broadcaster(request)
+    if not (live_limiter.allow("live") if live else limiter.allow(_client(request))):
         return JSONResponse({"kind": "rate_limited", "lang": detect(body.question),
                              "opening": RATE_MSG[detect(body.question)], "verses": []}, status_code=429)
     history = _history(body.history)
     cached = None if history else cache.get(_cache_key(body.question, body.lang))
     if cached:
         return cached
-    use_model = bool(engine.llm) and budget.take()
+    use_model = bool(engine.llm) and (live_budget if live else budget).take()
     ans = await engine.answer(body.question, use_model=use_model, history=history, lang=body.lang)
     log.info("ask kind=%s lang=%s model=%s trace=%s", ans.kind, ans.lang, use_model, ans.trace)
     out = _public(ans)
@@ -201,9 +216,10 @@ async def voice(body: Voice, request: Request):
 async def speak(body: Speak, request: Request):
     if not hmac.compare_digest(body.sig, speech.sign(_sign_key(), body.lang, body.text)):
         return JSONResponse({"error": "unknown_text"}, status_code=403)
-    if not speak_limiter.allow(_client(request)):
+    live = _broadcaster(request)
+    if not (live_limiter.allow("live-speak") if live else speak_limiter.allow(_client(request))):
         return JSONResponse({"error": "rate_limited"}, status_code=429)
-    audio = await speaker.speak(body.text, body.lang)
+    audio = await (live_speaker if live else speaker).speak(body.text, body.lang)
     if not audio:
         return Response(status_code=204)  # the page reads it with the browser's own voice
     return Response(audio, media_type="audio/wav", headers={"Cache-Control": "private, max-age=86400"})
@@ -225,6 +241,25 @@ async def live_token(request: Request, attempt: int = 0):
         return JSONResponse({"error": "token_failed"}, status_code=502)
     return {"token": token, "model": model, "ws_url": live.WS_URL, "session_minutes": live.SESSION_MINUTES,
             "more_models": attempt + 1 < len(live.LIVE_MODELS)}
+
+
+@app.get("/api/recite")
+def recite() -> dict:
+    """Every verse in order with what the live stream shows and says. No model call; speaking it still goes
+    through /api/speak and its budgets."""
+    out = []
+    for v in sorted(_kb.verses.values(), key=lambda x: (x.chapter, int(x.ref.split(".")[1]))):
+        ch = _kb.chapters[v.chapter]
+        text = speech.recitation(v, ch["name_en"])
+        out.append({"id": v.id, "ref": v.ref, "chapter": v.chapter, "verse": int(v.ref.split(".")[1]),
+                    "chapter_name": ch["name_en"], "chapter_name_sanskrit": ch["name_sanskrit"],
+                    "speaker": v.speaker, "addressed_to": v.addressed_to,
+                    "speaker_hindi": SPEAKER_HI.get(v.speaker, v.speaker),
+                    "listener_hindi": SPEAKER_HI.get(v.addressed_to, v.addressed_to),
+                    "sanskrit": v.sanskrit, "transliteration": v.transliteration, "translation": v.translation or "",
+                    "translation_source": "Swami Swarupananda (1909)" if v.translation else "",
+                    "speech": [{"text": text, "lang": "en", "sig": speech.sign(_sign_key(), "en", text)}]})
+    return {"count": len(out), "verses": out}
 
 
 @app.get("/api/verses")
