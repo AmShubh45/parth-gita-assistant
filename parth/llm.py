@@ -3,6 +3,7 @@
 The engine talks to an `LLM` protocol, so tests use a scripted fake and production uses Gemini."""
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import os
@@ -13,10 +14,10 @@ import httpx
 
 logger = logging.getLogger(__name__)
 _API = "https://generativelanguage.googleapis.com/v1beta"
-FAST_MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-flash-lite-latest", "gemini-flash-latest")
-SMART_MODELS = ("gemini-3.5-flash", "gemini-2.5-flash", "gemini-flash-latest", "gemini-3.5-flash-lite")
+FAST_MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-flash-lite-latest", "gemini-2.5-flash-lite")
+SMART_MODELS = ("gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-flash-latest")
 # The verifier should be a different model from the writer where possible, so it does not share its blind spots.
-CHECK_MODELS = ("gemini-3.5-flash-lite", "gemini-2.5-flash", "gemini-flash-lite-latest")
+CHECK_MODELS = ("gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-flash-lite-latest")
 
 
 class LLMError(Exception):
@@ -25,7 +26,7 @@ class LLMError(Exception):
 
 class LLM(Protocol):
     async def json(self, step: str, system: str, prompt: str, schema: dict, *, smart: bool = False,
-                   max_tokens: int = 800, timeout_s: float = 20.0) -> dict: ...
+                   max_tokens: int = 800, timeout_s: float = 20.0, audio: tuple[str, bytes] | None = None) -> dict: ...
 
 
 class Gemini:
@@ -38,7 +39,8 @@ class Gemini:
         return bool(self.key)
 
     async def json(self, step: str, system: str, prompt: str, schema: dict, *, smart: bool = False,
-                   max_tokens: int = 800, timeout_s: float = 20.0) -> dict:
+                   max_tokens: int = 800, timeout_s: float = 20.0, audio: tuple[str, bytes] | None = None) -> dict:
+        """audio=(mime_type, bytes) attaches a recording to the prompt (used to transcribe speech)."""
         if not self.key:
             raise LLMError("GEMINI_API_KEY is not set")
         models = CHECK_MODELS if step == "verify" else (SMART_MODELS if smart else FAST_MODELS)
@@ -53,8 +55,11 @@ class Gemini:
                     cfg["thinkingConfig"] = {"thinkingLevel": "low"}
                 elif model.startswith("gemini-2.5"):
                     cfg["thinkingConfig"] = {"thinkingBudget": 0}
+                parts: list[dict] = [{"text": prompt}]
+                if audio:
+                    parts.append({"inlineData": {"mimeType": audio[0], "data": base64.b64encode(audio[1]).decode()}})
                 payload = {"system_instruction": {"parts": [{"text": system}]},
-                           "contents": [{"role": "user", "parts": [{"text": prompt}]}], "generationConfig": cfg}
+                           "contents": [{"role": "user", "parts": parts}], "generationConfig": cfg}
                 try:
                     r = await client.post(f"{_API}/models/{model}:generateContent",
                                           headers={"x-goog-api-key": self.key}, json=payload)

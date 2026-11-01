@@ -1,6 +1,6 @@
-# Parth v2: architecture
+# Gita Sarathi (Parth v2): architecture
 
-Parth answers real human problems (grief, fear, anger, confusion about duty, heartbreak, failure, comparison, guilt, loneliness) with what the Bhagavad Gita actually says. Every answer is grounded in specific verses, quoted exactly, read in their real context: who is speaking, to whom, at what moment of the Mahabharata, and how the classical commentators understood it. The aim is a product people anywhere can trust: it never invents a verse, never puts words in Krishna's mouth, and says so when the Gita does not address something.
+Gita Sarathi · गीता सारथी (the charioteer: Krishna's role for Arjuna) answers real human problems (grief, fear, anger, confusion about duty, heartbreak, failure, comparison, guilt, loneliness) with what the Bhagavad Gita actually says. Every answer is grounded in specific verses, quoted exactly, read in their real context: who is speaking, to whom, at what moment of the Mahabharata, and how the classical commentators understood it. The aim is a product people anywhere can trust: it never invents a verse, never puts words in Krishna's mouth, and says so when the Gita does not address something.
 
 ## 1. Principles
 
@@ -50,14 +50,22 @@ question
 
 ## 4. Product surfaces
 
-- **Web app.** Ask in text, answers stream over Server-Sent Events. Each verse card has Sanskrit, transliteration, translation and context, plus "Why this verse?" and "This helped / doesn't fit" feedback.
-- **Live voice** (built, `parth/live.py`):
+- **Web app** (`parth/static/index.html`): one reading column. Ask by voice or text; each answer is verse cards (Sanskrit, transliteration, translation, context, meaning, "for you") with "This helped / doesn't fit" feedback.
+- **Spoken answers** (the default voice mode, built):
+  - **Ask:** tap the mic and speak. The page records 16 kHz audio (worklet) and stops by itself after about 1.5 s of silence (30 s maximum, or tap again).
+  - **Understand:** `POST /api/voice` sends the WAV. One fast Gemini call transcribes it and does the engine's "understand" step together, then the deterministic crisis triage runs on the transcript, then the same select → compose → verify pipeline as typed questions. The transcript streams back first (NDJSON), so the page shows what it heard while the answer is written.
+  - **Speak:** the spoken script is built only from the verified answer (`parth/speech.py`): opening, then for each verse its chapter, verse and speaker with the meaning and "for you", then the closing. The page plays it piece by piece through `POST /api/speak` (Gemini TTS, cached, daily cap `PARTH_DAILY_TTS_LIMIT`), preparing the next piece while one plays. Pieces are HMAC-signed so the endpoint speaks only text this server wrote. If TTS is unavailable, the browser's own voice reads the same text.
+  - **Conversation mode** re-opens the mic after each spoken answer, and the last two questions travel with the next one so follow-ups ("aur batao") make sense.
+  - **Audio on phones:** one AudioContext, created inside the tap, carries recording and playback, so answers that arrive seconds later still play.
+- **Live (beta)** (real-time, `parth/live.py`):
   - **Connection:** the browser talks to Gemini Live directly, using a single-use ephemeral token whose session config is locked (system instruction, tools, audio, transcription).
-  - **Grounding:** the model must call `find_verses`, which our server answers from the verified knowledge base. The page shows those exact verse cards while Parth speaks.
+  - **Grounding:** the model must call `find_verses`, which our server answers from the verified knowledge base. The page shows those exact verse cards while Gita Sarathi speaks.
+  - **Half duplex:** while Gita Sarathi's audio plays (plus a 400 ms tail) the page sends silence instead of the microphone, so a phone's loudspeaker cannot make it hear and interrupt itself. An `interrupted` that arrives while the mic is muted is ignored as echo; a "रोकें · Interrupt" button stops it by hand.
+  - **Diagnostics:** each turn reports a `turn_summary` (audio received, transcript lengths, interrupts, echo ignored, server keys seen) and any unknown server keys to `/api/live/event`, so Render's logs show exactly where a session fails. No audio or transcripts are logged.
   - **Safety:** user transcripts run through the same safety triage, with helplines on screen.
   - **Limits:** a daily voice-session cap, a per-visitor rate limit, and 10-minute sessions.
-  - **Honest limit:** spoken words are grounded and instructed, not verified word by word like typed answers.
-  - **Testing:** `scripts/e2e_voice_mock.py` drives the page against a mock Live server.
+  - **Honest limit:** spoken words are grounded and instructed, not verified word by word like the spoken answers above.
+- **Testing:** `scripts/e2e_voice_mock.py` drives both modes in Chromium with a fake microphone and mocked Gemini: record → auto-stop → transcript → cards → every piece played → conversation mode's second question; and Live's half duplex, echo handling and tool call.
 - **Parth Live** (YouTube, 24/7).
   - Built like the MarketLab live channel: a separate folder on the laptop, OBS with its own **ParthLive** profile and **GitaLive** scene, controlled from Python over OBS WebSocket. The stream key is in that folder's `.env`, and a Windows Task Scheduler autopilot starts it.
   - OBS shows a Browser Source page from the Parth server.
@@ -72,7 +80,7 @@ question
 - **Knowledge base:** versioned JSON in the repo, rebuilt by scripts and gated by tests. Embeddings are precomputed at deploy time (701 verses fit in memory; no vector database needed).
 - **Models:**
   - Gemini for selection, writing, verification and embeddings, on a separate key from Samajh.
-  - Google Cloud TTS (as in the cricket engine) for Parth Live speech.
+  - Gemini TTS for spoken answers (browser speech as the fallback); Google Cloud TTS (as in the cricket engine) for Parth Live speech.
 - **Storage:** Postgres (Neon) for questions, answers, feedback and moderation logs. No personal data beyond what the user types; questions are stored anonymously.
 - **Observability:** Langfuse traces per stage, plus a daily evaluation run.
 - **Deploy:** Render (Docker).
@@ -98,8 +106,8 @@ A change that lowers any of these does not ship.
 
 1. **Knowledge base L1–L3**: done. Authentic Swarupananda translation (L2): 487/700 verses verified.
 2. **Remaining translations:** review the 213 unverified verses against page images, and add Telang and Besant. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
-3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 71 tests.
-4. **Web app**: deploy to Render, replacing the Node.js version (kept on the `legacy-node` branch).
+3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 85 tests, plus the browser end-to-end voice check.
+4. **Web app**: done and deployed on Render as Gita Sarathi, with spoken answers, conversation mode and Live (beta). The Node.js version is kept on the `legacy-node` branch.
 5. **Parth Live**: OBS automation, recitation loop and YouTube chat Q&A.
 6. **Growth**: voice, more languages, sharing cards.
 

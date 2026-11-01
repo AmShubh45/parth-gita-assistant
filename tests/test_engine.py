@@ -201,7 +201,7 @@ def test_model_flags_hidden_crisis(kb):
 def test_off_topic_is_redirected(kb):
     llm = FakeLLM({"understand": {"topic": "off_topic", "crisis": False, "english": "cricket score", "situations": []}})
     ans = run(Engine(kb, llm).answer("aaj match ka score kya hai"))
-    assert ans.kind == "off_topic" and "Parth" in ans.opening
+    assert ans.kind == "off_topic" and "Gita Sarathi" in ans.opening
 
 
 # ---------------------------------------------------------------- quota guards and the HTTP layer
@@ -228,11 +228,14 @@ def test_http_api_and_page():
     client = TestClient(app)
     assert client.get("/healthz").json()["answerable_verses"] >= 480
     page = client.get("/")
-    assert page.status_code == 200 and "पार्थ" in page.text
-    assert "बात करें" in page.text
+    assert page.status_code == 200 and "गीता सारथी" in page.text and "Gita Sarathi" in page.text
+    assert "बोलकर पूछें" in page.text and "बातचीत मोड" in page.text and "Live" in page.text
     assert client.get("/static/capture.worklet.js").status_code == 200
     r = client.post("/api/ask", json={"question": "mujhe bahut gussa aata hai"}).json()
     assert r["lang"] == "hinglish" and r["verses"] and "trace" not in r
+    assert r["speech"] and all(i["text"] and len(i["sig"]) == 32 for i in r["speech"])  # every answer can be spoken
+    follow = client.post("/api/ask", json={"question": "aur batao", "history": ["mujhe bahut gussa aata hai"]})
+    assert follow.status_code == 200
     assert client.post("/api/ask", json={"question": "x"}).status_code == 422
     assert client.get("/api/verse/2.47").json()["translation_status"] == "verified"
 
@@ -286,3 +289,148 @@ def test_live_event_logging(monkeypatch):
     assert client.post("/api/live/event", content="not json").status_code == 422
     client.post("/api/live/event", content='{"sid": "ab12", "event": "closed"}')
     assert client.post("/api/live/event", content='{"sid": "ab12", "event": "closed"}').status_code == 429
+
+
+# ---------------------------------------------------------------- spoken answers (turn-based voice)
+def _wav(seconds: float = 1.0) -> bytes:
+    from parth.speech import wav
+    return wav(b"\x00\x00" * int(16000 * seconds), 16000)
+
+
+def _grounded_hi(kb):
+    llm = FakeLLM({"understand": UNDERSTAND, "select": SELECT, "compose": GOOD_HI, "verify": {"ok": True, "problems": []}})
+    return run(Engine(kb, llm).answer("मुझे बहुत गुस्सा आता है")).to_dict()
+
+
+def test_spoken_script_follows_the_answer(kb):
+    from parth import speech
+    a = _grounded_hi(kb)
+    seg = speech.segments(a)
+    assert seg[0] == GOOD_HI["opening"] and seg[-1] == GOOD_HI["closing"] and len(seg) == 4
+    assert seg[1].startswith("अध्याय 2, श्लोक 62 में श्रीकृष्ण कहते हैं।") and GOOD_HI["verses"][0]["meaning"] in seg[1]
+    assert "BG" not in speech.script(a)
+    en = {**a, "lang": "en"}
+    assert speech.segments(en)[1].startswith("In chapter 2, verse 62, Krishna says:")
+    assert speech.segments({**a, "lang": "hinglish"})[1].startswith("Adhyay 2, shlok 62 mein Krishna kehte hain.")
+    # without an explanation, the authentic translation itself is read
+    fb = {**a, "kind": "fallback"}
+    assert kb.verses["BG 2.62"].translation in speech.segments(fb)[1]
+    crisis = {"kind": "crisis", "lang": "hi", "opening": "कृपया अभी 14416 पर कॉल करें।", "verses": []}
+    assert speech.segments(crisis) == ["कृपया अभी 14416 पर कॉल करें।"]
+    items = speech.speech_items(a, "k1")
+    assert items[0]["sig"] == speech.sign("k1", "hi", items[0]["text"]) != speech.sign("k2", "hi", items[0]["text"])
+
+
+def test_tts_falls_back_across_models_caches_and_caps(monkeypatch):
+    import base64
+    import httpx
+    from parth import speech
+    seen = []
+
+    def handler(request):
+        model = request.url.path.split("/models/")[1].split(":")[0]
+        seen.append(model)
+        if model == speech.TTS_MODELS[0]:
+            return httpx.Response(404, json={"error": "not found"})
+        pcm = base64.b64encode(b"\x01\x00" * 2400).decode()
+        return httpx.Response(200, json={"candidates": [{"content": {"parts": [
+            {"inlineData": {"mimeType": "audio/L16;codec=pcm;rate=24000", "data": pcm}}]}}]})
+
+    real = httpx.AsyncClient
+    monkeypatch.setattr(speech.httpx, "AsyncClient", lambda **kw: real(transport=httpx.MockTransport(handler), **kw))
+    sp = speech.Speaker("test-key", daily_limit=2)
+    audio = run(sp.speak("नमस्ते, मैं गीता सारथी हूँ।", "hi"))
+    assert audio[:4] == b"RIFF" and audio[8:12] == b"WAVE" and len(audio) == 44 + 4800
+    assert seen == [speech.TTS_MODELS[0], speech.TTS_MODELS[1]]
+    assert run(sp.speak("नमस्ते, मैं गीता सारथी हूँ।", "hi")) == audio and len(seen) == 2     # cached, no new call
+    assert run(sp.speak("दूसरा वाक्य", "hi")) and seen[-1] == speech.TTS_MODELS[1]              # dead model skipped
+    assert run(sp.speak("तीसरा वाक्य", "hi")) is None                                           # daily cap reached
+    assert run(speech.Speaker("").speak("hello", "en")) is None                                 # no key: browser voice
+
+
+@pytest.fixture
+def voice_app(monkeypatch, kb):
+    from fastapi.testclient import TestClient
+    from parth import app as appmod
+
+    def setup(script):
+        llm = FakeLLM(script)
+        monkeypatch.setattr(appmod._gemini, "key", "test-key")
+        monkeypatch.setattr(appmod, "engine", Engine(kb, llm))
+        monkeypatch.setattr(appmod, "budget", appmod.DailyBudget(5))
+        monkeypatch.setattr(appmod, "turn_limiter", appmod.RateLimiter(per_minute=20))
+        monkeypatch.setattr(appmod, "cache", appmod.AnswerCache())
+        return TestClient(appmod.app), llm
+    return setup
+
+
+def _lines(r):
+    return [json.loads(x) for x in r.text.splitlines() if x.strip()]
+
+
+def test_spoken_question_gets_a_grounded_answer_to_speak(voice_app):
+    import base64
+    client, llm = voice_app({"understand": {**UNDERSTAND, "transcript": "मुझे बहुत गुस्सा आता है"}, "select": SELECT,
+                             "compose": GOOD_HI, "verify": {"ok": True, "problems": []}})
+    r = client.post("/api/voice", json={"audio": base64.b64encode(_wav()).decode()})
+    assert r.status_code == 200 and r.headers["content-type"].startswith("application/x-ndjson")
+    first, second = _lines(r)
+    assert first == {"transcript": "मुझे बहुत गुस्सा आता है"}          # sent before the answer is written
+    a = second["answer"]
+    assert a["kind"] == "answer" and a["lang"] == "hi" and [v["id"] for v in a["verses"]] == ["BG 2.62", "BG 2.63"]
+    assert a["speech"][0]["text"] == GOOD_HI["opening"] and "trace" not in a
+    # transcription and understanding are one model call, then the usual grounded steps
+    assert [s for s, _ in llm.calls] == ["understand", "select", "compose", "verify"]
+    assert "attached audio" in llm.calls[0][1]
+
+
+def test_spoken_follow_up_carries_the_conversation(voice_app):
+    import base64
+    client, llm = voice_app({"understand": {**UNDERSTAND, "transcript": "aur batao"}, "select": SELECT,
+                             "compose": GOOD_HI, "verify": {"ok": True, "problems": []}})
+    r = client.post("/api/voice", json={"audio": base64.b64encode(_wav()).decode(), "history": ["mujhe bahut gussa aata hai"]})
+    assert r.status_code == 200 and "mujhe bahut gussa aata hai" in llm.calls[0][1]
+
+
+def test_spoken_crisis_gets_helplines_not_teaching(voice_app):
+    import base64
+    client, llm = voice_app({"understand": {**UNDERSTAND, "transcript": "main khudkushi kar lunga"}})
+    a = _lines(client.post("/api/voice", json={"audio": base64.b64encode(_wav()).decode()}))[1]["answer"]
+    assert a["kind"] == "crisis" and "14416" in a["opening"] and not a["verses"]
+    assert [s for s, _ in llm.calls] == ["understand"]
+    assert "14416" in a["speech"][0]["text"]
+
+
+def test_voice_endpoint_guards(voice_app, monkeypatch):
+    import base64
+    from parth import app as appmod
+    client, _ = voice_app({"understand": {**UNDERSTAND, "transcript": ""}})
+    good = base64.b64encode(_wav()).decode()
+    assert client.post("/api/voice", json={"audio": good}).json() == {"transcript": "", "error": "no_speech"}
+    assert client.post("/api/voice", json={"audio": base64.b64encode(b"x" * 9000).decode()}).status_code == 400  # not a WAV
+    assert client.post("/api/voice", json={"audio": base64.b64encode(_wav(40)).decode()}).status_code == 422      # too long
+    assert client.post("/api/voice", json={"audio": "not base64!" * 20}).status_code == 400
+    client2, _ = voice_app({"understand": LLMError("Gemini quota reached")})
+    assert client2.post("/api/voice", json={"audio": good}).json()["error"] == "transcribe_failed"
+    monkeypatch.setattr(appmod, "budget", appmod.DailyBudget(0))
+    assert client2.post("/api/voice", json={"audio": good}).status_code == 429
+    monkeypatch.setattr(appmod, "engine", Engine(appmod._kb, None))
+    assert client2.post("/api/voice", json={"audio": good}).status_code == 503
+
+
+def test_speak_only_speaks_what_the_server_wrote(monkeypatch):
+    from fastapi.testclient import TestClient
+    from parth import app as appmod, speech
+    monkeypatch.setattr(appmod._gemini, "key", "test-key")
+
+    async def fake_speak(text, lang):
+        return speech.wav(b"\x00\x00" * 100) if "silent" not in text else None
+    monkeypatch.setattr(appmod.speaker, "speak", fake_speak)
+    client = TestClient(appmod.app)
+    text = "गुस्सा आना स्वाभाविक है।"
+    ok = client.post("/api/speak", json={"text": text, "lang": "hi", "sig": speech.sign("test-key", "hi", text)})
+    assert ok.status_code == 200 and ok.headers["content-type"] == "audio/wav" and ok.content[:4] == b"RIFF"
+    assert client.post("/api/speak", json={"text": "anything I like", "lang": "en", "sig": "0" * 32}).status_code == 403
+    assert client.post("/api/speak", json={"text": text, "lang": "en", "sig": speech.sign("test-key", "hi", text)}).status_code == 403
+    silent = "silent piece"
+    assert client.post("/api/speak", json={"text": silent, "lang": "en", "sig": speech.sign("test-key", "en", silent)}).status_code == 204

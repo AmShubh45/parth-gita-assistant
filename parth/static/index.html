@@ -2,320 +2,633 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>पार्थ · Parth · Talk through life with the Bhagavad Gita</title>
-<meta name="description" content="Talk to Parth, live, in Hindi, Hinglish or English. Answers come from what the Bhagavad Gita actually says: exact verses from verified sources, their real context, and how they apply to you.">
-<meta name="theme-color" content="#070C1E">
-<meta property="og:title" content="पार्थ · Parth">
-<meta property="og:description" content="Talk through what you're going through, live, with the Bhagavad Gita. Hindi, Hinglish or English.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070C1E'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23E8A33D' font-family='serif'%3E%E0%A4%AA%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>गीता सारथी · Gita Sarathi · जीवन के प्रश्न, गीता के उत्तर</title>
+<meta name="description" content="Speak or type about anything you're going through, in Hindi, Hinglish or English. Gita Sarathi answers aloud with what the Bhagavad Gita actually says: exact verses, their real context, and how they apply to you.">
+<meta property="og:title" content="गीता सारथी · Gita Sarathi">
+<meta property="og:description" content="Ask by voice in Hindi, Hinglish or English. Spoken answers grounded in the exact verses of the Bhagavad Gita.">
+<meta name="theme-color" content="#0B1426">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1426'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23E8A33D' font-family='serif'%3E%E0%A4%B8%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Tiro+Devanagari+Hindi&display=swap">
 <style>
-/* Concept: night over Kurukshetra. One deliberate dark theme; a single glowing talk orb is the focal point,
-   the conversation and exact verse cards flow beneath it in one reading column (max 760px). */
+/* Layout: one calm reading column (max 760px): header, the voice + question box, then the conversation as verse cards. */
 :root{
-  --night:#070C1E; --night-2:#0D1631; --panel:rgba(255,255,255,.045); --panel-2:rgba(255,255,255,.075);
-  --line:rgba(255,255,255,.11); --ink:#EEF1FA; --muted:#A3ACC6; --faint:#6F7896;
-  --gold:#E8A33D; --gold-2:#F6C76E; --gold-glow:rgba(232,163,61,.35);
-  --peacock:#4FC3C9; --peacock-soft:rgba(79,195,201,.12); --alert:#FF7A8A; --alert-soft:rgba(255,122,138,.12);
+  --bg:#F4F6F9; --surface:#FFFFFF; --ink:#151B2B; --muted:#5B6479; --line:#DDE2EB; --soft:#EEF1F6;
+  --peacock:#0F6B73; --peacock-soft:#E2F1F2; --on-peacock:#FFFFFF; --gold:#B7791F; --gold-soft:#FBF1DF;
+  --alert:#B4233A; --alert-soft:#FCE9EC; --on-alert:#FFFFFF;
   --f-ui:"Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
   --f-verse:"Tiro Devanagari Sanskrit", "Noto Serif Devanagari", serif;
   --f-head:"Tiro Devanagari Hindi", "Noto Serif Devanagari", Georgia, serif;
-  color-scheme:dark;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0B1426; --surface:#121D33; --ink:#E9EDF6; --muted:#9BA6BE; --line:#26324D; --soft:#17233D;
+    --peacock:#5CC4CB; --peacock-soft:#12303A; --on-peacock:#05222A; --gold:#E8A33D; --gold-soft:#2D2412;
+    --alert:#F27A8C; --alert-soft:#3A1720; --on-alert:#2A0A10;
+    color-scheme:dark;
+  }
 }
 *{box-sizing:border-box}
-html,body{background:var(--night)}
-body{margin:0;color:var(--ink);font:17px/1.65 var(--f-ui);min-height:100vh;overflow-x:hidden;
-  background:radial-gradient(1200px 520px at 50% -120px,#1B2A5C 0%,rgba(27,42,92,0) 70%),
-             radial-gradient(900px 400px at 50% 105%,rgba(232,163,61,.10) 0%,rgba(232,163,61,0) 70%),var(--night)}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;z-index:0;
-  background-image:radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 27% 62%,#fff 50%,transparent 51%),
-  radial-gradient(1.4px 1.4px at 44% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 63% 31%,#fff 50%,transparent 51%),
-  radial-gradient(1.2px 1.2px at 78% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 89% 48%,#fff 50%,transparent 51%),
-  radial-gradient(1px 1px at 6% 77%,#fff 50%,transparent 51%),radial-gradient(1.3px 1.3px at 54% 84%,#fff 50%,transparent 51%),
-  radial-gradient(1px 1px at 93% 88%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 35% 38%,#fff 50%,transparent 51%);
-  background-size:420px 420px}
-.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding-inline:18px}
-a{color:var(--gold-2)}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 var(--f-ui)}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px}
+a{color:var(--peacock)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
 button{font:inherit;cursor:pointer;color:inherit}
+[hidden]{display:none !important}
 
-.top{display:flex;align-items:center;justify-content:space-between;padding-block:18px 0}
-.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
-.brand b{font-family:var(--f-head);font-weight:400;font-size:28px;color:var(--gold)}
-.brand span{font-size:14px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.top a.about{font-size:14px;color:var(--muted);text-decoration:none}
+header{padding-block:34px 6px;text-align:center}
+.mark{font-family:var(--f-head);font-size:clamp(38px,8vw,48px);line-height:1.1;color:var(--gold)}
+.mark small{display:block;font-family:var(--f-ui);font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+h1{font-family:var(--f-head);font-weight:400;font-size:clamp(24px,5vw,32px);margin:12px 0 4px;letter-spacing:.01em}
+.tag{color:var(--muted);margin:0}
+.tag b{color:var(--ink);font-weight:600}
 
-.hero{text-align:center;padding-block:26px 6px}
-.hero h1{font-family:var(--f-head);font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.2;margin:0}
-.hero p{color:var(--muted);margin:10px auto 0;max-width:46ch}
-.hero p b{color:var(--ink);font-weight:600}
-
-/* orb */
-.stage{display:grid;justify-items:center;gap:16px;padding-block:64px 18px}
-.orb{position:relative;width:184px;height:184px;border-radius:50%;border:0;padding:0;
-  background:radial-gradient(circle at 50% 38%,var(--gold-2) 0%,var(--gold) 38%,#9A5B12 100%);
-  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 60px 6px var(--gold-glow),inset 0 -14px 30px rgba(0,0,0,.25);
-  display:grid;place-items:center;transition:transform .12s ease-out}
-.orb:hover{transform:scale(1.03)}
-.orb .inner{display:grid;justify-items:center;gap:2px;color:#1C1003}
-.orb .inner b{font-family:var(--f-head);font-weight:400;font-size:30px;line-height:1}
-.orb .inner small{font-size:14px;font-weight:600;letter-spacing:.03em}
-.orb svg{width:30px;height:30px}
-.ring{position:absolute;inset:-14px;border-radius:50%;border:1.5px solid rgba(232,163,61,.35);pointer-events:none;
-  transform:scale(var(--s,1));transition:transform .08s linear,opacity .3s}
-.ring.r2{inset:-30px;border-color:rgba(232,163,61,.2)}
-.ring.r3{inset:-48px;border-color:rgba(232,163,61,.1)}
-body[data-state="idle"] .ring{animation:breathe 4s ease-in-out infinite}
-.ring.r2{animation-delay:.4s !important}.ring.r3{animation-delay:.8s !important}
-@keyframes breathe{50%{transform:scale(1.06);opacity:.6}}
-body[data-state="listening"] .orb{background:radial-gradient(circle at 50% 38%,#9DEBEF 0%,var(--peacock) 45%,#1D6E73 100%);box-shadow:0 0 70px 8px rgba(79,195,201,.35)}
-body[data-state="listening"] .ring{border-color:rgba(79,195,201,.4)}
-body[data-state="thinking"] .orb{animation:pulse 1.2s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 90px 18px var(--gold-glow)}}
-body[data-state="connecting"] .orb{opacity:.75}
-.status{min-height:28px;color:var(--muted);text-align:center;font-size:16px}
-.status b{color:var(--ink);font-weight:600}
-.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.pill{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:7px 16px;font-size:15px;color:var(--ink)}
-.pill:hover{border-color:var(--gold)}
-.pill.end{border-color:rgba(255,122,138,.5);color:var(--alert)}
-.timer{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums}
-
-/* type form */
-.typebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px;margin-top:6px}
-.typebox textarea{width:100%;min-height:84px;resize:vertical;border:0;background:transparent;color:var(--ink);font:inherit;font-size:17.5px;padding:4px}
-.typebox textarea:focus{outline:none}
-.typebox .row{display:flex;justify-content:flex-end;gap:8px}
-.go{border:0;background:var(--gold);color:#1C1003;border-radius:12px;padding:9px 20px;font-weight:700}
+/* the voice + question box */
+.ask{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 18px 40px -30px rgba(11,20,38,.45)}
+.voice{display:flex;align-items:center;gap:14px}
+.mic{--lvl:0;position:relative;flex:none;width:68px;height:68px;border-radius:50%;border:0;background:var(--peacock);color:var(--on-peacock);display:grid;place-items:center;transition:background .2s}
+.mic svg{width:28px;height:28px}
+.mic::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid currentColor;opacity:0;transform:scale(calc(1 + var(--lvl) * .35));transition:transform .08s linear}
+body[data-state="listening"] .mic, body[data-state="live"] .mic{background:var(--alert);color:var(--on-alert)}
+body[data-state="listening"] .mic::after, body[data-state="live"] .mic::after{opacity:.55;border-color:var(--alert)}
+body[data-state="thinking"] .mic{background:var(--soft);color:var(--peacock)}
+body[data-state="thinking"] .mic::after{opacity:1;border-color:var(--gold) transparent var(--gold) transparent;animation:spin 1s linear infinite}
+body[data-state="speaking"] .mic{background:var(--gold);color:#1B1203}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vtext{flex:1;min-width:0}
+.vtext b{display:block;font-size:18px;line-height:1.35}
+.vtext span{display:block;font-size:14.5px;color:var(--muted);line-height:1.4}
+.vbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid var(--line);background:var(--soft);border-radius:99px;padding:6px 14px;font-size:15px;white-space:nowrap}
+.pill.strong{background:var(--peacock);border-color:var(--peacock);color:var(--on-peacock);font-weight:600}
+.pill.warn{border-color:var(--alert);color:var(--alert);background:var(--alert-soft)}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13.5px;margin:14px 2px 6px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+textarea{width:100%;min-height:76px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font:inherit;font-size:17px;padding:10px 12px}
+textarea:focus{outline:none;border-color:var(--peacock)}
+.ask-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;flex-wrap:wrap}
+.hint{font-size:13.5px;color:var(--muted)}
+.go{border:0;background:var(--peacock);color:var(--on-peacock);border-radius:12px;padding:9px 20px;font-weight:600;font-size:16.5px;margin-left:auto}
 .go:disabled{opacity:.6;cursor:wait}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chips button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:4px 12px;font-size:14.5px;color:var(--muted)}
-.chips button:hover{color:var(--ink);border-color:var(--gold)}
+.opts{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px}
+.opts label{display:inline-flex;align-items:center;gap:7px;cursor:pointer;color:var(--muted)}
+.opts input{accent-color:var(--peacock);width:17px;height:17px;margin:0}
+.opts input:checked + span{color:var(--ink)}
+.beta{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:0 6px;margin-left:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 13px;font-size:15px}
+.chips button:hover{border-color:var(--peacock)}
 
-/* conversation */
-#thread{display:grid;gap:14px;margin-top:26px}
-.msg{max-width:88%;padding:10px 15px;border-radius:16px;line-height:1.55;white-space:pre-line}
-.msg.you{justify-self:end;background:var(--peacock-soft);border:1px solid rgba(79,195,201,.25);border-bottom-right-radius:4px}
-.msg.parth{justify-self:start;background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:4px}
-.msg .who{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
-.msg.parth .who{color:var(--gold)}
-.msg.live{opacity:.85}
-.lookup{font-size:13.5px;color:var(--faint);text-align:center}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:18px;padding:18px 18px 14px;animation:rise .45s ease-out both}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:13.5px;color:var(--muted);margin-bottom:12px}
-.card-head b{color:var(--gold-2);font-weight:600}
-.shloka{font-family:var(--f-verse);font-size:clamp(19px,3.4vw,23px);line-height:1.8;text-align:center;white-space:pre-line;margin:4px 0 2px;color:#FFF7E8}
-.translit{font-family:var(--f-verse);font-style:italic;color:var(--muted);text-align:center;white-space:pre-line;font-size:15px;margin:0 0 14px}
-.tr{border-left:2px solid var(--gold);padding:2px 0 2px 14px;margin:0 0 6px}
-.tr p{margin:0}
-.tr small{display:block;color:var(--faint);font-size:12.5px;margin-top:4px}
+/* the conversation */
+#thread{margin-top:26px}
+.turn{margin-bottom:30px;scroll-margin-top:12px}
+.you{margin:0 0 14px auto;max-width:88%;width:fit-content;background:var(--peacock-soft);border-radius:16px 16px 4px 16px;padding:9px 15px;font-size:17px}
+.you small{display:block;font-size:12px;color:var(--muted)}
+.said{background:var(--surface);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:10px 15px;margin:0 0 14px;max-width:92%}
+.status{display:flex;align-items:center;gap:10px;color:var(--muted);padding:6px 4px 14px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.listen{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 14px;font-size:15px;margin:0 0 14px}
+.listen[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-soft)}
+.opening{font-size:19px;margin:0 2px 16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 20px 16px;margin-bottom:16px}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;font-size:14px;color:var(--muted);margin-bottom:14px}
+.card-head b{color:var(--peacock);font-weight:600}
+.shloka{font-family:var(--f-verse);font-size:clamp(19px,3.6vw,24px);line-height:1.75;text-align:center;white-space:pre-line;margin:6px 0 4px;overflow-wrap:anywhere}
+.translit{font-family:var(--f-verse);font-style:italic;color:var(--muted);text-align:center;white-space:pre-line;font-size:15.5px;margin:0 0 16px;overflow-wrap:anywhere}
+.tr{background:var(--soft);border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.tr p{margin:0;font-size:16.5px}
+.tr small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
 .sec{margin:12px 0 0}
-.sec h3{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
+.sec h3{font-family:var(--f-ui);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
 .sec p{margin:0}
-.sec.apply{background:var(--peacock-soft);border-radius:12px;padding:10px 14px;margin-top:12px}
+.sec.apply{background:var(--peacock-soft);border-radius:12px;padding:10px 14px;margin-top:14px}
 .sec.apply h3{color:var(--peacock)}
-.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px}
-.crisis{background:var(--alert-soft);border:1.5px solid var(--alert);border-radius:18px;padding:18px;white-space:pre-line}
-.crisis .lines{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;white-space:normal}
-.crisis a{background:var(--alert);color:#2A0A10;text-decoration:none;font-weight:700;border-radius:12px;padding:8px 14px}
-.plain{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.fb{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.fb button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:3px 12px;font-size:14px}
+.closing{font-size:18px;margin:6px 2px 10px}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px;margin:8px 2px}
+.crisis{background:var(--alert-soft);border:1.5px solid var(--alert);border-radius:18px;padding:20px;white-space:pre-line;margin-bottom:14px}
+.crisis .lines{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;white-space:normal}
+.crisis a{background:var(--alert);color:var(--on-alert);text-decoration:none;font-weight:600;border-radius:12px;padding:9px 14px}
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:14px}
+.lookup{font-size:13.5px;color:var(--muted);margin:0 2px 10px}
 
-footer{margin-top:54px;padding-block:22px 40px;border-top:1px solid var(--line);font-size:13.5px;color:var(--faint)}
-footer p{margin:0 0 8px}
-@media (max-width:420px){.orb{width:160px;height:160px}.msg{max-width:94%}}
-@media (prefers-reduced-motion:reduce){*,*::before{animation:none !important;transition:none !important}}
+footer{margin-top:44px;padding-block:22px 36px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+footer p{margin:0 0 6px}
+#dbg{position:fixed;left:8px;right:8px;bottom:8px;z-index:9;background:#000c;color:#9fe;padding:6px 10px;border-radius:10px;font:12px/1.4 ui-monospace,monospace}
+@media (max-width:520px){
+  .voice{flex-wrap:wrap}
+  .vtext{flex-basis:calc(100% - 90px)}
+  .vbtns{width:100%;justify-content:flex-start}
+  .mic{width:62px;height:62px}
+}
+@media (prefers-reduced-motion: reduce){.dot,body[data-state="thinking"] .mic::after{animation:none}.mic::after{transition:none}}
 </style>
 </head>
 <body data-state="idle">
 <div class="wrap">
-  <div class="top">
-    <a class="brand" href="/"><b>पार्थ</b><span>Parth</span></a>
-    <a class="about" href="#about">कैसे काम करता है · How it works</a>
-  </div>
-
-  <section class="hero">
+  <header>
+    <div class="mark">गीता सारथी<small>Gita Sarathi</small></div>
     <h1>जीवन के प्रश्न, गीता के उत्तर</h1>
-    <p>Talk to Parth, live, in <b>हिंदी</b>, <b>Hinglish</b> or <b>English</b>. Every verse it shares is real, quoted exactly from verified sources.</p>
-  </section>
+    <p class="tag">Speak or type about anything you're going through, in <b>हिंदी</b>, <b>Hinglish</b> or <b>English</b>.<br>The answer is spoken back to you, from what the Bhagavad Gita actually says.</p>
+  </header>
 
-  <section class="stage" aria-label="Voice conversation">
-    <button class="orb" id="orb" type="button" aria-label="Talk to Parth">
-      <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-      <span class="inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
-        <b>बात करें</b><small>TALK TO PARTH</small>
-      </span>
-    </button>
-    <div class="status" id="status">बात शुरू करने के लिए दबाएँ · <b>Tap to start talking</b></div>
-    <div class="controls">
-      <button class="pill end" id="end" type="button" hidden>बात खत्म करें · End</button>
-      <button class="pill" id="typeToggle" type="button">या लिखकर पूछें · Type instead</button>
-      <span class="timer" id="timer" hidden></span>
+  <section class="ask" aria-label="Ask Gita Sarathi">
+    <div class="voice">
+      <button type="button" class="mic" id="mic" aria-label="बोलकर पूछें · Tap and speak">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5"/></svg>
+      </button>
+      <div class="vtext" aria-live="polite">
+        <b id="vstate">बोलकर पूछें · Tap and speak</b>
+        <span id="vhint">हिंदी, Hinglish या English में अपनी बात कहिए</span>
+      </div>
+      <div class="vbtns">
+        <button type="button" class="pill strong" id="vsend" hidden>भेजें · Send</button>
+        <button type="button" class="pill" id="vcancel" hidden>रद्द करें · Cancel</button>
+        <button type="button" class="pill" id="vstop" hidden>⏹ रोकें · Stop</button>
+        <button type="button" class="pill" id="vinterrupt" hidden>✋ रोकें · Interrupt</button>
+        <button type="button" class="pill warn" id="vend" hidden>समाप्त · End</button>
+      </div>
+    </div>
+    <div class="or">या लिखकर पूछें · or type</div>
+    <form id="ask" autocomplete="off">
+      <textarea id="q" name="q" aria-label="आपके मन में क्या है? · What's on your mind?" maxlength="2000" placeholder="जैसे: मुझे बहुत गुस्सा आता है, क्या करूँ? · e.g. My exam result is tomorrow and I can't stop worrying"></textarea>
+      <div class="ask-row">
+        <span class="hint">Your questions are not linked to you.</span>
+        <button type="submit" class="go" id="go">पूछें · Ask</button>
+      </div>
+    </form>
+    <div class="opts">
+      <label><input type="checkbox" id="optSpeak" checked><span>🔊 उत्तर बोलकर सुनाएँ · Speak answers</span></label>
+      <label><input type="checkbox" id="optConvo"><span>🔁 बातचीत मोड · Conversation mode</span></label>
+      <label title="Real-time voice with Gemini Live. Still being tuned."><input type="checkbox" id="optLive"><span>⚡ Live बातचीत</span><span class="beta">beta</span></label>
     </div>
   </section>
-
-  <form class="typebox" id="typeform" hidden autocomplete="off">
-    <textarea id="q" maxlength="2000" aria-label="Your question" placeholder="जैसे: मुझे बहुत गुस्सा आता है, क्या करूँ? · e.g. My exam result is tomorrow and I can't stop worrying"></textarea>
-    <div class="row"><button class="go" id="go" type="submit">पूछें · Ask</button></div>
-    <div class="chips" id="chips">
-      <button type="button">मुझे बहुत गुस्सा आता है, क्या करूँ?</button>
-      <button type="button">Exam ke result ki bahut chinta hai</button>
-      <button type="button">My father passed away and I can't cope</button>
-      <button type="button">मैं हमेशा दूसरों से अपनी तुलना करता हूँ</button>
-      <button type="button">I feel very lonely</button>
-    </div>
-  </form>
+  <div class="chips" id="chips" aria-label="Example questions">
+    <button type="button">मुझे बहुत गुस्सा आता है, क्या करूँ?</button>
+    <button type="button">Exam ke result ki bahut chinta hai</button>
+    <button type="button">My father passed away and I can't cope</button>
+    <button type="button">मैं हमेशा दूसरों से अपनी तुलना करता हूँ</button>
+    <button type="button">I feel very lonely</button>
+    <button type="button">Purani galtiyon ka pachhtava nahi jaata</button>
+  </div>
 
   <main id="thread" aria-live="polite"></main>
 
-  <footer id="about">
-    <p><b style="color:var(--muted)">How Parth stays true to the Gita.</b> Parth looks up verses from a knowledge base of the Sanskrit text and Swami Swarupananda's 1909 translation, verified word by word against four original scans. It shows the exact verse beside its words, explains who is speaking and why, and never invents verses. Typed answers are also checked by a second AI before you see them.</p>
-    <p>Parth is not a substitute for a teacher, doctor or counsellor. If you are in distress, please call <a href="tel:14416">Tele-MANAS 14416</a> (India, free, 24×7) or 112 in an emergency.</p>
+  <footer>
+    <p>Every verse shows the original Sanskrit and a verified public-domain translation (Swami Swarupananda, 1909). Explanations are written for you and checked against the sources; they are not a substitute for a teacher, doctor or counsellor. Your voice is used only to understand your question and is not stored.</p>
+    <p>If you are in distress, please call <a href="tel:14416">Tele-MANAS 14416</a> (India, free, 24×7).</p>
   </footer>
 </div>
 
 <script>
 (() => {
   const $ = (id) => document.getElementById(id);
-  const thread = $("thread"), statusEl = $("status"), orb = $("orb");
-  const SPEAKER_HI = { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" };
-  const T = {
-    hi: { tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", ch: "अध्याय", you: "आप", parth: "पार्थ" },
-    hinglish: { tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", ch: "Adhyay", you: "Aap", parth: "Parth" },
-    en: { tr: "Translation", ctx: "Context", apply: "For you", ch: "Chapter", you: "You", parth: "Parth" },
-  };
-  const STATUS = {
-    idle: "बात शुरू करने के लिए दबाएँ · <b>Tap to start talking</b>",
-    connecting: "जुड़ रहा हूँ… · <b>Connecting…</b>",
-    listening: "सुन रहा हूँ… बोलिए · <b>Listening, go ahead</b>",
-    thinking: "श्लोक खोज रहा हूँ… · <b>Finding verses…</b>",
-    speaking: "पार्थ बोल रहे हैं · <b>Parth is speaking</b> (बीच में बोल सकते हैं · you can interrupt)",
-  };
-  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-  const scrollEnd = () => window.scrollTo({ top: document.body.scrollHeight, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  const setState = (s) => { document.body.dataset.state = s; statusEl.innerHTML = STATUS[s] || ""; };
-
-  // ------------------------------------------------------------- rendering (shared by voice and text)
-  function bubble(kind, text, lang = "hi") {
-    const b = el("div", "msg " + kind);
-    b.append(el("span", "who", (T[lang] || T.hi)[kind === "you" ? "you" : "parth"]), el("span", "txt", text));
-    thread.append(b); scrollEnd(); return b;
-  }
-  function section(title, text, cls) {
-    if (!text) return null;
-    const s = el("div", "sec" + (cls ? " " + cls : "")); s.append(el("h3", null, title), el("p", null, text)); return s;
-  }
-  function card(v, lang = "hi", extra = {}) {
-    const t = T[lang] || T.en, hi = lang === "hi";
-    const c = el("article", "card");
-    const head = el("div", "card-head"), left = el("span");
-    left.append(el("b", null, v.id), document.createTextNode(` · ${t.ch} ${v.chapter} · ${hi ? v.chapter_name_sanskrit : v.chapter_name}`));
-    head.append(left, el("span", null, hi ? `${SPEAKER_HI[v.speaker]} → ${SPEAKER_HI[v.addressed_to]}` : `${v.speaker} → ${v.addressed_to}`));
-    c.append(head, el("p", "shloka", v.sanskrit), el("p", "translit", v.transliteration));
-    const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); c.append(tr);
-    [section(t.ctx, extra.context), section(extra.meaning_label, extra.meaning), section(t.apply, extra.application, "apply")].forEach((s) => s && c.append(s));
-    thread.append(c); scrollEnd(); return c;
-  }
-  function crisisCard(message) {
-    const box = el("div", "crisis", message), lines = el("div", "lines");
-    [["tel:14416", "Tele-MANAS 14416"], ["tel:18008914416", "1-800-891-4416"], ["tel:18005990019", "KIRAN 1800-599-0019"], ["tel:112", "112"]]
-      .forEach(([href, label]) => { const a = el("a", null, label); a.href = href; lines.append(a); });
-    box.append(lines); thread.append(box); scrollEnd();
-  }
-
-  // ------------------------------------------------------------- typed questions (verified text pipeline)
-  const form = $("typeform"), q = $("q"), go = $("go");
-  $("typeToggle").onclick = () => { form.hidden = !form.hidden; if (!form.hidden) q.focus(); };
-  async function ask(question) {
-    question = question.trim(); if (question.length < 2) return;
-    go.disabled = true; bubble("you", question, /[ऀ-ॿ]/.test(question) ? "hi" : "en"); q.value = "";
-    const wait = el("div", "lookup", "श्लोक खोजे जा रहे हैं… · Finding verses…"); thread.append(wait); scrollEnd();
-    try {
-      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question }) });
-      const a = await r.json(); wait.remove();
-      if (a.kind === "crisis") return crisisCard(a.opening);
-      if (!a.verses || !a.verses.length) { bubble("parth", a.opening || "", a.lang); return; }
-      if (a.opening) bubble("parth", a.opening, a.lang);
-      a.verses.forEach((v) => card(v, a.lang, { context: v.context, meaning: v.meaning, application: v.application, meaning_label: a.meaning_label }));
-      if (a.closing) bubble("parth", a.closing, a.lang);
-      if (a.note) { const n = el("p", "note", a.note); thread.append(n); }
-    } catch (e) { wait.remove(); thread.append(el("div", "plain", "कुछ गड़बड़ हुई, फिर कोशिश करें · Something went wrong, please try again.")); }
-    finally { go.disabled = false; }
-  }
-  form.onsubmit = (e) => { e.preventDefault(); ask(q.value); };
-  $("chips").onclick = (e) => { if (e.target.tagName === "BUTTON") ask(e.target.textContent); };
-
-  // ------------------------------------------------------------- live voice (Gemini Live, direct from the browser)
-  const supported = !!(navigator.mediaDevices && window.AudioWorkletNode && window.WebSocket);
-  if (!supported) { orb.hidden = true; form.hidden = false; statusEl.textContent = "इस ब्राउज़र में आवाज़ उपलब्ध नहीं है, लिखकर पूछें · Voice isn't available in this browser; please type."; }
-
-  const b64 = (buf) => { let s = ""; const u = new Uint8Array(buf); for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
-  const pcmFrom64 = (data) => { const bin = atob(data), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
-    const i16 = new Int16Array(u.buffer), f = new Float32Array(i16.length); for (let i = 0; i < i16.length; i++) f[i] = i16[i] / 32768; return f; };
-
-  let S = null; // current session
+  const thread = $("thread"), form = $("ask"), q = $("q"), go = $("go"), mic = $("mic");
+  const optSpeak = $("optSpeak"), optConvo = $("optConvo"), optLive = $("optLive");
   const DEBUG = /[?&]debug=1/.test(location.search);
-  const dbg = DEBUG ? (() => { const d = el("div", "lookup"); d.id = "dbg"; d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:9;background:#000c;padding:6px 10px;border-radius:10px;text-align:left;font:12px/1.4 monospace;color:#9fe"; document.body.append(d); return d; })() : null;
-  function diag() { if (dbg && S) dbg.textContent = `model ${S.tok && S.tok.model} · setup ${S.ready} · mic ${S.inp && S.inp.state} · out ${S.out && S.out.state} · chunks ${S.sent} · peak ${(S.peak || 0).toFixed(3)} · msgs ${S.recv} · last ${S.lastEvent || "-"}`; }
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const L = {
+    hi: { finding: "आपके लिए श्लोक खोजे जा रहे हैं…", tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", helped: "क्या इससे मदद मिली?", yes: "हाँ", no: "यह फिट नहीं बैठता", thanks: "धन्यवाद!", ch: "अध्याय", listen: "🔊 सुनें", stop: "⏹ रोकें", you: "आपने कहा", err: "कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।" },
+    hinglish: { finding: "Aapke liye shlok dhoondhe ja rahe hain…", tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", helped: "Kya isse madad mili?", yes: "Haan", no: "Ye fit nahi baithta", thanks: "Dhanyavaad!", ch: "Adhyay", listen: "🔊 Suniye", stop: "⏹ Rokiye", you: "Aapne kaha", err: "Kuch gadbad hui. Please phir try kariye." },
+    en: { finding: "Finding the verses that speak to you…", tr: "Translation", ctx: "Context", apply: "For you", helped: "Did this help?", yes: "Yes", no: "Doesn't fit", thanks: "Thank you!", ch: "Chapter", listen: "🔊 Listen", stop: "⏹ Stop", you: "You said", err: "Something went wrong. Please try again." },
+  };
+  const SPEAKER = { hi: { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" } };
+  const guessLang = (t) => (/[ऀ-ॿ]/.test(t) ? "hi" : /\b(hai|hain|mujhe|kya|nahi|mera|meri|bahut|kaise|ki|ke|kar|aur|main)\b/i.test(t) ? "hinglish" : "en");
+  // what the voice box says in each state: [Hindi, English]
+  const VS = {
+    idle: ["बोलकर पूछें · Tap and speak", "हिंदी, Hinglish या English में अपनी बात कहिए"],
+    starting: ["माइक चालू हो रहा है… · Starting the mic", ""],
+    listening: ["सुन रहा हूँ… · Listening", "बोलिए; आपके रुकते ही मैं समझ लूँगा · Speak; I'll take it when you pause"],
+    understanding: ["समझ रहा हूँ… · Understanding", "आपकी बात सुनी जा रही है"],
+    finding: ["गीता में उत्तर खोज रहा हूँ… · Finding verses", "श्लोक, उनका प्रसंग और आपके लिए अर्थ"],
+    speaking: ["बोल रहा हूँ… · Speaking", "बीच में रोकने के लिए ⏹ दबाएँ"],
+    again: ["फिर से सुन रहा हूँ… · Your turn", "बातचीत मोड: अगला प्रश्न बोलिए"],
+    live_connecting: ["Live जुड़ रहा है… · Connecting", "रियल-टाइम बातचीत (beta)"],
+    live_listening: ["Live: सुन रहा हूँ · Listening", "बोलिए, गीता सारथी बीच में जवाब देंगे"],
+    live_speaking: ["Live: बोल रहा हूँ · Speaking", "रोकने के लिए ✋ दबाएँ"],
+    live_thinking: ["Live: श्लोक खोज रहा हूँ · Finding verses", ""],
+  };
+  const ERR = {
+    no_speech: ["कुछ सुनाई नहीं दिया · I couldn't hear anything", "माइक के पास साफ़ बोलिए, फिर 🎙 दबाएँ"],
+    mic_denied: ["माइक की अनुमति चाहिए · Microphone access needed", "ब्राउज़र में माइक की अनुमति दें, या लिखकर पूछें"],
+    daily_limit: ["आज की सीमा पूरी हो गई · Today's limit is reached", "कृपया लिखकर पूछें; उत्तर श्लोकों से ही मिलेंगे"],
+    rate_limited: ["थोड़ा रुकिए · Please wait a moment", "आप बहुत जल्दी-जल्दी पूछ रहे हैं; एक मिनट बाद फिर बोलिए"],
+    voice_unavailable: ["आवाज़ अभी उपलब्ध नहीं · Voice is unavailable", "कृपया लिखकर पूछें"],
+    transcribe_failed: ["आवाज़ समझ नहीं पाया · Couldn't process the audio", "एक बार फिर बोलिए, या लिखकर पूछें"],
+    network: ["नेटवर्क की समस्या · Network problem", "इंटरनेट जाँचिए और फिर कोशिश करें"],
+    other: ["कुछ गड़बड़ हुई · Something went wrong", "एक बार फिर कोशिश करें, या लिखकर पूछें"],
+  };
+
+  let state = "idle";
+  function setState(s) { state = s; document.body.dataset.state = s; showButtons(); }
+  function vstate(key, src = VS) { const [a, b] = src[key] || src.other || VS.idle; $("vstate").textContent = a; $("vhint").textContent = b; }
+  function showButtons() {
+    const live = !!S;
+    $("vsend").hidden = $("vcancel").hidden = !(state === "listening" && !live);
+    $("vstop").hidden = !(state === "speaking" && !live);
+    $("vinterrupt").hidden = !live; $("vend").hidden = !live;
+  }
+
+  // ---------------------------------------------------------------- preferences (per browser, optional)
+  try {
+    const p = JSON.parse(localStorage.getItem("sarathi.prefs") || "{}");
+    if (typeof p.speak === "boolean") optSpeak.checked = p.speak;
+    if (typeof p.convo === "boolean") optConvo.checked = p.convo;
+  } catch {}
+  const savePrefs = () => { try { localStorage.setItem("sarathi.prefs", JSON.stringify({ speak: optSpeak.checked, convo: optConvo.checked })); } catch {} };
+  optSpeak.onchange = () => { savePrefs(); if (!optSpeak.checked) stopSpeaking(); };
+  optConvo.onchange = savePrefs;
+  optLive.onchange = () => { if (!optLive.checked && S) stopLive(); if (rec) finish(rec, "cancel"); vstate(optLive.checked ? "live_hint" : "idle", optLive.checked ? { live_hint: ["Live बातचीत · Tap to start", "रियल-टाइम आवाज़ (beta): 🎙 दबाकर बात शुरू करें"] } : VS); };
+
+  // ---------------------------------------------------------------- diagnostics (no audio, no transcripts)
+  const sid = Math.random().toString(36).slice(2, 10);
   function report(event, detail = "") {
-    const body = JSON.stringify({ sid: (S && S.sid) || "-", event, detail: String(detail).slice(0, 300) });
+    const body = JSON.stringify({ sid, event, detail: String(detail).slice(0, 300) });
     try { navigator.sendBeacon ? navigator.sendBeacon("/api/live/event", new Blob([body], { type: "application/json" })) : fetch("/api/live/event", { method: "POST", headers: { "content-type": "application/json" }, body }); } catch {}
   }
-  // Resample mono float PCM when the browser will not open a 24 kHz playback context.
+  const dbg = DEBUG ? (() => { const d = document.createElement("div"); d.id = "dbg"; document.body.append(d); return d; })() : null;
+  const diag = (t) => { if (dbg) dbg.textContent = t; };
+
+  // ---------------------------------------------------------------- rendering
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function section(title, text, cls) {
+    if (!text) return null;
+    const s = el("div", "sec" + (cls ? " " + cls : ""));
+    s.append(el("h3", null, title), el("p", null, text));
+    return s;
+  }
+  function verseCard(v, a, question) {
+    const t = L[a.lang] || L.en, sp = SPEAKER[a.lang] || {};
+    const c = el("article", "card");
+    const head = el("div", "card-head");
+    const left = el("span"); left.append(el("b", null, v.id), document.createTextNode(` · ${t.ch} ${v.chapter} · ${a.lang === "hi" ? v.chapter_name_sanskrit : v.chapter_name}`));
+    head.append(left, el("span", null, `${sp[v.speaker] || v.speaker} → ${sp[v.addressed_to] || v.addressed_to}`));
+    c.append(head, el("p", "shloka", v.sanskrit));
+    const tl = el("p", "translit", v.transliteration); tl.lang = "sa-Latn"; c.append(tl);
+    if (v.translation) { const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); c.append(tr); }
+    [section(t.ctx, v.context), section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply")].forEach((s) => s && c.append(s));
+    if (question && (a.kind === "answer" || a.kind === "fallback")) {
+      const fb = el("div", "fb"); fb.append(el("span", null, t.helped));
+      [[t.yes, true], [t.no, false]].forEach(([label, helpful]) => {
+        const b = el("button", null, label); b.type = "button";
+        b.onclick = () => { fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, verse: v.id, helpful }) }).catch(() => {}); fb.replaceChildren(el("span", null, t.thanks)); };
+        fb.append(b);
+      });
+      c.append(fb);
+    }
+    return c;
+  }
+  function crisisBox(message) {
+    const box = el("div", "crisis", message);
+    const lines = el("div", "lines");
+    [["tel:14416", "Tele-MANAS 14416"], ["tel:18008914416", "1-800-891-4416"], ["tel:18005990019", "KIRAN 1800-599-0019"], ["tel:112", "112"]]
+      .forEach(([href, label]) => { const a = el("a", null, label); a.href = href; lines.append(a); });
+    box.append(lines);
+    return box;
+  }
+  function newTurn(question, spoken) {
+    const turn = el("section", "turn");
+    const you = el("p", "you");
+    if (spoken) you.append(el("small", null, "🎙"));
+    you.append(el("span", "said-text", question || "…"));
+    const st = el("div", "status"); st.append(el("span", "dot"), el("span", null, (L[guessLang(question || "")] || L.hi).finding));
+    turn.append(you, st);
+    thread.append(turn);
+    turn.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    return turn;
+  }
+  function setYou(turn, text) {
+    turn.querySelector(".said-text").textContent = text;
+    const st = turn.querySelector(".status span:last-child"); if (st) st.textContent = (L[guessLang(text)] || L.hi).finding;
+  }
+  function renderAnswer(turn, a, question) {
+    turn.querySelector(".status")?.remove();
+    turn.answer = a;
+    const t = L[a.lang] || L.en;
+    if (a.speech && a.speech.length) {
+      const b = el("button", "listen", t.listen); b.type = "button"; b.setAttribute("aria-pressed", "false");
+      b.onclick = () => { unlockAudio(); if (speaking && speaking.turn === turn) stopSpeaking(); else speakTurn(turn, true); };
+      turn.append(b);
+    }
+    if (a.kind === "crisis" || a.kind === "harm_others") { turn.append(crisisBox(a.opening)); return; }
+    if (!a.verses || !a.verses.length) { turn.append(el("div", "plain", a.opening)); return; }
+    if (a.opening) turn.append(el("p", "opening", a.opening));
+    a.verses.forEach((v) => turn.append(verseCard(v, a, question)));
+    if (a.closing) turn.append(el("p", "closing", a.closing));
+    if (a.note) turn.append(el("p", "note", a.note));
+  }
+  function turnError(turn, lang, text) { turn.querySelector(".status")?.remove(); turn.append(el("div", "plain", text || (L[lang] || L.hi).err)); }
+
+  // ---------------------------------------------------------------- audio: one context, started inside a tap
+  // Phones only let audio play from a context that was created or resumed during a tap; everything
+  // afterwards (the answer arriving seconds later) plays through this same context.
+  let actx = null, speechUnlocked = false;
+  function unlockAudio() {
+    try {
+      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state !== "running") actx.resume().catch(() => {});
+    } catch {}
+    if (!speechUnlocked && "speechSynthesis" in window) { try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } catch {} speechUnlocked = true; }
+    return actx;
+  }
+  const b64 = (buf) => { let s = ""; const u = new Uint8Array(buf); for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
+
+  // ---------------------------------------------------------------- speaking an answer
+  let speakSeq = 0, speaking = null, ttsDownUntil = 0, voices = [];
+  if ("speechSynthesis" in window) { voices = speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => { voices = speechSynthesis.getVoices(); }; }
+
+  async function fetchSpeech(item, lang) {
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 20000);
+    try {
+      const r = await fetch("/api/speak", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: item.text, lang, sig: item.sig }), signal: ctl.signal });
+      if (r.status === 204) { ttsDownUntil = Date.now() + 5 * 60000; return null; }
+      if (!r.ok) return null;
+      const data = await r.arrayBuffer();
+      return await new Promise((res, rej) => { const p = unlockAudio().decodeAudioData(data, res, rej); if (p && p.catch) p.catch(rej); });
+    } catch { return null; } finally { clearTimeout(timer); }
+  }
+  async function playBuffer(buf, id) {
+    const ctx = unlockAudio();
+    if (ctx.state !== "running") { await Promise.race([ctx.resume().catch(() => {}), new Promise((r) => setTimeout(r, 800))]); }
+    if (ctx.state !== "running" || id !== speakSeq) return false;
+    return new Promise((res) => {
+      const src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination);
+      const guard = setTimeout(() => res(true), buf.duration * 1000 + 1500);
+      src.onended = () => { clearTimeout(guard); res(true); };
+      if (speaking) speaking.src = src;
+      src.start();
+    });
+  }
+  function sayBrowser(text, lang, id) {
+    return new Promise((res) => {
+      if (!("speechSynthesis" in window) || id !== speakSeq) return res();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === "en" ? "en-IN" : "hi-IN";
+      const v = voices.find((x) => x.lang === u.lang) || voices.find((x) => x.lang && x.lang.toLowerCase().startsWith(u.lang.slice(0, 2)));
+      if (v) u.voice = v;
+      u.rate = 0.95;
+      const guard = setTimeout(res, 5000 + text.length * 110);
+      u.onend = u.onerror = () => { clearTimeout(guard); res(); };
+      speechSynthesis.speak(u);
+    });
+  }
+  async function speakTurn(turn, manual = false) {
+    const a = turn.answer; if (!a || !a.speech || !a.speech.length) return onSpoken(turn, manual);
+    stopSpeaking();
+    const id = ++speakSeq, items = a.speech, lang = a.lang;
+    const btn = turn.querySelector(".listen"), t = L[lang] || L.en;
+    speaking = { id, turn, src: null };
+    if (btn) { btn.textContent = t.stop; btn.setAttribute("aria-pressed", "true"); }
+    setState("speaking"); vstate("speaking");
+    const audio = turn.audio || (turn.audio = []);   // kept for replay
+    const get = (i) => audio[i] || (audio[i] = fetchSpeech(items[i], lang));
+    let browser = Date.now() < ttsDownUntil;
+    for (let i = 0; i < items.length && id === speakSeq; i++) {
+      if (!browser) { get(i); if (i + 1 < items.length) get(i + 1); }   // the next piece is prepared while this one plays
+      const buf = browser ? null : await audio[i];
+      if (id !== speakSeq) return;
+      const played = buf ? await playBuffer(buf, id) : false;
+      if (!played) {
+        if (!browser) { browser = true; report("tts_fallback", buf ? `ctx=${actx && actx.state}` : "no_audio"); }
+        await sayBrowser(items[i].text, lang, id);
+      }
+    }
+    if (id !== speakSeq) return;
+    speaking = null;
+    if (btn) { btn.textContent = t.listen; btn.setAttribute("aria-pressed", "false"); }
+    setState("idle"); vstate("idle");
+    onSpoken(turn, manual);
+  }
+  function stopSpeaking() {
+    speakSeq++;
+    if (speaking) {
+      try { speaking.src && speaking.src.stop(); } catch {}
+      const btn = speaking.turn.querySelector(".listen"), t = L[(speaking.turn.answer || {}).lang] || L.en;
+      if (btn) { btn.textContent = t.listen; btn.setAttribute("aria-pressed", "false"); }
+      speaking = null;
+    }
+    try { "speechSynthesis" in window && speechSynthesis.cancel(); } catch {}
+    if (state === "speaking") { setState("idle"); vstate("idle"); }
+  }
+  // conversation mode: after an answer has been spoken, listen for the next question
+  function onSpoken(turn, manual) {
+    const a = turn.answer || {};
+    if (manual || !optConvo.checked || S || a.kind === "crisis" || a.kind === "harm_others") return;
+    setTimeout(() => { if (state === "idle" && !rec && !S) startListening(true); }, 350);
+  }
+
+  // ---------------------------------------------------------------- asking (typed)
+  const history = [];
+  function remember(question) { history.push(question); if (history.length > 4) history.shift(); }
+
+  async function ask(question) {
+    question = question.trim();
+    if (question.length < 2) { q.focus(); return; }
+    if (state === "thinking") return;
+    unlockAudio(); stopSpeaking(); if (rec) finish(rec, "cancel");
+    const lang = guessLang(question);
+    go.disabled = true; setState("thinking"); vstate("finding");
+    const turn = newTurn(question, false);
+    try {
+      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, history: history.slice(-2) }) });
+      const a = await r.json();
+      if (!r.ok && !a.opening) throw new Error(r.status);
+      remember(question); q.value = "";
+      renderAnswer(turn, a, question);
+      setState("idle"); vstate("idle");
+      if (optSpeak.checked) speakTurn(turn); else onSpoken(turn);
+    } catch (e) {
+      turnError(turn, lang); setState("idle"); vstate("idle");
+    } finally { go.disabled = false; }
+  }
+  form.addEventListener("submit", (e) => { e.preventDefault(); ask(q.value); });
+  q.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); ask(q.value); } });
+  $("chips").addEventListener("click", (e) => { if (e.target.tagName === "BUTTON") { q.value = e.target.textContent; ask(q.value); } });
+
+  // ---------------------------------------------------------------- asking (spoken): record, then send
+  let rec = null, captureReady = null;
+  const MIC = { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } };
+
+  async function startListening(auto = false) {
+    const ctx = unlockAudio();
+    if (!ctx || !navigator.mediaDevices || !window.AudioWorkletNode) { vstate("voice_unavailable", ERR); return; }
+    stopSpeaking();
+    const r = rec = { chunks: [], n: 0, noise: 0.006, loud: 0, peak: 0, speechIdx: -1, lastVoiceIdx: 0, lastVoice: 0, t0: 0, auto };
+    setState("listening"); vstate("starting");
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia(MIC); }
+    catch (e) { if (rec === r) rec = null; setState("idle"); vstate("mic_denied", ERR); report("voice_error", "mic_denied " + (e && e.name)); return; }
+    if (rec !== r) { stream.getTracks().forEach((t) => t.stop()); return; }
+    try {
+      captureReady = captureReady || ctx.audioWorklet.addModule("/static/capture.worklet.js");
+      await captureReady;
+    } catch (e) { captureReady = null; stream.getTracks().forEach((t) => t.stop()); rec = null; setState("idle"); vstate("voice_unavailable", ERR); report("voice_error", "worklet " + (e && e.message)); return; }
+    if (rec !== r) { stream.getTracks().forEach((t) => t.stop()); return; }
+    r.stream = stream;
+    r.src = ctx.createMediaStreamSource(stream); r.cap = new AudioWorkletNode(ctx, "parth-capture"); r.mute = ctx.createGain(); r.mute.gain.value = 0;
+    r.src.connect(r.cap).connect(r.mute).connect(ctx.destination);
+    r.cap.port.onmessage = ({ data }) => onChunk(r, data.pcm);
+    r.t0 = performance.now();
+    vstate(auto ? "again" : "listening");
+    r.maxTimer = setTimeout(() => finish(r, "max"), 30000);
+    if (ctx.state !== "running") ctx.resume().catch(() => {});
+  }
+
+  // Voice activity: learn the room's noise level, notice speech, and send once the person pauses for ~1.5 s.
+  function onChunk(r, buf) {
+    if (rec !== r) return;
+    const pcm = new Int16Array(buf); r.chunks.push(pcm); r.n++;
+    let e = 0; for (let i = 0; i < pcm.length; i++) e += pcm[i] * pcm[i];
+    const lvl = Math.sqrt(e / pcm.length) / 32768, now = performance.now();
+    r.peak = Math.max(r.peak, lvl);
+    const thr = Math.min(0.08, Math.max(0.012, r.noise * 3));
+    if (lvl > thr) {
+      r.loud++; r.lastVoice = now; r.lastVoiceIdx = r.chunks.length;
+      if (r.loud >= 3 && r.speechIdx < 0) r.speechIdx = Math.max(0, r.chunks.length - 3);
+      r.noise = r.noise * 0.997 + lvl * 0.003;   // a steady loud room slowly raises the bar
+    } else { r.loud = 0; r.noise = r.noise * 0.9 + lvl * 0.1; }
+    mic.style.setProperty("--lvl", Math.min(0.5, lvl * 5).toFixed(3));
+    diag(`rec ${r.n} lvl ${lvl.toFixed(3)} thr ${thr.toFixed(3)} speech ${r.speechIdx} ctx ${actx && actx.state}`);
+    if (r.speechIdx >= 0 && now - r.lastVoice > 1500) finish(r, "pause");
+    else if (r.speechIdx < 0 && now - r.t0 > (r.auto ? 12000 : 9000)) finish(r, "silence");
+  }
+
+  function finish(r, why) {
+    if (rec !== r) return;
+    rec = null; clearTimeout(r.maxTimer);
+    try { r.cap.port.onmessage = null; r.src.disconnect(); r.cap.disconnect(); r.mute.disconnect(); } catch {}
+    r.stream && r.stream.getTracks().forEach((t) => t.stop());
+    mic.style.setProperty("--lvl", 0);
+    if (why === "cancel") { setState("idle"); vstate("idle"); return; }
+    if (r.speechIdx < 0 && !(why === "manual" && r.peak > 0.01)) {
+      setState("idle");
+      if (r.auto) vstate("idle"); else vstate("no_speech", ERR);
+      return;
+    }
+    const from = Math.max(0, (r.speechIdx < 0 ? 0 : r.speechIdx) - 10);        // keep ~0.3 s before speech
+    const to = r.speechIdx < 0 ? r.chunks.length : Math.min(r.chunks.length, r.lastVoiceIdx + 14);  // and ~0.45 s after
+    sendVoice(wavFrom(r.chunks.slice(from, to), 16000));
+  }
+
+  function wavFrom(chunks, rate) {
+    const n = chunks.reduce((a, c) => a + c.length, 0), buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf);
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    w(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); w(8, "WAVE"); w(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, "data"); v.setUint32(40, n * 2, true);
+    let o = 44; for (const c of chunks) { new Int16Array(buf, o, c.length).set(c); o += c.length * 2; }
+    return buf;
+  }
+
+  async function* ndjson(r) {
+    if (!r.body || !r.body.getReader) { for (const line of (await r.text()).split("\n")) if (line.trim()) yield JSON.parse(line); return; }
+    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (value) buf += dec.decode(value, { stream: true });
+      let i; while ((i = buf.indexOf("\n")) >= 0) { const line = buf.slice(0, i); buf = buf.slice(i + 1); if (line.trim()) yield JSON.parse(line); }
+      if (done) break;
+    }
+    if (buf.trim()) yield JSON.parse(buf);
+  }
+
+  async function sendVoice(wav) {
+    setState("thinking"); vstate("understanding");
+    const turn = newTurn("…", true);
+    let heard = "", answered = false;
+    try {
+      const r = await fetch("/api/voice", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ audio: b64(wav), history: history.slice(-2) }) });
+      if (!r.ok) { const e = await r.json().catch(() => ({})); throw Object.assign(new Error("http"), { code: e.error || "other" }); }
+      for await (const m of ndjson(r)) {
+        if (m.error) throw Object.assign(new Error(m.error), { code: m.error });
+        if (typeof m.transcript === "string" && !m.answer) { heard = m.transcript; setYou(turn, heard); vstate("finding"); }
+        if (m.answer) {
+          answered = true; remember(heard);
+          renderAnswer(turn, m.answer, heard);
+          setState("idle"); vstate("idle");
+          if (optSpeak.checked) speakTurn(turn); else onSpoken(turn);
+        }
+      }
+      if (!answered) throw Object.assign(new Error("incomplete"), { code: "other" });
+    } catch (e) {
+      const code = e.code || (e instanceof TypeError ? "network" : "other");
+      report("voice_error", code);
+      if (!heard) turn.remove(); else turnError(turn, guessLang(heard));
+      setState("idle"); vstate(code, ERR);
+    }
+  }
+
+  mic.onclick = () => {
+    unlockAudio();
+    if (optLive.checked) return S ? stopLive() : startLive();
+    if (rec) return finish(rec, "manual");
+    if (state === "thinking") return;
+    if (state === "speaking") { stopSpeaking(); }
+    startListening(false);
+  };
+  $("vsend").onclick = () => rec && finish(rec, "manual");
+  $("vcancel").onclick = () => rec && finish(rec, "cancel");
+  $("vstop").onclick = () => { stopSpeaking(); };
+
+  // ================================================================ Live (beta): real-time Gemini Live
+  // Half-duplex on purpose: while Gita Sarathi is speaking, the page sends silence instead of the microphone,
+  // so a phone's loudspeaker cannot make it hear (and interrupt) itself. "Interrupt" stops it by hand.
+  let S = null;
+  const KNOWN_TOP = new Set(["setupComplete", "serverContent", "toolCall", "toolCallCancellation", "goAway", "sessionResumptionUpdate", "usageMetadata"]);
+  const KNOWN_SC = new Set(["modelTurn", "turnComplete", "interrupted", "generationComplete", "inputTranscription", "outputTranscription", "groundingMetadata", "turnCompleteReason", "waitingForInput", "usageMetadata"]);
+  const pcmFrom64 = (data) => { const bin = atob(data), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const i16 = new Int16Array(u.buffer, 0, u.length >> 1), f = new Float32Array(i16.length); for (let i = 0; i < i16.length; i++) f[i] = i16[i] / 32768; return f; };
   function resample(f, from, to) {
     if (from === to) return f;
     const out = new Float32Array(Math.round(f.length * to / from)), r = from / to;
     for (let i = 0; i < out.length; i++) { const x = i * r, i0 = Math.floor(x), i1 = Math.min(i0 + 1, f.length - 1); out[i] = f[i0] + (f[i1] - f[i0]) * (x - i0); }
     return out;
   }
+  const newStats = () => ({ chunks: 0, ms: 0, inChars: 0, outChars: 0, interrupts: 0, echo: 0, muted: 0, keys: new Set() });
+  const playing = () => S && performance.now() < S.playEnd + 400;
 
-  // Everything that needs the tap (audio contexts, microphone permission) starts here, before any await:
-  // phones keep audio that is started later suspended, and then Gemini never hears anything.
-  function begin() {
-    if (S) return stopVoice();
-    let out;
-    try { out = new AudioContext({ sampleRate: 24000 }); } catch { out = new AudioContext(); }
-    const inp = new AudioContext();
-    out.resume(); inp.resume();
-    const micP = navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
-    S = { sid: Math.random().toString(36).slice(2, 10), out, inp, micP, ready: false, you: null, parth: null, lastAudio: 0, lang: "hi",
-          sent: 0, recv: 0, peak: 0, tok: null };
-    $("end").hidden = false; $("typeToggle").hidden = true;
-    setState("connecting");
-    startVoice(0).catch((e) => { report("start_error", e && e.message); failVoice(String(e && e.message || e)); });
+  function startLive() {
+    const ctx = unlockAudio();
+    if (!ctx || !window.AudioWorkletNode) { vstate("voice_unavailable", ERR); return; }
+    stopSpeaking();
+    const micP = navigator.mediaDevices.getUserMedia(MIC);
+    S = { micP, ready: false, you: null, parth: null, turn: null, playEnd: 0, sent: 0, recv: 0, peak: 0, tok: null, st: newStats(), unknown: new Set(), dropping: false, lang: "hi" };
+    setState("live"); vstate("live_connecting");
+    liveConnect(0).catch((e) => { report("start_error", e && e.message); failLive(String(e && e.message || e)); });
   }
 
-  async function startVoice(attempt) {
-    const s = S;
-    // audio graph first, so the microphone is flowing the moment the session is ready
+  async function liveConnect(attempt) {
+    const s = S, ctx = actx;
     if (!s.player) {
-      let mic;
-      try { mic = await s.micP; } catch (e) { report("mic_denied", e && e.name); stopVoice(); statusEl.innerHTML = "माइक की अनुमति चाहिए · <b>Please allow microphone access</b>"; return; }
-      s.mic = mic;
-      await Promise.all([s.out.audioWorklet.addModule("/static/playback.worklet.js"), s.inp.audioWorklet.addModule("/static/capture.worklet.js")]);
+      let stream;
+      try { stream = await s.micP; } catch (e) { report("mic_denied", e && e.name); stopLive(); vstate("mic_denied", ERR); return; }
+      s.mic = stream;
+      await Promise.all([ctx.audioWorklet.addModule("/static/playback.worklet.js"), captureReady = captureReady || ctx.audioWorklet.addModule("/static/capture.worklet.js")]);
       if (S !== s) return;
-      s.player = new AudioWorkletNode(s.out, "parth-playback");
-      s.analyser = s.out.createAnalyser(); s.analyser.fftSize = 512;
-      s.player.connect(s.analyser).connect(s.out.destination);
-      const src = s.inp.createMediaStreamSource(mic), cap = new AudioWorkletNode(s.inp, "parth-capture"), mute = s.inp.createGain();
-      mute.gain.value = 0; src.connect(cap).connect(mute).connect(s.inp.destination);
-      cap.port.onmessage = ({ data }) => {
-        s.micLevel = data.level; s.peak = Math.max(s.peak, data.level);
-        if (s.ready && s.ws && s.ws.readyState === 1) {
-          s.ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64(data.pcm) } } }));
-          if (++s.sent === 1) report("first_audio_sent", `inp=${s.inp.state} rate=${s.inp.sampleRate}`);
-        }
+      s.player = new AudioWorkletNode(ctx, "parth-playback"); s.player.connect(ctx.destination);
+      s.src = ctx.createMediaStreamSource(stream); s.cap = new AudioWorkletNode(ctx, "parth-capture"); s.mute = ctx.createGain(); s.mute.gain.value = 0;
+      s.src.connect(s.cap).connect(s.mute).connect(ctx.destination);
+      s.cap.port.onmessage = ({ data }) => {
+        s.peak = Math.max(s.peak, data.level);
+        if (!playing()) mic.style.setProperty("--lvl", Math.min(0.5, data.level * 5).toFixed(3));
+        if (!(s.ready && s.ws && s.ws.readyState === 1)) return;
+        let pcm = data.pcm;
+        if (playing()) { pcm = new ArrayBuffer(data.pcm.byteLength); s.st.muted++; }
+        s.ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64(pcm) } } }));
+        if (++s.sent === 1) report("first_audio_sent", `ctx=${ctx.state} rate=${ctx.sampleRate}`);
       };
     }
     const r = await fetch(`/api/live/token?attempt=${attempt}`, { method: "POST" });
     const tok = await r.json();
-    if (!r.ok) { report("token_error", tok.error || r.status); return failVoice(tok.error || String(r.status)); }
+    if (!r.ok) { report("token_error", tok.error || r.status); return failLive(tok.error || String(r.status)); }
     if (S !== s) return;
-    s.tok = tok; s.attempt = attempt; s.ready = false;
+    s.tok = tok; s.ready = false;
     report("token_ok", tok.model);
     const ws = new WebSocket(`${tok.ws_url}?access_token=${encodeURIComponent(tok.token)}`);
     s.ws = ws;
@@ -324,143 +637,145 @@ footer p{margin:0 0 8px}
       const text = typeof ev.data === "string" ? ev.data : await ev.data.text();
       let m; try { m = JSON.parse(text); } catch { return; }
       if (S !== s) return;
-      s.recv++; s.lastEvent = Object.keys(m.serverContent || m)[0];
-      onServer(m); diag();
+      s.recv++; onLive(m);
     };
     ws.onclose = (ev) => {
       if (S !== s) return;
       report("closed", `${ev.code} ${ev.reason || ""} ready=${s.ready} sent=${s.sent} recv=${s.recv}`);
-      if (!s.ready && tok.more_models && attempt === 0) { s.ws = null; return startVoice(1).catch((e) => failVoice(String(e))); }
-      const why = ev.reason ? ` (${ev.code}: ${ev.reason})` : ev.code !== 1000 ? ` (${ev.code})` : "";
-      stopVoice();
-      statusEl.innerHTML = s.ready ? `बातचीत समाप्त हुई · <b>Conversation ended</b>${why}` : `आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type</b>${why}`;
-      if (!s.ready) form.hidden = false;
+      if (!s.ready && tok.more_models && attempt === 0) { s.ws = null; return liveConnect(1).catch((e) => failLive(String(e))); }
+      const ready = s.ready; stopLive();
+      vstate(ready ? "ended" : "busy", { ended: ["Live बातचीत समाप्त · Live conversation ended", "फिर शुरू करने के लिए 🎙 दबाएँ"], busy: ["Live अभी उपलब्ध नहीं · Live is busy", "Live बंद करके सामान्य आवाज़ से पूछें"] });
     };
     ws.onerror = () => {};
   }
 
-  function onSetupComplete() {
-    const s = S;
-    s.ready = true;
-    s.out.resume(); s.inp.resume();
-    report("setup_complete", `inp=${s.inp.state} out=${s.out.state}`);
-    setState("listening");
-    animate();
+  function onLiveReady() {
+    const s = S; s.ready = true;
+    if (actx.state !== "running") actx.resume().catch(() => {});
+    report("setup_complete", `ctx=${actx.state}`);
+    vstate("live_listening");
     const endAt = Date.now() + ((s.tok && s.tok.session_minutes) || 10) * 60000;
     s.timer = setInterval(() => {
-      const left = Math.max(0, endAt - Date.now()); $("timer").hidden = false;
-      $("timer").textContent = `${Math.floor(left / 60000)}:${String(Math.floor(left / 1000) % 60).padStart(2, "0")}`;
-      diag();
-      if (!left) stopVoice();
-    }, 1000);
-    // after a few seconds, tell the person if their microphone is not reaching us
-    s.micCheck = setTimeout(() => {
       if (S !== s) return;
-      if (s.sent === 0 || s.peak < 0.003) {
-        report("no_mic_level", `sent=${s.sent} peak=${s.peak.toFixed(4)} inp=${s.inp.state}`);
-        statusEl.innerHTML = "माइक से आवाज़ नहीं आ रही · <b>We can't hear your microphone.</b> ";
-        const retry = el("button", "pill", "फिर से चालू करें · Tap to retry"); retry.type = "button";
-        retry.onclick = () => { s.inp.resume(); s.out.resume(); setState("listening"); };
-        statusEl.append(retry);
-      }
-    }, 6000);
-    // let Parth greet first
-    s.ws.send(JSON.stringify({ realtimeInput: { text: "नमस्ते" } }));
+      if (Date.now() > endAt) return stopLive();
+      const k = s.thinking ? "live_thinking" : playing() ? "live_speaking" : "live_listening";
+      if (s.vs !== k) { s.vs = k; vstate(k); }
+      if (playing()) mic.style.setProperty("--lvl", 0.15);
+      diag(`live ${s.tok && s.tok.model} ctx ${actx.state} sent ${s.sent} muted ${s.st.muted} recv ${s.recv} peak ${s.peak.toFixed(3)} playing ${playing()}`);
+    }, 200);
+    s.micCheck = setTimeout(() => { if (S === s && (s.sent === 0 || s.peak < 0.003)) report("no_mic_level", `sent=${s.sent} peak=${s.peak.toFixed(4)} ctx=${actx.state}`); }, 6000);
+    s.ws.send(JSON.stringify({ realtimeInput: { text: "नमस्ते" } }));   // let Gita Sarathi greet first
   }
 
-  function onServer(m) {
-    if (m.setupComplete) return onSetupComplete();
-    if (m.goAway) { report("go_away", JSON.stringify(m.goAway)); stopVoice(); return; }
+  function liveTurn() {
+    if (!S.turn) { S.turn = el("section", "turn"); thread.append(S.turn); }
+    return S.turn;
+  }
+
+  function onLive(m) {
+    const s = S;
+    for (const k of Object.keys(m)) if (!KNOWN_TOP.has(k) && !s.unknown.has(k)) { s.unknown.add(k); report("unknown_keys", "top:" + k); }
+    if (m.setupComplete) return onLiveReady();
+    if (m.goAway) { report("go_away", JSON.stringify(m.goAway)); return stopLive(); }
     if (m.toolCall) { report("tool_call", (m.toolCall.functionCalls || []).map((f) => f.name).join(",")); return onToolCall(m.toolCall); }
     const sc = m.serverContent; if (!sc) return;
-    if (!S.gotContent) { S.gotContent = true; report("first_server_content", Object.keys(sc).join(",")); }
+    if (!s.gotContent) { s.gotContent = true; report("first_server_content", Object.keys(sc).join(",") || "(empty)"); }
+    for (const k of Object.keys(sc)) { s.st.keys.add(k); if (!KNOWN_SC.has(k) && !s.unknown.has(k)) { s.unknown.add(k); report("unknown_keys", "sc:" + k); } }
     if (sc.inputTranscription && sc.inputTranscription.text) {
-      if (!S.you) S.you = bubble("you", "", S.lang);
-      const t = S.you.querySelector(".txt"); t.textContent += sc.inputTranscription.text;
-      if (/[ऀ-ॿ]/.test(t.textContent)) S.lang = "hi";
+      s.st.inChars += sc.inputTranscription.text.length;
+      if (!s.you) { s.turn = null; const t = liveTurn(); s.you = el("p", "you"); s.you.append(el("small", null, "🎙"), el("span", "said-text", "")); t.append(s.you); s.parth = null; }
+      const t = s.you.querySelector(".said-text"); t.textContent += sc.inputTranscription.text;
+      s.lang = guessLang(t.textContent);
+      s.dropping = false;
     }
     if (sc.modelTurn && sc.modelTurn.parts) {
       finishYou();
       for (const p of sc.modelTurn.parts) {
-        if (p.inlineData && p.inlineData.data && S.player) {
-          const f = resample(pcmFrom64(p.inlineData.data), 24000, S.out.sampleRate);
-          S.player.port.postMessage(f, [f.buffer]); S.lastAudio = performance.now();
-        }
+        if (!(p.inlineData && p.inlineData.data && s.player) || s.dropping) continue;
+        const rate = +((p.inlineData.mimeType || "").match(/rate=(\d+)/) || [0, 24000])[1];
+        const f = resample(pcmFrom64(p.inlineData.data), rate, actx.sampleRate);
+        s.st.chunks++; s.st.ms += f.length / actx.sampleRate * 1000;
+        s.playEnd = Math.max(s.playEnd, performance.now()) + f.length / actx.sampleRate * 1000;
+        s.player.port.postMessage(f, [f.buffer]);
       }
     }
     if (sc.outputTranscription && sc.outputTranscription.text) {
-      finishYou();
-      if (!S.parth) S.parth = bubble("parth", "", S.lang);
-      S.parth.querySelector(".txt").textContent += sc.outputTranscription.text;
+      finishYou(); s.st.outChars += sc.outputTranscription.text.length;
+      if (!s.parth) { s.parth = el("p", "said"); liveTurn().append(s.parth); }
+      s.parth.textContent += sc.outputTranscription.text;
     }
-    if (sc.interrupted) { if (S.player) S.player.port.postMessage("interrupt"); S.parth = null; }
-    if (sc.turnComplete) { finishYou(); S.parth = null; }
+    if (sc.interrupted) {
+      s.st.interrupts++;
+      if (playing() && !s.userStop) { s.st.echo++; report("echo_ignored", `queued_ms=${Math.round(s.playEnd - performance.now())}`); }  // the mic was muted, so this was not the person
+      else { s.player && s.player.port.postMessage("interrupt"); s.playEnd = 0; }
+      s.dropping = false; s.userStop = false; s.parth = null;
+    }
+    if (sc.turnComplete) {
+      finishYou();
+      const t = s.st;
+      report("turn_summary", `audio=${t.chunks}/${Math.round(t.ms)}ms in=${t.inChars} out=${t.outChars} int=${t.interrupts} echo=${t.echo} muted=${t.muted} keys=${[...t.keys].join("+")} ctx=${actx.state} sent=${s.sent}`);
+      s.st = newStats(); s.parth = null; s.dropping = false; s.userStop = false; s.thinking = false;
+    }
   }
 
   function finishYou() {
     if (!S || !S.you) return;
-    const said = S.you.querySelector(".txt").textContent.trim(); S.you = null;
+    const said = S.you.querySelector(".said-text").textContent.trim(); S.you = null;
     if (!said) return;
+    remember(said);
+    const turn = S.turn;
     fetch("/api/triage", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: said }) })
-      .then((r) => r.json()).then((t) => { if (t.kind === "crisis" || t.kind === "harm_others") crisisCard(t.message); }).catch(() => {});
+      .then((r) => r.json()).then((t) => { if ((t.kind === "crisis" || t.kind === "harm_others") && turn) turn.append(crisisBox(t.message)); }).catch(() => {});
   }
 
   async function onToolCall(call) {
-    setState("thinking"); finishYou();
-    const s = S;
+    const s = S; s.thinking = true; finishYou();
+    const turn = liveTurn();
     const responses = await Promise.all((call.functionCalls || []).map(async (fc) => {
       try {
         const r = await fetch(`/api/verses?k=3&q=${encodeURIComponent((fc.args && fc.args.query) || "")}`);
         const data = await r.json();
-        if (data.verses.length) thread.append(el("div", "lookup", "पार्थ इन श्लोकों से बता रहे हैं · Verses Parth is drawing on"));
-        data.verses.forEach((v) => card(v, s.lang));
+        if (data.verses.length) turn.append(el("p", "lookup", "गीता सारथी इन श्लोकों से बता रहे हैं · Verses being explained"));
+        const a = { lang: s.lang, kind: "verses", meaning_label: "" };
+        data.verses.forEach((v) => turn.append(verseCard(v, a, null)));
         const brief = data.verses.map((v) => ({ id: v.id, speaker: v.speaker, listener: v.addressed_to, chapter: `${v.chapter} (${v.chapter_name}: ${v.chapter_theme})`,
           translation: v.translation, translation_by: v.translation_source }));
         return { id: fc.id, name: fc.name, response: { result: { verses: brief, note: data.note } } };
       } catch (e) { return { id: fc.id, name: fc.name, response: { error: "lookup failed" } }; }
     }));
+    if (S === s) s.thinking = false;
     if (S === s && s.ws && s.ws.readyState === 1) s.ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
   }
 
-  function animate() {
+  function interruptLive() {
     if (!S) return;
-    const buf = new Float32Array(256); let speakLevel = 0;
-    if (S.analyser) { S.analyser.getFloatTimeDomainData(buf); speakLevel = Math.sqrt(buf.reduce((a, x) => a + x * x, 0) / buf.length); }
-    const speaking = performance.now() - S.lastAudio < 350;
-    if (document.body.dataset.state !== "thinking" || speaking) {
-      const want = speaking ? "speaking" : "listening";
-      if (document.body.dataset.state !== want && !statusEl.querySelector("button")) setState(want);
-    }
-    const lvl = speaking ? speakLevel * 4 : (S.micLevel || 0) * 6;
-    document.querySelectorAll(".ring").forEach((r, i) => r.style.setProperty("--s", (1 + Math.min(0.35, lvl) * (1 + i * 0.5)).toFixed(3)));
-    S.raf = requestAnimationFrame(animate);
+    S.player && S.player.port.postMessage("interrupt");
+    S.playEnd = 0; S.dropping = true; S.userStop = true; S.parth = null;
+    report("user_interrupt", `chunks=${S.st.chunks}`);
   }
 
-  function stopVoice() {
+  function stopLive() {
     if (!S) return;
     const s = S; S = null;
-    cancelAnimationFrame(s.raf); clearInterval(s.timer); clearTimeout(s.micCheck);
+    clearInterval(s.timer); clearTimeout(s.micCheck);
     try { s.ws && s.ws.readyState <= 1 && s.ws.close(1000); } catch {}
-    s.mic && s.mic.getTracks().forEach((t) => t.stop());
-    if (!s.mic) s.micP.then((m) => m.getTracks().forEach((t) => t.stop())).catch(() => {});
-    try { s.inp.close(); s.out.close(); } catch {}
-    document.querySelectorAll(".ring").forEach((r) => r.style.removeProperty("--s"));
-    $("end").hidden = true; $("typeToggle").hidden = false; $("timer").hidden = true;
-    setState("idle");
+    s.mic ? s.mic.getTracks().forEach((t) => t.stop()) : s.micP.then((m) => m.getTracks().forEach((t) => t.stop())).catch(() => {});
+    try { s.cap && (s.cap.port.onmessage = null); s.src && s.src.disconnect(); s.cap && s.cap.disconnect(); s.player && s.player.disconnect(); } catch {}
+    mic.style.setProperty("--lvl", 0);
+    setState("idle"); vstate("idle");
   }
 
-  function failVoice(reason) {
-    console.warn("voice unavailable:", reason);
-    stopVoice();
-    statusEl.innerHTML = /daily_limit/.test(reason)
-      ? "आज की आवाज़-बातचीत की सीमा पूरी हो गई। लिखकर पूछें · <b>Today's voice limit is reached; please type.</b>"
-      : `आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type your question.</b> (${reason})`;
-    form.hidden = false;
+  function failLive(reason) {
+    console.warn("live unavailable:", reason);
+    stopLive();
+    optLive.checked = false;
+    vstate(/daily_limit/.test(reason) ? "daily_limit" : "busy", { ...ERR, busy: ["Live अभी उपलब्ध नहीं · Live is unavailable", "सामान्य आवाज़ मोड चालू है: 🎙 दबाकर पूछें"] });
   }
 
-  orb.onclick = begin;
-  $("end").onclick = stopVoice;
-  window.addEventListener("pagehide", stopVoice);
+  $("vinterrupt").onclick = interruptLive;
+  $("vend").onclick = stopLive;
+  window.addEventListener("pagehide", () => { stopLive(); if (rec) finish(rec, "cancel"); stopSpeaking(); });
+  setState("idle");
 })();
 </script>
 </body>

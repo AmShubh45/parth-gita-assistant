@@ -1,8 +1,10 @@
 """HTTP API and the web page.
 
-GET  /                 the Parth web app (voice-first)
-POST /api/ask          {"question": "..."} -> grounded text answer (JSON)
-POST /api/live/token   ephemeral, config-locked token for a Gemini Live voice session
+GET  /                 the Gita Sarathi web app
+POST /api/ask          {"question": "..."} -> grounded answer (JSON), with the pieces to speak it
+POST /api/voice        {"audio": base64 WAV, "history": [...]} -> transcript + grounded answer, to be spoken
+POST /api/speak        {"text", "lang", "sig"} -> WAV of a piece of an answer this server wrote (204: use the browser voice)
+POST /api/live/token   ephemeral, config-locked token for a real-time Gemini Live session (beta)
 GET  /api/verses?q=    verified verses for the voice model's find_verses tool (and the page's cards)
 POST /api/triage       {"text": "..."} -> crisis check on what the person said
 POST /api/live/event   voice-session milestones from the page, logged (no audio, no transcripts)
@@ -13,28 +15,31 @@ GET  /healthz
 from __future__ import annotations
 
 import asyncio
+import base64
+import hmac
+import json
 import logging
 import os
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from .engine import Engine
 from .guard import AnswerCache, DailyBudget, RateLimiter
-from . import live
+from . import live, speech
 from .kb import KnowledgeBase
 from .lang import detect
-from .llm import Gemini
+from .llm import Gemini, LLMError
 from .safety import triage
 
 logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
 log = logging.getLogger("parth")
 STATIC = Path(__file__).resolve().parent / "static"
 
-app = FastAPI(title="Parth", version="2.0", docs_url=None, redoc_url=None)
+app = FastAPI(title="Gita Sarathi", version="2.1", docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
 _kb = KnowledgeBase.load()
 _gemini = Gemini()
@@ -43,6 +48,10 @@ budget, limiter, cache = DailyBudget(), RateLimiter(), AnswerCache()
 voice_budget = DailyBudget(int(os.environ.get("PARTH_DAILY_VOICE_LIMIT", "100")))
 voice_limiter = RateLimiter(per_minute=3)
 event_limiter = RateLimiter(per_minute=60)
+speaker = speech.Speaker(_gemini.key)
+turn_limiter = RateLimiter(per_minute=6)     # spoken questions per visitor per minute
+speak_limiter = RateLimiter(per_minute=40)   # spoken answer pieces per visitor per minute
+MAX_WAV = 1_100_000                           # about 34 s of 16 kHz mono 16-bit audio
 
 RATE_MSG = {
     "en": "You're asking very quickly. Please wait a minute and try again.",
@@ -53,6 +62,18 @@ RATE_MSG = {
 
 class Ask(BaseModel):
     question: str = Field(min_length=2, max_length=2000)
+    history: list[str] = Field(default_factory=list, max_length=6)  # earlier questions, for follow-ups
+
+
+class Voice(BaseModel):
+    audio: str = Field(min_length=100, max_length=1_500_000)  # base64 WAV
+    history: list[str] = Field(default_factory=list, max_length=6)
+
+
+class Speak(BaseModel):
+    text: str = Field(min_length=1, max_length=2500)
+    lang: str = Field(pattern="^(en|hi|hinglish)$")
+    sig: str = Field(max_length=64)
 
 
 class Triage(BaseModel):
@@ -60,7 +81,8 @@ class Triage(BaseModel):
 
 
 LIVE_EVENTS = {"token_ok", "token_error", "start_error", "mic_denied", "setup_complete", "first_audio_sent",
-               "first_server_content", "tool_call", "no_mic_level", "go_away", "closed"}
+               "first_server_content", "tool_call", "no_mic_level", "go_away", "closed", "turn_summary", "unknown_keys",
+               "user_interrupt", "echo_ignored", "voice_error", "tts_fallback"}
 
 
 class LiveEvent(BaseModel):
@@ -80,6 +102,22 @@ def _client(request: Request) -> str:
     return fwd.split(",")[0].strip() or (request.client.host if request.client else "?")
 
 
+def _history(items: list[str]) -> list[str]:
+    return [h.strip()[:300] for h in items if h and h.strip()][-2:]
+
+
+def _sign_key() -> str:
+    return _gemini.key or "no-key"
+
+
+def _public(ans) -> dict:
+    """An answer as the page receives it: no internal trace, plus the pieces to speak it aloud."""
+    out = ans.to_dict()
+    out.pop("trace", None)
+    out["speech"] = speech.speech_items(out, _sign_key())
+    return out
+
+
 @app.get("/")
 def home() -> FileResponse:
     return FileResponse(STATIC / "index.html", headers={"Cache-Control": "no-cache"})
@@ -88,26 +126,78 @@ def home() -> FileResponse:
 @app.get("/healthz")
 def healthz() -> dict:
     return {"ok": True, "answerable_verses": len(_kb.answerable), "model": bool(engine.llm),
-            "ai_answers_today": budget.used, "ai_daily_limit": budget.limit}
+            "ai_answers_today": budget.used, "ai_daily_limit": budget.limit, "tts_today": speaker.used}
 
 
 @app.post("/api/ask")
 async def ask(body: Ask, request: Request):
-    from .lang import detect
     if not limiter.allow(_client(request)):
         return JSONResponse({"kind": "rate_limited", "lang": detect(body.question),
                              "opening": RATE_MSG[detect(body.question)], "verses": []}, status_code=429)
-    cached = cache.get(body.question)
+    history = _history(body.history)
+    cached = None if history else cache.get(body.question)
     if cached:
         return cached
     use_model = bool(engine.llm) and budget.take()
-    ans = await engine.answer(body.question, use_model=use_model)
+    ans = await engine.answer(body.question, use_model=use_model, history=history)
     log.info("ask kind=%s lang=%s model=%s trace=%s", ans.kind, ans.lang, use_model, ans.trace)
-    out = ans.to_dict()
-    out.pop("trace", None)
-    if ans.kind == "answer":
+    out = _public(ans)
+    if ans.kind == "answer" and not history:
         cache.put(body.question, out)
     return out
+
+
+@app.post("/api/voice")
+async def voice(body: Voice, request: Request):
+    """A spoken question: one model call transcribes and understands it, then the same grounded
+    engine as typed questions answers it. The page speaks the answer with /api/speak."""
+    if not engine.llm:
+        return JSONResponse({"error": "voice_unavailable"}, status_code=503)
+    if not turn_limiter.allow(_client(request)):
+        return JSONResponse({"error": "rate_limited"}, status_code=429)
+    try:
+        audio = base64.b64decode(body.audio, validate=True)
+    except ValueError:
+        return JSONResponse({"error": "bad_audio"}, status_code=400)
+    if audio[:4] != b"RIFF" or audio[8:12] != b"WAVE" or not 44 + 8000 <= len(audio) <= MAX_WAV:
+        return JSONResponse({"error": "bad_audio"}, status_code=400)
+    if not budget.take():
+        return JSONResponse({"error": "daily_limit"}, status_code=429)
+    history = _history(body.history)
+    try:
+        u = await engine.understand_audio(audio, history)
+    except LLMError as exc:
+        log.warning("voice transcription failed: %s", exc)
+        return JSONResponse({"error": "transcribe_failed"}, status_code=502)
+    transcript = (u.get("transcript") or "").strip()[:2000]
+    if len(transcript) < 2:
+        return {"transcript": "", "error": "no_speech"}
+
+    async def lines():
+        # the transcript goes out at once, so the page shows what it heard while the answer is written
+        yield json.dumps({"transcript": transcript}, ensure_ascii=False) + "\n"
+        out = None if history else cache.get(transcript)
+        if out is None:
+            ans = await engine.answer(transcript, use_model=True, understanding=u, history=history)
+            log.info("voice kind=%s lang=%s secs=%.1f trace=%s", ans.kind, ans.lang, (len(audio) - 44) / 32000, ans.trace)
+            out = _public(ans)
+            if ans.kind == "answer" and not history:
+                cache.put(transcript, out)
+        yield json.dumps({"answer": out}, ensure_ascii=False) + "\n"
+
+    return StreamingResponse(lines(), media_type="application/x-ndjson", headers={"Cache-Control": "no-store"})
+
+
+@app.post("/api/speak")
+async def speak(body: Speak, request: Request):
+    if not hmac.compare_digest(body.sig, speech.sign(_sign_key(), body.lang, body.text)):
+        return JSONResponse({"error": "unknown_text"}, status_code=403)
+    if not speak_limiter.allow(_client(request)):
+        return JSONResponse({"error": "rate_limited"}, status_code=429)
+    audio = await speaker.speak(body.text, body.lang)
+    if not audio:
+        return Response(status_code=204)  # the page reads it with the browser's own voice
+    return Response(audio, media_type="audio/wav", headers={"Cache-Control": "private, max-age=86400"})
 
 
 @app.post("/api/live/token")

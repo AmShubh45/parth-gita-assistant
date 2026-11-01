@@ -43,9 +43,9 @@ FALLBACK_TEXT = {
         "hinglish": "Mujhe Gita mein aise shlok nahi mile jo seedhe is baare mein baat karte hon. Kya aap thoda aur batayenge ki aap kya mehsoos kar rahe hain?",
     },
     "off_topic": {
-        "en": "I'm Parth, and I answer life's questions through the Bhagavad Gita. Tell me what's on your mind: a worry, a decision, a loss, anything you're carrying.",
-        "hi": "मैं पार्थ हूँ, और मैं भगवद्गीता के माध्यम से जीवन के प्रश्नों का उत्तर देता हूँ। बताइए, आपके मन में क्या है: कोई चिंता, कोई निर्णय, कोई दुख?",
-        "hinglish": "Main Parth hoon, aur main Bhagavad Gita ke through zindagi ke sawalon ke jawab deta hoon. Bataiye, aapke man mein kya hai: koi chinta, koi faisla, koi dukh?",
+        "en": "I'm Gita Sarathi, and I answer life's questions through the Bhagavad Gita. Tell me what's on your mind: a worry, a decision, a loss, anything you're carrying.",
+        "hi": "मैं गीता सारथी हूँ, और मैं भगवद्गीता के माध्यम से जीवन के प्रश्नों का उत्तर देता हूँ। बताइए, आपके मन में क्या है: कोई चिंता, कोई निर्णय, कोई दुख?",
+        "hinglish": "Main Gita Sarathi hoon, aur main Bhagavad Gita ke through zindagi ke sawalon ke jawab deta hoon. Bataiye, aapke man mein kya hai: koi chinta, koi faisla, koi dukh?",
     },
 }
 
@@ -108,7 +108,12 @@ _VERIFY_SCHEMA = {"type": "OBJECT", "properties": {"ok": {"type": "BOOLEAN"},
                   "required": ["ok", "problems"]}
 
 # ------------------------------------------------------------------ prompts
-_UNDERSTAND_SYSTEM = """You read one message sent to Parth, an app that answers life questions through the Bhagavad Gita.
+def _history_note(history: list[str] | None) -> str:
+    recent = [h.strip()[:300] for h in (history or []) if h and h.strip()][-2:]
+    return ("Earlier in this conversation the person said: " + " | ".join(recent) + "\nNow they say: ") if recent else ""
+
+
+_UNDERSTAND_SYSTEM = """You read one message sent to Gita Sarathi, an app that answers life questions through the Bhagavad Gita.
 The message may be in Hindi, Hinglish or English. Return:
 - topic: "life_question" (a feeling, problem, decision, relationship, work, loss...), "gita_question" (about the Gita,
   its characters or teachings), or "off_topic" (unrelated requests: news, code, trivia, homework...).
@@ -121,7 +126,7 @@ You are given candidate verses with their speaker, listener, chapter and an auth
 Pick 1 to 3 verses that speak most directly to the person's situation when read in their real context.
 Prefer verses where Krishna teaches. Choose only from the candidate IDs. For each, say in one sentence why it fits."""
 
-_COMPOSE_SYSTEM = """You are Parth. You help people with real problems through what the Bhagavad Gita actually says.
+_COMPOSE_SYSTEM = """You are Gita Sarathi. You help people with real problems through what the Bhagavad Gita actually says.
 
 Write the whole answer in {lang}. Be warm, simple and respectful, like an elder who has studied the Gita closely.
 
@@ -141,7 +146,7 @@ Rules:
 - No medical, legal or financial advice. Never use the Gita to justify harm, caste discrimination or politics.
 - Keep it short: opening ≤ 2 sentences, each field ≤ 3 sentences, closing ≤ 2 sentences."""
 
-_VERIFY_SYSTEM = """You check an answer written for a person by Parth, an app grounded in the Bhagavad Gita.
+_VERIFY_SYSTEM = """You check an answer written for a person by Gita Sarathi, an app grounded in the Bhagavad Gita.
 You are given the person's question, the source material for each verse (authentic translation, speaker, chapter,
 neighbouring verses, classical commentary excerpts) and the answer.
 Set ok=false and list each problem if any of these is true:
@@ -215,8 +220,21 @@ class Engine:
                       note=FALLBACK_TEXT["note"][lang], meaning_label=MEANING_LABEL[lang], situations=sits, trace=trace)
 
     # ------------------------------------------------------------- pipeline
-    async def answer(self, question: str, use_model: bool = True) -> Answer:
-        """use_model=False answers from the knowledge base alone (e.g. when the daily AI budget is spent)."""
+    async def understand_audio(self, audio_wav: bytes, history: list[str] | None = None) -> dict:
+        """Transcribe a spoken question and understand it in one model call."""
+        schema = _understand_schema([s["id"] for s in self.kb.situations])
+        schema = {**schema, "properties": {**schema["properties"], "transcript": {"type": "STRING"}},
+                  "required": ["transcript", *schema["required"]]}
+        prompt = (_history_note(history) + "The attached audio is the person's message. Transcribe it exactly in the "
+                  "script they spoke (Devanagari for Hindi, Roman letters for Hinglish, English as English), then fill the rest.")
+        return await self.llm.json("understand", _UNDERSTAND_SYSTEM, prompt, schema, max_tokens=600, timeout_s=25,
+                                   audio=("audio/wav", audio_wav))
+
+    async def answer(self, question: str, use_model: bool = True, understanding: dict | None = None,
+                     history: list[str] | None = None) -> Answer:
+        """use_model=False answers from the knowledge base alone (e.g. when the daily AI budget is spent).
+        understanding: a result already computed (e.g. by understand_audio), so the model is not asked twice.
+        history: the person's previous questions in this conversation, for follow-ups like "aur batao"."""
         t0 = time.monotonic()
         question = (question or "").strip()[:2000]
         lang = detect(question)
@@ -229,8 +247,8 @@ class Engine:
         llm = self.llm if use_model else None
         if llm:
             try:
-                u = await llm.json("understand", _UNDERSTAND_SYSTEM, question,
-                                        _understand_schema([s["id"] for s in self.kb.situations]), max_tokens=300)
+                u = understanding or await llm.json("understand", _UNDERSTAND_SYSTEM, _history_note(history) + question,
+                                                    _understand_schema([s["id"] for s in self.kb.situations]), max_tokens=300)
                 trace["steps"].append("understand")
                 if u.get("crisis"):
                     return Answer(kind="crisis", lang=lang, opening=triage("suicide", lang).message or "", trace=trace)
@@ -248,7 +266,7 @@ class Engine:
             return self._fallback(lang, cands, sits, trace, "no model configured" if not self.llm else "daily AI budget reached")
 
         try:
-            ans = await self._grounded(question, english, lang, cands, sits, trace)
+            ans = await self._grounded(_history_note(history) + question, english, lang, cands, sits, trace)
         except LLMError as exc:
             return self._fallback(lang, cands, sits, trace, f"model error: {exc}")
         trace["ms"] = int((time.monotonic() - t0) * 1000)

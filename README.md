@@ -1,8 +1,8 @@
-> **Parth v2 is being rebuilt on the `v2` branch** (Python/FastAPI, grounded answers with exact verse citations, and a 24/7 YouTube live stream). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+> **Gita Sarathi · गीता सारथी (Parth v2) lives on the `v2` branch**: ask by voice or text in Hindi, Hinglish or English and hear the answer spoken back, grounded in exact Gita verses (Python/FastAPI; a 24/7 YouTube live stream is next). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 >
-> Deploy v2 on Render: New → Blueprint → this repo → it reads `render.yaml` (branch `v2`). Paste the same `GEMINI_API_KEY` Samajh uses; `PARTH_DAILY_AI_LIMIT` (default 300) caps Parth's AI answers per day so Samajh's quota is protected.
+> Deploy v2 on Render: New → Blueprint → this repo → it reads `render.yaml` (branch `v2`). Paste the same `GEMINI_API_KEY` Samajh uses; `PARTH_DAILY_AI_LIMIT` (default 300) caps AI answers per day and `PARTH_DAILY_TTS_LIMIT` (default 600) caps spoken pieces, so Samajh's quota is protected.
 >
-> Run v2 locally: `pip install -r requirements-dev.txt && pytest -q`, then `GEMINI_API_KEY=... uvicorn parth.app:app` and `POST /api/ask {"question": "..."}`. Without a key, Parth still answers with the most relevant verses. The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
+> Run v2 locally: `pip install -r requirements-dev.txt && pytest -q`, then `GEMINI_API_KEY=... uvicorn parth.app:app` and open http://127.0.0.1:8000 (tap the mic, or type). Without a key, it still answers typed questions with the most relevant verses and reads them with the browser's voice. `python scripts/e2e_voice_mock.py` checks both voice modes in Chromium with Gemini mocked. The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
 
 # पार्थ - Gita Assistant 🕉️
 

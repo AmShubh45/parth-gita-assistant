@@ -3,7 +3,7 @@
 The browser talks to Gemini Live directly over a WebSocket, so audio never passes through our
 server. Our server only:
 - mints a single-use ephemeral token whose session config is locked (model, system instruction,
-  tools, audio output, transcription), so a visitor cannot change Parth's instructions;
+  tools, audio output, transcription), so a visitor cannot change Gita Sarathi's instructions;
 - answers the model's `find_verses` tool calls (relayed by the browser) from the verified
   knowledge base, which is also what the page shows as verse cards;
 - runs the same safety triage on what the person says.
@@ -20,7 +20,7 @@ VOICE = os.environ.get("PARTH_LIVE_VOICE", "Charon")
 WS_URL = ("wss://generativelanguage.googleapis.com/ws/"
           "google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContentConstrained")
 
-SYSTEM = """You are Parth, a warm and wise guide who helps people with real problems through what the
+SYSTEM = """You are Gita Sarathi, a warm and wise guide who helps people with real problems through what the
 Bhagavad Gita actually says. You are talking with one person, live, by voice.
 
 Language: reply in the language the person speaks (Hindi, Hinglish or English). Keep replies short and
