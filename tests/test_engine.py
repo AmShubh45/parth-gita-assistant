@@ -229,7 +229,47 @@ def test_http_api_and_page():
     assert client.get("/healthz").json()["answerable_verses"] >= 480
     page = client.get("/")
     assert page.status_code == 200 and "पार्थ" in page.text
+    assert "बात करें" in page.text
+    assert client.get("/static/capture.worklet.js").status_code == 200
     r = client.post("/api/ask", json={"question": "mujhe bahut gussa aata hai"}).json()
     assert r["lang"] == "hinglish" and r["verses"] and "trace" not in r
     assert client.post("/api/ask", json={"question": "x"}).status_code == 422
     assert client.get("/api/verse/2.47").json()["translation_status"] == "verified"
+
+
+# ---------------------------------------------------------------- live voice
+def test_voice_endpoints_without_a_key():
+    from fastapi.testclient import TestClient
+    from parth.app import app
+    client = TestClient(app)
+    assert client.post("/api/live/token").status_code == 503  # no key here: the page falls back to typing
+    v = client.get("/api/verses", params={"q": "anger at my colleague"}).json()
+    assert v["verses"] and all(x["translation"] for x in v["verses"]) and v["verses"][0]["id"] in {"BG 2.62", "BG 2.63"}
+    assert client.post("/api/triage", json={"text": "main khudkushi kar lunga"}).json()["kind"] == "crisis"
+    assert client.post("/api/triage", json={"text": "mujhe gussa aata hai"}).json()["kind"] == "ok"
+
+
+def test_voice_token_locks_the_whole_session():
+    from google.genai import types
+    from parth import live
+    cfg = types.CreateAuthTokenConfig.model_validate(live.token_request("gemini-3.8-live"))
+    assert cfg.uses == 1 and cfg.lock_additional_fields == []
+    lc = cfg.live_connect_constraints
+    assert lc.model == "gemini-3.8-live"
+    assert [f.name for f in lc.config.tools[0].function_declarations] == ["find_verses"]
+    assert "Never recite Sanskrit or translations from memory" in str(lc.config.system_instruction)
+    assert "14416" in str(lc.config.system_instruction)
+
+
+def test_voice_token_endpoint_guards(monkeypatch):
+    from fastapi.testclient import TestClient
+    from parth import app as appmod, live
+    monkeypatch.setattr(appmod._gemini, "key", "test-key")
+    monkeypatch.setattr(live, "mint_token", lambda key, model: f"auth_tokens/{model}")
+    monkeypatch.setattr(appmod, "voice_budget", appmod.DailyBudget(1))
+    monkeypatch.setattr(appmod, "voice_limiter", appmod.RateLimiter(per_minute=5))
+    client = TestClient(appmod.app)
+    first = client.post("/api/live/token").json()
+    assert first["token"] == "auth_tokens/" + live.LIVE_MODELS[0] and first["ws_url"].startswith("wss://")
+    assert client.post("/api/live/token").status_code == 429            # daily voice cap
+    assert client.post("/api/live/token?attempt=1").json()["model"] == live.LIVE_MODELS[-1]  # fallback model

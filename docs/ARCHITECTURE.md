@@ -51,7 +51,13 @@ question
 ## 4. Product surfaces
 
 - **Web app.** Ask in text, answers stream over Server-Sent Events. Each verse card has Sanskrit, transliteration, translation and context, plus "Why this verse?" and "This helped / doesn't fit" feedback.
-- **Voice** (later). Real-time voice on the same pipeline, so voice answers obey the same grounding rules.
+- **Live voice** (built, `parth/live.py`):
+  - **Connection:** the browser talks to Gemini Live directly, using a single-use ephemeral token whose session config is locked (system instruction, tools, audio, transcription).
+  - **Grounding:** the model must call `find_verses`, which our server answers from the verified knowledge base. The page shows those exact verse cards while Parth speaks.
+  - **Safety:** user transcripts run through the same safety triage, with helplines on screen.
+  - **Limits:** a daily voice-session cap, a per-visitor rate limit, and 10-minute sessions.
+  - **Honest limit:** spoken words are grounded and instructed, not verified word by word like typed answers.
+  - **Testing:** `scripts/e2e_voice_mock.py` drives the page against a mock Live server.
 - **Parth Live** (YouTube, 24/7).
   - Built like the MarketLab live channel: a separate folder on the laptop, OBS with its own **ParthLive** profile and **GitaLive** scene, controlled from Python over OBS WebSocket. The stream key is in that folder's `.env`, and a Windows Task Scheduler autopilot starts it.
   - OBS shows a Browser Source page from the Parth server.

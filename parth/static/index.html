@@ -2,230 +2,410 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>पार्थ · Parth · जीवन के प्रश्न, गीता के उत्तर</title>
-<meta name="description" content="Ask about anything you're going through, in Hindi, Hinglish or English. Parth answers with what the Bhagavad Gita actually says: exact verses, their real context, and how they apply to you.">
-<meta name="theme-color" content="#0B1426">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1426'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23E8A33D' font-family='serif'%3E%E0%A4%AA%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>पार्थ · Parth · Talk through life with the Bhagavad Gita</title>
+<meta name="description" content="Talk to Parth, live, in Hindi, Hinglish or English. Answers come from what the Bhagavad Gita actually says: exact verses from verified sources, their real context, and how they apply to you.">
+<meta name="theme-color" content="#070C1E">
+<meta property="og:title" content="पार्थ · Parth">
+<meta property="og:description" content="Talk through what you're going through, live, with the Bhagavad Gita. Hindi, Hinglish or English.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070C1E'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23E8A33D' font-family='serif'%3E%E0%A4%AA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Tiro+Devanagari+Hindi&display=swap">
 <style>
-/* Layout: one calm reading column (max 760px): header, question box, then the answer as verse cards. */
+/* Concept: night over Kurukshetra. One deliberate dark theme; a single glowing talk orb is the focal point,
+   the conversation and exact verse cards flow beneath it in one reading column (max 760px). */
 :root{
-  --bg:#F4F6F9; --surface:#FFFFFF; --ink:#151B2B; --muted:#5B6479; --line:#DDE2EB; --soft:#EEF1F6;
-  --peacock:#0F6B73; --peacock-soft:#E2F1F2; --gold:#B7791F; --gold-soft:#FBF1DF;
-  --alert:#B4233A; --alert-soft:#FCE9EC;
+  --night:#070C1E; --night-2:#0D1631; --panel:rgba(255,255,255,.045); --panel-2:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.11); --ink:#EEF1FA; --muted:#A3ACC6; --faint:#6F7896;
+  --gold:#E8A33D; --gold-2:#F6C76E; --gold-glow:rgba(232,163,61,.35);
+  --peacock:#4FC3C9; --peacock-soft:rgba(79,195,201,.12); --alert:#FF7A8A; --alert-soft:rgba(255,122,138,.12);
   --f-ui:"Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
   --f-verse:"Tiro Devanagari Sanskrit", "Noto Serif Devanagari", serif;
   --f-head:"Tiro Devanagari Hindi", "Noto Serif Devanagari", Georgia, serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0B1426; --surface:#121D33; --ink:#E9EDF6; --muted:#9BA6BE; --line:#26324D; --soft:#17233D;
-    --peacock:#5CC4CB; --peacock-soft:#12303A; --gold:#E8A33D; --gold-soft:#2D2412;
-    --alert:#F27A8C; --alert-soft:#3A1720;
-    color-scheme:dark;
-  }
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 var(--f-ui)}
-.wrap{max-width:760px;margin:0 auto;padding-inline:18px}
-a{color:var(--peacock)}
-:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
-button{font:inherit;cursor:pointer}
+html,body{background:var(--night)}
+body{margin:0;color:var(--ink);font:17px/1.65 var(--f-ui);min-height:100vh;overflow-x:hidden;
+  background:radial-gradient(1200px 520px at 50% -120px,#1B2A5C 0%,rgba(27,42,92,0) 70%),
+             radial-gradient(900px 400px at 50% 105%,rgba(232,163,61,.10) 0%,rgba(232,163,61,0) 70%),var(--night)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;z-index:0;
+  background-image:radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 27% 62%,#fff 50%,transparent 51%),
+  radial-gradient(1.4px 1.4px at 44% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 63% 31%,#fff 50%,transparent 51%),
+  radial-gradient(1.2px 1.2px at 78% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 89% 48%,#fff 50%,transparent 51%),
+  radial-gradient(1px 1px at 6% 77%,#fff 50%,transparent 51%),radial-gradient(1.3px 1.3px at 54% 84%,#fff 50%,transparent 51%),
+  radial-gradient(1px 1px at 93% 88%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 35% 38%,#fff 50%,transparent 51%);
+  background-size:420px 420px}
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding-inline:18px}
+a{color:var(--gold-2)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+button{font:inherit;cursor:pointer;color:inherit}
 
-header{padding-block:34px 10px;text-align:center}
-.mark{font-family:var(--f-head);font-size:44px;line-height:1;color:var(--gold)}
-h1{font-family:var(--f-head);font-weight:400;font-size:clamp(26px,5vw,34px);margin:10px 0 4px;letter-spacing:.01em}
-.tag{color:var(--muted);margin:0}
-.tag b{color:var(--ink);font-weight:600}
+.top{display:flex;align-items:center;justify-content:space-between;padding-block:18px 0}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-family:var(--f-head);font-weight:400;font-size:28px;color:var(--gold)}
+.brand span{font-size:14px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.top a.about{font-size:14px;color:var(--muted);text-decoration:none}
 
-/* ask box */
-.ask{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 18px 40px -30px rgba(11,20,38,.45)}
-.ask label{display:block;font-weight:600;font-size:15px;margin:0 4px 8px}
-textarea{width:100%;min-height:96px;resize:vertical;border:0;background:transparent;color:var(--ink);font:inherit;font-size:18px;padding:4px}
-textarea:focus{outline:none}
-.ask-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;flex-wrap:wrap}
-.hint{font-size:13.5px;color:var(--muted)}
-.btns{display:flex;gap:8px;margin-left:auto}
-.mic{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:12px;padding:9px 12px;display:inline-flex;align-items:center;gap:6px}
-.mic[aria-pressed="true"]{background:var(--alert-soft);border-color:var(--alert);color:var(--alert)}
-.go{border:0;background:var(--peacock);color:#fff;border-radius:12px;padding:10px 20px;font-weight:600;font-size:16.5px}
-@media (prefers-color-scheme: dark){.go{color:#05222A}}
+.hero{text-align:center;padding-block:26px 6px}
+.hero h1{font-family:var(--f-head);font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.2;margin:0}
+.hero p{color:var(--muted);margin:10px auto 0;max-width:46ch}
+.hero p b{color:var(--ink);font-weight:600}
+
+/* orb */
+.stage{display:grid;justify-items:center;gap:16px;padding-block:64px 18px}
+.orb{position:relative;width:184px;height:184px;border-radius:50%;border:0;padding:0;
+  background:radial-gradient(circle at 50% 38%,var(--gold-2) 0%,var(--gold) 38%,#9A5B12 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 60px 6px var(--gold-glow),inset 0 -14px 30px rgba(0,0,0,.25);
+  display:grid;place-items:center;transition:transform .12s ease-out}
+.orb:hover{transform:scale(1.03)}
+.orb .inner{display:grid;justify-items:center;gap:2px;color:#1C1003}
+.orb .inner b{font-family:var(--f-head);font-weight:400;font-size:30px;line-height:1}
+.orb .inner small{font-size:14px;font-weight:600;letter-spacing:.03em}
+.orb svg{width:30px;height:30px}
+.ring{position:absolute;inset:-14px;border-radius:50%;border:1.5px solid rgba(232,163,61,.35);pointer-events:none;
+  transform:scale(var(--s,1));transition:transform .08s linear,opacity .3s}
+.ring.r2{inset:-30px;border-color:rgba(232,163,61,.2)}
+.ring.r3{inset:-48px;border-color:rgba(232,163,61,.1)}
+body[data-state="idle"] .ring{animation:breathe 4s ease-in-out infinite}
+.ring.r2{animation-delay:.4s !important}.ring.r3{animation-delay:.8s !important}
+@keyframes breathe{50%{transform:scale(1.06);opacity:.6}}
+body[data-state="listening"] .orb{background:radial-gradient(circle at 50% 38%,#9DEBEF 0%,var(--peacock) 45%,#1D6E73 100%);box-shadow:0 0 70px 8px rgba(79,195,201,.35)}
+body[data-state="listening"] .ring{border-color:rgba(79,195,201,.4)}
+body[data-state="thinking"] .orb{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 90px 18px var(--gold-glow)}}
+body[data-state="connecting"] .orb{opacity:.75}
+.status{min-height:28px;color:var(--muted);text-align:center;font-size:16px}
+.status b{color:var(--ink);font-weight:600}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.pill{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:7px 16px;font-size:15px;color:var(--ink)}
+.pill:hover{border-color:var(--gold)}
+.pill.end{border-color:rgba(255,122,138,.5);color:var(--alert)}
+.timer{font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+/* type form */
+.typebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px;margin-top:6px}
+.typebox textarea{width:100%;min-height:84px;resize:vertical;border:0;background:transparent;color:var(--ink);font:inherit;font-size:17.5px;padding:4px}
+.typebox textarea:focus{outline:none}
+.typebox .row{display:flex;justify-content:flex-end;gap:8px}
+.go{border:0;background:var(--gold);color:#1C1003;border-radius:12px;padding:9px 20px;font-weight:700}
 .go:disabled{opacity:.6;cursor:wait}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.chips button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:5px 13px;font-size:15px}
-.chips button:hover{border-color:var(--peacock)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chips button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:4px 12px;font-size:14.5px;color:var(--muted)}
+.chips button:hover{color:var(--ink);border-color:var(--gold)}
 
-/* answer */
-#answer{margin-top:28px}
-.status{display:flex;align-items:center;gap:10px;color:var(--muted);padding:16px 4px}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:pulse 1s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.25}}
-.opening{font-size:19px;margin:0 2px 18px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 20px 16px;margin-bottom:16px}
-.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;font-size:14px;color:var(--muted);margin-bottom:14px}
-.card-head b{color:var(--peacock);font-weight:600}
-.shloka{font-family:var(--f-verse);font-size:clamp(20px,3.6vw,24px);line-height:1.75;text-align:center;white-space:pre-line;margin:6px 0 4px}
-.translit{font-family:var(--f-verse);font-style:italic;color:var(--muted);text-align:center;white-space:pre-line;font-size:15.5px;margin:0 0 16px}
-.tr{background:var(--soft);border-radius:12px;padding:12px 14px;margin:0 0 14px}
-.tr p{margin:0;font-size:16.5px}
-.tr small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+/* conversation */
+#thread{display:grid;gap:14px;margin-top:26px}
+.msg{max-width:88%;padding:10px 15px;border-radius:16px;line-height:1.55;white-space:pre-line}
+.msg.you{justify-self:end;background:var(--peacock-soft);border:1px solid rgba(79,195,201,.25);border-bottom-right-radius:4px}
+.msg.parth{justify-self:start;background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg .who{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.msg.parth .who{color:var(--gold)}
+.msg.live{opacity:.85}
+.lookup{font-size:13.5px;color:var(--faint);text-align:center}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:18px;padding:18px 18px 14px;animation:rise .45s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.card-head b{color:var(--gold-2);font-weight:600}
+.shloka{font-family:var(--f-verse);font-size:clamp(19px,3.4vw,23px);line-height:1.8;text-align:center;white-space:pre-line;margin:4px 0 2px;color:#FFF7E8}
+.translit{font-family:var(--f-verse);font-style:italic;color:var(--muted);text-align:center;white-space:pre-line;font-size:15px;margin:0 0 14px}
+.tr{border-left:2px solid var(--gold);padding:2px 0 2px 14px;margin:0 0 6px}
+.tr p{margin:0}
+.tr small{display:block;color:var(--faint);font-size:12.5px;margin-top:4px}
 .sec{margin:12px 0 0}
-.sec h3{font-family:var(--f-ui);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
+.sec h3{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
 .sec p{margin:0}
-.sec.apply{background:var(--peacock-soft);border-radius:12px;padding:10px 14px;margin-top:14px}
+.sec.apply{background:var(--peacock-soft);border-radius:12px;padding:10px 14px;margin-top:12px}
 .sec.apply h3{color:var(--peacock)}
-.fb{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--muted);flex-wrap:wrap}
-.fb button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:99px;padding:3px 12px;font-size:14px}
-.closing{font-size:18px;margin:6px 2px 10px}
-.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px;margin:8px 2px}
-.crisis{background:var(--alert-soft);border:1.5px solid var(--alert);border-radius:18px;padding:20px;white-space:pre-line}
-.crisis .lines{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;white-space:normal}
-.crisis a{background:var(--alert);color:#fff;text-decoration:none;font-weight:600;border-radius:12px;padding:9px 14px}
-@media (prefers-color-scheme: dark){.crisis a{color:#2A0A10}}
-.plain{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px}
+.crisis{background:var(--alert-soft);border:1.5px solid var(--alert);border-radius:18px;padding:18px;white-space:pre-line}
+.crisis .lines{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;white-space:normal}
+.crisis a{background:var(--alert);color:#2A0A10;text-decoration:none;font-weight:700;border-radius:12px;padding:8px 14px}
+.plain{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
 
-footer{margin-top:44px;padding-block:22px 36px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
-footer p{margin:0 0 6px}
-@media (prefers-reduced-motion: reduce){.dot{animation:none}}
+footer{margin-top:54px;padding-block:22px 40px;border-top:1px solid var(--line);font-size:13.5px;color:var(--faint)}
+footer p{margin:0 0 8px}
+@media (max-width:420px){.orb{width:160px;height:160px}.msg{max-width:94%}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none !important;transition:none !important}}
 </style>
 </head>
-<body>
+<body data-state="idle">
 <div class="wrap">
-  <header>
-    <div class="mark" aria-hidden="true">पार्थ</div>
-    <h1>जीवन के प्रश्न, गीता के उत्तर</h1>
-    <p class="tag">Ask about anything you're going through, in <b>हिंदी</b>, <b>Hinglish</b> or <b>English</b>.<br>Answers come from what the Bhagavad Gita actually says.</p>
-  </header>
-
-  <form class="ask" id="ask" autocomplete="off">
-    <label for="q">आपके मन में क्या है? · What's on your mind?</label>
-    <textarea id="q" name="q" maxlength="2000" placeholder="जैसे: मुझे बहुत गुस्सा आता है, क्या करूँ? · e.g. My exam result is tomorrow and I can't stop worrying"></textarea>
-    <div class="ask-row">
-      <span class="hint">Your question is not linked to you.</span>
-      <div class="btns">
-        <button type="button" class="mic" id="mic" aria-pressed="false" hidden title="Speak your question">🎙 <span id="mic-label">बोलें</span></button>
-        <button type="submit" class="go" id="go">पूछें · Ask</button>
-      </div>
-    </div>
-  </form>
-  <div class="chips" id="chips" aria-label="Example questions">
-    <button type="button">मुझे बहुत गुस्सा आता है, क्या करूँ?</button>
-    <button type="button">Exam ke result ki bahut chinta hai</button>
-    <button type="button">My father passed away and I can't cope</button>
-    <button type="button">मैं हमेशा दूसरों से अपनी तुलना करता हूँ</button>
-    <button type="button">I feel very lonely</button>
-    <button type="button">Purani galtiyon ka pachhtava nahi jaata</button>
+  <div class="top">
+    <a class="brand" href="/"><b>पार्थ</b><span>Parth</span></a>
+    <a class="about" href="#about">कैसे काम करता है · How it works</a>
   </div>
 
-  <main id="answer" aria-live="polite"></main>
+  <section class="hero">
+    <h1>जीवन के प्रश्न, गीता के उत्तर</h1>
+    <p>Talk to Parth, live, in <b>हिंदी</b>, <b>Hinglish</b> or <b>English</b>. Every verse it shares is real, quoted exactly from verified sources.</p>
+  </section>
 
-  <footer>
-    <p>Every verse shows the original Sanskrit and a verified public-domain translation (Swami Swarupananda, 1909). Explanations are written for you and checked against the sources; they are not a substitute for a teacher, doctor or counsellor.</p>
-    <p>If you are in distress, please call <a href="tel:14416">Tele-MANAS 14416</a> (India, free, 24×7).</p>
+  <section class="stage" aria-label="Voice conversation">
+    <button class="orb" id="orb" type="button" aria-label="Talk to Parth">
+      <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+      <span class="inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        <b>बात करें</b><small>TALK TO PARTH</small>
+      </span>
+    </button>
+    <div class="status" id="status">बात शुरू करने के लिए दबाएँ · <b>Tap to start talking</b></div>
+    <div class="controls">
+      <button class="pill end" id="end" type="button" hidden>बात खत्म करें · End</button>
+      <button class="pill" id="typeToggle" type="button">या लिखकर पूछें · Type instead</button>
+      <span class="timer" id="timer" hidden></span>
+    </div>
+  </section>
+
+  <form class="typebox" id="typeform" hidden autocomplete="off">
+    <textarea id="q" maxlength="2000" aria-label="Your question" placeholder="जैसे: मुझे बहुत गुस्सा आता है, क्या करूँ? · e.g. My exam result is tomorrow and I can't stop worrying"></textarea>
+    <div class="row"><button class="go" id="go" type="submit">पूछें · Ask</button></div>
+    <div class="chips" id="chips">
+      <button type="button">मुझे बहुत गुस्सा आता है, क्या करूँ?</button>
+      <button type="button">Exam ke result ki bahut chinta hai</button>
+      <button type="button">My father passed away and I can't cope</button>
+      <button type="button">मैं हमेशा दूसरों से अपनी तुलना करता हूँ</button>
+      <button type="button">I feel very lonely</button>
+    </div>
+  </form>
+
+  <main id="thread" aria-live="polite"></main>
+
+  <footer id="about">
+    <p><b style="color:var(--muted)">How Parth stays true to the Gita.</b> Parth looks up verses from a knowledge base of the Sanskrit text and Swami Swarupananda's 1909 translation, verified word by word against four original scans. It shows the exact verse beside its words, explains who is speaking and why, and never invents verses. Typed answers are also checked by a second AI before you see them.</p>
+    <p>Parth is not a substitute for a teacher, doctor or counsellor. If you are in distress, please call <a href="tel:14416">Tele-MANAS 14416</a> (India, free, 24×7) or 112 in an emergency.</p>
   </footer>
 </div>
 
 <script>
 (() => {
   const $ = (id) => document.getElementById(id);
-  const form = $("ask"), q = $("q"), go = $("go"), out = $("answer");
-  const L = {
-    hi: { finding: "आपके लिए श्लोक खोजे जा रहे हैं…", tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", helped: "क्या इससे मदद मिली?", yes: "हाँ", no: "यह फिट नहीं बैठता", thanks: "धन्यवाद!", speaks: "→", ch: "अध्याय", err: "कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।" },
-    hinglish: { finding: "Aapke liye shlok dhoondhe ja rahe hain…", tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", helped: "Kya isse madad mili?", yes: "Haan", no: "Ye fit nahi baithta", thanks: "Dhanyavaad!", speaks: "→", ch: "Adhyay", err: "Kuch gadbad hui. Please phir try kariye." },
-    en: { finding: "Finding the verses that speak to you…", tr: "Translation", ctx: "Context", apply: "For you", helped: "Did this help?", yes: "Yes", no: "Doesn't fit", thanks: "Thank you!", speaks: "→", ch: "Chapter", err: "Something went wrong. Please try again." },
+  const thread = $("thread"), statusEl = $("status"), orb = $("orb");
+  const SPEAKER_HI = { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" };
+  const T = {
+    hi: { tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", ch: "अध्याय", you: "आप", parth: "पार्थ" },
+    hinglish: { tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", ch: "Adhyay", you: "Aap", parth: "Parth" },
+    en: { tr: "Translation", ctx: "Context", apply: "For you", ch: "Chapter", you: "You", parth: "Parth" },
   };
-  const SPEAKER = { hi: { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" } };
-  const guessLang = (t) => (/[ऀ-ॿ]/.test(t) ? "hi" : /\b(hai|mujhe|kya|nahi|mera|meri|bahut|kaise|ki|ke)\b/i.test(t) ? "hinglish" : "en");
+  const STATUS = {
+    idle: "बात शुरू करने के लिए दबाएँ · <b>Tap to start talking</b>",
+    connecting: "जुड़ रहा हूँ… · <b>Connecting…</b>",
+    listening: "सुन रहा हूँ… बोलिए · <b>Listening, go ahead</b>",
+    thinking: "श्लोक खोज रहा हूँ… · <b>Finding verses…</b>",
+    speaking: "पार्थ बोल रहे हैं · <b>Parth is speaking</b> (बीच में बोल सकते हैं · you can interrupt)",
+  };
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const scrollEnd = () => window.scrollTo({ top: document.body.scrollHeight, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  const setState = (s) => { document.body.dataset.state = s; statusEl.innerHTML = STATUS[s] || ""; };
 
-  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-
+  // ------------------------------------------------------------- rendering (shared by voice and text)
+  function bubble(kind, text, lang = "hi") {
+    const b = el("div", "msg " + kind);
+    b.append(el("span", "who", (T[lang] || T.hi)[kind === "you" ? "you" : "parth"]), el("span", "txt", text));
+    thread.append(b); scrollEnd(); return b;
+  }
   function section(title, text, cls) {
     if (!text) return null;
-    const s = el("div", "sec" + (cls ? " " + cls : ""));
-    s.append(el("h3", null, title), el("p", null, text));
-    return s;
+    const s = el("div", "sec" + (cls ? " " + cls : "")); s.append(el("h3", null, title), el("p", null, text)); return s;
   }
-
-  function verseCard(v, a, question) {
-    const t = L[a.lang] || L.en;
-    const sp = (SPEAKER[a.lang] || {});
+  function card(v, lang = "hi", extra = {}) {
+    const t = T[lang] || T.en, hi = lang === "hi";
     const c = el("article", "card");
-    const head = el("div", "card-head");
-    const left = el("span"); left.append(el("b", null, v.id), document.createTextNode(` · ${t.ch} ${v.chapter} · ${a.lang === "hi" ? v.chapter_name_sanskrit : v.chapter_name}`));
-    head.append(left, el("span", null, `${sp[v.speaker] || v.speaker} ${t.speaks} ${sp[v.addressed_to] || v.addressed_to}`));
-    c.append(head, el("p", "shloka", v.sanskrit));
-    const tl = el("p", "translit", v.transliteration); tl.lang = "sa-Latn"; c.append(tl);
+    const head = el("div", "card-head"), left = el("span");
+    left.append(el("b", null, v.id), document.createTextNode(` · ${t.ch} ${v.chapter} · ${hi ? v.chapter_name_sanskrit : v.chapter_name}`));
+    head.append(left, el("span", null, hi ? `${SPEAKER_HI[v.speaker]} → ${SPEAKER_HI[v.addressed_to]}` : `${v.speaker} → ${v.addressed_to}`));
+    c.append(head, el("p", "shloka", v.sanskrit), el("p", "translit", v.transliteration));
     const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); c.append(tr);
-    [section(t.ctx, v.context), section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply")].forEach((s) => s && c.append(s));
-    if (a.kind === "answer" || a.kind === "fallback") {
-      const fb = el("div", "fb"); fb.append(el("span", null, t.helped));
-      [[t.yes, true], [t.no, false]].forEach(([label, helpful]) => {
-        const b = el("button", null, label); b.type = "button";
-        b.onclick = () => { fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, verse: v.id, helpful }) }).catch(() => {}); fb.replaceChildren(el("span", null, t.thanks)); };
-        fb.append(b);
-      });
-      c.append(fb);
-    }
-    return c;
+    [section(t.ctx, extra.context), section(extra.meaning_label, extra.meaning), section(t.apply, extra.application, "apply")].forEach((s) => s && c.append(s));
+    thread.append(c); scrollEnd(); return c;
+  }
+  function crisisCard(message) {
+    const box = el("div", "crisis", message), lines = el("div", "lines");
+    [["tel:14416", "Tele-MANAS 14416"], ["tel:18008914416", "1-800-891-4416"], ["tel:18005990019", "KIRAN 1800-599-0019"], ["tel:112", "112"]]
+      .forEach(([href, label]) => { const a = el("a", null, label); a.href = href; lines.append(a); });
+    box.append(lines); thread.append(box); scrollEnd();
   }
 
-  function render(a, question) {
-    out.replaceChildren();
-    if (a.kind === "crisis") {
-      const box = el("div", "crisis", a.opening);
-      const lines = el("div", "lines");
-      [["tel:14416", "Tele-MANAS 14416"], ["tel:18008914416", "1-800-891-4416"], ["tel:18005990019", "KIRAN 1800-599-0019"], ["tel:112", "112"]]
-        .forEach(([href, label]) => { const a2 = el("a", null, label); a2.href = href; lines.append(a2); });
-      box.append(lines); out.append(box); return;
-    }
-    if (!a.verses || !a.verses.length) { out.append(el("div", "plain", a.opening)); return; }
-    if (a.opening) out.append(el("p", "opening", a.opening));
-    a.verses.forEach((v) => out.append(verseCard(v, a, question)));
-    if (a.closing) out.append(el("p", "closing", a.closing));
-    if (a.note) out.append(el("p", "note", a.note));
-  }
-
+  // ------------------------------------------------------------- typed questions (verified text pipeline)
+  const form = $("typeform"), q = $("q"), go = $("go");
+  $("typeToggle").onclick = () => { form.hidden = !form.hidden; if (!form.hidden) q.focus(); };
   async function ask(question) {
-    question = question.trim();
-    if (question.length < 2) { q.focus(); return; }
-    const t = L[guessLang(question)];
-    go.disabled = true;
-    const st = el("div", "status"); st.append(el("span", "dot"), el("span", null, t.finding));
-    out.replaceChildren(st);
+    question = question.trim(); if (question.length < 2) return;
+    go.disabled = true; bubble("you", question, /[ऀ-ॿ]/.test(question) ? "hi" : "en"); q.value = "";
+    const wait = el("div", "lookup", "श्लोक खोजे जा रहे हैं… · Finding verses…"); thread.append(wait); scrollEnd();
     try {
       const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question }) });
-      const a = await r.json();
-      if (!r.ok && !a.opening) throw new Error(r.status);
-      render(a, question);
-      out.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    } catch (e) {
-      out.replaceChildren(el("div", "plain", t.err));
-    } finally { go.disabled = false; }
+      const a = await r.json(); wait.remove();
+      if (a.kind === "crisis") return crisisCard(a.opening);
+      if (!a.verses || !a.verses.length) { bubble("parth", a.opening || "", a.lang); return; }
+      if (a.opening) bubble("parth", a.opening, a.lang);
+      a.verses.forEach((v) => card(v, a.lang, { context: v.context, meaning: v.meaning, application: v.application, meaning_label: a.meaning_label }));
+      if (a.closing) bubble("parth", a.closing, a.lang);
+      if (a.note) { const n = el("p", "note", a.note); thread.append(n); }
+    } catch (e) { wait.remove(); thread.append(el("div", "plain", "कुछ गड़बड़ हुई, फिर कोशिश करें · Something went wrong, please try again.")); }
+    finally { go.disabled = false; }
   }
+  form.onsubmit = (e) => { e.preventDefault(); ask(q.value); };
+  $("chips").onclick = (e) => { if (e.target.tagName === "BUTTON") ask(e.target.textContent); };
 
-  form.addEventListener("submit", (e) => { e.preventDefault(); ask(q.value); });
-  q.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); ask(q.value); } });
-  $("chips").addEventListener("click", (e) => { if (e.target.tagName === "BUTTON") { q.value = e.target.textContent; ask(q.value); } });
+  // ------------------------------------------------------------- live voice (Gemini Live, direct from the browser)
+  const supported = !!(navigator.mediaDevices && window.AudioWorkletNode && window.WebSocket);
+  if (!supported) { orb.hidden = true; form.hidden = false; statusEl.textContent = "इस ब्राउज़र में आवाज़ उपलब्ध नहीं है, लिखकर पूछें · Voice isn't available in this browser; please type."; }
 
-  // Voice input (Chrome / Edge / Android): Hindi by default, which also understands Hinglish speech.
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (SR) {
-    const mic = $("mic"); mic.hidden = false;
-    let rec = null;
-    mic.onclick = () => {
-      if (rec) { rec.stop(); return; }
-      rec = new SR(); rec.lang = "hi-IN"; rec.interimResults = true;
-      mic.setAttribute("aria-pressed", "true"); $("mic-label").textContent = "सुन रहा हूँ…";
-      rec.onresult = (ev) => { q.value = Array.from(ev.results).map((r) => r[0].transcript).join(" "); };
-      rec.onend = () => { mic.setAttribute("aria-pressed", "false"); $("mic-label").textContent = "बोलें"; rec = null; if (q.value.trim()) ask(q.value); };
-      rec.onerror = () => rec && rec.stop();
-      rec.start();
+  const b64 = (buf) => { let s = ""; const u = new Uint8Array(buf); for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
+  const pcmFrom64 = (data) => { const bin = atob(data), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    const i16 = new Int16Array(u.buffer), f = new Float32Array(i16.length); for (let i = 0; i < i16.length; i++) f[i] = i16[i] / 32768; return f; };
+
+  let S = null; // current session
+  async function startVoice(attempt = 0) {
+    if (S) return;
+    setState("connecting");
+    let tok;
+    try {
+      const r = await fetch(`/api/live/token?attempt=${attempt}`, { method: "POST" });
+      tok = await r.json();
+      if (!r.ok) throw new Error(tok.error || r.status);
+    } catch (e) { return voiceUnavailable(String(e.message || e)); }
+    let mic;
+    try { mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } }); }
+    catch (e) { setState("idle"); statusEl.innerHTML = "माइक की अनुमति चाहिए · <b>Please allow microphone access</b>"; return; }
+
+    S = { tok, mic, ready: false, you: null, parth: null, lastAudio: 0, lang: "hi", attempt };
+    $("end").hidden = false; $("typeToggle").hidden = true;
+    const ws = new WebSocket(`${tok.ws_url}?access_token=${encodeURIComponent(tok.token)}`);
+    S.ws = ws;
+    ws.onopen = () => ws.send(JSON.stringify({ setup: { model: `models/${tok.model}` } }));
+    ws.onmessage = async (ev) => {
+      const text = typeof ev.data === "string" ? ev.data : await ev.data.text();
+      let m; try { m = JSON.parse(text); } catch { return; }
+      onServer(m);
     };
+    ws.onclose = (ev) => {
+      const wasReady = S && S.ready;
+      stopVoice();
+      if (!wasReady) {
+        if (tok.more_models && attempt === 0) return startVoice(1);
+        voiceUnavailable(`closed ${ev.code}`);
+      }
+    };
+    ws.onerror = () => {};
   }
+
+  async function onSetupComplete() {
+    S.ready = true;
+    // playback at 24 kHz with an analyser for the orb
+    S.out = new AudioContext({ sampleRate: 24000 });
+    await S.out.audioWorklet.addModule("/static/playback.worklet.js");
+    S.player = new AudioWorkletNode(S.out, "parth-playback");
+    S.analyser = S.out.createAnalyser(); S.analyser.fftSize = 512;
+    S.player.connect(S.analyser).connect(S.out.destination);
+    // microphone at the device rate, resampled to 16 kHz in the worklet
+    S.inp = new AudioContext();
+    await S.inp.audioWorklet.addModule("/static/capture.worklet.js");
+    const src = S.inp.createMediaStreamSource(S.mic), cap = new AudioWorkletNode(S.inp, "parth-capture"), mute = S.inp.createGain();
+    mute.gain.value = 0; src.connect(cap).connect(mute).connect(S.inp.destination);
+    cap.port.onmessage = ({ data }) => {
+      S.micLevel = data.level;
+      if (S.ws.readyState === 1) S.ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64(data.pcm) } } }));
+    };
+    setState("listening");
+    animate();
+    const ms = tok_minutes() * 60000, endAt = Date.now() + ms;
+    S.timer = setInterval(() => {
+      const left = Math.max(0, endAt - Date.now()); $("timer").hidden = false;
+      $("timer").textContent = `${Math.floor(left / 60000)}:${String(Math.floor(left / 1000) % 60).padStart(2, "0")}`;
+      if (!left) stopVoice();
+    }, 1000);
+    // let Parth greet first
+    S.ws.send(JSON.stringify({ clientContent: { turns: [{ role: "user", parts: [{ text: "नमस्ते" }] }], turnComplete: true } }));
+  }
+  const tok_minutes = () => (S && S.tok.session_minutes) || 10;
+
+  function onServer(m) {
+    if (m.setupComplete) return onSetupComplete();
+    if (m.goAway) { stopVoice(); return; }
+    if (m.toolCall) return onToolCall(m.toolCall);
+    const sc = m.serverContent; if (!sc) return;
+    if (sc.inputTranscription && sc.inputTranscription.text) {
+      if (!S.you) S.you = bubble("you", "", S.lang);
+      const t = S.you.querySelector(".txt"); t.textContent += sc.inputTranscription.text;
+      if (/[ऀ-ॿ]/.test(t.textContent)) S.lang = "hi";
+    }
+    if (sc.modelTurn && sc.modelTurn.parts) {
+      finishYou();
+      for (const p of sc.modelTurn.parts) {
+        if (p.inlineData && p.inlineData.data && S.player) { const f = pcmFrom64(p.inlineData.data); S.player.port.postMessage(f, [f.buffer]); S.lastAudio = performance.now(); }
+      }
+    }
+    if (sc.outputTranscription && sc.outputTranscription.text) {
+      finishYou();
+      if (!S.parth) S.parth = bubble("parth", "", S.lang);
+      S.parth.querySelector(".txt").textContent += sc.outputTranscription.text;
+    }
+    if (sc.interrupted) { if (S.player) S.player.port.postMessage("interrupt"); S.parth = null; }
+    if (sc.turnComplete) { finishYou(); S.parth = null; }
+  }
+
+  function finishYou() {
+    if (!S || !S.you) return;
+    const said = S.you.querySelector(".txt").textContent.trim(); S.you = null;
+    if (!said) return;
+    fetch("/api/triage", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: said }) })
+      .then((r) => r.json()).then((t) => { if (t.kind === "crisis" || t.kind === "harm_others") crisisCard(t.message); }).catch(() => {});
+  }
+
+  async function onToolCall(call) {
+    setState("thinking"); finishYou();
+    const responses = await Promise.all((call.functionCalls || []).map(async (fc) => {
+      try {
+        const r = await fetch(`/api/verses?k=3&q=${encodeURIComponent((fc.args && fc.args.query) || "")}`);
+        const data = await r.json();
+        if (data.verses.length) thread.append(el("div", "lookup", "पार्थ इन श्लोकों से बता रहे हैं · Verses Parth is drawing on"));
+        data.verses.forEach((v) => card(v, S.lang));
+        const brief = data.verses.map((v) => ({ id: v.id, speaker: v.speaker, listener: v.addressed_to, chapter: `${v.chapter} (${v.chapter_name}: ${v.chapter_theme})`,
+          translation: v.translation, translation_by: v.translation_source }));
+        return { id: fc.id, name: fc.name, response: { result: { verses: brief, note: data.note } } };
+      } catch (e) { return { id: fc.id, name: fc.name, response: { error: "lookup failed" } }; }
+    }));
+    if (S && S.ws.readyState === 1) S.ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
+  }
+
+  function animate() {
+    if (!S) return;
+    const buf = new Float32Array(256); let speakLevel = 0;
+    if (S.analyser) { S.analyser.getFloatTimeDomainData(buf); speakLevel = Math.sqrt(buf.reduce((a, x) => a + x * x, 0) / buf.length); }
+    const speaking = performance.now() - S.lastAudio < 350;
+    if (document.body.dataset.state !== "thinking" || speaking) setState(speaking ? "speaking" : "listening");
+    const lvl = speaking ? speakLevel * 4 : (S.micLevel || 0) * 6;
+    document.querySelectorAll(".ring").forEach((r, i) => r.style.setProperty("--s", (1 + Math.min(0.35, lvl) * (1 + i * 0.5)).toFixed(3)));
+    S.raf = requestAnimationFrame(animate);
+  }
+
+  function stopVoice() {
+    if (!S) return;
+    const s = S; S = null;
+    cancelAnimationFrame(s.raf); clearInterval(s.timer);
+    try { s.ws && s.ws.readyState <= 1 && s.ws.close(); } catch {}
+    s.mic && s.mic.getTracks().forEach((t) => t.stop());
+    s.inp && s.inp.close(); s.out && s.out.close();
+    document.querySelectorAll(".ring").forEach((r) => r.style.removeProperty("--s"));
+    $("end").hidden = true; $("typeToggle").hidden = false; $("timer").hidden = true;
+    setState("idle");
+  }
+
+  function voiceUnavailable(reason) {
+    console.warn("voice unavailable:", reason);
+    setState("idle");
+    statusEl.innerHTML = /daily_limit/.test(reason)
+      ? "आज की आवाज़-बातचीत की सीमा पूरी हो गई। लिखकर पूछें · <b>Today's voice limit is reached; please type.</b>"
+      : "आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type your question.</b>";
+    form.hidden = false;
+  }
+
+  orb.onclick = () => (S ? stopVoice() : startVoice(0));
+  $("end").onclick = stopVoice;
+  window.addEventListener("pagehide", stopVoice);
 })();
 </script>
 </body>
