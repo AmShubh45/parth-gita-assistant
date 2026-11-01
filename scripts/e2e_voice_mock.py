@@ -23,6 +23,7 @@ import websockets
 
 WS_PORT, APP_PORT = 8765, 8301
 log: dict = {"setup": None, "audio_in": 0, "tool_response": None, "greeting": None}
+events: list[str] = []
 
 
 def tone(seconds: float = 0.4) -> str:
@@ -36,16 +37,16 @@ async def live(ws):
         if "setup" in m:
             log["setup"] = m["setup"]
             await ws.send(json.dumps({"setupComplete": {}}))
-        elif "realtimeInput" in m:
-            log["audio_in"] += 1
-        elif "clientContent" in m and log["greeting"] is None:
-            log["greeting"] = m["clientContent"]
+        elif "realtimeInput" in m and "text" in m["realtimeInput"] and log["greeting"] is None:
+            log["greeting"] = m["realtimeInput"]
             await ws.send(json.dumps({"serverContent": {"outputTranscription": {"text": "नमस्ते! आपके मन में क्या है?"},
                                                         "modelTurn": {"parts": [{"inlineData": {"mimeType": "audio/pcm;rate=24000", "data": tone()}}]}}}))
             await ws.send(json.dumps({"serverContent": {"turnComplete": True}}))
             await asyncio.sleep(0.6)
             await ws.send(json.dumps({"serverContent": {"inputTranscription": {"text": "मुझे बहुत गुस्सा आता है"}}}))
             await ws.send(json.dumps({"toolCall": {"functionCalls": [{"id": "call-1", "name": "find_verses", "args": {"query": "anger"}}]}}))
+        elif "realtimeInput" in m and "audio" in m["realtimeInput"]:
+            log["audio_in"] += 1
         elif "toolResponse" in m:
             log["tool_response"] = m["toolResponse"]
             await ws.send(json.dumps({"serverContent": {"outputTranscription": {"text": "गीता के दूसरे अध्याय में श्रीकृष्ण बताते हैं कि क्रोध कहाँ से आता है।"},
@@ -55,7 +56,16 @@ async def live(ws):
 
 def run_app():
     sys.path.insert(0, ".")
+    import logging
     from parth import app as appmod, live as livemod
+
+    class Capture(logging.Handler):
+        def emit(self, record):
+            msg = record.getMessage()
+            if msg.startswith("live_event"):
+                events.append(msg.split("event=")[1].split()[0])
+
+    logging.getLogger("parth").addHandler(Capture())
     appmod._gemini.key = "mock-key"
     livemod.mint_token = lambda key, model: "mock-token"
     livemod.WS_URL = f"ws://127.0.0.1:{WS_PORT}/ws"
@@ -70,8 +80,8 @@ async def main(shot: str | None) -> int:
     errors: list[str] = []
     async with async_playwright() as p:
         b = await p.chromium.launch(executable_path="/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
-                                    args=["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream",
-                                          "--autoplay-policy=no-user-gesture-required"])
+                                    args=["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"])
+        # no autoplay override: audio must start from the tap, exactly as on a phone
         ctx = await b.new_context(viewport={"width": 1280, "height": 900}, permissions=["microphone"])
         page = await ctx.new_page()
         page.on("pageerror", lambda e: errors.append(str(e)))
@@ -91,6 +101,7 @@ async def main(shot: str | None) -> int:
             "parth_bubbles": await page.eval_on_selector_all(".msg.parth .txt", "els => els.map(e => e.textContent)"),
             "state": await page.evaluate("document.body.dataset.state"),
             "errors": errors,
+            "events": list(dict.fromkeys(events)),
         }
         if shot:
             await page.screenshot(path=shot, full_page=True)
@@ -101,7 +112,8 @@ async def main(shot: str | None) -> int:
     print(json.dumps(result, ensure_ascii=False, indent=1))
     ok = (result["setup_model"] == "models/" + "gemini-3.8-live" and result["greeting_sent"] and result["mic_chunks_sent"] > 5
           and result["tool_verses"] and result["cards_on_page"][:1] == result["tool_verses"][:1]
-          and result["you_bubbles"] and len(result["parth_bubbles"]) >= 2 and not errors and result["state_after_end"] == "idle")
+          and result["you_bubbles"] and len(result["parth_bubbles"]) >= 2 and not errors and result["state_after_end"] == "idle"
+          and {"token_ok", "setup_complete", "first_audio_sent", "first_server_content", "tool_call"} <= set(result["events"]))
     print("PASS" if ok else "FAIL")
     return 0 if ok else 1
 

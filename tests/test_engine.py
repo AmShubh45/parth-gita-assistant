@@ -273,3 +273,16 @@ def test_voice_token_endpoint_guards(monkeypatch):
     assert first["token"] == "auth_tokens/" + live.LIVE_MODELS[0] and first["ws_url"].startswith("wss://")
     assert client.post("/api/live/token").status_code == 429            # daily voice cap
     assert client.post("/api/live/token?attempt=1").json()["model"] == live.LIVE_MODELS[-1]  # fallback model
+
+
+def test_live_event_logging(monkeypatch):
+    from fastapi.testclient import TestClient
+    from parth import app as appmod
+    monkeypatch.setattr(appmod, "event_limiter", appmod.RateLimiter(per_minute=2))
+    client = TestClient(appmod.app)
+    ok = client.post("/api/live/event", content='{"sid": "ab12", "event": "first_audio_sent", "detail": "inp=running"}')
+    assert ok.status_code == 200
+    assert client.post("/api/live/event", content='{"sid": "ab12", "event": "anything_else"}').status_code == 422
+    assert client.post("/api/live/event", content="not json").status_code == 422
+    client.post("/api/live/event", content='{"sid": "ab12", "event": "closed"}')
+    assert client.post("/api/live/event", content='{"sid": "ab12", "event": "closed"}').status_code == 429

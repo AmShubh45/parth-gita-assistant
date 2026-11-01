@@ -258,75 +258,122 @@ footer p{margin:0 0 8px}
     const i16 = new Int16Array(u.buffer), f = new Float32Array(i16.length); for (let i = 0; i < i16.length; i++) f[i] = i16[i] / 32768; return f; };
 
   let S = null; // current session
-  async function startVoice(attempt = 0) {
-    if (S) return;
-    setState("connecting");
-    let tok;
-    try {
-      const r = await fetch(`/api/live/token?attempt=${attempt}`, { method: "POST" });
-      tok = await r.json();
-      if (!r.ok) throw new Error(tok.error || r.status);
-    } catch (e) { return voiceUnavailable(String(e.message || e)); }
-    let mic;
-    try { mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } }); }
-    catch (e) { setState("idle"); statusEl.innerHTML = "माइक की अनुमति चाहिए · <b>Please allow microphone access</b>"; return; }
+  const DEBUG = /[?&]debug=1/.test(location.search);
+  const dbg = DEBUG ? (() => { const d = el("div", "lookup"); d.id = "dbg"; d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:9;background:#000c;padding:6px 10px;border-radius:10px;text-align:left;font:12px/1.4 monospace;color:#9fe"; document.body.append(d); return d; })() : null;
+  function diag() { if (dbg && S) dbg.textContent = `model ${S.tok && S.tok.model} · setup ${S.ready} · mic ${S.inp && S.inp.state} · out ${S.out && S.out.state} · chunks ${S.sent} · peak ${(S.peak || 0).toFixed(3)} · msgs ${S.recv} · last ${S.lastEvent || "-"}`; }
+  function report(event, detail = "") {
+    const body = JSON.stringify({ sid: (S && S.sid) || "-", event, detail: String(detail).slice(0, 300) });
+    try { navigator.sendBeacon ? navigator.sendBeacon("/api/live/event", new Blob([body], { type: "application/json" })) : fetch("/api/live/event", { method: "POST", headers: { "content-type": "application/json" }, body }); } catch {}
+  }
+  // Resample mono float PCM when the browser will not open a 24 kHz playback context.
+  function resample(f, from, to) {
+    if (from === to) return f;
+    const out = new Float32Array(Math.round(f.length * to / from)), r = from / to;
+    for (let i = 0; i < out.length; i++) { const x = i * r, i0 = Math.floor(x), i1 = Math.min(i0 + 1, f.length - 1); out[i] = f[i0] + (f[i1] - f[i0]) * (x - i0); }
+    return out;
+  }
 
-    S = { tok, mic, ready: false, you: null, parth: null, lastAudio: 0, lang: "hi", attempt };
+  // Everything that needs the tap (audio contexts, microphone permission) starts here, before any await:
+  // phones keep audio that is started later suspended, and then Gemini never hears anything.
+  function begin() {
+    if (S) return stopVoice();
+    let out;
+    try { out = new AudioContext({ sampleRate: 24000 }); } catch { out = new AudioContext(); }
+    const inp = new AudioContext();
+    out.resume(); inp.resume();
+    const micP = navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
+    S = { sid: Math.random().toString(36).slice(2, 10), out, inp, micP, ready: false, you: null, parth: null, lastAudio: 0, lang: "hi",
+          sent: 0, recv: 0, peak: 0, tok: null };
     $("end").hidden = false; $("typeToggle").hidden = true;
+    setState("connecting");
+    startVoice(0).catch((e) => { report("start_error", e && e.message); failVoice(String(e && e.message || e)); });
+  }
+
+  async function startVoice(attempt) {
+    const s = S;
+    // audio graph first, so the microphone is flowing the moment the session is ready
+    if (!s.player) {
+      let mic;
+      try { mic = await s.micP; } catch (e) { report("mic_denied", e && e.name); stopVoice(); statusEl.innerHTML = "माइक की अनुमति चाहिए · <b>Please allow microphone access</b>"; return; }
+      s.mic = mic;
+      await Promise.all([s.out.audioWorklet.addModule("/static/playback.worklet.js"), s.inp.audioWorklet.addModule("/static/capture.worklet.js")]);
+      if (S !== s) return;
+      s.player = new AudioWorkletNode(s.out, "parth-playback");
+      s.analyser = s.out.createAnalyser(); s.analyser.fftSize = 512;
+      s.player.connect(s.analyser).connect(s.out.destination);
+      const src = s.inp.createMediaStreamSource(mic), cap = new AudioWorkletNode(s.inp, "parth-capture"), mute = s.inp.createGain();
+      mute.gain.value = 0; src.connect(cap).connect(mute).connect(s.inp.destination);
+      cap.port.onmessage = ({ data }) => {
+        s.micLevel = data.level; s.peak = Math.max(s.peak, data.level);
+        if (s.ready && s.ws && s.ws.readyState === 1) {
+          s.ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64(data.pcm) } } }));
+          if (++s.sent === 1) report("first_audio_sent", `inp=${s.inp.state} rate=${s.inp.sampleRate}`);
+        }
+      };
+    }
+    const r = await fetch(`/api/live/token?attempt=${attempt}`, { method: "POST" });
+    const tok = await r.json();
+    if (!r.ok) { report("token_error", tok.error || r.status); return failVoice(tok.error || String(r.status)); }
+    if (S !== s) return;
+    s.tok = tok; s.attempt = attempt; s.ready = false;
+    report("token_ok", tok.model);
     const ws = new WebSocket(`${tok.ws_url}?access_token=${encodeURIComponent(tok.token)}`);
-    S.ws = ws;
+    s.ws = ws;
     ws.onopen = () => ws.send(JSON.stringify({ setup: { model: `models/${tok.model}` } }));
     ws.onmessage = async (ev) => {
       const text = typeof ev.data === "string" ? ev.data : await ev.data.text();
       let m; try { m = JSON.parse(text); } catch { return; }
-      onServer(m);
+      if (S !== s) return;
+      s.recv++; s.lastEvent = Object.keys(m.serverContent || m)[0];
+      onServer(m); diag();
     };
     ws.onclose = (ev) => {
-      const wasReady = S && S.ready;
+      if (S !== s) return;
+      report("closed", `${ev.code} ${ev.reason || ""} ready=${s.ready} sent=${s.sent} recv=${s.recv}`);
+      if (!s.ready && tok.more_models && attempt === 0) { s.ws = null; return startVoice(1).catch((e) => failVoice(String(e))); }
+      const why = ev.reason ? ` (${ev.code}: ${ev.reason})` : ev.code !== 1000 ? ` (${ev.code})` : "";
       stopVoice();
-      if (!wasReady) {
-        if (tok.more_models && attempt === 0) return startVoice(1);
-        voiceUnavailable(`closed ${ev.code}`);
-      }
+      statusEl.innerHTML = s.ready ? `बातचीत समाप्त हुई · <b>Conversation ended</b>${why}` : `आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type</b>${why}`;
+      if (!s.ready) form.hidden = false;
     };
     ws.onerror = () => {};
   }
 
-  async function onSetupComplete() {
-    S.ready = true;
-    // playback at 24 kHz with an analyser for the orb
-    S.out = new AudioContext({ sampleRate: 24000 });
-    await S.out.audioWorklet.addModule("/static/playback.worklet.js");
-    S.player = new AudioWorkletNode(S.out, "parth-playback");
-    S.analyser = S.out.createAnalyser(); S.analyser.fftSize = 512;
-    S.player.connect(S.analyser).connect(S.out.destination);
-    // microphone at the device rate, resampled to 16 kHz in the worklet
-    S.inp = new AudioContext();
-    await S.inp.audioWorklet.addModule("/static/capture.worklet.js");
-    const src = S.inp.createMediaStreamSource(S.mic), cap = new AudioWorkletNode(S.inp, "parth-capture"), mute = S.inp.createGain();
-    mute.gain.value = 0; src.connect(cap).connect(mute).connect(S.inp.destination);
-    cap.port.onmessage = ({ data }) => {
-      S.micLevel = data.level;
-      if (S.ws.readyState === 1) S.ws.send(JSON.stringify({ realtimeInput: { audio: { mimeType: "audio/pcm;rate=16000", data: b64(data.pcm) } } }));
-    };
+  function onSetupComplete() {
+    const s = S;
+    s.ready = true;
+    s.out.resume(); s.inp.resume();
+    report("setup_complete", `inp=${s.inp.state} out=${s.out.state}`);
     setState("listening");
     animate();
-    const ms = tok_minutes() * 60000, endAt = Date.now() + ms;
-    S.timer = setInterval(() => {
+    const endAt = Date.now() + ((s.tok && s.tok.session_minutes) || 10) * 60000;
+    s.timer = setInterval(() => {
       const left = Math.max(0, endAt - Date.now()); $("timer").hidden = false;
       $("timer").textContent = `${Math.floor(left / 60000)}:${String(Math.floor(left / 1000) % 60).padStart(2, "0")}`;
+      diag();
       if (!left) stopVoice();
     }, 1000);
+    // after a few seconds, tell the person if their microphone is not reaching us
+    s.micCheck = setTimeout(() => {
+      if (S !== s) return;
+      if (s.sent === 0 || s.peak < 0.003) {
+        report("no_mic_level", `sent=${s.sent} peak=${s.peak.toFixed(4)} inp=${s.inp.state}`);
+        statusEl.innerHTML = "माइक से आवाज़ नहीं आ रही · <b>We can't hear your microphone.</b> ";
+        const retry = el("button", "pill", "फिर से चालू करें · Tap to retry"); retry.type = "button";
+        retry.onclick = () => { s.inp.resume(); s.out.resume(); setState("listening"); };
+        statusEl.append(retry);
+      }
+    }, 6000);
     // let Parth greet first
-    S.ws.send(JSON.stringify({ clientContent: { turns: [{ role: "user", parts: [{ text: "नमस्ते" }] }], turnComplete: true } }));
+    s.ws.send(JSON.stringify({ realtimeInput: { text: "नमस्ते" } }));
   }
-  const tok_minutes = () => (S && S.tok.session_minutes) || 10;
 
   function onServer(m) {
     if (m.setupComplete) return onSetupComplete();
-    if (m.goAway) { stopVoice(); return; }
-    if (m.toolCall) return onToolCall(m.toolCall);
+    if (m.goAway) { report("go_away", JSON.stringify(m.goAway)); stopVoice(); return; }
+    if (m.toolCall) { report("tool_call", (m.toolCall.functionCalls || []).map((f) => f.name).join(",")); return onToolCall(m.toolCall); }
     const sc = m.serverContent; if (!sc) return;
+    if (!S.gotContent) { S.gotContent = true; report("first_server_content", Object.keys(sc).join(",")); }
     if (sc.inputTranscription && sc.inputTranscription.text) {
       if (!S.you) S.you = bubble("you", "", S.lang);
       const t = S.you.querySelector(".txt"); t.textContent += sc.inputTranscription.text;
@@ -335,7 +382,10 @@ footer p{margin:0 0 8px}
     if (sc.modelTurn && sc.modelTurn.parts) {
       finishYou();
       for (const p of sc.modelTurn.parts) {
-        if (p.inlineData && p.inlineData.data && S.player) { const f = pcmFrom64(p.inlineData.data); S.player.port.postMessage(f, [f.buffer]); S.lastAudio = performance.now(); }
+        if (p.inlineData && p.inlineData.data && S.player) {
+          const f = resample(pcmFrom64(p.inlineData.data), 24000, S.out.sampleRate);
+          S.player.port.postMessage(f, [f.buffer]); S.lastAudio = performance.now();
+        }
       }
     }
     if (sc.outputTranscription && sc.outputTranscription.text) {
@@ -357,18 +407,19 @@ footer p{margin:0 0 8px}
 
   async function onToolCall(call) {
     setState("thinking"); finishYou();
+    const s = S;
     const responses = await Promise.all((call.functionCalls || []).map(async (fc) => {
       try {
         const r = await fetch(`/api/verses?k=3&q=${encodeURIComponent((fc.args && fc.args.query) || "")}`);
         const data = await r.json();
         if (data.verses.length) thread.append(el("div", "lookup", "पार्थ इन श्लोकों से बता रहे हैं · Verses Parth is drawing on"));
-        data.verses.forEach((v) => card(v, S.lang));
+        data.verses.forEach((v) => card(v, s.lang));
         const brief = data.verses.map((v) => ({ id: v.id, speaker: v.speaker, listener: v.addressed_to, chapter: `${v.chapter} (${v.chapter_name}: ${v.chapter_theme})`,
           translation: v.translation, translation_by: v.translation_source }));
         return { id: fc.id, name: fc.name, response: { result: { verses: brief, note: data.note } } };
       } catch (e) { return { id: fc.id, name: fc.name, response: { error: "lookup failed" } }; }
     }));
-    if (S && S.ws.readyState === 1) S.ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
+    if (S === s && s.ws && s.ws.readyState === 1) s.ws.send(JSON.stringify({ toolResponse: { functionResponses: responses } }));
   }
 
   function animate() {
@@ -376,7 +427,10 @@ footer p{margin:0 0 8px}
     const buf = new Float32Array(256); let speakLevel = 0;
     if (S.analyser) { S.analyser.getFloatTimeDomainData(buf); speakLevel = Math.sqrt(buf.reduce((a, x) => a + x * x, 0) / buf.length); }
     const speaking = performance.now() - S.lastAudio < 350;
-    if (document.body.dataset.state !== "thinking" || speaking) setState(speaking ? "speaking" : "listening");
+    if (document.body.dataset.state !== "thinking" || speaking) {
+      const want = speaking ? "speaking" : "listening";
+      if (document.body.dataset.state !== want && !statusEl.querySelector("button")) setState(want);
+    }
     const lvl = speaking ? speakLevel * 4 : (S.micLevel || 0) * 6;
     document.querySelectorAll(".ring").forEach((r, i) => r.style.setProperty("--s", (1 + Math.min(0.35, lvl) * (1 + i * 0.5)).toFixed(3)));
     S.raf = requestAnimationFrame(animate);
@@ -385,25 +439,26 @@ footer p{margin:0 0 8px}
   function stopVoice() {
     if (!S) return;
     const s = S; S = null;
-    cancelAnimationFrame(s.raf); clearInterval(s.timer);
-    try { s.ws && s.ws.readyState <= 1 && s.ws.close(); } catch {}
+    cancelAnimationFrame(s.raf); clearInterval(s.timer); clearTimeout(s.micCheck);
+    try { s.ws && s.ws.readyState <= 1 && s.ws.close(1000); } catch {}
     s.mic && s.mic.getTracks().forEach((t) => t.stop());
-    s.inp && s.inp.close(); s.out && s.out.close();
+    if (!s.mic) s.micP.then((m) => m.getTracks().forEach((t) => t.stop())).catch(() => {});
+    try { s.inp.close(); s.out.close(); } catch {}
     document.querySelectorAll(".ring").forEach((r) => r.style.removeProperty("--s"));
     $("end").hidden = true; $("typeToggle").hidden = false; $("timer").hidden = true;
     setState("idle");
   }
 
-  function voiceUnavailable(reason) {
+  function failVoice(reason) {
     console.warn("voice unavailable:", reason);
-    setState("idle");
+    stopVoice();
     statusEl.innerHTML = /daily_limit/.test(reason)
       ? "आज की आवाज़-बातचीत की सीमा पूरी हो गई। लिखकर पूछें · <b>Today's voice limit is reached; please type.</b>"
-      : "आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type your question.</b>";
+      : `आवाज़ अभी उपलब्ध नहीं है, लिखकर पूछें · <b>Voice is busy right now; please type your question.</b> (${reason})`;
     form.hidden = false;
   }
 
-  orb.onclick = () => (S ? stopVoice() : startVoice(0));
+  orb.onclick = begin;
   $("end").onclick = stopVoice;
   window.addEventListener("pagehide", stopVoice);
 })();

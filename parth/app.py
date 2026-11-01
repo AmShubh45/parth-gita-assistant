@@ -5,6 +5,7 @@ POST /api/ask          {"question": "..."} -> grounded text answer (JSON)
 POST /api/live/token   ephemeral, config-locked token for a Gemini Live voice session
 GET  /api/verses?q=    verified verses for the voice model's find_verses tool (and the page's cards)
 POST /api/triage       {"text": "..."} -> crisis check on what the person said
+POST /api/live/event   voice-session milestones from the page, logged (no audio, no transcripts)
 POST /api/feedback     {"question", "verse", "helpful"} -> logged
 GET  /api/verse/x.y    one verse
 GET  /healthz
@@ -41,6 +42,7 @@ engine = Engine(_kb, _gemini if _gemini.available else None)
 budget, limiter, cache = DailyBudget(), RateLimiter(), AnswerCache()
 voice_budget = DailyBudget(int(os.environ.get("PARTH_DAILY_VOICE_LIMIT", "100")))
 voice_limiter = RateLimiter(per_minute=3)
+event_limiter = RateLimiter(per_minute=60)
 
 RATE_MSG = {
     "en": "You're asking very quickly. Please wait a minute and try again.",
@@ -55,6 +57,16 @@ class Ask(BaseModel):
 
 class Triage(BaseModel):
     text: str = Field(max_length=4000)
+
+
+LIVE_EVENTS = {"token_ok", "token_error", "start_error", "mic_denied", "setup_complete", "first_audio_sent",
+               "first_server_content", "tool_call", "no_mic_level", "go_away", "closed"}
+
+
+class LiveEvent(BaseModel):
+    sid: str = Field(max_length=40)
+    event: str = Field(max_length=40)
+    detail: str = Field(default="", max_length=300)
 
 
 class Feedback(BaseModel):
@@ -140,6 +152,21 @@ def check(body: Triage) -> dict:
     if t.kind != "ok":
         log.warning("voice triage: %s", t.kind)
     return {"kind": t.kind, "lang": lang, "message": t.message}
+
+
+@app.post("/api/live/event")
+async def live_event(request: Request):
+    """Where a voice session got to, so Render's logs show the exact step a failing session stops at."""
+    try:
+        ev = LiveEvent.model_validate_json(await request.body())  # sendBeacon posts raw JSON
+    except Exception:
+        return JSONResponse({"ok": False}, status_code=422)
+    if ev.event not in LIVE_EVENTS:
+        return JSONResponse({"ok": False}, status_code=422)
+    if not event_limiter.allow(_client(request)):
+        return JSONResponse({"ok": False}, status_code=429)
+    log.info("live_event sid=%s event=%s detail=%s", ev.sid, ev.event, ev.detail.replace("\n", " "))
+    return {"ok": True}
 
 
 @app.post("/api/feedback")
