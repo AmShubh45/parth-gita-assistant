@@ -16,7 +16,7 @@ Parth answers real human problems (grief, fear, anger, confusion about duty, hea
 | Layer | Contents | Source | Status |
 |---|---|---|---|
 | L1 Canon | 701 verses: Sanskrit, IAST transliteration, chapter, verse, speaker, listener | `gita/gita` (Unlicense); text is ancient, public domain | **Built** (`kb/verses.json`) |
-| L2 Translations | Authentic public-domain English translations, quoted verbatim | Telang 1882, Besant 1905, Swarupananda 1909 (and Arnold 1885 for poetry), ingested from original scans | **Blocked:** source sites not reachable from the build environment |
+| L2 Translations | Authentic public-domain English translations, quoted verbatim | Swami Swarupananda 1909, from four archive.org scans with word-level consensus; Telang 1882 and Besant 1922 next | **Built: 487/700 verified** (`kb/translations/swarupananda.json`); 213 awaiting review against page images |
 | L2b Search text | Modernised English derived from Purohit Swami / Sivananda, used for retrieval only, never displayed | `gita/gita` | Built, quarantined (`search_en`) |
 | L3 Classical commentaries | 13 Sanskrit commentaries per verse | `gita/gita`; centuries old, public domain | **Built** (`kb/commentaries.json`) |
 | L4 Context notes | Per verse: the situation, the question it answers, what comes before/after, key terms, notes where schools differ | Drafted by a model from L1–L3, checked by a second model against the sources, approved by a human | Phase 2 |
@@ -90,15 +90,14 @@ A change that lowers any of these does not ship.
 
 ## 8. Roadmap
 
-1. **Knowledge base L1–L3**: done.
-2. **Authentic translations (L2)** once source sites are reachable. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
+1. **Knowledge base L1–L3**: done. Authentic Swarupananda translation (L2): 487/700 verses verified.
+2. **Remaining translations:** review the 213 unverified verses against page images, and add Telang and Besant. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
 3. **Web app**: deploy to Render, replacing the Node.js version (kept on the `legacy-node` branch).
 4. **Parth Live**: OBS automation, recitation loop and YouTube chat Q&A.
 5. **Growth**: voice, more languages, sharing cards.
 
 ## 9. Needed from the owner
 
-- **Network access:** allow these domains in the build environment so authentic translations can be ingested: `archive.org`, `en.wikisource.org`, `sacred-texts.com`, `gutenberg.org`.
 - **Gemini:** a separate API key for Parth, set on Render.
 - **YouTube:** a Google Cloud OAuth client for chat reading, and the channel's stream key. Both go in the live folder's `.env` and are never committed.
 - **Review:** about 30 minutes to review a sample of context notes and life-situation mappings before launch.

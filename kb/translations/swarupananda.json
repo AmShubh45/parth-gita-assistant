@@ -1,0 +1,4148 @@
+{
+ "source": {
+  "translator": "Swami Swarupananda",
+  "title": "Srimad-Bhagavad-Gita, with text, word-for-word translation, English rendering and comments",
+  "published": "Advaita Ashrama, Mayavati, 1909",
+  "licence": "Public domain worldwide (author died 1906; first published 1909).",
+  "scans": [
+   "https://archive.org/details/in.ernet.dli.2015.237563",
+   "https://archive.org/details/in.ernet.dli.2015.386852",
+   "https://archive.org/details/in.ernet.dli.2015.20768",
+   "https://archive.org/details/in.ernet.dli.2015.20770"
+  ],
+  "method": "Four OCR scans; a word is kept only when at least two scans agree with it."
+ },
+ "verses": {
+  "BG 1.1": {
+   "text": "Tell me, O Sanjaya! Assembled on Kurukshetra, the centre of religious activity, desirous to fight, what indeed did my people and the Pandavas do?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.2": {
+   "text": "But then king Duryodhana, having seen the Pandava forces in battlearray-, approached his teacher Drona, and spoke these words :",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "But then King Duryodhana, having seen the Pandava forces in battle-array, approached his teacher Drona, and spoke these words :"
+  },
+  "BG 1.3": {
+   "text": "“Behold, O Teacher! this mighty army of the sons of Pandu, arrayed by the son of Drupada, thy gifted pupil.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.4": {
+   "text": "“Here (are) heroes, mighty archers” the equals in battle of Bhima and Arjuna — the great warriors Yuyudhana, Virata, Drupada; the valiant Dhrishtaketu, Chekitana, and the king of Kashi; the best of men, Purujit, Kuntibhoja, and Shaibya; the powerful Yudh manyu, and the brave Uttamaujas, the son of Subhadra and the sons of Draupadi — lords of great chariots.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 1.4",
+    "BG 1.5",
+    "BG 1.6"
+   ],
+   "issues": [
+    "unsettled word 'Yuyudhana'",
+    "unsettled word 'Virata'",
+    "unsettled word 'Chekitana'",
+    "unsettled word 'Kuntibhoja'",
+    "unsettled word 'Shaibya'"
+   ],
+   "primary_raw": "“Here (are) heroes, mighty archers” the equals in battle of Bhima and Arjuna — the great warriors Yuyudhana, Virata, Drupada; the valiant Dhrishtaketu, Chekitana, and the king of Kashi; the best of men, Purujit, Kuntibhoja, and Shaibya; the powerful Yudhamanyu, and the brave Uttamaujas, the son of Subhadra and the sons of Draupadi — all of whom are lords of great chariots."
+  },
+  "BG 1.7": {
+   "text": "“Hear also, O Best of the twice born! the names of those who (are) distinguished amongst ourselves, the leaders of my army. These I relate (to you) for your information.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.8": {
+   "text": "“Yourself and Bhishma and Kama and Kripa, the victorious in war. Asvatthama and Vikarna and Jayadratha, the son of Somadatta.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.9": {
+   "text": "“And many other heroes also, wellskilled in fight, and armed with many kinds of weapons, are here, determined to lay down their lives for my sake.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'wellskilled'"
+   ],
+   "primary_raw": "“And many other heroes also, wellskilled in fight, and armed with many kinds of weapons, are here, determined to lay down their lives for my sake."
+  },
+  "BG 1.10": {
+   "text": "“This our army defended by Bhishma (is) impossible to be counted, but that army of theirs, defended by Bhima (is) easy to number.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.11": {
+   "text": "“(Now) do, being stationed in your proper places in the divisions of the army, support Bhishma alone.”",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.12": {
+   "text": "That powerful, oldest of the Kurus, Bhishma the grandsire, in order to cheer Duryodhana, now sounded aloud a hon-roar and blew his conch.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'hon'"
+   ],
+   "primary_raw": "That powerful, oldest of the Kurus, Bhishma the grandsire, in order to cheer Duryodhana, now sounded aloud a hon-roar and blew his conch."
+  },
+  "BG 1.13": {
+   "text": "Then following Bhishma, conchs and kettle-drums, tabors, trumpets, and cowhorns blared forth suddenly from the Kaurava side, and the noise was tremendous.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.14": {
+   "text": "Then, also, Madhava and Pandava, stationed in their magnificent chariot yoked with white horses, blew their divine conches with a furious noise.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.15": {
+   "text": "Hrishikesha blew the Panchajanya, Dhananjaya, the Devadatta, and Vrikodara, the doer of terrific deeds, his large conch",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Hrishikesha blew the Panchajanya, Dhananjaya, the Devadatta, and Vrikodara, the doer of terrific deeds, his large conch"
+  },
+  "BG 1.16": {
+   "text": "King Yudhishthira, son of Kunti, blew the conch named Anantavijaya, and Nakula and Sahadeva, their Sughosha and",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "King Yudhishthira, son of Kunti, blew the conch named Anantavijaya, and Nakula and Sahadeva, their Sughosha and"
+  },
+  "BG 1.17": {
+   "text": "'the expert bowman, king of Kashi, and the great warrior Shikhandi, Dhrishtadyumna, and Virata, and the un conquered Satyaki; 5«T«F U ? t; i I O Lord of Earth (Dhritarashtra) (king) Drupada sl^q^T: and the sons of Draupadi ^ and ^T^RTf: the mighty-armed son of Subhadra (Abhimanyu) all respective conchs blew.",
+   "verified": false,
+   "scans_agreeing": 2,
+   "issues": [
+    "found in fewer than two other scans"
+   ],
+   "primary_raw": "'the expert bowman, king of Kashi, and the great warrior Shikhandi, Dhrishtadyumna, and Virata, and the un conquered Satyaki; 5«T«F U ? t; i I O Lord of Earth (Dhritarashtra) (king) Drupada sl^q^T: and the sons of Draupadi ^ and ^T^RTf: the mighty-armed son of Subhadra (Abhimanyu) all respective conchs blew."
+  },
+  "BG 1.18": {
+   "text": "O Lord of Earth! Drupada and the sons of Draupadi, and the mighty-armed son of Subhadra, all, also blew each his own conch.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.19": {
+   "text": "And the terrific noise resounding throughout heaven and earth rent the hearts of Dhritarashtra’s party.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.20": {
+   "text": "Then, O Lord of Earth, seeing Dhritarashtra’s party standing marshalled and the shooting about to begin, that Pandava, whose ensign was the monkey, raising his bow, said the following words to Krishna:",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Dhritarashtra'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Then, O Lord of Earth, seeing Dhritarashtra’s party standing marshalled and the shooting about to begin, the Pandava, whose ensign was the monkey, raising his bow, said the following words to Krishna:"
+  },
+  "BG 1.21": {
+   "text": "Place my chariot, O Achyuta! between the two armies that I may see those who stand here prepared for war. On this eve of battle (let me know) with whom I have to fight.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 1.21",
+    "BG 1.22"
+   ]
+  },
+  "BG 1.23": {
+   "text": "For I desire to observe those who are assembled here for fight, wishing to please the evil-minded Duryodhana by taking his side on this battle-field.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.24": {
+   "text": "O Bharata, commanded thus by Gudakesha, Hrishikesha drove that grandest of chariots to a place between the two hosts, facing Bhishma, Drona, and all the rulers of the earth, and then spoke thus, “Behold, O Partha, all the Kurus gathered together!”",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 1.24",
+    "BG 1.25"
+   ],
+   "issues": [
+    "unsettled word 'Bharata'"
+   ],
+   "primary_raw": "O Bharata, commanded thus by Gudakesha, Hrishikesha drove that grandest of chariots to a place between the two hosts, facing Bhishma, Drona, and all the rulers of the earth, and then spoke thus, “Behold, O Partha, all the Kurus gathered together!”"
+  },
+  "BG 1.26": {
+   "text": "Then saw Partha stationed there in both the armies, grandfathers, fathers-in-law, and uncles, brothers and cousins, his own and",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Then saw Partha stationed there in both the armies, grandfathers, fathers-in-law, and uncles, brothers and cousins, his own and"
+  },
+  "BG 1.28": {
+   "text": "Seeing, O Krishna, these my kinsmen gathered here eager for fight, my limbs fail me, and my mouth is parched up. I shiver all over, and my hair stands on end. The bow Gandiva slips from my hand, and my skin burns.",
+   "verified": true,
+   "scans_agreeing": 3,
+   "covers": [
+    "BG 1.28",
+    "BG 1.29"
+   ]
+  },
+  "BG 1.30": {
+   "text": "Neither, O Keshava, can I stand upright. My mind is in a whirl. And I see adverse omens.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 1.31": {
+   "text": "Neither, O Krishna, do I see any good in killing these my own people in battle. I desire neither victory nor empire, nor yet pleasure.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.32": {
+   "text": "Of what avail is dominion to us, of what avail are pleasures and even life, if these, O Govinda! for whose sake it is desired that empire, enjoyment, and pleasure should be ours, themselves stand here in battle, having renounced life and wealth — teachers, uncles, sons, and also grandfathers, maternal uncles, fathers-in-law, grandsons, brothers-in-law, besides other kinsmen.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 1.32",
+    "BG 1.33",
+    "BG 1.34"
+   ]
+  },
+  "BG 1.35": {
+   "text": "Even though these were to kill me, O slayer of Madhu, I could not wish to kill them — not even for the sake of dominion over the three worlds, how much less for the sake of the earth!",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 1.36": {
+   "text": "What pleasure indeed could be ours, O Janardana, from killing these sons of Dhritarashtra? Sin only could take hold of us by the slaying of these felons.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Janardana'"
+   ],
+   "primary_raw": "What pleasure indeed could be ours, O Janardana, from killing these sons of Dhritarashtra? Sin only could take hold of us by the slaying of these felons."
+  },
+  "BG 1.37": {
+   "text": "Therefore we ought not to kill our kindred, the sons of Dhritarashtra. For how could we, O Madhava, gain happiness by the slaying of our own kinsmen?",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'ought'"
+   ],
+   "primary_raw": "Therefore we ought not to kill our kindred, the sons of Dhritarashtra. For how could we, O Madhava, gain happiness by the slaying of our own kinsmen?"
+  },
+  "BG 1.38": {
+   "text": "Though these, with understanding overpowered by greed, see no evil due to",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 1.38",
+    "BG 1.39"
+   ],
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Though these, with understanding overpowered by greed, see no evil due to"
+  },
+  "BG 1.40": {
+   "text": "On the decay of a family the immemorial religious rites of that family die out. On the destruction of spirituality, impiety further overwhelms the whole of the family.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.42": {
+   "text": "Admixture of castes, indeed, is for the hell of the family and the destroyers of the family; their ancestors fall, deprived of the offerings of rice-ball and water.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 1.43": {
+   "text": "By these misdeeds of the destroyers of the family, bringing about confusion of castes, are the immemorial religious rites of the caste and the family destroyed.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 1.44": {
+   "text": "We have heard, O Janardana, that dwelling in hell is inevitable for those men in whose families religious practices have been destroyed.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'is'",
+    "unsettled word 'inevitable'",
+    "unsettled word 'for'"
+   ],
+   "primary_raw": "We have heard, O Janardana, that dwelling in hell is inevitable for those men in whose families religious practices have been destroyed."
+  },
+  "BG 1.45": {
+   "text": "Alas, we are involved in a great sin, in that we are prepared to slay our kinsmen, from greed of the pleasures of a kingdom!",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.46": {
+   "text": "Verily, if the sons of Dhritarashtra, weapons in hand, were to slay me, unresisting and unarmed, in the battle, that would be better for me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 1.47": {
+   "text": "Speaking thus in the midst of the battle-field, Arjuna, casting away his bow and arrows, sank down on the seat of his chariot, with his mind distressed with sorrow.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.1": {
+   "text": "To him who was thus overwhelmed with pity and sorrowing, and whose eyes were dimmed with tears, Madhusudana spoke these words.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.2": {
+   "text": "In such a crisis, whence comes upon thee, O Arjuna, this dejection, un-Arya-like, disgraceful, and contrary to the attainment of heaven?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.3": {
+   "text": "Yield not to unmanliness, O son of Pritha! Ill doth it become thee. Cast off this mean faint-heartedness and arise, O scorcher of thine enemies!",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.4": {
+   "text": "But how can I, in battle, O slayer of Madhu, fight with arrows against Bhishma and Drona, who are rather worthy to be worshipped, O destroyer of foes!",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.5": {
+   "text": "Surely it would be better even to eat the bread of beggary in this life than to slay these great-souled masters. But if I kill them, even in this world, all my enjoyment of wealth and desires will be stained with blood.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.6": {
+   "text": "And indeed I can scarcely tell which will be better, that they should conquer us or that we should conquer them, . The very sons of Dhritarashtra — after slaying whom we should not care to live — stand facing us.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Dhritarashtra'"
+   ],
+   "primary_raw": "And indeed I can scarcely tell which will be better, that we should conquer them, or that they should conquer us. The very sons of Dhritarashtra — ^after slaying whom we should not care to live — stand facing us."
+  },
+  "BG 2.7": {
+   "text": "With my nature overpowered by weak commiseration, with a mind in confusion about duty, I supplicate Thee. Say decidedly what is good for me. I am Thy disciple. Instruct me who have taken refuge in Thee.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.8": {
+   "text": "I do not see anything to remove this sorrow which blasts my senses, even were I to obtain unrivalled and flourishing dominion over the earth, and mastery over the gods.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.9": {
+   "text": "Having spoken thus to the Lord of the senses, Gudakesha, the scorcher of foes, said, ‘I shall not fight”, o govinda and became silent.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.10": {
+   "text": "To him who was sorrowing in the midst of the two armies, Hrishikesha, as if smiUng, O descendant of Bharata, spoke these words.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'smiUng'"
+   ],
+   "primary_raw": "To him who was sorrowing in the midst of the two armies, Hrishikesha, as if smiUng, O descendant of Bharata, spoke these words."
+  },
+  "BG 2.12": {
+   "text": "It is not that I have never existed, nor thou, nor these kings. Nor is it that we shall cease to exist in the future.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 2.13": {
+   "text": "As are childhood, youth, and old age, in this body, to the embodied soul, so",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "As are childhood, youth, and old age, in this body, to the embodied soul, so"
+  },
+  "BG 2.14": {
+   "text": "Notions of heat and cold, of pain and pleasure, are born, O son of Kunti, only of the contact of the senses with their objects. They have a beginning and an end. They are impermanent in their nature. Bear them patiently, O descendant of Bharata.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.15": {
+   "text": "That calm man who is the same in pain and pleasure, whom these cannot disturb, alone is able, O great amongst men, to attain to immortality.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.16": {
+   "text": "The unreal never is. The Real never is not. Men possessed of the knowledge of the Truth fully know both these.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.17": {
+   "text": "That by which all this is pervaded — That know for certain to be indestructible. None has the power to destroy this Immutable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.18": {
+   "text": "Of this indwelling Self — the Ever changeless, the indestructible, the illimitable — these bodies are said to have an end. Fight, therefore, O descendant of Bharata.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.19": {
+   "text": "He who takes the Self to be the slayer, and he who takes It to be the slain, neither of these knows. It does not slay, nor is It slain.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'and'"
+   ],
+   "primary_raw": "He who takes the Self to be the slayer, and he who takes It to be the slain, neither of these knows. It does not slay, nor is It slain."
+  },
+  "BG 2.20": {
+   "text": "This is never born, nor does It die. It is not that, not having been. It again comes into being. (Or according to another view: It is not that having been, It again ceases to be). This is unborn, eternal, changeless, ever itself. It is not killed when the body is",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "This is never born, nor does It die. It is not that, not having been. It again conies into being. (Or according to another view: It is not that having been, It again ceases to be). This is unborn, eternal, changeless, everItself. It is not killed when the body is"
+  },
+  "BG 2.21": {
+   "text": "He that knows This to be indestructible, changeless, without birth, and immutable, how is he, O son of Pritha, to slay or cause the slaying of another How is?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.22": {
+   "text": "Even as a man casts off worn-out clothes, and puts on others which are new, so the embodied casts off worn-out bodies, and enters into others which are new.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.23": {
+   "text": "This (Self), weapons cut not; This, fire burns not; This, water wets not; and This, wind dries not.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.24": {
+   "text": "This Self cannot be cut, nor burnt, nor wetted, nor dried. Changeless, all-pervading, unmoving, immovable, the Self is eternal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.25": {
+   "text": "This (Self) is said to be unmanifested, unthinkable, and unchangeable. Therefore, knowing This to be such, thou oughtest not to mourn.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.26": {
+   "text": "But if thou shouldst take This to have constant birth and death, even in that case, O mighty-armed, thou oughtest not to mourn for This.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.27": {
+   "text": "Of that which is born, death is certain; of that which is dead, birth is certain. Over the unavoidable, therefore, thou oughtest not to grieve.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.29": {
+   "text": "Some look upon the Self as marvellous. Others speak of It as wonderful. Others again hear of It as a wonder. And still others, though hearing, do not understand It at all.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.30": {
+   "text": "This, the Indweller in the bodies of all, is ever indestructible, O descendant of Bharata. Wherefore thou oughtest not to mourn for any creature.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.31": {
+   "text": "Looking at thine own Dharma, also, thou oughtest not to waver, for there is nothing higher for a Kshatriya than a righteous war.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.32": {
+   "text": "Fortunate certainly are the Kshatriyas, O son of Pritha, who are called to fight in such a battle that comes unsought as an open gate to heaven.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.33": {
+   "text": "But if thou refusest to engage in this righteous warfare, then forfeiting thine own Dharma and honour, thou shalt incur sin.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.34": {
+   "text": "The world also will ever hold thee in reprobation. To the honoured, disrepute is surely worse than death.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.35": {
+   "text": "The great chariotwarriors will believe that thou hast withdrawn from the battle through fear. And thou wilt be lightly esteemed by them who have thought much of thee.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'The'",
+    "unsettled word 'chariotwarriors'"
+   ],
+   "primary_raw": "The great chariotwarriors^ will believe that thou hast withdrawn from the battle through fear. And thou wilt be lightly esteemed by them who have thought much of thee."
+  },
+  "BG 2.36": {
+   "text": "Thine enemies also, cavilling at thy great prowess, will say of thee things that are not to be uttered. What could be more intolerable than this?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.37": {
+   "text": "Dying thou gainest heaven; conquering thou enjoyest the earth. Therefore, O son of Kunti, arise, resolved to fight.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.38": {
+   "text": "Having made pain and pleasure, gain and loss, conquest and defeat, the same, engage thou then in battle. So shalt thou incur no sin.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.39": {
+   "text": "The wisdom of Self-realisation has been declared unto thee. Hearken thou now to the wisdom of Yoga, endued with which, O son of Pritha, thou shalt break through the bonds of Karma.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.40": {
+   "text": "In this, there is no waste of the unfinished attempt, nor is there production of contrary results. Even very little of this Dharma protects from the great terror.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.41": {
+   "text": "In this, O scion of Kuru, there is but a single one-pointed determination. The purposes of the undecided are innumerable and many-branching.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.42": {
+   "text": "O Partha, no set determination is formed in the minds of those that are deeply attached to pleasure and power, and whose discrimination is stolen away by the flowery words of the unwise, who are full of desires and look upon heaven as their highest goal and who, taking pleasure in the panegyric words of the Vedas, declare that there is nothing else. Their flowery words are exuberant with various specific rites as the means to pleasure and power and are the causes of (new) births as the result of their works (performed with desire).",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 2.42",
+    "BG 2.43",
+    "BG 2.44"
+   ]
+  },
+  "BG 2.45": {
+   "text": "The Vedas deal with the three Gunas. Be thou free, O Arjuna, from the triad of the Gunas, free from the pairs of opposites, ever-balanced, free from (the thought of) getting and keeping, and established in the Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.46": {
+   "text": "To the Brahmana who has known the Self, all the Vedas are of so much use as a reservoir is, when there is a flood everywhere.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.47": {
+   "text": "Thy right is to work only; but never to the fruits thereof. Be thou not the producer of the fruits of (thy) actions; neither let thy attachment be towards inaction.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.48": {
+   "text": "Being steadfast in Yoga, O Dhananjaya, perform actions, abandoning attachment, remaining unconcerned as regards success and failure. This evenness of mind (in regard to success and failure) is known as Yoga.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.49": {
+   "text": "Work (with desire) is verily far inferior to that performed with the mind undisturbed by thoughts of results. O Dhananjaya, seek refuge in this evenness of mind. Wretched are they who act for results.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.50": {
+   "text": "Endued with this evenness of mind, one frees oneself in this life, alike from vice and virtue. Devote thyself, therefore, to this Yoga. Yoga is the very dexterity of work.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.51": {
+   "text": "The wise, possessed of this evenness of mind, abandoning the fruits of their actions, freed for ever from the fetters of birth, go to that state which is beyond all evil.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.52": {
+   "text": "When thy intellect crosses beyond the taint of illusion, then shalt thou attain to indifference, regarding things heard and things yet to be heard.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.53": {
+   "text": "When thy intellect, tossed about by the conflict of opinions, has become immovable and firmly established in the Self, then thou shalt attain Self-realisation.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.54": {
+   "text": "What, O Keshava, is the description of the man of steady wisdom, merged in Samadhi? How (on the other hand) does the man of steady wisdom speak, how sit, how walk?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.55": {
+   "text": "When a man completely casts away, O Partha, all the desires of the mind, satisfied in the Self alone by the Self, then is he said to be one of steady wisdom.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.56": {
+   "text": "He whose mind is not shaken by adversity, who does not hanker after happiness, who has become free from affection, fear, and wrath, is indeed the Muni of steady wisdom.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.57": {
+   "text": "He who is everywhere -unattached, not pleased at receiving good, nor vexed at evil, his wisdom is fixed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.58": {
+   "text": "When also, like the tortoise its limbs, he can completely withdraw the senses from their objects, then his wisdom becomes steady.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.59": {
+   "text": "Objects fall away from the abstinent man, leaving the longing behind. But his longing also ceases, who sees the Supreme.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 2.60": {
+   "text": "The turbulent senses, O son of Kunti, do violently snatch away the mind of even a wise man, striving after perfection.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.61": {
+   "text": "The steadfast, having controlled them all, sits focussed on Me as. the Supreme. His wisdom is steady, whose senses are under control.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 2.62": {
+   "text": "Thinking of objects, attachment to them is formed in a man. From attachment longing, and from longing anger grows.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 2.63": {
+   "text": "From anger comes delusion, and from delusion loss of memory. From loss of memory comes the ruin of discrimination, and from the ruin of discrimination he perishes.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 2.64": {
+   "text": "But the self-controlled man, moving among objects with senses under restraint, and free from attraction and aversion, attains to tranquillity.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.65": {
+   "text": "In tranquillity, all sorrow is destroyed. For the intellect of him, who is tranquil-minded, is soon established in firmness.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.66": {
+   "text": "No knowledge (of the Self) has the unsteady. Nor has he meditation. To the unmeditative there is no peace. And how can one without peace have happiness?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.67": {
+   "text": "For, the mind, which follows in the wake of the wandering senses, carries away his discrimination, as a wind (carries away from its course) a boat on the waters.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.68": {
+   "text": "Therefore, O mighty-armed, he, whose senses are completely restrained from their objects.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.69": {
+   "text": "That which is night to all beings, in that the self-controlled man wakes. That in which all beings wake, is night to the Self seeing Muni.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.70": {
+   "text": "As into the ocean — brimful, and still — flow the waters, even so the Muni into whom enter all desires, he, and not the desirer of desires, attains to peace.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.71": {
+   "text": "That man who lives devoid of longing, abandoning all desires, without the sense of “I” and “mine”, he attains to peace.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 2.72": {
+   "text": "This is to have one’s being in Brahman, O son of Pritha. None, attaining to this, becomes deluded. Being established therein, even at the end of life, a man attains to oneness with Brahman.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 3.1": {
+   "text": "If, O Janardana, according to Thee, knowledge is superior to action, why then, O Keshava, dost Thou engage me in this terrible action?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.2": {
+   "text": "With these seemingly conflicting words. Thou art, as it were, bewildering my understanding;— tell me that one thing for certain, by which I can attain to the highest.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 3.4": {
+   "text": "By non-performance of work none reaches worklessness; by merely giving up action no one attains to perfection.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'non'"
+   ],
+   "primary_raw": "By non-performance of work none reaches worklessness; by merely giving up action no one attains to perfection."
+  },
+  "BG 3.5": {
+   "text": "Verily none can ever rest for even an instant, without performing action; for all are made to act, helplessly indeed, by the Gunas, born of Prakriti.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.6": {
+   "text": "He, who restraining the organs of action, sits revolving in the mind, thoughts regarding objects of senses, he, of deluded understanding, is called a hypocrite.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.7": {
+   "text": "But,, who, controlling the senses by the mind, unattached, directs his organs of action to the path of work, excels.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.9": {
+   "text": "The world is bound by actions other than those performed for the sake of Yajna; do thou, therefore, O son of Kunti, perform action for Yajna alone, devoid of attachment Yajna means a-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The world is bound by actions other than those performed for the sake of Yajna; do thou, therefore, O son of Kunti, perform action for Yajna alone, devoid of attach-"
+  },
+  "BG 3.10": {
+   "text": "The Prajapati, having in the beginning created mankind together with Yajna, said, “By this shall ye multiply: this shall be the milch cow of your desires.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.11": {
+   "text": "“Cherish the Devas with this, and may those Devas cherish you: thus cherishing one another, ye shall gain the highest good.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.12": {
+   "text": "“The Devas, cherished by Yajna, will give you desired-for objects.” So, he who enjoys objects given by the Devas without offering (in return) to them, is verily a thief.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.13": {
+   "text": "The good, eating the remnants of Yajna, are freed from all sins: but who cook food (only) for themselves, those sinful ones eat sin.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.14": {
+   "text": "From food come forth beings: from rain food is produced: from Yajna arises rain; and Yajna is born of Karma.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.15": {
+   "text": "Know Karma to have risen from the Veda, and the Veda from the Imperishable. Therefore the all-pervading Veda is ever centred in Yajna.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.16": {
+   "text": "He who here follows not the wheel thus set revolving, living in sin, and satisfied in the senses, O son of Pritha — he lives in vain.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.17": {
+   "text": "But the man who is devoted to the Self, and is satisfied with the Self, and content in the Self alone, he has no obligatory duty.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.18": {
+   "text": "He has no object in this world (to gain) by doing (an action), nor (does he incur any loss) by non-performance of action — nor has he (need of) depending on any being for any object.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.19": {
+   "text": "Therefore, do thou always perform actions which are obligatory, without attachment; by performing action without attachment, one attains to the highest.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.20": {
+   "text": "Verily by action alone, Janaka and others attained perfection; also, simply with the view for the guidance of men, thou shouldst perform action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.21": {
+   "text": "Whatsoever the superior person does, that is followed by others. What he demonstrates by action, that people follow.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.22": {
+   "text": "I have, O son of Pritha, no duty, nothing that I have not gained; and nothing that I have to gain, in the three worlds; yet, I continue in action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.23": {
+   "text": "If ever I did not continue in work without relaxation, men O son of Pritha, men would, in every way, follow in My wake.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Pritha'",
+    "unsettled word 'men'"
+   ],
+   "primary_raw": "If ever I did not continue in work without relaxation, O son of Pritha, men would, in every way, follow in My wake."
+  },
+  "BG 3.24": {
+   "text": "If did not do work, these worlds would perish. I should be the cause of the admixture of races, and should ruin these beings.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.25": {
+   "text": "As do the unwise, attached to work, act, so should the wise act, O descend-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'descend'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "As do the unwise, attached to work, act, so should the wise act, O descend-"
+  },
+  "BG 3.26": {
+   "text": "One should not unsettle the understanding of the ignorant, attached to action; the wise, (himself) steadily acting, should engage (the ignorant) in all work.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.27": {
+   "text": "The Gunas of Prakriti perform all action. With the understanding deluded by egoism, man thinks, ‘T am the doer.’’",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.28": {
+   "text": "But, one, with true insight into the domains of Guna and Karma, knowing that Gunas as senses merely rest on Gunas as objects, does not become attached.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.29": {
+   "text": "Men of perfect knowledge should not unsettle (the understanding of) people of dull wit and imperfect knowledge, who deluded by the Gunas of Prakriti attach (themselves) to the functions of the Gunas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.30": {
+   "text": "Renouncing all actions to Me, with mind centred on the Self, getting rid of hope and selfishness, fight — free from (mental) fever.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.31": {
+   "text": "Those men who constantly practise this teaching of Mine, full of Shraddha and without cavilling, they too, are freed from work.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.33": {
+   "text": "Even a wise man acts in accordance with, his own. nature; beings follow nature: what can restraint do?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.34": {
+   "text": "Attachment and aversion of the senses for their respective objects are natural: let none come under their sway: they are his foes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.35": {
+   "text": "Better is one’s own Dharma, (though) imperfect, than the Dharma of another well-performed. Better is death in one’s own Dharma: the Dharma of another is fraught with fear.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.36": {
+   "text": "But by what does man commit sin, though against his wishes, O Varshneya, constrained as it were by force?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.37": {
+   "text": "It is desire — it is anger, born of the Rajo-guna: of great craving, and of great sin; know this as the foe here (in this world).",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Rajo'",
+    "unsettled word 'guna'",
+    "unsettled word 'sin'"
+   ],
+   "primary_raw": "It is desire — ^it is anger, born of the Rajo-guna: of great craving, and of great sin; know this as the foe here (in this world)."
+  },
+  "BG 3.38": {
+   "text": "As fire is enveloped by smoke, as a mirror by dust, as an embryo by the secundine, so is it covered by that.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 3.39": {
+   "text": "Knowledge is covered by this, the constant foe of the wise, O son of Kunti, the unappeasable fire of desire.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.40": {
+   "text": "The senses, the mind, and the intellect are said to be its abode: through these, it deludes the embodied by veiling his wisdom.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.41": {
+   "text": "Therefore, O Bull of the Bharata race, controlling the senses at the outset, kill it — the sinful, the destroyer of knowledge and reaUsation.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'reaUsation'"
+   ],
+   "primary_raw": "Therefore, O Bull of the Bharata race, controlhng the senses at the outset, kill it — the sinful, the destroyer of knowledge and reaUsation."
+  },
+  "BG 3.42": {
+   "text": "The senses are said to be superior (to the body); the mind is superior to the senses; the intellect is superior to the mind; and that which is superior to the intellect is He (the Atman).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 3.43": {
+   "text": "Thus, knowing Him who is the superior of the intellect, and restraining the self by the Self, destroy, O mighty-armed, that enemy, the unseizable foe, of desire.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.1": {
+   "text": "I told this imperishable Yoga to Vivasvat; Vivasvat told it to Manu; (and) Manu told it to Ikshvaku:",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "I told this imperishable Yoga to Vivasvat; Vivasvat told it to Manu; (and) Manu told it to Ikshvaku:"
+  },
+  "BG 4.2": {
+   "text": "Thus handed down in regular succession, the royal sages knew it. This Yoga, by long lapse of time, declined in this world, O burner of foes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.3": {
+   "text": "I have this day told thee that same ancient Yoga, (for) thou art My devotee, and My friend, and this secret is profound indeed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.4": {
+   "text": "Later was Thy birth, and that of Vivasvat prior; how then should I understand that Thou toldest this in the beginning?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.5": {
+   "text": "Many are the births that have been passed by Me and thee, O Arjuna. I know them all, whilst thou knowest not, O scorcher of foes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.6": {
+   "text": "Though I am unborn, of changeless nature and Lord of beings, yet subjugating My Prakriti, I come into being by My own Maya.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.7": {
+   "text": "Whenever, O descendant of Bharata, there is decline of Dharma, and rise of Adharma, then I body Myself forth.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.8": {
+   "text": "For the protection of the good, for the destruction of the wicked, and for the establishment of Dharma, I come into being in every age.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.9": {
+   "text": "He who thus knows, in true light. My divine birth and action, leaving the body, is not bom again: he attains to Me, O Arjuna.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'bom'"
+   ],
+   "primary_raw": "He who thus knows, in true light. My divine birth and action, leaving the body, is not bom again: he attains to Me, O Arjuna."
+  },
+  "BG 4.10": {
+   "text": "Freed from attachment, fear, and anger, absorbed in Me, taking refuge in Me, purified by the fire of knowledge, many have attained My Being.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.11": {
+   "text": "In whatever way men worship Me, in the same way do I fulfil their desires; (it is) My path, O son of Pritha, (that) men tread, in all ways.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.12": {
+   "text": "Longing for success in action, in this world, (men) worship the gods. Because success, resulting from action, is quickly attained in the human world.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.13": {
+   "text": "The fourfold caste was created by Me, by the differentiation of Guna and Karma. Though I am the author thereof, know Me to be the non-doer, and changeless.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.14": {
+   "text": "Actions do not taint Me, nor have I any thirst for the result of action. He who knows Me thus is not fettered by action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.15": {
+   "text": "Knowing thus, the ancient seekers after freedom also performed action. Do thou, therefore, perform action, as did the ancients in olden times.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.16": {
+   "text": "Even sages are bewildered, as to what is action and what is inaction. I shall, therefore, tell you what action is, by knowing which you will be freed from evil.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.17": {
+   "text": "For verily, (the true nature) even of action (enjoined by the Shastras) should",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "For verily, (the true nature) even of action (enjoined by the Shastras) should"
+  },
+  "BG 4.18": {
+   "text": "He who sees inaction in action, and action in inaction he is intelligent among men, he is a Yogi and a doer of all action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.19": {
+   "text": "Whose undertakings are all devoid of plan and desire for results, and whose actions are burnt by the fire of knowledge, him, the sages call wise.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.20": {
+   "text": "Forsaking the clinging to fruits of action, ever satisfied, depending on nothing, though engaged in action, he does not do anything.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.21": {
+   "text": "Without hope, the body and mind controlled, and all possessions relinquished, he does not suffer any evil consequences, by doing mere bodily action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.22": {
+   "text": "Content with what comes to him without effort, unaffected by the pairs of opposites, free from envy, even-minded in success and failure, though acting, he is not bound.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.23": {
+   "text": "Devoid of attachment, liberated, with mind centred in knowledge, performing work for Yajna alone, his whole Karma dissolves away.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.24": {
+   "text": "The process is Brahman, the clarified butter is Brahman, in the fire of Brahman; by seeing Brahman in action, he reaches Brahman alone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.25": {
+   "text": "Some Yogis perform sacrifices to Devas alone, while others offer the self as sacrifice by the self in the fire of Brahman alone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.26": {
+   "text": "Some again offer hearing and other senses as sacrifice in the fire of control, while others offer sound and other sense-objects as sacrifice in the fire of the senses.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.28": {
+   "text": "Others again offer wealth, austerity, and Yoga, as sacrifice, while still others, of self-restraint and rigid vows, offer study of the scriptures and knowledge, as sacrifice.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.29": {
+   "text": "Yet some offer as sacrifice, the out going into the in coming breath, and the in coming into the out going, stopping the courses of the in coming and out going breaths, constantly practising the regulation of the vital energy; while others yet of regulated food, offer in the Pranas the functions thereof.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Yet'",
+    "unsettled word 'some'"
+   ],
+   "primary_raw": "Yet some offer as sacrifice, the outgoing into the incoming breath, and the incoming into the outgoing, stopping the courses of the incoming and outgoing breaths, constantly practising the regulation of the vital energy; while others yet of regulated food, offer in the Pranas the functions thereof."
+  },
+  "BG 4.30": {
+   "text": "All of these are knowers of Yajna, having their sins consumed by Yajna, and eating of the nectar — the remnant of Yajna — they go to the Eternal Brahman. (Even) this world is not for the non-performer of Yajna, how then another, O best of the Kurus?",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 4.30",
+    "BG 4.31"
+   ]
+  },
+  "BG 4.32": {
+   "text": "Various Yajnas, like the above, are strewn in the store house of the Veda. Know them all to be born of action; and thus knowing, thou shalt be free.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.33": {
+   "text": "Knowledge-sacrifice, O scorcher of foes, is superior to sacrifice (performed) with (material) objects. All action in its entirety.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.34": {
+   "text": "Know that, by prostrating thyself, by questions, and by service; the wise, those who have realised the Truth, will instruct thee in that knowledge.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.35": {
+   "text": "Knowing which, thou shalt not, O P3ndava, again get deluded like this, and by which thou shalt see the whole of creation in (thy) Self and in Me.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'ndava'",
+    "leftover OCR characters"
+   ],
+   "primary_raw": "Knowing which, thou shalt not, O P3ndava, again get deluded like this, and by which thou shalt see the whole of creation in (thy) Self and in Me."
+  },
+  "BG 4.36": {
+   "text": "Even if thou be the most sinful among all the sinful, yet by the raft of knowledge alone thou shalt go across all sin.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.37": {
+   "text": "As blazing fire reduces wood into ashes, so, O Arjuna, does the fire of knowledge reduce all Karma to ashes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.38": {
+   "text": "Verily there exists nothing in this world purifying Like knowledge. In good time, having reached perfection in Yoga, one realises that oneself in one’s own heart.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.39": {
+   "text": "The man with Shraddha, the devoted, the master of one’s senses, attains (this) knowledge. Having attained knowledge one goes at once to the Supreme Peace.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "The man with Shraddha, the devoted, the master of one’s senses, attains (this) knowledge. Having attained knowledge one goes at once to the Supreme Peace."
+  },
+  "BG 4.40": {
+   "text": "The ignorant, the man without Shraddha, the doubting self, goes to destruction. The doubting self has neither this world, nor the next, nor happiness.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "The ignorant, the man without Shraddha, the doubting self, goes to destruction. The doubting self has neither this world, nor the next, nor happiness."
+  },
+  "BG 4.41": {
+   "text": "With work renounced by Yoga and doubts rent asunder by knowledge, O Dhananjaya, actions do not bind him who is poised in the Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 4.42": {
+   "text": "Therefore, cutting with the sword of knowledge, this doubt about the Self, born of ignorance, residing in thy heart, take refuge in Yoga. Arise, O Bharata!",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Bharata'"
+   ],
+   "primary_raw": "Therefore, cutting with the sword of knowledge, this doubt about the Self, bom of ignorance, residing in thy heart, take refuge in Yoga. Arise, O Bharata!"
+  },
+  "BG 5.1": {
+   "text": "Renunciation of action, O Krishna, thou commendest, and again, its performance. Which is the better one of these? Do thou tell me decisively.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.2": {
+   "text": "Both renunciation and performance of action lead to freedom: of these, performance of action is superior to the renunciation of action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.3": {
+   "text": "He should be known a constant Sannyasi, who neither Likes nor dislikes: for, free from the pairs of opposites, O mighty armed, he is easily set free from bondage.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.4": {
+   "text": "Children, not the wise, speak of knowledge and performance of action, as distinct. He who truly lives in one, gains the fruits of both.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.5": {
+   "text": "The plane which is reached by the Jnanis is also reached by the Karma-yogis. He who sees knowledge and performance of action as one he sees.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Jnanis'",
+    "unsettled word 'yogis'",
+    "unsettled word 'He'"
+   ],
+   "primary_raw": "The plane which is reached by the Jnanis is also reached by the Karma-yogis. He who sees knowledge and performance of action as one alone sees."
+  },
+  "BG 5.6": {
+   "text": "Renunciation of action, O mighty armed, is hard to attain to without performance of action; the man of meditation, purified by devotion to action, qiickly goes to Brahman.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'qi'",
+    "unsettled word 'ickly'"
+   ],
+   "primary_raw": "Renunciation of action, O mightyarmed, is hard to attain to without performance of action; the man of meditation, purified by devotion to action, qi^ickly goes to Brahman."
+  },
+  "BG 5.7": {
+   "text": "With the mind purified by devotion to performance of action, and the body conquered, and senses subdued, one who reahses one’s self, as the Self in all beings, though acting, is not tainted.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'reahses'"
+   ],
+   "primary_raw": "With the mind purified by devotion to performance of action, and the body conquered, and senses subdued, one who reahses one’s Self, as the Self in all beings, though acting, is not tainted."
+  },
+  "BG 5.8": {
+   "text": "The knower of Truth, (being) centred (in the Self) should think, “I do nothing at all” — though seeing, hearing, touching, smelling, eating, going, sleeping, breathing, speaking, letting go, holding, opening, and closing the eyes — convinced that it is the senses that move among senseobjects.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 5.8",
+    "BG 5.9"
+   ],
+   "issues": [
+    "unsettled word 'senseobjects'"
+   ],
+   "primary_raw": "The knower of Truth, (being) centred (in the Self) should think, “I do nothing at all” — though seeing, hearing, touching, smelling, eating, going, sleeping, breathing, speaking, letting go, holding, opening, and closing the eyes — convinced that it is the senses that move among senseobjects."
+  },
+  "BG 5.10": {
+   "text": "He who does actions forsaking attachment, resigning them to Brahman, is not soiled by evil, like unto a lotus-leaf by water.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.11": {
+   "text": "Devotees in the path of work perform action, only with body, mind, senses, and intellect, forsaking attachment, for the purification of the heart.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.12": {
+   "text": "The well-poised, forsaking the fruit of action, attains peace, born of steadfastness; the unbalanced one, led by desire, is bound by being attached to fruit (of action).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.13": {
+   "text": "The subduer (of the senses), having renounced all actions by discrimination, rests happily in the city of the nine gates, neither acting, nor causing (others) to act.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.14": {
+   "text": "Neither agency, nor actions does the Lord create for the world, nor (does He bring about) the union with the fruit of action. It is the universal ignorance that does (it all).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.15": {
+   "text": "The Omnipresent takes note of the merit or demerit of none. Knowledge is enveloped in ignorance, hence do beings get deluded.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.16": {
+   "text": "But whose ignorance is destroyed by the knowledge of Self — that knowledge of theirs, Like the sun, reveals the Supreme (Brahman).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.17": {
+   "text": "Those who have their intellect absorbed in That, whose self is That, whose steadfastness is in That, whose consummation is That, their impurities cleansed by knowledge, they attain to non-return (Moksha).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.18": {
+   "text": "The knowers of the Self look with an equal eye on a Brahmana endowed with learning and humility, a cow, an elephant, a dog, and a pariah.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.19": {
+   "text": "(Relative) existence has been conquered by them, even in this world, whose mind rests in evenness, since Brahman is even and without imperfection: therefore they indeed rest in Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.20": {
+   "text": "Resting in Brahman, with intellect steady, and without delusion, the knower of Brahman neither rejoiceth in receiving what is pleasant, nor grieveth on receiving what is unpleasant.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.21": {
+   "text": "With the heart unattached to external objects, he realises the joy that is in the Self. With the heart devoted to the meditation of Brahman, he attains undecaying happiness.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.22": {
+   "text": "Since enjoyments that are contact born are parents of misery alone, and with beginning and end, O son of Kunti, a wise man does not seek pleasure in them.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.23": {
+   "text": "He who can withstand in this world, before the liberation from the body, the impulse arising from lust and anger, he is steadfast (in Yoga), he is a happy man.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.24": {
+   "text": "Whose happiness is within, whose relaxation is within, whose light is within, that Yogi alone, becoming Brahman, gains absolute freedom.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.25": {
+   "text": "With imperfections exhausted, doubts dispelled, senses controlled, engaged in the good of all beings, the Rishis obtain absolute freedom.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.26": {
+   "text": "Released from lust and anger, the heart controlled, the Self realised, absolute freedom is for such Sannyasis, both here and hereafter.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 5.27": {
+   "text": "Shutting out external objects; steadying the eyes between the eyebrows; restricting the even currents of Prana and Apana inside the nostrils; the senses, mind, and intellect controlled; with Moksha as the supreme goal; freed from desire, fear, and anger: such a man of meditation is verily free for ever.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 5.27",
+    "BG 5.28"
+   ]
+  },
+  "BG 5.29": {
+   "text": "Knowing Me as the dispenser of Yajnas and asceticisms, as the Great Lord of all worlds, as the friend of all beings, he attains Peace.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.1": {
+   "text": "He who performs his bounden duty without leaning to the fruit of action — he is a renouncer of action as well as a devotee to action : not he who is without fire, nor he who is without action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.3": {
+   "text": "For the man of meditation wishing to attain purification of heart leading to concentration, work is said to be the way: For him, when he has attained such (concentration), inaction is said to be the way.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.4": {
+   "text": "Verily, when there is no attachment, either to sense-objects, or to actions, having renounced all Sankalpas, then is one said to have attained concentration.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.5": {
+   "text": "A man should uplift himself by his own self, so let him not weaken this self. For this self is the friend of oneself, and this self is the enemy of oneself,",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "A man should uplift himself by his own self, so let him not weaken this self. For this self is the friend of oneself, and this self is the enemy of oneself,"
+  },
+  "BG 6.6": {
+   "text": "The self (the active part of our nature) is the friend of the self, for him who has conquered himself by this self. But to the unconquered self, this self is inimical, (and behaves) hke (an external) foe.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'hke'"
+   ],
+   "primary_raw": "The self (the active part of our nature) is the friend of the self, for him who has conquered himself by this self. But to the unconquered self, this self is inimical, (and behaves) hke (an external) foe."
+  },
+  "BG 6.7": {
+   "text": "To the self-controlled and serene, the Supreme Self is the object of constant realisation, in cold and heat, pleasure and pain, as well as in honour and dishonour.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.8": {
+   "text": "Whose heart is filled with satisfaction by wisdom and realisation, and is changeless, whose senses are conquered, and to whom a lump of earth, stone, and gold are the same: that Yogi is called steadfast.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.9": {
+   "text": "He attains excellence who looks with equal regard upon well-wishers, friends, foes, neutrals, arbiters, the hateful, the relatives, and upon the righteous and unrighteous alike.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.10": {
+   "text": "The Yogi should constantly practise concentration of the heart, retiring into solitude, alone, with the mind and body subdued, free from hope and possession.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.11": {
+   "text": "Having estabhshed in a cleanly spot established his seat, firm, neither too high nor too low.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'estabhshed'"
+   ],
+   "primary_raw": "Having estabhshed in a cleanly spot his seat, firm, neither too high nor too low."
+  },
+  "BG 6.12": {
+   "text": "There, seated on that seat, making the mind one-pointed and subduing the action of the imaging faculty and the senses, let him practise Yoga for the purification of the heart.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.13": {
+   "text": "Let him firmly hold his body, head, and neck erect and still, (with the eye-balls fixed, as if) gazing at the tip of his nose, and not looking around.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.14": {
+   "text": "With the heart serene and fearless, firm in the vow of a Brahmachari, with the mind controlled, and ever thinking of Me, let him sit (in Yoga) having Me as his supreme goal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.16": {
+   "text": "(Success in) Yoga is not for him who eats too much or too little — nor, O Arjuna, for him who sleeps too much or too little.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.17": {
+   "text": "To him who is temperate in eating and recreation, in his effort for work, and in",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "To him who is temperate in eating and recreation, in his effort for work, and in"
+  },
+  "BG 6.18": {
+   "text": "When the completely controlled mind rests serenely in the Self alone, free from longing after all desires, then is one called steadfast (in the Self).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.19": {
+   "text": "‘‘As a lamp in a spot sheltered from the wind does not flicker” — even such has been the simile used for a Yogi of subdued mind, practising concentration in the Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.20": {
+   "text": "When the mind, absolutely restrained by the practice of concentration, attains quietude, and when seeing the Self by the self, one is satisfied in his own Self; when he feels that infinite bhss — which is perceived by the (purified) intellect and which transcends the senses, and established wherein he never departs from his real state; and having obtained which, regards no other acquisition superior to that, and where established, he is not moved even by heavy sorrow; let that be known as the state, called by the name of Yoga — a state of severance from the contact of pain. This Yoga should be practised with perseverance, undisturbed by depression of heart.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 6.20",
+    "BG 6.21",
+    "BG 6.22",
+    "BG 6.23"
+   ],
+   "issues": [
+    "unsettled word 'bhss'"
+   ],
+   "primary_raw": "When the mind, absolutely restrained by the practice of concentration, attains quietude, and when seeing the Self by the self, one is satisfied in his own Self; when he feels that infinite bhss — which is perceived by the (purified) intellect and which transcends the senses, and established wherein he never departs from his real state; and having obtained which, regards no other acquisition superior to that, and where established, he is not moved even by heavy sorrow; let that be known as the state, called by the name of Yoga — a state of severance from the contact of pain. This Yoga should be practised with perseverance, undisturbed by depression of heart."
+  },
+  "BG 6.24": {
+   "text": "Abandoning without reserve all desires born of Sankalpa, and completely restraining, by the mind alone, the whole group of senses from their objects in all directions; ftnjtrnrr Set in patience by the intellect JR: mind placed in the Self making by degrees should attain quietude q' not anything arPr even should think.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'ftnj'",
+    "unsettled word 'trnrr'",
+    "unsettled word 'the'",
+    "unsettled word 'JR'",
+    "unsettled word 'q'",
+    "unsettled word 'anything'",
+    "unsettled word 'arPr'",
+    "unsettled word 'even'",
+    "unsettled word 'should'",
+    "unsettled word 'think'"
+   ],
+   "primary_raw": "Abandoning without reserve all desires born of Sankalpa, and completely restraining, by the mind alone, the whole group of senses from their objects in all directions; ^ftnj^trnrr Set in patience by the intellect JR: mind placed in the Self making by degrees should attain quietude q' not anything arPr even should think."
+  },
+  "BG 6.25": {
+   "text": "With the intellect set in patience, with the mind fastened on the Self, let him attain quietude by degrees: let him not think of anything.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.26": {
+   "text": "Through whatever reason the restless, unsteady mind wanders away, let him.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.27": {
+   "text": "Verily, the supreme bliss comes to that Yogi, of perfectly tranquil mind, and passions quieted. Brahman-become, and freed from taint.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.28": {
+   "text": "The Yogi, freed from taint (of good and evil), constantly engaging the mind thus, with ease attains the infinite bliss of contact with Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.29": {
+   "text": "With the heart concentrated by Yoga, with the eye of evenness for all things, he beholds the Self in all beings and all beings in the Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.30": {
+   "text": "He who sees Me in all things, and sees all things in Me, he never becomes separated from Me, nor do I become separated from him.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.31": {
+   "text": "He who worships me dwelling in all beings being established in unity,,, whatever his mode of life, that Yogi abides in Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.32": {
+   "text": "He who judges of pleasure or pain everywhere, by the same standard as he applies to himself, that Yogi, O Arjuna, is regarded as the highest.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.33": {
+   "text": "This Yoga which has been taught by Thee, O slayer of Madhu, as characterised by evenness, I do not see (the possibility of) its lasting endurance, owing to restlessness (of the mind).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.34": {
+   "text": "Verily, the mind, O Krishna, is restless, turbulent, strong, and unyielding; I regard it quite as hard to achieve its control, as that of the wind.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.35": {
+   "text": "Without doubt, O mighty-armed, the mind is restless, and difficult to control; but through practice and renunciation, O son of Kunti, it may be governed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.36": {
+   "text": "Yoga is hard to be attained by one of uncontrolled self: such is My conviction; but the self-controlled, striving by right means can obtain it.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.37": {
+   "text": "Though possessed of Shraddha but unable to control himself, with the mind wandering away from Yoga, what end does one, failing to gain perfection in Yoga, meet, O Krishna?",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "Though possessed of Shraddha but unable to control himself, with the mind wandering away from Yoga, what end does one, failing to gain perfection in Yoga, meet, O Krishna ?"
+  },
+  "BG 6.38": {
+   "text": "Does he not, fallen from both, perish, without support, hke a rent cloud, O mighty-armed, deluded in the path of Brahman?",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'hke'"
+   ],
+   "primary_raw": "Does he not, fallen from both, perish, without support, hke a rent cloud, O mighty-armed, deluded in the path of Brahman?"
+  },
+  "BG 6.39": {
+   "text": "This doubt of mine, O Krishna, Thou shouldst completely dispel; for it is not possible for any but Thee to dispel this doubt.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.40": {
+   "text": "Verily, O son of Pritha, there is destruction for him, neither here nor hereafter for, the doer of good, O my son, never comes to grief.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.41": {
+   "text": "Having attained to the worlds of the righteous, and dwelling there for everlasting years, the fallen in Yoga reincarnates in the home of the pure and the prosperous.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.42": {
+   "text": "Or else he is born into a family of wise Yogis only; verily, a birth such as that is very rare to obtain in this world.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.43": {
+   "text": "There he is united with the intelligence acquired in his former body, and strives more than before, for perfection, O son of the Kurus.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.44": {
+   "text": "By that previous practice alone, he is borne on in spite of himself. Even the enquirer after Yoga rises superior to the performer of Vedic actions.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.45": {
+   "text": "The Yogi, striving assiduously, purified of taint, gradually gaining perfection through many births, then reaches the highest goal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.46": {
+   "text": "The Yogi is regarded as superior to those who practise asceticism, also to those who have obtained wisdom (through the Shastras). He is also superior to the performers of action (enjoined in the Vedas). Therefore, be thou a Yogi, O Arjuna!",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 6.47": {
+   "text": "And of all Yogis, he who with the inner self merged in Me, who with Shraddha devotes himself to Me, is considered by Me the most steadfast.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.1": {
+   "text": "With the mind intent on Me, O son of Pritha, taking refuge in Me, and practising Yoga, how thou shalt without doubt know Me fully, that do thou hear.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.2": {
+   "text": "I shall tell you in full, of knowledge, speculative and practical, knowing which, nothing more here remains to be known.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.3": {
+   "text": "One, perchance, in thousands of men, strives for perfection; and one perchance, among the blessed ones, striving thus, knows Me in reality.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.4": {
+   "text": "Bhumi (earth), Ap (water), Anala (fire), Vayu (air), Kha (ether), mind, intellect, and egoism: thus is My Prakriti divided eightfold.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.5": {
+   "text": "This is the lower (Prakriti). But different from it, know thou, O mighty-armed, My higher Prakriti — the principle of selfconsciousness, by which this universe is sus-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'selfconsciousness'",
+    "unsettled word 'sus'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "This is the lower (Prakriti). But different from it, know thou, O mighty-armed, My higher Prakriti — the principle of selfconsciousness, by which this universe is sus-"
+  },
+  "BG 7.6": {
+   "text": "Know that these (two Prakritis) are the womb of all beings, I am the origin and dissolution of the whole universe.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.7": {
+   "text": "Beyond Me, O Dhananjaya, there is naught. All this is strung in Me, as a row of jewels on a thread.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.8": {
+   "text": "I am the sapidity in water, O son of Kunti; I, the radiance in the moon and the sun; I am the Om in all the Vedas, sound in Akasha, and manhood in men.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'water'"
+   ],
+   "primary_raw": "I am the sapidity in water, O son of Kunti; I, the radiance in the moon and the sun; I am the Om in all the Vedas, sound in Akasha, and manhood in men."
+  },
+  "BG 7.9": {
+   "text": "I am the sacred fragrance in earth, and the brilliance in fire am I; the life in all beings, and the austerity am I in ascetics.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.10": {
+   "text": "Know Me, O son of Pritha, as the eternal seed of all beings. I am the intellect of the intelligent, and the heroism of the heroic.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.11": {
+   "text": "Of the strong, I am the strength devoid of desire and attachment. I am, O bull among the Bharatas, desire in beings, unopposed to Dharma.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.12": {
+   "text": "And whatever states pertaining to Sattva, and those pertaining to Rajas, and to Tamas, know them to proceed from Me alone; still I am not in them, but they are in Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.13": {
+   "text": "Deluded by these states, the modifications of, the three Gunas (of Prakriti), all this world does not know Me beyond them, and immutable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.14": {
+   "text": "Verily, this divine illusion of Mine, constituted of the Gunas, is difficult to cross over; those who devote themselves to Me alone, cross over this illusion.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.15": {
+   "text": "They do not devote themselves to Me — the evil-doers, the deluded, the lowest of men, deprived of discrimination by Maya and following the way of the Asuras.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.16": {
+   "text": "Four kinds of virtuous men worship Me, O Arjuna — the distressed, the seeker for knowledge the seeker",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Four kinds of virtuous men worship Me, O Arjuna — the distressed, the seeker of"
+  },
+  "BG 7.17": {
+   "text": "Of them, the wise man, ever-steadfast, (and fired) with devotion to the One, excels; for supremely dear am I to the wise, and he is dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.18": {
+   "text": "Noble indeed are they all, but the wise man I regard as My very Self; for with the mind steadfast, he is established in Me alone, as the supreme goal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.19": {
+   "text": "At the end of many births, the man of wisdom takes refuge in Me, realising that all this is Vasudeva (the innermost Self). Very rare is that great soul.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.20": {
+   "text": "Others again, deprived of discrimination by this and that desire, following this or that rite, devote themselves to other gods, led by their own natures.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.21": {
+   "text": "Whatsoever form any devotee seeks to worship with Shraddha — that Shraddha of his do I make unwavering.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.22": {
+   "text": "Endued with that Shraddha, he engages in the worship of that, and from it, gains his desires — these being verily dispensed by Me alone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.23": {
+   "text": "But the fruit (accruing) to these men of Little understanding is limited. The worshippers of the Devas go to the Devas; My devotees too come to me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.24": {
+   "text": "The foolish regard Me, the unmanifested, as come into manifestation, not knowing My supreme state — the immutable and tran-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'tran'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The foolish regard Me, the unmanifested, as come into manifestation, not knowing My supreme state — immutable and tran-"
+  },
+  "BG 7.25": {
+   "text": "Veiled by the illusion born of the congress of the Gunas, I am not manifest to all. This deluded world knows Me not — the Unborn, the Immutable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.26": {
+   "text": "I know, O Arjuna, the beings of the whole past, and the present, and the future, but Me none knoweth.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.27": {
+   "text": "By the delusion of the pairs of opposites, arising from desire and aversion, O descendant of Bharata, all beings fall into delusion at birth, O scorcher of foes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.28": {
+   "text": "Those men of virtuous deeds, whose sin has come to an end — they, freed from the delusion of the pairs of opposites, worship Me with firm resolve.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 7.29": {
+   "text": "Those who strive for freedom from old age and death, taking refuge in Me — they know Brahman, the whole of Adhyatma, and Karma in its entirety.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Adhyatma'"
+   ],
+   "primary_raw": "Those who strive for freedom from old age and death, taking refuge in Me — they know Brahman, the whole of Adhyatma, and Karma in its entirety."
+  },
+  "BG 7.30": {
+   "text": "Those who know Me with the Adhibhuta, the Adhidaiva, and with the Adhiyajna, (continue to) know Me even at the time of death, steadfast in mind.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.2": {
+   "text": "Who, in what way, is Adhiyajna here in this body, O destroyer of Madhu? And how art Thou known at the time of death, by the self-controlled?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.3": {
+   "text": "The Imperishable is the Supreme Brahman. Its dwelling in each individual body is called Adhyatma; the offering in sacrifice which causes the genesis and support of beings, is called Karma.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.4": {
+   "text": "The perishable adjunct is the Adhibhuta, and the Indweller is the Adhidaivata; I alone am the Adhiyajna here in this body, O best of the embodied.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.5": {
+   "text": "And he who at the time of death, meditating on Me alone, goes forth, leaving the body, attains My Being; there is no doubt of this.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.6": {
+   "text": "Remembering whatever object, at the end, he leaves the body, that alone is reached by him, O son of Kunti, (because) of his constant thought of that object.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.7": {
+   "text": "Therefore, at all times, constantly remember Me, and fight. With mind and intellect absorbed in Me, thou shalt doubtless come to Me.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 8.8": {
+   "text": "With the mind not moving towards anything else, made steadfast by the method of habitual meditation, and dwelling in the Supreme, Resplendent Purusha, O son of Pritha, one goes to Him.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Pritha'"
+   ],
+   "primary_raw": "With the mind not moving towards anything else, made steadfast by the method of habitual meditation, and dwelling on the Supreme, Resplendent Purusha, O son of Pritha, one goes to Him."
+  },
+  "BG 8.9": {
+   "text": "The Omniscient, the Ancient, the Overruler, minuter than an atom, the Sustainer of all, of form inconceivable, self luminous like the sun, and beyond the darkness of Maya — he who meditates on Him thus, at the time of death, full of devotion, with the mind unmoving, and also by the power of Yoga, fixing the whole PrSna be-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 8.9",
+    "BG 8.10"
+   ],
+   "issues": [
+    "unsettled word 'PrSna'",
+    "unsettled word 'be'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The Omniscient, the Ancient, the Overruler, minuter than an atom, the Sustainer of all, of form inconceivable, selfluminous like the sun, and beyond the darkness of Maya — ^he who meditates on Him thus, at the time of death, full of devotion, with the mind unmoving, and also by the power of Yoga, fixing the whole PrSna be-"
+  },
+  "BG 8.11": {
+   "text": "What the knowers of the Veda speak of as imperishable, what the self controlled Sannyasins (), freed from attachment enter, to gain which goal they live the life of a Brahmacharin, that I shall declare unto thee in brief.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.12": {
+   "text": "Controlling all the senses, confining the mind in the heart, drawing the Prana into the head, occupied in the practice of concentration, uttering the one-syllable ‘‘Om” — the Brahman, and meditating on Me — he who departs, leaving the body, attains the Supreme Goal.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 8.12",
+    "BG 8.13"
+   ],
+   "issues": [
+    "unsettled word 'Prana'"
+   ],
+   "primary_raw": "Controlling all the senses, confining the mind in the heart, drawing the Prana into the head, occupied in the practice of concentration, uttering the one-syllabled ‘‘Om” — the Brahman, and meditating on Me — ^he who so departs, leaving the body, attains the Supreme Goal."
+  },
+  "BG 8.15": {
+   "text": "Reaching the highest perfection and having attained Me, the great-souled ones are no more subject to re birth — the home of pain, and ephemeral.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.16": {
+   "text": "All the worlds, O Arjuna, including the realm of Brahma, are subject to return, but after attaining Me, O son of Kunti, there is no rebirth.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'rebirth'"
+   ],
+   "primary_raw": "All the worlds, O Arjuna, including the realm of Brahma, are subject to return, but after attaining Me, O son of Kunti, there is no rebirth."
+  },
+  "BG 8.17": {
+   "text": "They know (the true measure of) day and night, who know the day of Brahma, which ends in a thousand Yugas, and the night which (also) ends in a thousand Yugas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.18": {
+   "text": "At the approach of (Brahma’s) day, all manifestations proceed from the unmanifested state; at the approach of night, they merge verily into that alone, which is called the unmanifested.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 8.19": {
+   "text": "The very same multitude of brings (that existed in the preceding day of Brahma), being born again and again, merge, in spite of themselves, O son of Pritha, (into the unmanifested), at the approach of night, and re-manifest at the approach of day.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'brings'",
+    "unsettled word 'unmanifested'"
+   ],
+   "primary_raw": "The very same multitude of brings (that existed in the preceding day of Brahma), being born again and again, merge, in spite of themselves, O son of Pritha, (into the unmanifested), at the approach of night, and re-manifest at the approach of day."
+  },
+  "BG 8.20": {
+   "text": "But beyond this unmanifested, there is that other Unmanifested, Eternal Existence — That which is not destroyed at the destruction of all beings.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.21": {
+   "text": "What has been called Unmanifested and Imperishable, has been described as the Goal Supreme. That is My highest state, having attained which, there is no return.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.22": {
+   "text": "And that Supreme Purusha is attainable, O son of Pritha, by whole souled devotion to Him alone, in Whom all beings dwell, and by Whom all this is pervaded.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.23": {
+   "text": "Now I shall tell thee, O bull of the Bharatas, of the time (path) travelling in which, the Yogis return, (and again of that, taking which) they do not return.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Bharatas'"
+   ],
+   "primary_raw": "Now I shall tell thee, O bull of the Bharatas, of the time (path) travelling in which, the Yogis return, (and again of that, taking which) they do not return."
+  },
+  "BG 8.24": {
+   "text": "Fire, flame, day-time, the bright fortnight, the six months of the Northern passage of the sun — taking this path, the knowers of Brahman go to Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.25": {
+   "text": "Smoke, night-time, the dark fortnight, the six months of the Southern passage of the sun — taking this path the Yogi, attaining the lunar light, returns.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.26": {
+   "text": "Truly are these bright and dark paths of the world considered eternal: one leads to non-return; by the other, one returns.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.27": {
+   "text": "No Yogi, O son of Pritha, is deluded after knowing these paths. Therefore, O Arjuna, be thou steadfast in Yoga, at all times.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 8.28": {
+   "text": "Whatever meritorious effect is declared (in the Scriptures) to accrue from (the study of) the Vedas, (the performance of) Yajnas, (the practice of) austerities and gifts — above all this rises the Yogi, having known this, and attains to the primeval, supreme Abode.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 9.1": {
+   "text": "To thee, who dost not carp, verily shall I now declare this, the most profound knowledge, united with realisation, having known which, thou shalt be free from evil (Samsara).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.2": {
+   "text": "Of sciences, the highest; of profundities, the deepest; of purifiers, the supreme, is this; realisable by direct perception, endowed with (immense) merit, very easy to perform, and of an imperishable nature.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.3": {
+   "text": "Persons without Shraddha for this Dharma, return, O scorcher of foes, without attaining Me, to the path of re birth fraught with death.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.4": {
+   "text": "All this world is pervaded by Me in My unmanifested form: all beings exist in Me, but I do not dwell in them.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.5": {
+   "text": "Nor do beings exist in Me (in reality), behold My Divine Yoga! Bringing forth and supporting the beings. My Self does not dwell in them.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 9.6": {
+   "text": "As the mighty wind, moving always everywhere, rests ever in the Akasha, know thou, that even so do all beings rest in Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.7": {
+   "text": "At the end of a Kalpa, O son of Kunti, all beings go back to My Prakriti: at the beginning of (another) Kalpa, I send them forth again.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.8": {
+   "text": "Animating My Prakriti, I project again and again this whole multitude of beings, helpless under the sway of Prakriti.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.9": {
+   "text": "These acts do not bind Me, sitting as one neutral, unattached to them, O",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "These acts do not bind Me, sitting as one neutral, unattached to them, O"
+  },
+  "BG 9.10": {
+   "text": "By reason of My proximity, Prakriti produces all this, the moving and the unmoving; the world wheels round and round, O son of Kunti, because of this.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.11": {
+   "text": "Unaware of My higher state, as the great Lord of beings, fools disregard Me, dwelling in the human form.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.12": {
+   "text": "Of vain hopes, of vain works, of vain knowledge, and senseless, they verily are possessed of the delusive nature of Rakshasas and Asuras.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.13": {
+   "text": "But the great-souled ones, O son of Pritha, possessed of the Divine Prakriti, knowing Me to be the origin of beings and immutable, worship Me with a single mind.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.14": {
+   "text": "Glorifying Me always and striving with firm resolve, bowing down to Me in devotion, always steadfast, they worship Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.15": {
+   "text": "Others, too, sacrificing by the Yajna of knowledge (i.e., seeing the Self in all), worship Me the All-Formed, as one, as distinct, as manifold.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.18": {
+   "text": "The Goal, the Supporter, the Lord, the Witness, the Abode, the Refuge, the Friend, the Origin, the Dissolution, the Substratum, the Storehouse, the Seed immutable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.19": {
+   "text": "(As sun) I give heat; I withhold and send forth the rain; I am immortality and also death; the being and non-being am I, O Arjuna!",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.20": {
+   "text": "The knowers of the three Vedas, worshipping Me by Yajna, drinking the Soma, and (thus) being purified from sin, pray for passage to heaven; reaching the holy world of the Lord of the Devas, they enjoy in heaven the divine pleasures of the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The knowers of the three Vedas, worshipping Me by Yajna, drinking the Soma, and (thus) being purified from sin, pray for passage to heaven; reaching the holy world of the Lord of the Devas, they enjoy in heaven the divine pleasures of the"
+  },
+  "BG 9.21": {
+   "text": "Having enjoyed the vast Swarga world, they enter the mortal world, on the exhaustion of their merit: Thus, abiding by the injunctions of the three (Vedas), desiring desires, they (constantly) come and go.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.22": {
+   "text": "Persons who, meditating on Me as nonseparate-, worship Me in all beings, to them thus ever zealously engaged, I carry what they lack and preserve what they already have.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'zealously'"
+   ],
+   "primary_raw": "Persons who, meditating on Me as non-separate, worship Me in all beings, to them thus ever zealously engaged, I carry what they lack and preserve what they already have."
+  },
+  "BG 9.23": {
+   "text": "Even those devotees, who endued with Shraddha, worship other gods, they too worship Me alone, O son of Kunti, (but) by the wrong method.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.24": {
+   "text": "For I alone am the Enjoyer, and Lord of all Yajnas; but because they do not know Me in reality, they return, (to the mortal world).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.25": {
+   "text": "Votaries of the Devas go to the Devas; to the Pitris, go their votaries; to the Bhutas, go the Bhuta worshippers; My votaries too come unto Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.26": {
+   "text": "Whoever with devotion offers Me a leaf, a flower, a fruit, or water, that I accept — the devout gift of the pure minded Not only the.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.27": {
+   "text": "Whatever thou doest, whatever thou eatest, whatever thou offerest in sacrifice, whatever thou givest away, whatever austerity thou practisest, O son of Kunti, do that as an offering unto Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.28": {
+   "text": "Thus shalt thou be freed from the bondages of actions, bearing good and evil results: with the heart steadfast in the Yoga of renunciation, and liberated thou shalt come unto Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.30": {
+   "text": "If the very wicked worship Me, with devotion to none else, he should be regarded as good, for he has rightly resolved.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.31": {
+   "text": "Soon does he become righteous, and attains to eternal Peace, O son of Kunti; boldly canst thou proclaim, that My devotee is never destroyed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.32": {
+   "text": "For, taking refuge in Me, they also, O son of Pritha, who might be of inferior birth — women, Vaishyas, as well as Sudras — even they attain to the Supreme Goal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 9.33": {
+   "text": "What need to mention holy Br hmanas, and devoted Rajarshis! Having obtained this transient, joyless world, worship thou Me.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Rajarshis'"
+   ],
+   "primary_raw": "What need to mention holy Brahmanas, and devoted Rajarshis! Having obtained this transient, joyless world, worship thou Me."
+  },
+  "BG 9.34": {
+   "text": "Fill thy mind with Me, be My devotee, sacrifice unto Me, bow down to Me; thus having made thy heart steadfast in Me, taking Me as the Supreme Goal, thou shalt come to Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.1": {
+   "text": "Again, O mighty-armed, do thou listen to My supreme word, which I, wishing thy welfare, will tell thee who art delighted (to hear Me).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.2": {
+   "text": "Neither the hosts of Devas, nor the great Rishis, know My origin, for in every way I am the source of all the Devas and the great",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Neither the hosts of Devas, nor the great Rishis, know My origin, for in every way I am the source of all the Devas and the great"
+  },
+  "BG 10.3": {
+   "text": "He who knows Me, birthless and beginningless, the great Lord of worlds — he, among mortals, is undeluded, he is freed from all sins.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.4": {
+   "text": "Intellect, knowledge, non-delusion, forbearance, truth, restraint of the external senses, calmness of heart, happiness, misery, birth, death, fear, as well as fearlessness, non-injury, evenness, contentment, austerity, benevolence, good name, (as well as) illfame — (these) different kinds of qualities of beings arise from Me alone.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 10.4",
+    "BG 10.5"
+   ],
+   "issues": [
+    "unsettled word 'illfame'"
+   ],
+   "primary_raw": "Intellect, knowledge, non-delusion, forbearance, truth, restraint of the external senses, calmness of heart, happiness, misery, birth, death, fear, as well as fearlessness, non-injury, evenness, contentment, austerity, benevolence, good name, (as well as) illfame — (these) different kinds of qualities of beings arise from Me alone."
+  },
+  "BG 10.6": {
+   "text": "The seven great Rishis as well as the four ancient Manus, possessed of powers like 'Me (due to their thoughts being fixed on Me), were born of (My) mind; from whom are these creatures in the world.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.7": {
+   "text": "He who in reality knows these manifold manifestations of My being and (this) Yoga power of Mine, becomes established in the unshakable Yoga; there is no doubt of it.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.9": {
+   "text": "With their minds wholly in Me, with their senses absorbed in Me, enlightening, and always speaking of Me, they are satisfied and delighted.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.10": {
+   "text": "To them, ever steadfast and serving Me with affection, I give that Buddhi-Yoga by which they come unto Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.11": {
+   "text": "Out of mere compassion for them, I, abiding in their hearts, destroy the darkness (in them) born of ignorance, by the luminous lamp of knowledge.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.12": {
+   "text": "The Supreme Brahman, the Supreme Abode, the Supreme Purifier, art Thou. All the Rishis, the Deva-Rishi Narada as well as Asita, Devala, and Vyasa have declared Thee as the Eternal, the Self luminous Purusha, the first Deva, Birthless, and All-pervading. So also Thou Thyself sayest to me.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 10.12",
+    "BG 10.13"
+   ]
+  },
+  "BG 10.14": {
+   "text": "I regard all this that Thou sayest to me as true, O Keshava. Verily, O Bhagavan, neither the Devas nor the Danavas know Thy manifestation.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.15": {
+   "text": "Verily, Thou Thyself knowest Thyself by Thyself, O Supreme, O Source of beings, O Lord of beings, O Deva of Devas, O Ruler of the world.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.16": {
+   "text": "Thou shouldst indeed speak, without reserve, of Thy divine attributes by which, filling all these worlds. Thou",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Thou shouldst indeed speak, without reserve, of Thy divine attributes by which, filling all these worlds. Thou"
+  },
+  "BG 10.17": {
+   "text": "How shall I, O Yogin, meditate ever to know Thee? In what things, O Bhagavan, art Thou to be thought of by me?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.18": {
+   "text": "Speak to me again in detail, O JanSrdana, of Thy Yoga-powers and attributes; for I am never satiated in hearing the ambrosia (of Thy speech).",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'JanSrdana'"
+   ],
+   "primary_raw": "Speak to me again in detail, O JanSrdana, of Thy Yoga-powers and attributes; for I am never satiated in hearing the ambrosia (of Thy speech)."
+  },
+  "BG 10.19": {
+   "text": "I shall speak to thee now, O best of the Kurus, of my divine attributes, according to their prominence; there is no end to the manifoldness of My manifesta-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'manifesta'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "I shall speak to thee now, O best of the Kurus, of my divine attributes, according to their prominence; there is no end to the particulars of My manifesta-"
+  },
+  "BG 10.20": {
+   "text": "I am the Self, O Gudakesha, existent in the heart of all beings; I am the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Gudakesha'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "I am the Self, O Gudakesha, existent in the heart of all beings; I am the"
+  },
+  "BG 10.21": {
+   "text": "Of the Adityas, I am Vishnu; of luminaries, the radiant Sun; of the winds, I am Marichi; of the asterisms, the Moon.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.22": {
+   "text": "I am the Sama-Veda of the Vedas, Vasava (Indra) of the gods; and of the senses I am Manas and intelligence in living beings am I.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.23": {
+   "text": "And of the Rudras I am Shankara; of the Yakshas and Rakshasas, the Lord of wealth (Kuvera); of the Vasus I am Pavaka; and of mountains, Meru am I.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shankara'",
+    "unsettled word 'I'"
+   ],
+   "primary_raw": "And of the Rudras I am Shankara; of the Yakshas and Rakshasas, the Lord of wealth (Kubera) ; of the Vasus I am Pavak^ ; and of mountains, Meru am I."
+  },
+  "BG 10.24": {
+   "text": "And of priests, O son of Pritha, know Me the chief, Brihaspati; of generals, I am Skanda; of bodies of water, I am the ocean.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.25": {
+   "text": "Of the great Rishis I am Bhrigu; of words I am the one syllable “Om”; of Yajnas I am the Yajna of Japa (silent repetition); of immovable things the Himalaya.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.26": {
+   "text": "Of all trees (I am) the Ashvattha, and Narada of Deva-Rishis; Chitraratha of Gandharvas am I, and the Muni Kapila of the perfected ones.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.27": {
+   "text": "Know Me among horses as Uchchaisshravas, Amrita-born; of lordly elephants Airavata, and of men the king.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Uchchaisshravas'"
+   ],
+   "primary_raw": "Know Me among horses as Uchchaisshravas, Amrita-bom; of lordly elephants Airavata, and of men the king."
+  },
+  "BG 10.28": {
+   "text": "Of weapons I am the thunderbolt, of cows I am Kamadhuk; I am the Kandarpa, the cause of offspring; of serpents I am",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Of weapons I am the thxmderbolt, of cows I am Kamadhuk; I am the Kandarpa, the cause of offspring; of serpents I am"
+  },
+  "BG 10.29": {
+   "text": "And Ananta of snakes I am, I am Varuna of water-beings; and Aryaman of Pitris I am, I am Yama of controllers.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Aryaman'"
+   ],
+   "primary_raw": "And Ananta of snakes I am, I am Varuna of water-beings; and Aryaman of Pitris I am, I am Yama of controllers."
+  },
+  "BG 10.30": {
+   "text": "And Prahlada am I of Diti’s progeny, of measurers I am Time; and of beasts I am the lord of beasts, and Garuda of birds.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.31": {
+   "text": "Of purifiers I am the wind, Rama of warriors am I; of fishes I am the shark, of streams I am Jahnavi (the Ganga).",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Ganga'"
+   ],
+   "primary_raw": "Of purifiers I am the wind, Rama of warriors am I ; of fishes I am the shark, of streams I am Jahnavi (the Ganga)."
+  },
+  "BG 10.32": {
+   "text": "Of manifestations I am the beginning, the middle and also the end; of all knowledges I am the knowledge of the Self, and Vada of disputants.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.33": {
+   "text": "Of letters the letter A am I, and Dvanda of all compounds; Myself the inexhaustible Time, I the Sustainer (by dispensing fruits of actions) All-formed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.34": {
+   "text": "And I am the all-seizing Death, and the prosperity of those who are to be prosperous; of the feminine qualities (I am) Fame, Prosperity (or beauty). and Inspiration, Memory, Intelligence, Constancy and Forbearance.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.35": {
+   "text": "Of Samas also I am the BrihatSama, of metres Gayatri am I; of months I am Margashirsha, of seasons the flowery season.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Samas'",
+    "unsettled word 'BrihatSama'"
+   ],
+   "primary_raw": "Of Samas also I am the BrihatSama, of metres Gayatri am I; of months I am Margashirsha, of seasons the flowery season."
+  },
+  "BG 10.36": {
+   "text": "I am the gambling of the fraudulent, I am the power of the powerful; I am victory, I am effort, I am Sattva of the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sattva'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "I am the gambling of the fraudulent, I am the power of the powerful; I am victory, I am effort, I am Sattva of the"
+  },
+  "BG 10.37": {
+   "text": "Of the Vrishnis I am Vasudeva; of the Pandavas, Dhananjaya; and also of the Munis I am Vyasa; of the sages, Ushanas the sage.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'Pandavas'",
+    "unsettled word 'Vyasa'",
+    "unsettled word 'Ushanas'"
+   ],
+   "primary_raw": "Of the Vrishnis I am Vasudeva; of the Pandavas, Dhananjaya; and also of the Munis I am Vyasa; of the sages, Ushanas the sage."
+  },
+  "BG 10.38": {
+   "text": "Of punishers I am the sceptre; of those who seek to conquer, I am statesmanship; and also of things secret I am silence, and the knowledge of knowers am I.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'statesmanship'"
+   ],
+   "primary_raw": "Of punishers I am the sceptre; of those who seek to conquer, I am statesmanship; and also of things secret T am silence, and the knowledge of knowers am I."
+  },
+  "BG 10.39": {
+   "text": "And whatsoever is the seed of all beings, that also am I, O Arjuna. There is no being, whether moving or unmoving, that can exist without Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.40": {
+   "text": "There is no end to the manifestations of My divine attributes, O scorcher of foes; but this is a partial statement by Me of the particulars of My divine attributes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.41": {
+   "text": "Whatever being there is great, prosperous, or powerful, that know thou to be a product of a part of My splendour.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 10.42": {
+   "text": "Or what avails thee to know all this diversity, O Arjuna? (Know thou this that) I exist, supporting this whole world by a portion of Myself.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.1": {
+   "text": "By the supremely profound words, on the discrimination of self, that have been spoken by Thee out of compassion towards me, this my delusion is gone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.2": {
+   "text": "Of Thee, O lotus-eyed, I have heard at length, of the origin and dissolution of beings, as also Thy inexhaustible greatness.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.3": {
+   "text": "So it is, O Supreme ! as Thou hast declared Thyself. (Still) I desire to see Thy Ishvara-Form, O purusha Supreme Purusha.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Purusha'"
+   ],
+   "primary_raw": "So it is, O Supreme Lord! as Thou hast declared Thyself. (Still) I desire to see Thy Ishvara-Form, O Supreme Purusha."
+  },
+  "BG 11.4": {
+   "text": "If, O Lord, Thou thinkest me capable of seeing it, then, O Lord of Yogis, show me Thy immutable Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.5": {
+   "text": "Behold, O son of Pritha, by the hundred and by the thousand, My different forms celestial, of various colours and shapes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.6": {
+   "text": "Behold the Adityas, the Vasus, the Rudras, the twin Ashvins, and the Maruts; behold, O descendant of Bharata, many wonders that were not seen before.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.7": {
+   "text": "See now, O Gudakesha, in this My body, the whole universe together with its — moving creatures and immovable objects — and all else that thou desirest to see.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.8": {
+   "text": "But thou canst not see Me with these eyes of thine; I give thee supersensuous sight; behold My Yoga power.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.9": {
+   "text": "Having thus spoken, O king, Hari, the Great Lord of Yoga, then showed unto the son of Pritha, His Supreme IshvaraForm: numerous mouths and eyes with numerous wondrous sights 35'> with numerous celestial ornaments <44>1 with numerous celestial weapons uplifted.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'IshvaraForm'",
+    "leftover OCR characters"
+   ],
+   "primary_raw": "Having thus spoken, O King, Hari, the Great Lord of Yoga, showed unto the son of Pritha, His Supreme IshvaraForm: numerous mouths and eyes aRTTwith numerous wondrous sight 3rq^rfe5iIPR'>f With numerous celestial ornaments f<»4M4>1Wdl^^ with numerous celestial weapons uplifted."
+  },
+  "BG 11.10": {
+   "text": "With numerous mouths and eyes, with numerous wondrous sights, with numerous celestial ornaments, with numerous celestial weapons uplifted; n fjoiffn <?in H T Wearing celestial garlands and apparel anointed with celestial-scented unguents << the All-wonderful Resplendent Boundless All-formed.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'n'",
+    "unsettled word 'fjoiffn'",
+    "unsettled word 'in'",
+    "unsettled word 'H'",
+    "unsettled word 'T'",
+    "leftover OCR characters"
+   ],
+   "primary_raw": "With numerous mouths and eyes, with numerous wondrous sights, with numerous celestial ornaments, with numerous celestial weapons uplifted; n fjoiffn <?in H T Wearing celestial garlands and apparel anointed with celestial-scented unguents ^<lt<r*l the All-wonderful Resplendent apTfgf Boundless All-formed."
+  },
+  "BG 11.11": {
+   "text": "Wearing celestial garlands and apparel, anointed with celestial-scented unguents, the All-wonderful Resplendent, Boundless, and All-formed.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.12": {
+   "text": "If the splendour of a thousand suns were to rise up at once in the sky, that would be like the splendour of the Mighty Being.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.13": {
+   "text": "There in the body of the God of gods, the son of Pandu then saw the whole universe resting together, with its manifold divisions.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.14": {
+   "text": "Then Dhananjaya, filled with wonder, with his hairs standing on end, bending down his head to the Deva in adoration, spoke with joined palms.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'hairs'"
+   ],
+   "primary_raw": "Then Dhananjaya, filled with wonder, with his hairs standing on end, bending down his head to the Deva in adoration, spoke with joined palms."
+  },
+  "BG 11.15": {
+   "text": "I see all the devas, O Deva, in Thy body, and hosts of all grades of beings; Brahma, the Lord, seated on the lotus, and all the Rishis and celestial serpents.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.16": {
+   "text": "I see Thee of boundless form on every side with manifold arms, stomachs, mouths, and eyes; neither the end nor the middle, nor also the beginning of Thee do I see, O Lord of the universe, O Universal Form.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.17": {
+   "text": "I see Thee with diadem, club, and discus; a mass of radiance shining everywhere, very hard to look at, all around blazing like burning fire and sun, and immeasurable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.18": {
+   "text": "Thou art the Imperishable, the Supreme Being, the one thing to be known. Thou art the great Refuge of this universe; Thou art the undying Guardian of the Eternal Dharma, Thou art the Ancient Purusha, I ween.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.19": {
+   "text": "I see Thee without beginning, middle, or end, infinite in power, of manifold arms; the sun and the moon Thine eyes, the burning fire Thy mouth; heating the whole universe with Thy radiance.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.20": {
+   "text": "This space betwixt heaven and earth and all the quarters are filled by Thee alone; having seen this, Thy marvellous and awful form, the three worlds are trembling with fear, O Great-souled One.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.21": {
+   "text": "Verily, into Thee enter these hosts of the Devas; some extol Thee in fear with joined palms; “May it be well!’’ thus saying, bands of great Rishis and Siddhas praise Thee with splendid hymns.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.22": {
+   "text": "The Rudras, Adityas, Vasus, Sadhyas, Vishva-Devas, the two Ashvins, Maruts, and Ushmapas, and hosts of Gandharvas, Yakshas, Asuras, and Siddhas — all",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sadhyas'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The Rudras, Adityas, Vasus, Sadhyas, Vishva-Devas, the two Ashvins, Maruts, Ushmapas, and hosts of Gandharvas, Yakshas, Asuras, and Siddhas — all"
+  },
+  "BG 11.23": {
+   "text": "Having seen Thy immeasurable Form — with many mouths and eyes, O mighty-armed, with many arms, thighs, and feet, with many stomachs, and fearful with many tusks — the worlds are terrified, and so am I.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.24": {
+   "text": "On seeing Thee touching the sky, shining in many a colour, with mouths wide open, with large fiery eyes. I am terrified at heart, and find no courage nor peace, O Vishnu.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.25": {
+   "text": "Having seen Thy mouths, fearful with tusks, (blazing) like Pralaya-fires, I know not the four quarters, nor do I find peace; have mercy, O Lord of the Devas, O Abode of the universe.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.26": {
+   "text": "All these sons of Dhritarashtra, with hosts of monarchs, Bhishma, Drona, and Sutaputra, with the warrior chiefs of",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 11.26",
+    "BG 11.27"
+   ],
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "All those sons of DhritarSshtra, with hosts of monarchs, Bhishma, Drona, and Sutaputra, with the warrior chiefs of"
+  },
+  "BG 11.28": {
+   "text": "Verily, as the many torrents of rivers flow towards the ocean, so do these heroes in the world of men enter Thy mouths fiercely flaming on all sides.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.29": {
+   "text": "As moths precipitately rush into a blazing fire to perish, just so do these creatures also precipitately rush into Thy mouths only to perish.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.30": {
+   "text": "Swallowing all the worlds on every side with Thy flaming mouths, Thou art licking Thy lips. Thy fierce rays, filling the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Swallowing all the worlds on every side with Thy flaming mouths, Thou art licking Thy lips. Thy fierce rays, filling the"
+  },
+  "BG 11.31": {
+   "text": "Tell me who Thou art, fierce in form. Salutation to Thee, O deva Supreme ! have mercy. I desire to know Thee, O Primeval One. I know not indeed Thy purpose.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.32": {
+   "text": "I am the mighty world-destroying Time, here made manifest for the purpose of infolding the world. Even without thee, none of the warriors arrayed in the hostile armies shall live.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.33": {
+   "text": "Therefore do thou arise and acquire fame. After conquering the enemies, enjoy the unrivalled dominion. Verily by Myself have they been already slain; be thou merelyan apparent cause, O Savyas chin (Arjuna).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.34": {
+   "text": "Drona, Bhishma, Jayadratha, Kama as well as other brave warriors — these killed already",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Drona, Bhishma, Jayadratha, Kama as well as other brave warriors — these already"
+  },
+  "BG 11.35": {
+   "text": "Having heard that speech of Keshava, the diademed one (Arjuna), with joined palms, trembling, prostrated himself.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.36": {
+   "text": "It is meet, O Hrishikesha, that the world is delighted and rejoices in Thy praise, that Rakshasas fly in fear to all quarters and all the hosts of Siddhas bow down to Thee in adoration.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.37": {
+   "text": "And why should they not, O Great-souled One, bow to Thee, greater than, and the Primal Cause of even Brahma, O Infinite Being, O Lord of the Devas, O Abode of the universe? Thou art the Imperishable, the Being and the non Being, (as well as) That which is Beyond (them).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.38": {
+   "text": "Thou art the Primal Deva, the ancient Purusha; Thou art the Supreme Refuge of this universe. Thou art the Knower, and the One Thing to be known; Thou art the Supreme Goal. By Thee is the universe pervaded, O boundless Form.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.39": {
+   "text": "Thou art Vayu, Yama, Agni, Varuna, the Moon, Prajapati, and the Great Grandfather. Salutation, salutation to Thee,",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Thou art Vayu, Yama, Agni, Varuna, the Moon, Prajapati, and the Greatgrandfather. Salutation, salutation to Thee,"
+  },
+  "BG 11.40": {
+   "text": "Salutation to Thee before and behind, salutation to Thee on every side, O All! Thou, infinite in power and infinite in prowess, pervadest all; wherefore Thou art All.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.41": {
+   "text": "Whatever I have presumptuously said from carelessness or love, addressing Thee as “O Krishna, O Yadava, O friend,” regarding Thee merely as a friend, unconscious of this Thy greatness — in whatever way I may have been disrespectful to Thee in fun, while walking, reposing, sitting, or at meals, when alone (with Thee), O Achyuta, or in company — I implore",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 11.41",
+    "BG 11.42"
+   ],
+   "issues": [
+    "unsettled word 'I'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Whatever I have presumptuously said from carelessness or love, addressing Thee as “O Krishna, O Yadava, O friend,” regarding Thee merely as a friend, unconscious of this Thy greatness — ^in whatever way I may have been disrespectful to Thee in fun, while walking, reposing, sitting, or at meals, when alone (with Thee), O Achyuta, or in company — I implore"
+  },
+  "BG 11.43": {
+   "text": "Thou art the Father of the world, moving and unmoving; the object of its worship; greater than the great. None there exists who is equal to Thee in the three worlds; who then can excel Thee, O Thou of power incomparable?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.44": {
+   "text": "So prostrating my body in adoration, I crave Thy forgiveness, Lord adorable ! As a father forgiveth his son, friend a dear friend, a beloved one his love, even so shouldst Thou forgive me, O Deva.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.45": {
+   "text": "Overjoyed am I to have seen what I saw never before; yet my mind is distracted with terror. Show me, O Deva, only that Form of Thine. Have mercy, O Lord of Devas, O Abode of the universe.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.46": {
+   "text": "Diademed, bearing ‘a mace and a discus. Thee I desire to see as before. Assume that same four-armed Form, O Thou of thousand arms, of universal Form.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.47": {
+   "text": "Graciously have I shown to thee, O Arjuna, this Form supreme, by My own Yoga power, this, primeval, infinite, universal Form of Mine, resplendent which hath not been seen before by anyone else.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.48": {
+   "text": "Neither by the study of the Veda and of Yajna, nor by gifts, nor by rituals, nor by",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Neither by the study of the Veda and Yajna, nor by gifts, nor by rituals, nor by"
+  },
+  "BG 11.49": {
+   "text": "Be not afraid nor bewildered, having beheld this Form of Mine, so terrific. With thy fears dispelled and with gladdened heart, now see again this former Form of Mine.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.50": {
+   "text": "So Vasudeva, having thus spoken to Arjuna, showed again His own Form; and the Greatsouled- One, assuming His gentle Form, pacified him who was terrified.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Vasudeva'"
+   ],
+   "primary_raw": "So Vasudeva, having thus spoken to Arjuna, showed again His own Form; and the Great-souled One, assuming His gentle Form, pacified him who was terrified."
+  },
+  "BG 11.51": {
+   "text": "Having seen this Thy gentle human form, O Janardana, my thoughts are now composed, and I am restored to my nature.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Janardana'",
+    "unsettled word 'to'",
+    "unsettled word 'my'"
+   ],
+   "primary_raw": "Having seen this Thy gentle human Form, O Janardana, my thoughts are now composed, and I am restored to my nature."
+  },
+  "BG 11.52": {
+   "text": "Very hard indeed it is to see this Form of Mine which thou hast seen. Even the Devas ever long to behold this Form.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.53": {
+   "text": "Neither by the Vedas nor by austerity, nor by gifts, nor by sacrifice can I be seen as thou hast seen Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.54": {
+   "text": "But by single- devotion I may in this form, be known, O Arjuna, and seen in reality, and also entered into, O scorcher of foes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 11.55": {
+   "text": "He who does work for Me alone and has Me for his goal, is devoted to Me, is freed from attachment, and bears enmity towards no creature — he entereth into Me, O",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "He who does work for Me alone and has Me for his goal, is devoted to Me, is freed from attachment, and bears enmity towards no creature — ^he entereth into Me, O"
+  },
+  "BG 12.1": {
+   "text": "Those devotees who, ever-steadfast, thus worship Thee, and those also who worship the Imperishable, the Unmanifested — which of them are better versed in Yoga?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.2": {
+   "text": "Those who, fixing their mind on Me, worship Me, ever-steadfast, and endowed with supreme Shraddha, they in My opinion are the best versed in Yoga.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.3": {
+   "text": "But those also, who worship the Imperishable, the Indefinable, the Unmanifested, the Omnipresent, the Unthinkable, the Unchangeable, the Immovable, the Eternal — having subdued all the senses, even-minded everywhere, engaged in the welfare of all beings — verily, they reach only Myself.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 12.3",
+    "BG 12.4"
+   ],
+   "issues": [
+    "unsettled word 'everywhere'"
+   ],
+   "primary_raw": "But those also, who worship the Imperishable, the Indefinable, the Unmanifested, the Omnipresent, the Unthinkable, the Unchangeable, the Immovable, the Eternal — having subdued all the senses, even-minded everywhere, engaged in the welfare of all beings — ^verily, they reach only Myself."
+  },
+  "BG 12.5": {
+   "text": "Greater is their trouble whose minds are set on the Unmanifested; for the goal of the Unmanifested is very hard for the embodied to reach.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Unmanifested'"
+   ],
+   "primary_raw": "Greater is their trouble whose minds are set on the Unmanifested; for the goal of the Unmanifested is very hard for the embodied to reach."
+  },
+  "BG 12.6": {
+   "text": "But those who worship Me, resigning all actions in Me, regarding Me as the Supreme Goal, meditating on Me with single-minded Yoga — for these whose mind is",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 12.6",
+    "BG 12.7"
+   ],
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "But those who worship Me, resigning all actions in Me, regarding Me as the Supreme Goal, meditating on Me with single-minded Yoga — ^to these whose mind is"
+  },
+  "BG 12.8": {
+   "text": "Fix thy mind on Me only, place thy intellect in Me: () thou shalt no doubt live in Me hereafter.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.9": {
+   "text": "If thou art unable to fix thy mind steadily on Me, then by Abhyasa-Yoga do thou seek to reach Me, O Dhananjaya.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.10": {
+   "text": "If also thou art unable to practise Abhyasa, be thou intent on doing actions for My sake. Even by doing actions for My sake, thou shalt attain perfection.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.11": {
+   "text": "If thou art unable to do even this, then taking refuge in Me, and self controlled abandon the fruit of all action, being self-controlled.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'being'"
+   ],
+   "primary_raw": "If thou art unable to do even this, then taking refuge in Me, abandon the fruit of all action, being self-controlled."
+  },
+  "BG 12.12": {
+   "text": "Better indeed is knowledge than (blind) Abhy sa; meditation (with knowledge) is more esteemed than (mere) knowledge; than meditation the renunciation of the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Better indeed is knowledge than (blind) Abhyasa; meditation (with knowledge) is more esteemed than (mere) knowledge ; than meditation the renunciation of the"
+  },
+  "BG 12.13": {
+   "text": "He who hates no creature, and is friendly and compassionate towards all, who is free from the feelings of “I and mine”, even-minded in pain and pleasure, and forbearing, ever content, and steady in meditation, self-controlled, and possessed of firm conviction, with mind and intellect fixed on Me — he who is thus devoted to Me, is dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 12.13",
+    "BG 12.14"
+   ]
+  },
+  "BG 12.16": {
+   "text": "He who is free from dependence, who is pure, prompt, unconcerned, untroubled, renouncing every undertaking — he who is thus devoted to Me, is dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.17": {
+   "text": "He who neither rejoices, nor hates, nor grieves, nor desires, renouncing good and evil, he who is full of devotion, is dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 12.18": {
+   "text": "He who is the same to friend and foe, and also in honour and dishonour; who is the same in heat and cold, and in pleasure and pain; who is free from attachment; to whom censure and praise are equal; who is silent, content with anything, homeless, steady-minded, full of devotion — that man is dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 12.18",
+    "BG 12.19"
+   ]
+  },
+  "BG 12.20": {
+   "text": "And they who follow this Immortal Dharma, as described above, endued with Shraddha, regarding Me as the Supreme Goal, and devoted— they are exceedingly dear to Me.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "And they who follow this Immortal Dharma, as described above, endued with Shraddha, regarding Me as the Supreme Goal, and devoted— they are exceedingly dear to Me."
+  },
+  "BG 13.2": {
+   "text": "This body, O son of Kunti, is called Kshetra, and he who knows it is called Kshetrajna by those who know of them (Kshetra and Kshetrajna).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.3": {
+   "text": "Me do thou also know, O descendant of Bharata, to be Kshetrajna in all Kshetras. The knowledge of Kshetra and Kshetrajna is considered by Me to be the knowledge.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.4": {
+   "text": "What the Kshetra is, what its properties are, what are its modifications, what effects arise from what causes, and also who He is and what are His powers, that hear from Me in brief.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.5": {
+   "text": "(This truth) has been sung by Rishis in many ways, in various distinctive chants, in passages indicative of Brahman, full of reasoning, and convincing.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.6": {
+   "text": "The great Elements, Egoism, Intellect, and also the Unmanifested (Mula Prakriti), the ten senses and the one (mind), and the five objects of sense; desire, hatred, pleasure, pain, the body, intelligence, fortitude — the Kshetra has been thus briefly described with its modifications The Sankhyas speak of-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 13.6",
+    "BG 13.7"
+   ],
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The great Elements, Egoism, Intellect, as also the Unmanifested (Mula Prakriti), the ten senses and the one (mind), and the five objects of the senses; desire, hatred, pleasure, pain, the aggregate, intelligence, fortitude — the Kshetra has been thus briefly described with its modi-"
+  },
+  "BG 13.8": {
+   "text": "Humility, unpretentiousness, noninjury, forbearance, uprightness, service of the teacher, purity, steadiness, self-control;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'noninjury'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Humility, unpretentiousness, noninjury, forbearance, uprightness, service to the teacher, purity, steadiness, self-control;"
+  },
+  "BG 13.9": {
+   "text": "The renunciation of sense-objects, and also absence of egoism; reflection on the evils of birth, death, old age, sickness, and pain;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The renunciation of sense-objects, and also absence of egoism; reflection on the evils of birth, death, old age, sickness, and pain;"
+  },
+  "BG 13.10": {
+   "text": "Non-attachment, non-identification of self with son, wife, home, and the rest, and constant even-mindedness in the occurrence of the desirable and the undesirable;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Non-attachment, non-identification of self with son, wife, home, and the rest, and constant even-mindedness in the occurrence of the desirable and the undesirable;"
+  },
+  "BG 13.11": {
+   "text": "Unswerving devotion to Me by the Yoga of non-separation, resort to sequestered places, distaste for the society of men;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Unswerving devotion to Me by the Yoga of non-separation, resort to sequestered places, distaste for the society of men;"
+  },
+  "BG 13.12": {
+   "text": "Constant application to spiritual knowledge, understanding the end of the knowledge: of truth this is declared to be knowledge, and what is opposed to it is ignorance.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.13": {
+   "text": "I shall describe that which has to be known, knowing which one attains to immortality, the beginningless Supreme Brahman. It is called neither being nor non-being.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.14": {
+   "text": "With hands and feet everywhere, with eyes, heads, and mouths everywhere, with ears everywhere in the universe — That exists pervading all.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.15": {
+   "text": "Shining by the functions of all the senses, yet without the senses; Absolute, yet",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Shining by the functions of all the senses, yet without the senses; Absolute, yet"
+  },
+  "BG 13.16": {
+   "text": "Without and within (all) beings; the unmoving and also the moving; because of Its subtlety incomprehensible; and It is far and near.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.17": {
+   "text": "Impartible, yet It exists as if divided in beings: It is to be known as sustain-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'sustain'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Impartible, yet It exists as if divided in beings: It is to be known as sustain-"
+  },
+  "BG 13.18": {
+   "text": "The Light even of lights, It is said to be beyond darkness; Knowledge, and the One Thing to be known, the Goal of knowledge, dwelling in the hearts of all.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.19": {
+   "text": "Thus Kshetra, knowledge, and that which has to be known, have been briefly stated. Knowing this, My devotee is fitted for My state.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.20": {
+   "text": "Know thou that Prakriti and Purusha are both beginningless; and know thou also that all modifications and Gunas are born of Prakriti.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.22": {
+   "text": "Purusha seated in Prakriti, experiences the Gunas born of Prakriti; the reason of the birth in good and evil wombs is its attachment to the Gunas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.23": {
+   "text": "And the Supreme Purusha in this body is also called the Looker-on, the Permitter, the Supporter, the Experiencer and!', the Great Lord, and as the Highest Self.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.24": {
+   "text": "He who thus knows the Purusha and Prakriti with Gunas, whatever his life, is not born again.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.25": {
+   "text": "Some by meditation behold the Self in their own intelligence by the purified heart, others by the path of knowledge, others again by KarmaYoga.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'KarmaYoga'"
+   ],
+   "primary_raw": "Some by meditation behold the Self in their own intelligence by the purified heart, others by the path of knowledge, others again by KarmaYoga."
+  },
+  "BG 13.26": {
+   "text": "Others again not knowing thus, worship as they have heard from others.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.27": {
+   "text": "Whatever being is born, the moving or the unmoving, O bull of the Bharatas, know it to be from the union of Kshetra and",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Whatever being is bom, the moving or the unmoving, O bull of the Bharatas, know it to be from the union of Kshetra and"
+  },
+  "BG 13.28": {
+   "text": "He sees, who sees the lord Supreme, existing equally in all beings, deathless in the dying.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.29": {
+   "text": "Since seeing the Lord equally existent everywhere, he injures not self by self, and so goes to the highest Goal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.30": {
+   "text": "He sees, who sees Prakriti alone doing all actions and that the Self is actionless.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.31": {
+   "text": "When he sees the separate existence of all beings inherent in the One, and their expansion from That (One) alone, he then becomes Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.32": {
+   "text": "Being without beginning and devoid of Gunas, this Supreme Self, immutable, O son of Kunti, though existing in the body neither acts nor is affected.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 13.33": {
+   "text": "As the all-pervading Akasha, because of its subtlety, is not tainted, so the Self existent everywhere in the body is not tainted.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'everywhere'"
+   ],
+   "primary_raw": "As the all-pervading Akasha, because of its subtlety, is not tainted, so the Self existent everywhere in the body is not tainted."
+  },
+  "BG 13.34": {
+   "text": "As the one sun illumines all this world, so does He who abides in the Kshetra, O descendant of Bharata, illumine the whole",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "As the one sun illumines all this world, so does He who abides in the Kshetra, O descendant of Bharata, illumine the whole"
+  },
+  "BG 13.35": {
+   "text": "They who thus with the eye of knowledge perceive the distinction between the Kshetra and the Kshetrajna, and also the emancipation from the Prakriti of beings, they go to the Supreme.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.1": {
+   "text": "Again I shall tell thee that supreme knowledge which is above all knowledge, having known which all the Munis have attained to high perfection after this life.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'shall'"
+   ],
+   "primary_raw": "Again I shall tell thee that supreme knowledge which is above all knowledge, having known which all the Munis have attained to high perfection after this life."
+  },
+  "BG 14.2": {
+   "text": "They who, having devoted themselves to this knowledge, have attained to My Being, are neither born at the time of creation, nor are they troubled at the time of dissolution.",
+   "verified": false,
+   "scans_agreeing": 2,
+   "issues": [
+    "found in fewer than two other scans"
+   ],
+   "primary_raw": "They who, having devoted themselves to this knowledge, have attained to My Being, are neither born at the time of creation, nor are they troubled at the time of dissolution."
+  },
+  "BG 14.3": {
+   "text": "My womb is the great Prakriti; in that I place the germ; from thence, O descendant of Bharata, is the birth of all beings.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.4": {
+   "text": "Whatever forms are produced, O son of Kunti, in all the wombs, the great Prakriti is their womb, and I the seed-giving Father.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.5": {
+   "text": "Sattva, Rajas, Tamas — these Gunas, O mighty-armed, born of Prakriti, bind fast the indestructible embodied in the body these gunas are the .",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.6": {
+   "text": "Of these Sattva, because of its stainlessness, luminous and free from evil, from its stainlessness binds, O sinless one, by attachment to happiness, and by attachment to knowledge.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'because'",
+    "unsettled word 'of'",
+    "unsettled word 'stainlessness'"
+   ],
+   "primary_raw": "Of these Sattva, because of its stainlessness, luminous and free from evil, binds, O sinless one, by attachment to happiness, and by attachment to knowledge."
+  },
+  "BG 14.7": {
+   "text": "Know Rajas to be of the nature of passion, giving rise to thirst and attachment;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Know Rajas to be of the nature of passion, giving rise to thirst and attachment;"
+  },
+  "BG 14.8": {
+   "text": "And know Tamas to be born of ignorance, delusive to all embodied beings; it binds fast, O descendant of Bharata, by miscomprehension, indolence, and sleep.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.9": {
+   "text": "Sattva attaches to happiness, and Rajas to action, O descendant of Bharata; while Tamas, verily, shrouding discrimination,",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Sattva attaches to happiness, and Rajas to action, O descendant of Bharata; while Tamas, verily, shrouding discrimination,"
+  },
+  "BG 14.10": {
+   "text": "Sattva arises, O descendant of Bharata, predominating over Rajas and Tamas; and Rajas over Sattva and Tamas; so, Tamas over Sattva and Rajas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.11": {
+   "text": "When through every sense in this body, the light of intelligence shines, then it should be known that Sattva is predominant.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.12": {
+   "text": "Greed, activity, the undertaking of actions, unrest, longing — these arise when Rajas is predominant, O bull of the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Greed, activity, the undertaking of actions, unrest, longing — these arise when Rajas is predominant, O bull of the"
+  },
+  "BG 14.13": {
+   "text": "Darkness, inertness, miscomprehension, and delusion — these arise when Tamas is predominant, O descendant of",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Darkness, inertness, miscomprehension, and delusion — these arise when Tamas is predominant, O descendant of"
+  },
+  "BG 14.14": {
+   "text": "If the embodied meets death wnen Sattva is predominant, then he attains to the spotless regions of the worshippers of the Highest.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'wnen'"
+   ],
+   "primary_raw": "If the embodied one meets death wnen Sattva is predominant, then he attains to the spotless regions of the worshippers of the Highest."
+  },
+  "BG 14.15": {
+   "text": "Meeting death in Rajas he is born among those attached to action; so dying in Tamas, he is born in the wombs of the irrational.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.16": {
+   "text": "The fruit of good action, they say, is Sattvika and pure; verily, the fruit of Rajas is pain, and ignorance the fruit of",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sattvika'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The fruit of good action, they say, is Sattvika and pure; verily, the fruit of Rajas is pain, and ignorance is the fruit of"
+  },
+  "BG 14.17": {
+   "text": "From Sattva arises wisdom, and greed from Rajas; miscomprehension, and delusion and ignorance arise from Tamas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.18": {
+   "text": "The Sattva-abiding go upwards; the Rajasika dwell in the middle; and the Tamasika, abiding in the function of the lowest Guna, go downwards.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Rajasika'",
+    "unsettled word 'Tamasika'"
+   ],
+   "primary_raw": "The Sattva-abiding go upwards; the Rajasika dwell in the middle; and the Tamasika, abiding in the function of the lowest Guna, go downwards."
+  },
+  "BG 14.19": {
+   "text": "When the seer beholds no agent other than the Gunas and knows That which is higher than the Gunas, he attains to My being.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.20": {
+   "text": "The embodied having gone beyond these three Gunas, out of which the body is evolved, is freed from birth, death, decay, and pain, and attains to immortality.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.21": {
+   "text": "By what marks, O Lord, is he (known) who has gone beyond these three Gunas? What is his conduct, and how does he pass beyond these three Gunas?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.22": {
+   "text": "He who hates not the appearance of light (the effect of Sattva), activity (the effect of Rajas), and delusion (the effect of Tamas), (in his own mind), O Pandava, nor longs for them when absent;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "He who hates not the appearance of light (the effect of Sattva), activity (the effect of Rajas), and delusion (the effect of Tamas), (in his own mind), O Pandava, nor longs for them when absent;"
+  },
+  "BG 14.23": {
+   "text": "He who, sitting like one unconcerned, is moved not by the Gunas, who knowing that the Gunas operate, is Self centred and swerves not; q: Who alike in pleasure and pain Self-abiding : regarding a clod of earth, a stone, or gold alike : the same to agreeable and disagreeable tX: firm the same to censure and praise;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'q'",
+    "unsettled word 'earth'",
+    "unsettled word 'tX'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "He who, sitting like one unconcerned, is moved not by the Gunas, who knowing that the Gunas operate, is Selfcentred and swerves not; q: Who alike in pleasure and pain Self-abiding H : regarding a clod of earth, a stone, and gold alike ^qfirqifiiq: the same to agreeable and disagreeable ^tX: firm the same in censure and praise;"
+  },
+  "BG 14.24": {
+   "text": "Alike in pleasure and pain. Self abiding, regarding a clod of earth, a stone or gold alike; the same to agreeable and disagreeable, firm, the same to censure and praise;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Alike in pleasure and pain. Selfabiding, regarding a clod of earth, a stone and gold alike; the same to agreeable and disagreeable, firm, the same in censure and praise ;"
+  },
+  "BG 14.25": {
+   "text": "The same in honour and disgrace, the same to friend and foe, relinquishing all undertakings — he is said to have gone beyond the Gunas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.26": {
+   "text": "And he who serves Me with an unswerving devotion, he, going beyond the Gunas, is fitted for becoming Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 14.27": {
+   "text": "For I am the abode of Brahman, the Immortal and Immutable, of everlasting Dharma and of Absolute Bliss.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.1": {
+   "text": "They speak of an eternal Ashvattha rooted above and branching below whose leaves are the Vedas; he who knows it, is a Veda-knower.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.2": {
+   "text": "Below and above spread its branches, nourished by the Gunas; sense-objects are its buds; and below in the world of man stretch forth the roots, orginating action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.3": {
+   "text": "Its form is not here perceived as such, neither its end, nor its origin, nor its",
+   "verified": false,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 15.3",
+    "BG 15.4"
+   ],
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Its form is not here perceived as such, neither its end, nor its origin, nor its"
+  },
+  "BG 15.5": {
+   "text": "Free from pride and delusion, with the evil of attachment conquered, ever dwelling in the Self, with desires completely receded, liberated from the pairs of opposites known as pleasure and pain, the undeluded reach that Goal Eternal.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.6": {
+   "text": "That the sun illumines not, nor the moon, nor fire; that is My Supreme Abode, going whither they return not.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.7": {
+   "text": "An eternal portion of Myself having become a living soul in the world of life, draws (to itself) the (five) senses with mind for the sixth, abiding in",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "An eternal portion of Myself having become a living soul in the world of life, draws (to itself) the (five) senses with mind for the sixth, abiding in"
+  },
+  "BG 15.8": {
+   "text": "When the Lord obtains a body and when He leaves it, He takes these and goes, as the wind takes the scents from their seats (the flowers).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.9": {
+   "text": "Presiding over the ear, the eye, the touch, taste, and smell, as also the mind, He experiences objects.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.10": {
+   "text": "While transmigrating (from one body to another), or residing (in the same) or experiencing, as He is united with the Gunas — the deluded do not see Him; but those who have the eye of wisdom behold Him.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'While'"
+   ],
+   "primary_raw": "While transmigrating (from one body to another), or residing (in the same) or experiencing, or when united with the Gunas — ^the deluded do not see Him; but those who have the eye of wisdom behold Him."
+  },
+  "BG 15.11": {
+   "text": "The Yogis striving (for perfection) behold Him dwelling in themselves; but the unrefined and unintelligent, even though striving, see Him not.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 15.12": {
+   "text": "The light which residing in the sun illumines the whole world, that which is in the moon and in the fire — know that light to be Mine.",
+   "verified": true,
+   "scans_agreeing": 3
+  },
+  "BG 15.13": {
+   "text": "Entering the earth with My energy, I support all beings, and I nourish all the herbs, becoming the watery moon.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.14": {
+   "text": "Abiding in the body of living beings as (the fire) Vaishvanara, I, associated with PrSna and Apana, digest the fourfold food..",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'PrSna'"
+   ],
+   "primary_raw": "Abiding in the body of living beings as (the fire) Vaishvanara, I, associated with PrSna and Apana, digest the fourfold food.."
+  },
+  "BG 15.15": {
+   "text": "I am centred in the hearts of all; memory and perception as well as their loss come from Me. I am verily that which has to be known by all the Vedas, I indeed am the Author of the Vedanta, and the Knower of the Veda am I.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.16": {
+   "text": "There are two Purushas in the world — the Perishable and the Imperishable. All beings are the Perishable, and’ the Kutastha is called Imperishable.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.17": {
+   "text": "But (there is) another, the Supreme Purusha, called the Highest Self, the immutable Lord, pervading the three worlds, sustains them.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.18": {
+   "text": "As I transcend the Perishable and am above even the Imperishable, therefore am I in the world and in the Veda celebrated as Purushottama, (the Highest Purusha).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.19": {
+   "text": "He who, free from delusion, thus knows Me, as the Supreme Purusha, he knowing all, worships Me as the all being, O descendant of Bharata.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 15.20": {
+   "text": "Thus, O sinless one, has this most profound teaching been imparted by Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.1": {
+   "text": "Fearlessness, purity of heart, steadfastness in knowledge and Yoga; giving away as charity, control of the senses, Yajna, reading of the Shastras, austerity, uprightness;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Fearlessness, purity of heart, steadfastness in knowledge and Yoga; almsgiving, control of the senses, Yajna, reading of the Shastras, austerity, uprightness;"
+  },
+  "BG 16.2": {
+   "text": "Non-injury, truth, absence of anger, renunciation, tranquillity, absence of calumny, compassion to beings, non covetousness, gentleness, modesty, absence of fickleness;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Non-injury, truth, absence of anger, renunciation, tranquillity, absence of calumny, compassion to beings, uncovetousness, gentleness, modesty, absence of fickleness ;"
+  },
+  "BG 16.3": {
+   "text": "Boldness, forgiveness, fortitude, purity, absence of hatred, absence of pride; these belong to one born for a divine state, O des-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'des'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Boldness, forgiveness, fortitude, purity, absence of hatred, absence of pride; these belong to one born for a divine state, O des-"
+  },
+  "BG 16.4": {
+   "text": "Ostentation, arrogance, and self-conceit, anger as also harshness and ignorance, belong to one who is born, O Partha, for an Asurika state.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.5": {
+   "text": "The divine state is deemed as mature for liberation, the Asurika for bondage; grieve not, O Pandava, thou art born for a divine state.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Pandava'"
+   ],
+   "primary_raw": "The divine state is deemed to make for liberation, the Asurika for bondage; grieve not, O Pandava, thou art born for a divine state."
+  },
+  "BG 16.6": {
+   "text": "There are two manifestations of beings in this world, the divine and the Asurika. The divine has been described at length; hear from Me, O Partha, of the Asurika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.7": {
+   "text": "The persons of Asurika nature know not what to do and what to refrain from; neither purity nor conduct, nor truth.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.8": {
+   "text": "They say, ‘The universe is without truth, without a (moral) basis, without a God, brought about by mutual union, with lust for its cause; what else?”",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.9": {
+   "text": "Holding this view, these ruined souls of small intellect of fierce deeds, rise as the enemies of the world for its destruction.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.10": {
+   "text": "Filled with insatiable desires, possessed with ostentation, pride, and arrogance, holding evil ideas through delusion, they work with impure resolve.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.11": {
+   "text": "Beset with immense cares ending only with death, regarding gratification of lust as the highest, and feeling sure that that is all;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Beset with immense cares ending only with death, regarding gratification of lust as the highest, and feeling sure that that is all;"
+  },
+  "BG 16.12": {
+   "text": "Bound by a hundred ties of hope, given over to lust and wrath, they strive to secure by unjust means hoards of wealth for sensual enjoyment.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.13": {
+   "text": "“This to day has been gained by me; this desire I shall obtain; this is mine, and this wealth also shall be mine in future.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.14": {
+   "text": "“That enemy has been slain by me, and others also shall I slay. I am the lord, I enjoy, I am successful, powerful, and happy.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.15": {
+   "text": "“I am rich and well-born. Who else is equal to me? I will sacrifice, I will give, I will rejoice.’’ Thus deluded by ignorance.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.16": {
+   "text": "Bewildered by many a fancy, covered by the meshes of delusion, addicted to the gratification of lust, they fall down into a foul hell.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.17": {
+   "text": "Self-conceited, haughty, filled with the pride and intoxication of wealth, they perform sacrifices in name, out of ostentation, disregarding ordinance; atnc Egoism power insolence lust wrath and tfisrcTT: possessed of in their own bodies and in those of others imr Me (the Self within) nfS't'd: hating 3n-itJ4c(>: (these) malignant people.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'at'",
+    "unsettled word 'nc'",
+    "unsettled word 'tfisrcTT'",
+    "unsettled word 'imr'",
+    "unsettled word 'nfS'",
+    "unsettled word 't'",
+    "unsettled word 'd'",
+    "unsettled word 'hating'",
+    "unsettled word 'n'",
+    "unsettled word 'i'",
+    "unsettled word 'tJ'",
+    "unsettled word 'c'",
+    "leftover OCR characters"
+   ],
+   "primary_raw": "Self-conceited, haughty, filled with the pride and intoxication of wealth, they perform sacrifices in name, out of ostentation, disregarding ordinance; at^^nc Egoism power ^ insolence ^rni lust wrath and ^tfisrcTT: possessed of in their own bodies and in those of others imr Me (the Self within) nfS't'd: hating 3n-i|tJ4c(>|: (these) malignant people."
+  },
+  "BG 16.18": {
+   "text": "Possessed of egoism, power, insolence, lust, and wrath, these malignant people hate Me (the Self within) in their own bodies and those of others.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.20": {
+   "text": "Obtaining the Asurika wombs, and deluded birth after birth, not attaining Me, they thus fall, O son of Kunti, into a still lower condition.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.21": {
+   "text": "Triple is this gate of hell, destructive of the self — lust, anger and greed; therefore one should forsake these three.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.22": {
+   "text": "The man who has got beyond these three gates of darkness, O son of Kunti, practises what is good for himself, and thus goes to the Goal Supreme.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.23": {
+   "text": "He who, setting aside the ordinance of the Shastra, acts under the impulse of desire, attains not to perfection, nor happiness, nor the Goal Supreme.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 16.24": {
+   "text": "So let the Shastra be thy authority in ascertaining what ought to be done and what ought not to be done. Having known what is said in the ordinance of the Shastra, thou shouldst act here.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.1": {
+   "text": "Those who, setting aside the ordinance of the Shastra, perform sacrifice with Shraddha, what is their condition, O Krishna? (Is it) Sattva, Rajas, or Tamas?",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "Those who, setting aside the ordinance of the Shastra, perform sacrifice with Shraddha, what is their condition, O Krishna ? (Is it) Sattva, Rajas, or Tamas?"
+  },
+  "BG 17.2": {
+   "text": "Threefold is the Shraddha of the embodied, which is inherent in their nature — the Sattvika, the Rajasika and the Tamasika. Do thou hear of it.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.3": {
+   "text": "The Shraddha of each is according to his natural disposition, O descendant of Bharata. The man consists of his Shraddha; he verily is what his Shraddha is.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.4": {
+   "text": "Sattvika men worship the Devas; Rajasika, the Yakshas and the Rakshasas; the others — the Tamasika men — the Pretas and the hosts of Bhutas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.5": {
+   "text": "Those men who practise severe austerities not enjoined by the Shastras, given to ostentation and egoism, possessed with the power of lust and attachment, torturing, senseless as they are, all the organs in the body, and Me dwelling in the body within; know them to be of Asurika resolve.",
+   "verified": true,
+   "scans_agreeing": 4,
+   "covers": [
+    "BG 17.5",
+    "BG 17.6"
+   ]
+  },
+  "BG 17.7": {
+   "text": "The food also which is liked by each of them is threefold, as also Yajna, austerity, and almsgiving. Do thou hear this, their distinction.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.8": {
+   "text": "The foods which augment vitality, energy, strength, health, 'cheerfulness, and appetite, which are savoury and oleaginous, substantial and agreeable, are liked by the",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The foods which augment vitality, energy, strength, health, 'cheerfulness, and appetite, which are savoury and oleaginous, substantial and agreeable, are liked by the"
+  },
+  "BG 17.9": {
+   "text": "The foods that are bitter, sour, saline, excessively hot, pungent, dry, and burning, are liked by the Rajasika, and are productive of pain, grief, and disease.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.10": {
+   "text": "That which is,, stinking, and cooked overnight, refuse, and impure, is the food liked by the Tamasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.12": {
+   "text": "That which is performed, O best of the Bharatas, seeking for fruit and for ostentation, know it to be a RSjasika Yajna.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'RSjasika'"
+   ],
+   "primary_raw": "That which is performed, O best of the Bharatas, seeking for fruit and for ostentation, know it to be a RSjasika Yajna."
+  },
+  "BG 17.13": {
+   "text": "The Yajna performed without heed to ordinance, in which no food is distributed, which is devoid of Mantras, gifts, and Shraddha, is said to be Tamasika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shraddha'"
+   ],
+   "primary_raw": "The Yajna performed without heed to ordinance, in which no food is distributed, which is devoid of Mantras, gifts, and Shraddha, is said to be Tamasika."
+  },
+  "BG 17.14": {
+   "text": "Worship of the Devas, the twice born, the Gurus, and the wise; purity, straightforwardness, continence, and non-injury are called the austerity of the body.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'injury'"
+   ],
+   "primary_raw": "Worship of the Devas, the twiceborn, the Gurus, and the wise ; purity, straightforwardness, continence, and non-injury are called the austerity of the body."
+  },
+  "BG 17.15": {
+   "text": "Speech which causes no vexation, and is true, as also agreeable and beneficial and regular study of the Vedas — these are said to form the austerity of speech.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.16": {
+   "text": "Serenity of mind, kindliness, silence, self-control, honesty of motive — this is called the mental austerity.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.17": {
+   "text": "This threefold austerity practised by steadfast men, with great Shraddha, desiring no fruit, is said to be Sattvika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sattvika'"
+   ],
+   "primary_raw": "This threefold austerity practised by steadfast men, with great Shraddha, desiring no fruit, is said to be Sattvika."
+  },
+  "BG 17.18": {
+   "text": "That austerity which is practised with the object of gaining welcome, honour, and worship, and with ostentation, is here said to be Rajasika, unstable, and transitory.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.19": {
+   "text": "That austerity which is practised out of a foolish notion, with self-torture or for the purpose of ruining another, is declared to be",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "That austerity which is practised out of a foolish notion, with self-torture or for the purpose of ruining another, is declared to be"
+  },
+  "BG 17.20": {
+   "text": "“To give is right” — gift given with this idea, to one who does no service in return, in a fit place and to a worthy person, that gift is held to be Sattvika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.21": {
+   "text": "And what is given with a view to receiving in return, or looking for the fruit, or again reluctantly, that gift is held to be",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "And what is given with a view to receiving in return, or looking for the fruit, or again reluctantly, that gift is held to be"
+  },
+  "BG 17.22": {
+   "text": "The gift that is given at the wrong place or time, to unworthy persons, without regard or with disdain, that is declared to be",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The gift that is given at the wrong place or time, to unworthy persons, without regard or with disdain, that is declared to be"
+  },
+  "BG 17.23": {
+   "text": "‘'Om, Tat, Sat”: this has been declared to be the triple designation of Brahman. By that were made of old the Brahmanas, the Vedas, and the Yajnas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.24": {
+   "text": "Therefore, uttering “Om”, are the acts of sacrifice, gift, and austerity as enjoined in the ordinances, always begun by the followers of the Vedas.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.25": {
+   "text": "Uttering “Tat”, without aiming at fruits, are the various acts of Yajna, austerity, and gift performed by the seekers of Moksha.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.26": {
+   "text": "The word ‘‘Sat” is used in the sense of reality and of goodness; and so also, O Partha, the word “Sat” is used in the sense of an auspicious act.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.27": {
+   "text": "Steadiness in Yajna, austerity, and gift is also called “Sat” : as also action in connection with these (or, action for the sake of the Lord) is called “Sat”.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 17.28": {
+   "text": "Whatever is sacrificed, given, or performed and whatever austerity is practised without Shraddha, it is called Asat, O Partha; if is naught here or hereafter.",
+   "verified": false,
+   "scans_agreeing": 3,
+   "issues": [
+    "unsettled word 'if'"
+   ],
+   "primary_raw": "Whatever is sacrificed, given, or performed and whatever austerity is practised without Shraddha, it is called Asat, O Partha; if is naught here or hereafter."
+  },
+  "BG 18.2": {
+   "text": "The renunciation of Kamya actions, the sages understand as Sannyasa: the wise declare the abandonment of the fruit of all works as Tyaga.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Tyaga'"
+   ],
+   "primary_raw": "The renunciation of Kamya actions, the sages understand as Sannyasa: the wise declare the abandonment of the fruit of all works as Tyaga."
+  },
+  "BG 18.3": {
+   "text": "Some philosophers declare that all actions should be relinquished as an evil, whilst others (say) that the work of Yajna, gift, and austerity should not be relin-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'actions'",
+    "unsettled word 'relin'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Some philosophers declare that all actions should be relinquished as an evil, whilst others (say) that the work of Yajna, gift, and austerity should not be relin-"
+  },
+  "BG 18.4": {
+   "text": "Hear from Me the final truth about relinquishment, O best of the Bharatas. For relinquishment has been declared to be of three kinds, O tiger among men.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.5": {
+   "text": "The work of Yajna, gift, and austerity should not be relinquished, but it should indeed be performed; (for) Yajna, gift, and austerity are purifying to the wise.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.6": {
+   "text": "But even these works, O Partha, should be performed, leaving attachment and the fruits; such is My best and certain convic-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'convic'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "But even these works, O Partha, should be performed, leaving attachment and the fruits; such is My best and certain convic-"
+  },
+  "BG 18.7": {
+   "text": "But the renunciation of obligatory action is not proper. Abandonment of the same from delusion is declared to be Tamasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.8": {
+   "text": "He who from fear of bodily trouble relinquishes action, because it is painful, thus performing a Rajasika relinquishment, he obtains not the fruit thereof.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.9": {
+   "text": "When obligatory work is performed, O Arjuna, only because it ought to be done, leaving attachment and fruit, such relinquishment is regarded as Sattvika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.10": {
+   "text": "The relinquisher endued with Sattva and a steady understanding and with his doubts dispelled, hates not a disagreeable work nor is attached to an agreeable one.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.11": {
+   "text": "Actions cannot be entirely relinquished by an embodied being, but he who relinquishes the fruits of action is called a relinquisher.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.12": {
+   "text": "The threefold fruit of action — disagreeable, agreeable, and mixed — accrues to non-relinquishers after death, but never to",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The threefold fruit of action — disagreeable, agreeable, and mixed — accrues to non-relinquishers after death, but never to"
+  },
+  "BG 18.13": {
+   "text": "Learn from Me, O mighty-armed, these five causes for the accomplishment of all works as declared in the wisdom which is the end of all action:",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Learn from Me, O mighty-armed, these five causes for the accomplishment of all works as declared in the wisdom which is the end of all action:"
+  },
+  "BG 18.14": {
+   "text": "The body, the agent, the various senses, the different functions of a manifold kind, and the presiding divinity, the fifth of these;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "The body, the agent, the various senses, the different functions of a manifold kind, and the presiding divinity, the fifth of these ;"
+  },
+  "BG 18.15": {
+   "text": "Whatever action a man performs by his body, speech, and mind — whether right or the reverse — these five are its causes.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.16": {
+   "text": "Such being the case, he who through a non-purified understanding looks upon his Self, the Absolute, as the agent — he of perverted mind sees not.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.17": {
+   "text": "He who is free from the notion of egoism, whose intelligence is not affected (by good or evil), though he kills these people, he kills not, nor is bound (by the action).",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.18": {
+   "text": "Knowledge, the known and the knower form the threefold cause of action. The instrument, the object, and the agent are the threefold basis of action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.19": {
+   "text": "Knowledge, action and agent are declared in the Sankhya philosophy to be of three kinds only, from the distinction of Gunas; hear them also duly.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.20": {
+   "text": "That by which the one indestructible Substance is seen in all beings, inseparate in the separated, know that knowledge to be",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "That by which the one indestructible Substance is seen in all beings, inseparate in the separated, know that knowledge to be"
+  },
+  "BG 18.21": {
+   "text": "But that knowledge which sees in all beings various entities of distinct kinds as different from one another, know thou that knowledge as Rajasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.22": {
+   "text": "Whilst that which is confined to one single effect as if it were the whole, without reason, without foundation in truth, and trivial — that is declared to be Tamasika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Tamasika'"
+   ],
+   "primary_raw": "Whilst that which is confined to one single effect as if it were the whole, without reason, without foundation in truth, and trivial — that is declared to be Tamasika."
+  },
+  "BG 18.23": {
+   "text": "An ordained action done without love or hatred by one not desirous of the fruit and free from attachment, is declared to be",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "An ordained action done without love or hatred by one not desirous of the fruit and free from attachment, is declared to be"
+  },
+  "BG 18.24": {
+   "text": "But the action which is performed desiring desires, or with self-conceit and with much effort, is declared to be Rajasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.25": {
+   "text": "That action is declared to be Tamasika which is undertaken through delusion, without heed to the consequence, loss (of power and wealth), injury (to others), and (one’s own) ability.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Tamasika'"
+   ],
+   "primary_raw": "That action is declared to be Tamasika which is undertaken through delusion, without heed to the consequence, loss (of power and wealth), injury (to others), and (one’s own) ability."
+  },
+  "BG 18.26": {
+   "text": "An agent who is free from attachment, non-egotistic, endued with fortitude and enthusiasm, and unaffected in success or failure, is called Sattvika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sattvika'"
+   ],
+   "primary_raw": "An agent who is free from attachment, non-egotistic, endued with fortitude and enthusiasm, and unaffected in success or failure, is called Sattvika."
+  },
+  "BG 18.27": {
+   "text": "He who is passionate, desirous of the fruits of action, greedy, malignant, impure, easily elated or dejected, such an agent 5: is called Rajasika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Rajasika'",
+    "leftover OCR characters"
+   ],
+   "primary_raw": "He who is passionate, desirous of the fruits of action, greedy, malignant, impure, easily elated or dejected, such an agent action ^5«r: is called Rajasika."
+  },
+  "BG 18.28": {
+   "text": "Unsteady, vulgar, arrogant, dishonest, malicious, indolent, desponding, and procrastinating, such an agent is called Tamasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.29": {
+   "text": "Hear thou the triple distinction of intellect and fortitude, according to the Gunas, as I declare them exhaustively and severally, O Dhananjaya.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.30": {
+   "text": "That which knows the paths of work and renunciation, right and wrong action, fear and fearlessness, bondage and liberation, that intellect, O Partha, is Sattvika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.31": {
+   "text": "That which has a distorted apprehension of Dharma and its opposite and also of right action and its opposite, that intellect, O Partha, is Rajasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.32": {
+   "text": "That which, enveloped in darkness, regards Adharma as Dharma and views all things in a perverted light, that intellect, O",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "That which, enveloped in darkness, regards Adharma as Dharma and views all things in a perverted light, that intellect, O"
+  },
+  "BG 18.33": {
+   "text": "The fortitude by which the functions of the mind, the Prana, and the senses, O Partha, are regulated, that fortitude, unswerving through Yoga, is Sattvika.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Sattvika'"
+   ],
+   "primary_raw": "The fortitude by which the functions of the mind, the Prana, and the senses, O Partha, are regulated, that fortitude, unswerving through Yoga, is Sattvika."
+  },
+  "BG 18.34": {
+   "text": "But the fortitude by which one regulates (one’s mind) to Dharma, desire, and wealth, desirous of the fruit of each from attachment, that fortitude, O Partha, is",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "But the fortitude by which one regulates (one’s mind) to Dharma, desire, and wealth, desirous of the fruit of each from attachment, that fortitude, O Partha, is"
+  },
+  "BG 18.35": {
+   "text": "That by which a stupid man does not give up sleep, fear, grief, despondency, and also overweening conceit, that fortitude, O Partha, is Tamasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.36": {
+   "text": "And now hear from Me, O bull of the Bharatas, of the threefold happiness that happiness which one learns to enjoy by habit, and by which one comes to the end of pain.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.37": {
+   "text": "That which is like poison at first, but like nectar at the end; that happiness is declared to be Sattvika, born of the translucence of intellect due to Self-reahsation.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'reahsation'"
+   ],
+   "primary_raw": "That which is like poison at first, but like nectar at the end; that happiness is declared to be Sattvika, born of the translucence of intellect due to Self-reahsation."
+  },
+  "BG 18.38": {
+   "text": "That which arises from the contact of object with sense, at first like nectar, but at the end like poison, that happiness is declared to be Rajasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.39": {
+   "text": "That happiness which begins and results in self-delusion arising from sleep, indolence, and miscomprehension, that is declared to be Tamasika.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.40": {
+   "text": "There is no entity on earth, or again in heaven among the Devas, that is devoid of these three Gunas, born of Prakriti.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.41": {
+   "text": "Of Brahmanas and Kshatriyas and Vaishyas, as also of Shudras, O scorcher of foes, the duties are distributed according to the Gunas born of their own nature.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shudras'"
+   ],
+   "primary_raw": "Of Brahmanas and Kshatriyas and Vaishyas, as also of Shudras, O scorcher of foes, the duties are distributed according to the Gunas born of their own nature."
+  },
+  "BG 18.42": {
+   "text": "The control of mind and senses, austerity, purity, forbearance, and also uprightness, knowledge, realisation, belief in a hereafter — these are the duties of the Brahmanas, born of (their own) nature.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.43": {
+   "text": "Prowess, boldness, fortitude, dexterity, and also not flying from battle, generosity and sovereignty are the duties of Kshatriyas, born of (their own) nature.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.44": {
+   "text": "Agriculture, cattle-rearing, and trade are the duties of Vaishyas, born of (their own) nature; and action consisting of service is the duty of the Shudras, born of (his own) nature.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Shudras'"
+   ],
+   "primary_raw": "Agriculture, cattle-rearing, and trade are the duties of the Vaishyas, born of (their own) nature; and action consisting of service is the duty of the Shudras, born of (their own) nature."
+  },
+  "BG 18.45": {
+   "text": "Devoted each to his own duty, man attains the highest perfection. How engaged in his own duty, he attains perfection, that hear.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.46": {
+   "text": "From whom is the evolution of all beings, by whom all this is pervaded, worshipping Him with his own duty, a man attains perfection.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.47": {
+   "text": "Better is one’s own Dharma, (though) imperfect than the Dharma of another wellperformed. He who does the duty ordained by his own nature incurs no evil.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.48": {
+   "text": "One should not relinquish, O son of Kunti, the duty to which he is born, though it is attended with evil; for, all undertakings are enveloped by evil, as fire by smoke.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.49": {
+   "text": "He whose intellect is unattached everywhere, who has subdued his heart, whose desires have fled, he attains to the supreme perfection, consisting of freedom from action.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.50": {
+   "text": "Learn from Me in brief, O son of Kunti, how reaching such perfection, he attains to Brahman, that supreme consummation of knowledge.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.51": {
+   "text": "Endued with a pure intellect; subduing the body and the senses with fortitude; relinquishing sound and such other senseobjects; abandoning attraction and hatred;",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'senseobjects'",
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Endued with a pure intellect; subduing the body and the senses with fortitude ; relinquishing sound and such other senseobjects; abandoning attraction and hatred;"
+  },
+  "BG 18.52": {
+   "text": "Resorting to a sequestered spot; eating but little; body, speech, and mind controlled ever engaged in-",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "does not end as a complete sentence"
+   ],
+   "primary_raw": "Resorting to a sequestered spot; eating but little; body, speech, and mind con-"
+  },
+  "BG 18.53": {
+   "text": "Forsaking egoism, power, pride, lust, wrath, and property; freed from the notion of '‘mine”; and tranquil — he is fit for becoming Brahman.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.54": {
+   "text": "Brahman-become, tranquil-minded, he neither grieves nor desires; the same to all beings, he attains to supreme devotion unto Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.55": {
+   "text": "By devotion he knows Me in reality, what and who I am; then having known Me in reality, he forthwith enters into Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.56": {
+   "text": "Even doing all actions always, taking refuge in Me — by My grace he attains to the eternal, immutable State.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.57": {
+   "text": "Resigning mentally all deeds in Me, having Me as the highest goal, resorting to Buddhi-Yoga do thou ever fix thy mind on Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.58": {
+   "text": "Fixing thy mind on Me, thou shalt, by My grace, overcome all obstacles; but if from self-conceit thou wilt not hear Me, thou shalt perish.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.59": {
+   "text": "If, filled with self-conceit, thou thinkest, “I will not fight”, vain is this thy resolve; thy Prakriti will constrain thee.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.60": {
+   "text": "Fettered, O son of Kunti, by thy own Karma, born of thy own nature, what thou, from delusion, desirest not to do, thou shalt have to do in spite of thyself.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.61": {
+   "text": "The Lord, O Arjuna, dwells in the hearts of all beings, causing all beings, by His Maya, to revolve, (as if) mounted on a machine.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.62": {
+   "text": "Take refuge in Him with all thy heart, O Bharata; by His grace shalt thou attain supreme peace (and) the eternal abode.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.63": {
+   "text": "Thus has wisdom, more profound than all profundities, been declared to thee by Me; reflecting over it fully, act as thou likest.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.64": {
+   "text": "Hear thou again My supreme word, the profoundest of all; because thou art dearly beloved of Me, therefore, will I speak what is good to thee.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.65": {
+   "text": "Occupy thy mind with Me, be devoted to Me, sacrifice to Me, bow down to Me. Thou shalt reach Myself; truly do I promise unto thee, (for) thou art dear to Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.66": {
+   "text": "Relinquishing all Dharmas take refuge in Me alone; I will liberate thee from all sins; grieve not.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.67": {
+   "text": "This is never to be spoken by thee to one who is devoid of austerities, nor to one who does not render service, nor to one who cavils at Me.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.68": {
+   "text": "He who with supreme devotion to Me will teach this deeply profound philosophy to My devotees, shall doubtless come to Me alone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.69": {
+   "text": "Nor among men is there any who does dearer service to Me, nor shall there be another on earth dearer to Me, than he.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.70": {
+   "text": "And he who will study this sacred dialogue of ours, by him shall I have been worshipped by the Yajna of knowledge; such is My conviction.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.71": {
+   "text": "And even that man who hears this, full of Shraddha and free from malice, he too, liberated, shall attain to the happy worlds of those of righteous deeds.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.72": {
+   "text": "Has this been heard by thee, O Partha, with an attentive mind? Has the delusion of thy ignorance been destroyed, O Dhananjaya?",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.73": {
+   "text": "Destroyed is my delusion, and I have gained my memory through Thy grace, O Achyuta. I am firm; my doubts are gone.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.74": {
+   "text": "Thus have I heard this wonderful dialogue between Vasudeva and the high souled Partha, causing my hair to stand on end.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.75": {
+   "text": "Through the grace of Vyasa3 have I heard this supreme and most profound Yoga, direct from Krishna, the Lord of Yoga, Himself declaring it.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "leftover OCR characters"
+   ],
+   "primary_raw": "Through the grace of Vy3sa have I heard this supreme and most profound Yoga, direct from Krishna, the Lord of Yoga, Himself declaring it."
+  },
+  "BG 18.76": {
+   "text": "O King, as I remember and remember this wonderful and holy dialogue between Keshava and Arjuna, I rejoice again and again.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Keshava'"
+   ],
+   "primary_raw": "O King, as I remember and remember this wonderful and holy dialogue between Keshava and Arjuna, I rejoice again and again."
+  },
+  "BG 18.77": {
+   "text": "And as I remember and remember that most wonderful Form of Hari, great is my wonder, O King; and I rejoice again and again.",
+   "verified": true,
+   "scans_agreeing": 4
+  },
+  "BG 18.78": {
+   "text": "Wherever is Krishna, the Lord of Yoga, wherever is Partha, the wielder of the bow, there are prosperity, victory, expansion, and sound policy: such is my conviction.",
+   "verified": false,
+   "scans_agreeing": 4,
+   "issues": [
+    "unsettled word 'Partha'"
+   ],
+   "primary_raw": "Wherever is Krishna, the Lord of Yoga, wherever is Partha, the wielder of the bow, there are prosperity, victory, expansion, and sound policy: such is my conviction."
+  }
+ },
+ "missing": [
+  "BG 1.5",
+  "BG 1.6",
+  "BG 1.22",
+  "BG 1.25",
+  "BG 1.27",
+  "BG 1.29",
+  "BG 1.33",
+  "BG 1.34",
+  "BG 1.39",
+  "BG 1.41",
+  "BG 2.11",
+  "BG 2.28",
+  "BG 2.43",
+  "BG 2.44",
+  "BG 3.3",
+  "BG 3.8",
+  "BG 3.32",
+  "BG 4.27",
+  "BG 4.31",
+  "BG 5.9",
+  "BG 5.28",
+  "BG 6.2",
+  "BG 6.15",
+  "BG 6.21",
+  "BG 6.22",
+  "BG 6.23",
+  "BG 8.1",
+  "BG 8.10",
+  "BG 8.13",
+  "BG 8.14",
+  "BG 9.16",
+  "BG 9.17",
+  "BG 9.29",
+  "BG 10.5",
+  "BG 10.8",
+  "BG 10.13",
+  "BG 11.27",
+  "BG 11.42",
+  "BG 12.4",
+  "BG 12.7",
+  "BG 12.14",
+  "BG 12.15",
+  "BG 12.19",
+  "BG 13.7",
+  "BG 13.21",
+  "BG 15.4",
+  "BG 16.19",
+  "BG 17.6",
+  "BG 17.11",
+  "BG 18.1"
+ ]
+}
