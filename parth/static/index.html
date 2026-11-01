@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पार्थ · Parth · जीवन के प्रश्न, गीता के उत्तर</title>
+<meta name="description" content="Ask about anything you're going through, in Hindi, Hinglish or English. Parth answers with what the Bhagavad Gita actually says: exact verses, their real context, and how they apply to you.">
+<meta name="theme-color" content="#0B1426">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1426'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='%23E8A33D' font-family='serif'%3E%E0%A4%AA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Tiro+Devanagari+Hindi&display=swap">
+<style>
+/* Layout: one calm reading column (max 760px): header, question box, then the answer as verse cards. */
+:root{
+  --bg:#F4F6F9; --surface:#FFFFFF; --ink:#151B2B; --muted:#5B6479; --line:#DDE2EB; --soft:#EEF1F6;
+  --peacock:#0F6B73; --peacock-soft:#E2F1F2; --gold:#B7791F; --gold-soft:#FBF1DF;
+  --alert:#B4233A; --alert-soft:#FCE9EC;
+  --f-ui:"Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
+  --f-verse:"Tiro Devanagari Sanskrit", "Noto Serif Devanagari", serif;
+  --f-head:"Tiro Devanagari Hindi", "Noto Serif Devanagari", Georgia, serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0B1426; --surface:#121D33; --ink:#E9EDF6; --muted:#9BA6BE; --line:#26324D; --soft:#17233D;
+    --peacock:#5CC4CB; --peacock-soft:#12303A; --gold:#E8A33D; --gold-soft:#2D2412;
+    --alert:#F27A8C; --alert-soft:#3A1720;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 var(--f-ui)}
+.wrap{max-width:760px;margin:0 auto;padding-inline:18px}
+a{color:var(--peacock)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+button{font:inherit;cursor:pointer}
+
+header{padding-block:34px 10px;text-align:center}
+.mark{font-family:var(--f-head);font-size:44px;line-height:1;color:var(--gold)}
+h1{font-family:var(--f-head);font-weight:400;font-size:clamp(26px,5vw,34px);margin:10px 0 4px;letter-spacing:.01em}
+.tag{color:var(--muted);margin:0}
+.tag b{color:var(--ink);font-weight:600}
+
+/* ask box */
+.ask{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 18px 40px -30px rgba(11,20,38,.45)}
+.ask label{display:block;font-weight:600;font-size:15px;margin:0 4px 8px}
+textarea{width:100%;min-height:96px;resize:vertical;border:0;background:transparent;color:var(--ink);font:inherit;font-size:18px;padding:4px}
+textarea:focus{outline:none}
+.ask-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;flex-wrap:wrap}
+.hint{font-size:13.5px;color:var(--muted)}
+.btns{display:flex;gap:8px;margin-left:auto}
+.mic{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:12px;padding:9px 12px;display:inline-flex;align-items:center;gap:6px}
+.mic[aria-pressed="true"]{background:var(--alert-soft);border-color:var(--alert);color:var(--alert)}
+.go{border:0;background:var(--peacock);color:#fff;border-radius:12px;padding:10px 20px;font-weight:600;font-size:16.5px}
+@media (prefers-color-scheme: dark){.go{color:#05222A}}
+.go:disabled{opacity:.6;cursor:wait}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:5px 13px;font-size:15px}
+.chips button:hover{border-color:var(--peacock)}
+
+/* answer */
+#answer{margin-top:28px}
+.status{display:flex;align-items:center;gap:10px;color:var(--muted);padding:16px 4px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.opening{font-size:19px;margin:0 2px 18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 20px 16px;margin-bottom:16px}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;font-size:14px;color:var(--muted);margin-bottom:14px}
+.card-head b{color:var(--peacock);font-weight:600}
+.shloka{font-family:var(--f-verse);font-size:clamp(20px,3.6vw,24px);line-height:1.75;text-align:center;white-space:pre-line;margin:6px 0 4px}
+.translit{font-family:var(--f-verse);font-style:italic;color:var(--muted);text-align:center;white-space:pre-line;font-size:15.5px;margin:0 0 16px}
+.tr{background:var(--soft);border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.tr p{margin:0;font-size:16.5px}
+.tr small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+.sec{margin:12px 0 0}
+.sec h3{font-family:var(--f-ui);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
+.sec p{margin:0}
+.sec.apply{background:var(--peacock-soft);border-radius:12px;padding:10px 14px;margin-top:14px}
+.sec.apply h3{color:var(--peacock)}
+.fb{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.fb button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:99px;padding:3px 12px;font-size:14px}
+.closing{font-size:18px;margin:6px 2px 10px}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px;margin:8px 2px}
+.crisis{background:var(--alert-soft);border:1.5px solid var(--alert);border-radius:18px;padding:20px;white-space:pre-line}
+.crisis .lines{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;white-space:normal}
+.crisis a{background:var(--alert);color:#fff;text-decoration:none;font-weight:600;border-radius:12px;padding:9px 14px}
+@media (prefers-color-scheme: dark){.crisis a{color:#2A0A10}}
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+
+footer{margin-top:44px;padding-block:22px 36px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+footer p{margin:0 0 6px}
+@media (prefers-reduced-motion: reduce){.dot{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true">पार्थ</div>
+    <h1>जीवन के प्रश्न, गीता के उत्तर</h1>
+    <p class="tag">Ask about anything you're going through, in <b>हिंदी</b>, <b>Hinglish</b> or <b>English</b>.<br>Answers come from what the Bhagavad Gita actually says.</p>
+  </header>
+
+  <form class="ask" id="ask" autocomplete="off">
+    <label for="q">आपके मन में क्या है? · What's on your mind?</label>
+    <textarea id="q" name="q" maxlength="2000" placeholder="जैसे: मुझे बहुत गुस्सा आता है, क्या करूँ? · e.g. My exam result is tomorrow and I can't stop worrying"></textarea>
+    <div class="ask-row">
+      <span class="hint">Your question is not linked to you.</span>
+      <div class="btns">
+        <button type="button" class="mic" id="mic" aria-pressed="false" hidden title="Speak your question">🎙 <span id="mic-label">बोलें</span></button>
+        <button type="submit" class="go" id="go">पूछें · Ask</button>
+      </div>
+    </div>
+  </form>
+  <div class="chips" id="chips" aria-label="Example questions">
+    <button type="button">मुझे बहुत गुस्सा आता है, क्या करूँ?</button>
+    <button type="button">Exam ke result ki bahut chinta hai</button>
+    <button type="button">My father passed away and I can't cope</button>
+    <button type="button">मैं हमेशा दूसरों से अपनी तुलना करता हूँ</button>
+    <button type="button">I feel very lonely</button>
+    <button type="button">Purani galtiyon ka pachhtava nahi jaata</button>
+  </div>
+
+  <main id="answer" aria-live="polite"></main>
+
+  <footer>
+    <p>Every verse shows the original Sanskrit and a verified public-domain translation (Swami Swarupananda, 1909). Explanations are written for you and checked against the sources; they are not a substitute for a teacher, doctor or counsellor.</p>
+    <p>If you are in distress, please call <a href="tel:14416">Tele-MANAS 14416</a> (India, free, 24×7).</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const form = $("ask"), q = $("q"), go = $("go"), out = $("answer");
+  const L = {
+    hi: { finding: "आपके लिए श्लोक खोजे जा रहे हैं…", tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", helped: "क्या इससे मदद मिली?", yes: "हाँ", no: "यह फिट नहीं बैठता", thanks: "धन्यवाद!", speaks: "→", ch: "अध्याय", err: "कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।" },
+    hinglish: { finding: "Aapke liye shlok dhoondhe ja rahe hain…", tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", helped: "Kya isse madad mili?", yes: "Haan", no: "Ye fit nahi baithta", thanks: "Dhanyavaad!", speaks: "→", ch: "Adhyay", err: "Kuch gadbad hui. Please phir try kariye." },
+    en: { finding: "Finding the verses that speak to you…", tr: "Translation", ctx: "Context", apply: "For you", helped: "Did this help?", yes: "Yes", no: "Doesn't fit", thanks: "Thank you!", speaks: "→", ch: "Chapter", err: "Something went wrong. Please try again." },
+  };
+  const SPEAKER = { hi: { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" } };
+  const guessLang = (t) => (/[ऀ-ॿ]/.test(t) ? "hi" : /\b(hai|mujhe|kya|nahi|mera|meri|bahut|kaise|ki|ke)\b/i.test(t) ? "hinglish" : "en");
+
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function section(title, text, cls) {
+    if (!text) return null;
+    const s = el("div", "sec" + (cls ? " " + cls : ""));
+    s.append(el("h3", null, title), el("p", null, text));
+    return s;
+  }
+
+  function verseCard(v, a, question) {
+    const t = L[a.lang] || L.en;
+    const sp = (SPEAKER[a.lang] || {});
+    const c = el("article", "card");
+    const head = el("div", "card-head");
+    const left = el("span"); left.append(el("b", null, v.id), document.createTextNode(` · ${t.ch} ${v.chapter} · ${a.lang === "hi" ? v.chapter_name_sanskrit : v.chapter_name}`));
+    head.append(left, el("span", null, `${sp[v.speaker] || v.speaker} ${t.speaks} ${sp[v.addressed_to] || v.addressed_to}`));
+    c.append(head, el("p", "shloka", v.sanskrit));
+    const tl = el("p", "translit", v.transliteration); tl.lang = "sa-Latn"; c.append(tl);
+    const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); c.append(tr);
+    [section(t.ctx, v.context), section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply")].forEach((s) => s && c.append(s));
+    if (a.kind === "answer" || a.kind === "fallback") {
+      const fb = el("div", "fb"); fb.append(el("span", null, t.helped));
+      [[t.yes, true], [t.no, false]].forEach(([label, helpful]) => {
+        const b = el("button", null, label); b.type = "button";
+        b.onclick = () => { fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, verse: v.id, helpful }) }).catch(() => {}); fb.replaceChildren(el("span", null, t.thanks)); };
+        fb.append(b);
+      });
+      c.append(fb);
+    }
+    return c;
+  }
+
+  function render(a, question) {
+    out.replaceChildren();
+    if (a.kind === "crisis") {
+      const box = el("div", "crisis", a.opening);
+      const lines = el("div", "lines");
+      [["tel:14416", "Tele-MANAS 14416"], ["tel:18008914416", "1-800-891-4416"], ["tel:18005990019", "KIRAN 1800-599-0019"], ["tel:112", "112"]]
+        .forEach(([href, label]) => { const a2 = el("a", null, label); a2.href = href; lines.append(a2); });
+      box.append(lines); out.append(box); return;
+    }
+    if (!a.verses || !a.verses.length) { out.append(el("div", "plain", a.opening)); return; }
+    if (a.opening) out.append(el("p", "opening", a.opening));
+    a.verses.forEach((v) => out.append(verseCard(v, a, question)));
+    if (a.closing) out.append(el("p", "closing", a.closing));
+    if (a.note) out.append(el("p", "note", a.note));
+  }
+
+  async function ask(question) {
+    question = question.trim();
+    if (question.length < 2) { q.focus(); return; }
+    const t = L[guessLang(question)];
+    go.disabled = true;
+    const st = el("div", "status"); st.append(el("span", "dot"), el("span", null, t.finding));
+    out.replaceChildren(st);
+    try {
+      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question }) });
+      const a = await r.json();
+      if (!r.ok && !a.opening) throw new Error(r.status);
+      render(a, question);
+      out.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    } catch (e) {
+      out.replaceChildren(el("div", "plain", t.err));
+    } finally { go.disabled = false; }
+  }
+
+  form.addEventListener("submit", (e) => { e.preventDefault(); ask(q.value); });
+  q.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); ask(q.value); } });
+  $("chips").addEventListener("click", (e) => { if (e.target.tagName === "BUTTON") { q.value = e.target.textContent; ask(q.value); } });
+
+  // Voice input (Chrome / Edge / Android): Hindi by default, which also understands Hinglish speech.
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR) {
+    const mic = $("mic"); mic.hidden = false;
+    let rec = null;
+    mic.onclick = () => {
+      if (rec) { rec.stop(); return; }
+      rec = new SR(); rec.lang = "hi-IN"; rec.interimResults = true;
+      mic.setAttribute("aria-pressed", "true"); $("mic-label").textContent = "सुन रहा हूँ…";
+      rec.onresult = (ev) => { q.value = Array.from(ev.results).map((r) => r[0].transcript).join(" "); };
+      rec.onend = () => { mic.setAttribute("aria-pressed", "false"); $("mic-label").textContent = "बोलें"; rec = null; if (q.value.trim()) ask(q.value); };
+      rec.onerror = () => rec && rec.stop();
+      rec.start();
+    };
+  }
+})();
+</script>
+</body>
+</html>

@@ -2,8 +2,11 @@ services:
   - type: web
     name: parth-v2
     runtime: docker
+    plan: free   # sleeps when idle (first answer after a pause takes ~50 s); Starter keeps it awake
     branch: v2
     healthCheckPath: /healthz
     envVars:
-      - key: GEMINI_API_KEY   # a separate key for Parth, so it never uses Samajh's quota
+      - key: GEMINI_API_KEY        # same key as Samajh (copy it from Samajh's Environment tab)
         sync: false
+      - key: PARTH_DAILY_AI_LIMIT  # AI-written answers per day; after this Parth shows verses only
+        value: "300"

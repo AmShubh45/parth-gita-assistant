@@ -202,3 +202,34 @@ def test_off_topic_is_redirected(kb):
     llm = FakeLLM({"understand": {"topic": "off_topic", "crisis": False, "english": "cricket score", "situations": []}})
     ans = run(Engine(kb, llm).answer("aaj match ka score kya hai"))
     assert ans.kind == "off_topic" and "Parth" in ans.opening
+
+
+# ---------------------------------------------------------------- quota guards and the HTTP layer
+def test_daily_budget_stops_model_use():
+    from parth.guard import DailyBudget
+    b = DailyBudget(limit=2)
+    assert [b.take(), b.take(), b.take()] == [True, True, False]
+
+
+def test_rate_limiter_and_cache():
+    from parth.guard import AnswerCache, RateLimiter
+    rl = RateLimiter(per_minute=2)
+    assert [rl.allow("a"), rl.allow("a"), rl.allow("a"), rl.allow("b")] == [True, True, False, True]
+    c = AnswerCache(size=2)
+    c.put("Mujhe gussa aata hai!", {"kind": "answer"})
+    assert c.get("mujhe  gussa aata hai") == {"kind": "answer"}
+    c.put("x", {}), c.put("y", {})
+    assert c.get("mujhe gussa aata hai") is None  # evicted
+
+
+def test_http_api_and_page():
+    from fastapi.testclient import TestClient
+    from parth.app import app
+    client = TestClient(app)
+    assert client.get("/healthz").json()["answerable_verses"] >= 480
+    page = client.get("/")
+    assert page.status_code == 200 and "पार्थ" in page.text
+    r = client.post("/api/ask", json={"question": "mujhe bahut gussa aata hai"}).json()
+    assert r["lang"] == "hinglish" and r["verses"] and "trace" not in r
+    assert client.post("/api/ask", json={"question": "x"}).status_code == 422
+    assert client.get("/api/verse/2.47").json()["translation_status"] == "verified"

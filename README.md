@@ -1,5 +1,7 @@
 > **Parth v2 is being rebuilt on the `v2` branch** (Python/FastAPI, grounded answers with exact verse citations, and a 24/7 YouTube live stream). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 >
+> Deploy v2 on Render: New → Blueprint → this repo → it reads `render.yaml` (branch `v2`). Paste the same `GEMINI_API_KEY` Samajh uses; `PARTH_DAILY_AI_LIMIT` (default 300) caps Parth's AI answers per day so Samajh's quota is protected.
+>
 > Run v2 locally: `pip install -r requirements-dev.txt && pytest -q`, then `GEMINI_API_KEY=... uvicorn parth.app:app` and `POST /api/ask {"question": "..."}`. Without a key, Parth still answers with the most relevant verses. The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
 
 # पार्थ - Gita Assistant 🕉️

@@ -56,6 +56,7 @@ class VerseCard:
     ref: str
     chapter: int
     chapter_name: str
+    chapter_name_sanskrit: str
     speaker: str
     addressed_to: str
     sanskrit: str
@@ -161,7 +162,8 @@ class Engine:
     # ------------------------------------------------------------- helpers
     def _card(self, v: Verse) -> VerseCard:
         ch = self.kb.chapters[v.chapter]
-        return VerseCard(id=v.id, ref=v.ref, chapter=v.chapter, chapter_name=ch["name_en"], speaker=v.speaker,
+        return VerseCard(id=v.id, ref=v.ref, chapter=v.chapter, chapter_name=ch["name_en"],
+                         chapter_name_sanskrit=ch["name_sanskrit"], speaker=v.speaker,
                          addressed_to=v.addressed_to, sanskrit=v.sanskrit, transliteration=v.transliteration,
                          translation=v.translation or "", translation_source="Swami Swarupananda (1909)")
 
@@ -213,7 +215,8 @@ class Engine:
                       note=FALLBACK_TEXT["note"][lang], meaning_label=MEANING_LABEL[lang], situations=sits, trace=trace)
 
     # ------------------------------------------------------------- pipeline
-    async def answer(self, question: str) -> Answer:
+    async def answer(self, question: str, use_model: bool = True) -> Answer:
+        """use_model=False answers from the knowledge base alone (e.g. when the daily AI budget is spent)."""
         t0 = time.monotonic()
         question = (question or "").strip()[:2000]
         lang = detect(question)
@@ -223,9 +226,10 @@ class Engine:
             return Answer(kind=tri.kind, lang=lang, opening=tri.message or "", trace=trace)
 
         english, situation_ids = "", []
-        if self.llm:
+        llm = self.llm if use_model else None
+        if llm:
             try:
-                u = await self.llm.json("understand", _UNDERSTAND_SYSTEM, question,
+                u = await llm.json("understand", _UNDERSTAND_SYSTEM, question,
                                         _understand_schema([s["id"] for s in self.kb.situations]), max_tokens=300)
                 trace["steps"].append("understand")
                 if u.get("crisis"):
@@ -240,8 +244,8 @@ class Engine:
         trace["candidates"] = [c.verse.id for c in cands]
         if not cands:
             return Answer(kind="no_match", lang=lang, opening=FALLBACK_TEXT["no_match"][lang], situations=sits, trace=trace)
-        if not self.llm:
-            return self._fallback(lang, cands, sits, trace, "no model configured")
+        if not llm:
+            return self._fallback(lang, cands, sits, trace, "no model configured" if not self.llm else "daily AI budget reached")
 
         try:
             ans = await self._grounded(question, english, lang, cands, sits, trace)
