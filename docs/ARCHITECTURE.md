@@ -92,9 +92,10 @@ A change that lowers any of these does not ship.
 
 1. **Knowledge base L1–L3**: done. Authentic Swarupananda translation (L2): 487/700 verses verified.
 2. **Remaining translations:** review the 213 unverified verses against page images, and add Telang and Besant. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
-3. **Web app**: deploy to Render, replacing the Node.js version (kept on the `legacy-node` branch).
-4. **Parth Live**: OBS automation, recitation loop and YouTube chat Q&A.
-5. **Growth**: voice, more languages, sharing cards.
+3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 71 tests.
+4. **Web app**: deploy to Render, replacing the Node.js version (kept on the `legacy-node` branch).
+5. **Parth Live**: OBS automation, recitation loop and YouTube chat Q&A.
+6. **Growth**: voice, more languages, sharing cards.
 
 ## 9. Needed from the owner
 

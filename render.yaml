@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: parth-v2
+    runtime: docker
+    branch: v2
+    healthCheckPath: /healthz
+    envVars:
+      - key: GEMINI_API_KEY   # a separate key for Parth, so it never uses Samajh's quota
+        sync: false

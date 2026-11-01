@@ -1,4 +1,6 @@
-> **Parth v2 is being rebuilt on the `v2` branch** (Python/FastAPI, grounded answers with exact verse citations, and a 24/7 YouTube live stream). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
+> **Parth v2 is being rebuilt on the `v2` branch** (Python/FastAPI, grounded answers with exact verse citations, and a 24/7 YouTube live stream). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+>
+> Run v2 locally: `pip install -r requirements-dev.txt && pytest -q`, then `GEMINI_API_KEY=... uvicorn parth.app:app` and `POST /api/ask {"question": "..."}`. Without a key, Parth still answers with the most relevant verses. The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
 
 # पार्थ - Gita Assistant 🕉️
 
