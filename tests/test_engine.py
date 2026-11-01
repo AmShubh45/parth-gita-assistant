@@ -236,6 +236,12 @@ def test_http_api_and_page():
     assert r["speech"] and all(i["text"] and len(i["sig"]) == 32 for i in r["speech"])  # every answer can be spoken
     follow = client.post("/api/ask", json={"question": "aur batao", "history": ["mujhe bahut gussa aata hai"]})
     assert follow.status_code == 200
+    # the answer-language choice: an English question answered in Hindi, and the other way round
+    hi = client.post("/api/ask", json={"question": "I feel very lonely", "lang": "hi"}).json()
+    assert hi["lang"] == "hi" and hi["kind"] == "fallback" and "why" in hi
+    assert not any(c.isascii() and c.isalpha() for item in hi["speech"] for c in item["text"])
+    assert client.post("/api/ask", json={"question": "मुझे बहुत गुस्सा आता है", "lang": "en"}).json()["lang"] == "en"
+    assert client.post("/api/ask", json={"question": "hello there", "lang": "fr"}).status_code == 422
     assert client.post("/api/ask", json={"question": "x"}).status_code == 422
     assert client.get("/api/verse/2.47").json()["translation_status"] == "verified"
 
@@ -261,6 +267,7 @@ def test_voice_token_locks_the_whole_session():
     assert lc.model == "gemini-3.8-live"
     assert [f.name for f in lc.config.tools[0].function_declarations] == ["find_verses"]
     assert "Never recite Sanskrit or translations from memory" in str(lc.config.system_instruction)
+    assert "never read the English" in str(lc.config.system_instruction)          # Hindi conversations stay in Hindi
     assert "14416" in str(lc.config.system_instruction)
 
 
@@ -312,9 +319,14 @@ def test_spoken_script_follows_the_answer(kb):
     en = {**a, "lang": "en"}
     assert speech.segments(en)[1].startswith("In chapter 2, verse 62, Krishna says:")
     assert speech.segments({**a, "lang": "hinglish"})[1].startswith("Adhyay 2, shlok 62 mein Krishna kehte hain.")
-    # without an explanation, the authentic translation itself is read
+    # without an explanation: English reads the authentic translation; Hindi reads the Sanskrit, never English
     fb = {**a, "kind": "fallback"}
-    assert kb.verses["BG 2.62"].translation in speech.segments(fb)[1]
+    hi_fb = speech.segments(fb)[1]
+    assert kb.verses["BG 2.62"].translation not in hi_fb and "ध्यायतो विषयान्पुंसः" in hi_fb
+    assert hi_fb.startswith("अध्याय 2, श्लोक 62 में श्रीकृष्ण अर्जुन से कहते हैं:") and "स्क्रीन पर" in hi_fb
+    assert not any(ch.isascii() and ch.isalpha() for ch in hi_fb)               # not a word of English
+    assert kb.verses["BG 2.62"].translation in speech.segments({**fb, "lang": "en"})[1]
+    assert "Iska anuvaad" in speech.segments({**fb, "lang": "hinglish"})[1]
     crisis = {"kind": "crisis", "lang": "hi", "opening": "कृपया अभी 14416 पर कॉल करें।", "verses": []}
     assert speech.segments(crisis) == ["कृपया अभी 14416 पर कॉल करें।"]
     items = speech.speech_items(a, "k1")
@@ -325,14 +337,15 @@ def test_tts_falls_back_across_models_caches_and_caps(monkeypatch):
     import base64
     import httpx
     from parth import speech
-    seen = []
+    seen, sent = [], []
 
     def handler(request):
         model = request.url.path.split("/models/")[1].split(":")[0]
         seen.append(model)
+        sent.append(json.loads(request.content)["contents"][0]["parts"][0]["text"])
         if model == speech.TTS_MODELS[0]:
-            return httpx.Response(404, json={"error": "not found"})
-        pcm = base64.b64encode(b"\x01\x00" * 2400).decode()
+            return httpx.Response(500, json={"error": "busy"})
+        pcm = base64.b64encode(b"\xa0\x0f" * 2400).decode()   # a quiet signal (peak 4000 of 32767)
         return httpx.Response(200, json={"candidates": [{"content": {"parts": [
             {"inlineData": {"mimeType": "audio/L16;codec=pcm;rate=24000", "data": pcm}}]}}]})
 
@@ -342,8 +355,12 @@ def test_tts_falls_back_across_models_caches_and_caps(monkeypatch):
     audio = run(sp.speak("नमस्ते, मैं गीता सारथी हूँ।", "hi"))
     assert audio[:4] == b"RIFF" and audio[8:12] == b"WAVE" and len(audio) == 44 + 4800
     assert seen == [speech.TTS_MODELS[0], speech.TTS_MODELS[1]]
+    assert set(sent) == {"नमस्ते, मैं गीता सारथी हूँ।"}                                          # only the words to say
+    import array
+    samples = array.array("h"); samples.frombytes(audio[44:])
+    assert max(samples) > 25000                                                                # quiet audio made louder
     assert run(sp.speak("नमस्ते, मैं गीता सारथी हूँ।", "hi")) == audio and len(seen) == 2     # cached, no new call
-    assert run(sp.speak("दूसरा वाक्य", "hi")) and seen[-1] == speech.TTS_MODELS[1]              # dead model skipped
+    assert run(sp.speak("दूसरा वाक्य", "hi")) and seen[2:] == [speech.TTS_MODELS[1]]          # the working model goes first
     assert run(sp.speak("तीसरा वाक्य", "hi")) is None                                           # daily cap reached
     assert run(speech.Speaker("").speak("hello", "en")) is None                                 # no key: browser voice
 
@@ -434,3 +451,12 @@ def test_speak_only_speaks_what_the_server_wrote(monkeypatch):
     assert client.post("/api/speak", json={"text": text, "lang": "en", "sig": speech.sign("test-key", "hi", text)}).status_code == 403
     silent = "silent piece"
     assert client.post("/api/speak", json={"text": silent, "lang": "en", "sig": speech.sign("test-key", "en", silent)}).status_code == 204
+
+
+def test_spoken_question_in_a_chosen_language(voice_app):
+    import base64
+    client, llm = voice_app({"understand": {**UNDERSTAND, "transcript": "मुझे बहुत गुस्सा आता है"}, "select": SELECT,
+                             "compose": GOOD_HI, "verify": {"ok": True, "problems": []}})
+    a = _lines(client.post("/api/voice", json={"audio": base64.b64encode(_wav()).decode(), "lang": "en"}))[1]["answer"]
+    assert a["lang"] == "en"      # the scripted Hindi explanation fails the English check, so it falls back in English
+    assert all(item["text"].isascii() for item in a["speech"][1:])

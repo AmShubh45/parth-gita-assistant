@@ -127,9 +127,17 @@ def run_app(state: dict):
 
 
 COUNT_AUDIO = """
-window.__plays = 0; window.__says = 0;
+// Spoken answers must play through <audio> elements (loudspeaker), never Web Audio buffers (earpiece on phones).
+window.__srcs = []; window.__streams = 0; window.__webaudio = 0; window.__says = 0;
+window.__pieces = () => window.__srcs.filter((u) => u !== window.__srcs[0]).length;   // the first is the silent unlock
+const _play = HTMLMediaElement.prototype.play;
+HTMLMediaElement.prototype.play = function (...a) {
+  if (this.srcObject) window.__streams++; else if ((this.src || '').startsWith('blob:')) window.__srcs.push(this.src);
+  const p = _play.apply(this, a);
+  return p;
+};
 const _start = AudioBufferSourceNode.prototype.start;
-AudioBufferSourceNode.prototype.start = function (...a) { window.__plays++; return _start.apply(this, a); };
+AudioBufferSourceNode.prototype.start = function (...a) { window.__webaudio++; return _start.apply(this, a); };
 if (window.speechSynthesis) { const _speak = speechSynthesis.speak.bind(speechSynthesis);
   speechSynthesis.speak = (u) => { if ((u.text || '').trim()) window.__says++; return _speak(u); }; }
 """
@@ -155,7 +163,7 @@ async def spoken_answers(p, tmp: Path, state: dict, shot: str | None) -> dict:
     await page.click("#mic")
     await page.wait_for_selector(".turn .card", timeout=20000)
     first_state = await page.evaluate("document.body.dataset.state")
-    await page.wait_for_function("window.__plays >= 4", timeout=15000)               # opening, 2 verses, closing
+    await page.wait_for_function("window.__pieces() >= 4", timeout=15000)            # opening, 2 verses, closing
     await page.wait_for_function("document.querySelectorAll('.turn').length >= 2 && document.querySelectorAll('.turn')[1].querySelector('.card')", timeout=25000)
     await page.uncheck("#optConvo")
     await page.wait_for_function("document.body.dataset.state === 'idle'", timeout=15000)
@@ -166,8 +174,11 @@ async def spoken_answers(p, tmp: Path, state: dict, shot: str | None) -> dict:
         "you": await page.eval_on_selector_all(".turn .you .said-text", "els => els.map(e => e.textContent)"),
         "cards": await page.eval_on_selector_all(".turn .card .card-head b", "els => els.map(e => e.textContent)"),
         "listen_buttons": await page.eval_on_selector_all(".turn .listen", "els => els.length"),
-        "audio_pieces_played": await page.evaluate("window.__plays"),
+        "audio_pieces_played": await page.evaluate("window.__pieces()"),
+        "web_audio_playback": await page.evaluate("window.__webaudio"),
         "browser_voice_used": await page.evaluate("window.__says"),
+        "first_section": await page.eval_on_selector(".turn .card .sec h3", "e => e.textContent"),
+        "english_tucked_away": await page.eval_on_selector(".turn .card details.tr-more", "e => !e.open && e.querySelector('summary').textContent"),
         "tts_calls": state.get("tts", 0),
         "second_question_saw_first": "मुझे बहुत गुस्सा आता है" in state["llm"].calls[4][1] if len(state["llm"].calls) > 4 else False,
         "errors": errors,
@@ -175,6 +186,8 @@ async def spoken_answers(p, tmp: Path, state: dict, shot: str | None) -> dict:
     await b.close()
     result["ok"] = (result["you"][:2] == ["मुझे बहुत गुस्सा आता है", "और बताइए"] and result["cards"][:2] == ["BG 2.62", "BG 2.63"]
                     and result["audio_pieces_played"] >= 8 and result["browser_voice_used"] == 0 and result["listen_buttons"] >= 2
+                    and result["web_audio_playback"] == 0 and result["first_section"] == "भावार्थ"
+                    and str(result["english_tucked_away"]).startswith("अंग्रेज़ी अनुवाद")
                     and result["second_question_saw_first"] and not errors and "voice_error" not in events)
     return result
 
@@ -188,6 +201,7 @@ async def live_beta(p, tmp: Path, shot: str | None) -> dict:
     errors: list[str] = []
     page.on("pageerror", lambda e: errors.append(str(e)))
     page.on("console", lambda m: m.type == "error" and errors.append(m.text))
+    await page.add_init_script(COUNT_AUDIO)
     await page.goto(f"http://127.0.0.1:{APP_PORT}/", wait_until="networkidle")
     await page.check("#optLive")
     await page.click("#mic")
@@ -208,6 +222,8 @@ async def live_beta(p, tmp: Path, shot: str | None) -> dict:
         "mic_chunks_while_speaking_with_sound": sum(during),
         "tool_verses": [v["id"] for v in (live_log["tool_response"] or {}).get("functionResponses", [{}])[0].get("response", {}).get("result", {}).get("verses", [])],
         "cards": await page.eval_on_selector_all(".turn .card .card-head b", "els => els.map(e => e.textContent)"),
+        "stream_to_audio_element": await page.evaluate("window.__streams"),
+        "web_audio_playback": await page.evaluate("window.__webaudio"),
         "state_after_end": await page.evaluate("document.body.dataset.state"),
         "errors": errors,
     }
@@ -216,6 +232,7 @@ async def live_beta(p, tmp: Path, shot: str | None) -> dict:
                     and result["mic_chunks_while_speaking"] > 5 and result["mic_chunks_while_speaking_with_sound"] == 0
                     and result["mic_chunks_later_with_sound"] > 5
                     and result["tool_verses"] and result["cards"][:1] == result["tool_verses"][:1]
+                    and result["stream_to_audio_element"] >= 1 and result["web_audio_playback"] == 0
                     and not errors and result["state_after_end"] == "idle"
                     and {"echo_ignored", "turn_summary", "tool_call", "setup_complete", "first_audio_sent"} <= set(events))
     return result

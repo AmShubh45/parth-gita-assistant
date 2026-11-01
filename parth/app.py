@@ -30,7 +30,7 @@ from pydantic import BaseModel, Field
 from .engine import Engine
 from .guard import AnswerCache, DailyBudget, RateLimiter
 from . import live, speech
-from .kb import KnowledgeBase
+from .kb import SPEAKER_HI, KnowledgeBase
 from .lang import detect
 from .llm import Gemini, LLMError
 from .safety import triage
@@ -63,11 +63,13 @@ RATE_MSG = {
 class Ask(BaseModel):
     question: str = Field(min_length=2, max_length=2000)
     history: list[str] = Field(default_factory=list, max_length=6)  # earlier questions, for follow-ups
+    lang: str | None = Field(default=None, pattern="^(hi|hinglish|en)$")  # answer language; None: the question's own
 
 
 class Voice(BaseModel):
     audio: str = Field(min_length=100, max_length=1_500_000)  # base64 WAV
     history: list[str] = Field(default_factory=list, max_length=6)
+    lang: str | None = Field(default=None, pattern="^(hi|hinglish|en)$")
 
 
 class Speak(BaseModel):
@@ -110,10 +112,17 @@ def _sign_key() -> str:
     return _gemini.key or "no-key"
 
 
+def _cache_key(question: str, lang: str | None) -> str:
+    return f"{lang} {question}" if lang else question
+
+
 def _public(ans) -> dict:
-    """An answer as the page receives it: no internal trace, plus the pieces to speak it aloud."""
+    """An answer as the page receives it: no internal trace, plus the pieces to speak it aloud.
+    A fallback says briefly why (shown only in the page's debug log)."""
     out = ans.to_dict()
-    out.pop("trace", None)
+    trace = out.pop("trace", None) or {}
+    if ans.kind == "fallback":
+        out["why"] = str(trace.get("fallback_reason", ""))[:120]
     out["speech"] = speech.speech_items(out, _sign_key())
     return out
 
@@ -135,15 +144,15 @@ async def ask(body: Ask, request: Request):
         return JSONResponse({"kind": "rate_limited", "lang": detect(body.question),
                              "opening": RATE_MSG[detect(body.question)], "verses": []}, status_code=429)
     history = _history(body.history)
-    cached = None if history else cache.get(body.question)
+    cached = None if history else cache.get(_cache_key(body.question, body.lang))
     if cached:
         return cached
     use_model = bool(engine.llm) and budget.take()
-    ans = await engine.answer(body.question, use_model=use_model, history=history)
+    ans = await engine.answer(body.question, use_model=use_model, history=history, lang=body.lang)
     log.info("ask kind=%s lang=%s model=%s trace=%s", ans.kind, ans.lang, use_model, ans.trace)
     out = _public(ans)
     if ans.kind == "answer" and not history:
-        cache.put(body.question, out)
+        cache.put(_cache_key(body.question, body.lang), out)
     return out
 
 
@@ -176,13 +185,13 @@ async def voice(body: Voice, request: Request):
     async def lines():
         # the transcript goes out at once, so the page shows what it heard while the answer is written
         yield json.dumps({"transcript": transcript}, ensure_ascii=False) + "\n"
-        out = None if history else cache.get(transcript)
+        out = None if history else cache.get(_cache_key(transcript, body.lang))
         if out is None:
-            ans = await engine.answer(transcript, use_model=True, understanding=u, history=history)
+            ans = await engine.answer(transcript, use_model=True, understanding=u, history=history, lang=body.lang)
             log.info("voice kind=%s lang=%s secs=%.1f trace=%s", ans.kind, ans.lang, (len(audio) - 44) / 32000, ans.trace)
             out = _public(ans)
             if ans.kind == "answer" and not history:
-                cache.put(transcript, out)
+                cache.put(_cache_key(transcript, body.lang), out)
         yield json.dumps({"answer": out}, ensure_ascii=False) + "\n"
 
     return StreamingResponse(lines(), media_type="application/x-ndjson", headers={"Cache-Control": "no-store"})
@@ -229,10 +238,14 @@ def verses(q: str, k: int = 3) -> dict:
         out.append({**{f: getattr(card, f) for f in ("id", "ref", "chapter", "chapter_name", "chapter_name_sanskrit",
                                                     "speaker", "addressed_to", "sanskrit", "transliteration",
                                                     "translation", "translation_source")},
-                    "chapter_theme": ch["meaning"]})
+                    "chapter_theme": ch["meaning"], "speaker_hindi": SPEAKER_HI.get(card.speaker, card.speaker),
+                    "listener_hindi": SPEAKER_HI.get(card.addressed_to, card.addressed_to)})
     log.info("find_verses q=%r -> %s", q[:200], [v["id"] for v in out])
     return {"verses": out, "situations": sits,
-            "note": "Quote translations exactly as given. If none fit, say the Gita does not address this directly."}
+            "note": ("The translation is English. In an English conversation quote it exactly as given. In a Hindi or "
+                     "Hinglish conversation do not read the English aloud: explain the verse in simple Hindi in your own "
+                     "words, faithful to it, and say the exact translation is on screen. If none fit, say the Gita does "
+                     "not address this directly.")}
 
 
 @app.post("/api/triage")

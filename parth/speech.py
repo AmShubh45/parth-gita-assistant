@@ -1,16 +1,20 @@
 """Speaking answers aloud: the spoken script and Gemini text-to-speech.
 
-The script is built from the verified answer (never from new model text), in the person's language.
-Audio comes from Gemini TTS, cached and capped per day. When TTS is unavailable the page reads the
-same script with the browser's own voice, so an answer is always spoken."""
+The script is built from the verified answer (never from new model text), in the answer's language
+only: a Hindi answer is never read with English in it. Audio comes from Gemini TTS with one fixed
+voice, cached, capped per day and loudness-normalised. Only the answer text is sent to TTS (a style
+instruction in front of it gets read aloud). When TTS is unavailable the page reads the same script
+with the browser's own voice, so an answer is always spoken."""
 from __future__ import annotations
 
 import base64
+import array
 import hashlib
 import hmac
 import io
 import logging
 import os
+import re
 import time
 import wave
 from collections import OrderedDict
@@ -25,11 +29,7 @@ TTS_MODELS = tuple(m.strip() for m in os.environ.get(
     "PARTH_TTS_MODEL", "gemini-3.8-flash-lite-tts,gemini-3.8-flash-tts,gemini-3.1-flash-tts-preview,gemini-2.5-flash-preview-tts"
 ).split(",") if m.strip())
 VOICE = os.environ.get("PARTH_TTS_VOICE", "Charon")
-STYLE = {
-    "hi": "Read this in calm, warm, natural Hindi, like a wise elder speaking gently to someone who is troubled:",
-    "hinglish": "Read this in calm, warm, natural Hindi (it is written in Roman letters), like a wise elder speaking gently:",
-    "en": "Read this in a calm, warm, gentle voice with an Indian English accent, like a wise elder speaking to someone who is troubled:",
-}
+ON_SCREEN = {"hi": "इसका अनुवाद स्क्रीन पर लिखा है।", "hinglish": "Iska anuvaad screen par likha hai."}
 
 
 def segments(answer: dict) -> list[str]:
@@ -47,11 +47,22 @@ def segments(answer: dict) -> list[str]:
                 head = f"Adhyay {v['chapter']}, shlok {num} mein {v['speaker']} kehte hain."
             else:
                 head = f"In chapter {v['chapter']}, verse {num}, {v['speaker']} says:"
-            # with an explanation: its meaning and what it means for you; without one: the authentic translation itself
-            body = [v.get("meaning", ""), v.get("application", "")] if kind == "answer" else [v.get("translation", "")]
+            if kind == "answer":      # its meaning and what it means for you, in the answer's language
+                body = [v.get("meaning", ""), v.get("application", "")]
+            elif lang == "en":        # no explanation available: the authentic translation itself
+                body = [v.get("translation", "")]
+            else:                     # Hindi/Hinglish without an explanation: the Sanskrit, never the English
+                sp, to = SPEAKER_HI.get(v["speaker"], v["speaker"]), SPEAKER_HI.get(v["addressed_to"], v["addressed_to"])
+                head = (f"अध्याय {v['chapter']}, श्लोक {num} में {sp} {to} से कहते हैं:" if lang == "hi" else
+                        f"Adhyay {v['chapter']}, shlok {num} mein {v['speaker']} {v['addressed_to']} se kehte hain:")
+                body = [_shloka(v.get("sanskrit", "")), ON_SCREEN[lang]]
             out.append(" ".join(p.strip() for p in [head, *body] if p and p.strip()))
         out.append(answer.get("closing", ""))
     return [p.strip() for p in out if p and p.strip()]
+
+
+def _shloka(text: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"[।॥]+", "।", text)).strip()
 
 
 def script(answer: dict) -> str:
@@ -67,6 +78,19 @@ def sign(key: str, lang: str, text: str) -> str:
 def speech_items(answer: dict, key: str) -> list[dict]:
     lang = answer.get("lang", "en")
     return [{"text": t, "sig": sign(key, lang, t)} for t in segments(answer)]
+
+
+def louder(pcm: bytes, peak_to: float = 0.89) -> bytes:
+    """Peak-normalise 16-bit PCM to about -1 dBFS (gain capped at 8x), so answers are not quiet."""
+    a = array.array("h")
+    a.frombytes(pcm[: len(pcm) // 2 * 2])
+    peak = max((abs(x) for x in a), default=0)
+    if not peak:
+        return pcm
+    g = min(8.0, peak_to * 32767 / peak)
+    if 0.95 < g < 1.05:
+        return pcm
+    return array.array("h", (max(-32768, min(32767, int(x * g))) for x in a)).tobytes()
 
 
 def wav(pcm: bytes, rate: int = 24000) -> bytes:
@@ -89,6 +113,7 @@ class Speaker:
         self.cache: OrderedDict[str, bytes] = OrderedDict()
         self.cache_size = cache_size
         self._dead: dict[str, float] = {}
+        self.preferred = ""  # the model that last worked: kept first, so the voice does not change between pieces
 
     def _take(self) -> bool:
         today = time.strftime("%Y-%m-%d", time.gmtime())
@@ -110,12 +135,12 @@ class Speaker:
             return self.cache[k]
         if not self._take():
             return None
-        prompt = f"{STYLE.get(lang, STYLE['en'])}\n\n{text}"
+        order = sorted(TTS_MODELS, key=lambda m: m != self.preferred)
         async with httpx.AsyncClient(timeout=40) as client:
-            for model in TTS_MODELS:
+            for model in order:
                 if time.monotonic() - self._dead.get(model, -1e9) < 3600:
                     continue
-                payload = {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                payload = {"contents": [{"role": "user", "parts": [{"text": text}]}],
                            "generationConfig": {"responseModalities": ["AUDIO"], "speechConfig": {
                                "voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICE}}}}}
                 try:
@@ -139,7 +164,8 @@ class Speaker:
                 except (KeyError, IndexError, StopIteration, ValueError):
                     log.warning("tts %s returned no audio", model)
                     continue
-                audio = wav(pcm, rate)
+                audio = wav(louder(pcm), rate)
+                self.preferred = model
                 self.cache[k] = audio
                 while len(self.cache) > self.cache_size:
                     self.cache.popitem(last=False)

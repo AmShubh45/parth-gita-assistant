@@ -231,13 +231,14 @@ class Engine:
                                    audio=("audio/wav", audio_wav))
 
     async def answer(self, question: str, use_model: bool = True, understanding: dict | None = None,
-                     history: list[str] | None = None) -> Answer:
+                     history: list[str] | None = None, lang: str | None = None) -> Answer:
         """use_model=False answers from the knowledge base alone (e.g. when the daily AI budget is spent).
         understanding: a result already computed (e.g. by understand_audio), so the model is not asked twice.
-        history: the person's previous questions in this conversation, for follow-ups like "aur batao"."""
+        history: the person's previous questions in this conversation, for follow-ups like "aur batao".
+        lang: answer in this language ("hi", "hinglish", "en") instead of the question's own language."""
         t0 = time.monotonic()
         question = (question or "").strip()[:2000]
-        lang = detect(question)
+        lang = lang if lang in LANG_NAME else detect(question)
         trace: dict = {"steps": []}
         tri = triage(question, lang)
         if tri.kind != "ok":

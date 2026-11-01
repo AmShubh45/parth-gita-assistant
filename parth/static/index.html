@@ -78,6 +78,7 @@ textarea:focus{outline:none;border-color:var(--peacock)}
 .opts label{display:inline-flex;align-items:center;gap:7px;cursor:pointer;color:var(--muted)}
 .opts input{accent-color:var(--peacock);width:17px;height:17px;margin:0}
 .opts input:checked + span{color:var(--ink)}
+.opts select{font:inherit;font-size:14.5px;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:2px 10px;cursor:pointer}
 .beta{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:0 6px;margin-left:2px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .chips button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 13px;font-size:15px}
@@ -103,6 +104,9 @@ textarea:focus{outline:none;border-color:var(--peacock)}
 .tr{background:var(--soft);border-radius:12px;padding:12px 14px;margin:0 0 14px}
 .tr p{margin:0;font-size:16.5px}
 .tr small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+.tr-more{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:8px 14px}
+.tr-more summary{cursor:pointer;color:var(--muted);font-size:14px}
+.tr-more p{margin:8px 0 2px;font-size:16px}
 .sec{margin:12px 0 0}
 .sec h3{font-family:var(--f-ui);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);margin:0 0 2px;font-weight:600}
 .sec p{margin:0}
@@ -120,7 +124,8 @@ textarea:focus{outline:none;border-color:var(--peacock)}
 
 footer{margin-top:44px;padding-block:22px 36px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
 footer p{margin:0 0 6px}
-#dbg{position:fixed;left:8px;right:8px;bottom:8px;z-index:9;background:#000c;color:#9fe;padding:6px 10px;border-radius:10px;font:12px/1.4 ui-monospace,monospace}
+#dbg{position:fixed;left:8px;right:8px;bottom:8px;z-index:9;max-height:42vh;overflow:auto;background:#000d;color:#9fe;padding:6px 10px;border-radius:10px;font:12px/1.4 ui-monospace,monospace}
+#dbg ol{list-style:none;margin:4px 0 0;padding:0;color:#cde}
 @media (max-width:520px){
   .voice{flex-wrap:wrap}
   .vtext{flex-basis:calc(100% - 90px)}
@@ -167,6 +172,7 @@ footer p{margin:0 0 6px}
       <label><input type="checkbox" id="optSpeak" checked><span>🔊 उत्तर बोलकर सुनाएँ · Speak answers</span></label>
       <label><input type="checkbox" id="optConvo"><span>🔁 बातचीत मोड · Conversation mode</span></label>
       <label title="Real-time voice with Gemini Live. Still being tuned."><input type="checkbox" id="optLive"><span>⚡ Live बातचीत</span><span class="beta">beta</span></label>
+      <label title="Auto answers in the language you ask in"><span>🌐 उत्तर की भाषा · Answer</span><select id="optLang" aria-label="Answer language"><option value="">Auto</option><option value="hi">हिंदी</option><option value="en">English</option></select></label>
     </div>
   </section>
   <div class="chips" id="chips" aria-label="Example questions">
@@ -190,14 +196,14 @@ footer p{margin:0 0 6px}
 (() => {
   const $ = (id) => document.getElementById(id);
   const thread = $("thread"), form = $("ask"), q = $("q"), go = $("go"), mic = $("mic");
-  const optSpeak = $("optSpeak"), optConvo = $("optConvo"), optLive = $("optLive");
+  const optSpeak = $("optSpeak"), optConvo = $("optConvo"), optLive = $("optLive"), optLang = $("optLang");
   const DEBUG = /[?&]debug=1/.test(location.search);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const L = {
-    hi: { finding: "आपके लिए श्लोक खोजे जा रहे हैं…", tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", helped: "क्या इससे मदद मिली?", yes: "हाँ", no: "यह फिट नहीं बैठता", thanks: "धन्यवाद!", ch: "अध्याय", listen: "🔊 सुनें", stop: "⏹ रोकें", you: "आपने कहा", err: "कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।" },
-    hinglish: { finding: "Aapke liye shlok dhoondhe ja rahe hain…", tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", helped: "Kya isse madad mili?", yes: "Haan", no: "Ye fit nahi baithta", thanks: "Dhanyavaad!", ch: "Adhyay", listen: "🔊 Suniye", stop: "⏹ Rokiye", you: "Aapne kaha", err: "Kuch gadbad hui. Please phir try kariye." },
-    en: { finding: "Finding the verses that speak to you…", tr: "Translation", ctx: "Context", apply: "For you", helped: "Did this help?", yes: "Yes", no: "Doesn't fit", thanks: "Thank you!", ch: "Chapter", listen: "🔊 Listen", stop: "⏹ Stop", you: "You said", err: "Something went wrong. Please try again." },
+    hi: { finding: "आपके लिए श्लोक खोजे जा रहे हैं…", tr: "अनुवाद", ctx: "प्रसंग", apply: "आपके लिए", helped: "क्या इससे मदद मिली?", yes: "हाँ", no: "यह फिट नहीं बैठता", thanks: "धन्यवाद!", ch: "अध्याय", listen: "🔊 सुनें", stop: "⏹ रोकें", you: "आपने कहा", trEn: "अंग्रेज़ी अनुवाद (मूल स्रोत)", err: "कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।" },
+    hinglish: { finding: "Aapke liye shlok dhoondhe ja rahe hain…", tr: "Translation", ctx: "Prasang (context)", apply: "Aapke liye", helped: "Kya isse madad mili?", yes: "Haan", no: "Ye fit nahi baithta", thanks: "Dhanyavaad!", ch: "Adhyay", listen: "🔊 Suniye", stop: "⏹ Rokiye", you: "Aapne kaha", trEn: "English anuvaad (mool srot)", err: "Kuch gadbad hui. Please phir try kariye." },
+    en: { finding: "Finding the verses that speak to you…", tr: "Translation", ctx: "Context", apply: "For you", helped: "Did this help?", yes: "Yes", no: "Doesn't fit", thanks: "Thank you!", ch: "Chapter", listen: "🔊 Listen", stop: "⏹ Stop", you: "You said", trEn: "Translation", err: "Something went wrong. Please try again." },
   };
   const SPEAKER = { hi: { Krishna: "श्रीकृष्ण", Arjuna: "अर्जुन", Sanjaya: "संजय", Dhritarashtra: "धृतराष्ट्र" } };
   const guessLang = (t) => (/[ऀ-ॿ]/.test(t) ? "hi" : /\b(hai|hain|mujhe|kya|nahi|mera|meri|bahut|kaise|ki|ke|kar|aur|main)\b/i.test(t) ? "hinglish" : "en");
@@ -241,20 +247,31 @@ footer p{margin:0 0 6px}
     const p = JSON.parse(localStorage.getItem("sarathi.prefs") || "{}");
     if (typeof p.speak === "boolean") optSpeak.checked = p.speak;
     if (typeof p.convo === "boolean") optConvo.checked = p.convo;
+    if (["", "hi", "en"].includes(p.lang)) optLang.value = p.lang;
   } catch {}
-  const savePrefs = () => { try { localStorage.setItem("sarathi.prefs", JSON.stringify({ speak: optSpeak.checked, convo: optConvo.checked })); } catch {} };
+  const savePrefs = () => { try { localStorage.setItem("sarathi.prefs", JSON.stringify({ speak: optSpeak.checked, convo: optConvo.checked, lang: optLang.value })); } catch {} };
   optSpeak.onchange = () => { savePrefs(); if (!optSpeak.checked) stopSpeaking(); };
   optConvo.onchange = savePrefs;
+  optLang.onchange = savePrefs;
+  const ansLang = (text) => optLang.value || guessLang(text || "");   // the language the answer will be in
   optLive.onchange = () => { if (!optLive.checked && S) stopLive(); if (rec) finish(rec, "cancel"); vstate(optLive.checked ? "live_hint" : "idle", optLive.checked ? { live_hint: ["Live बातचीत · Tap to start", "रियल-टाइम आवाज़ (beta): 🎙 दबाकर बात शुरू करें"] } : VS); };
 
   // ---------------------------------------------------------------- diagnostics (no audio, no transcripts)
   const sid = Math.random().toString(36).slice(2, 10);
   function report(event, detail = "") {
+    dlog(event, detail);
     const body = JSON.stringify({ sid, event, detail: String(detail).slice(0, 300) });
     try { navigator.sendBeacon ? navigator.sendBeacon("/api/live/event", new Blob([body], { type: "application/json" })) : fetch("/api/live/event", { method: "POST", headers: { "content-type": "application/json" }, body }); } catch {}
   }
-  const dbg = DEBUG ? (() => { const d = document.createElement("div"); d.id = "dbg"; document.body.append(d); return d; })() : null;
-  const diag = (t) => { if (dbg) dbg.textContent = t; };
+  // ?debug=1: what happened, in order, on screen (so a phone screenshot shows where a session stops)
+  const dbg = DEBUG ? (() => { const d = document.createElement("div"); d.id = "dbg"; d.append(document.createElement("div"), document.createElement("ol")); document.body.append(d); return d; })() : null;
+  const diag = (t) => { if (dbg) dbg.firstChild.textContent = t; };
+  function dlog(event, detail = "") {
+    if (!dbg) return;
+    const li = document.createElement("li"); li.textContent = `${new Date().toTimeString().slice(0, 8)} ${event} ${detail}`;
+    dbg.lastChild.prepend(li);
+    while (dbg.lastChild.children.length > 30) dbg.lastChild.lastChild.remove();
+  }
 
   // ---------------------------------------------------------------- rendering
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -272,8 +289,14 @@ footer p{margin:0 0 6px}
     head.append(left, el("span", null, `${sp[v.speaker] || v.speaker} → ${sp[v.addressed_to] || v.addressed_to}`));
     c.append(head, el("p", "shloka", v.sanskrit));
     const tl = el("p", "translit", v.transliteration); tl.lang = "sa-Latn"; c.append(tl);
-    if (v.translation) { const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); c.append(tr); }
-    [section(t.ctx, v.context), section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply")].forEach((s) => s && c.append(s));
+    const trBox = () => { if (!v.translation) return null; const tr = el("div", "tr"); tr.append(el("p", null, v.translation), el("small", null, `${t.tr} · ${v.translation_source}`)); return tr; };
+    const trMore = () => { if (!v.translation) return null; const d = el("details", "tr-more"); d.append(el("summary", null, `${t.trEn} · ${v.translation_source}`), el("p", null, v.translation)); d.lang = "en"; return d; };
+    // A Hindi answer leads with its Hindi meaning; the authentic (English) translation stays one tap away.
+    const hindiFirst = (a.lang === "hi" || a.lang === "hinglish") && v.meaning;
+    (hindiFirst
+      ? [section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply"), section(t.ctx, v.context), trMore()]
+      : [trBox(), section(t.ctx, v.context), section(a.meaning_label, v.meaning), section(t.apply, v.application, "apply")]
+    ).forEach((s) => s && c.append(s));
     if (question && (a.kind === "answer" || a.kind === "fallback")) {
       const fb = el("div", "fb"); fb.append(el("span", null, t.helped));
       [[t.yes, true], [t.no, false]].forEach(([label, helpful]) => {
@@ -298,7 +321,7 @@ footer p{margin:0 0 6px}
     const you = el("p", "you");
     if (spoken) you.append(el("small", null, "🎙"));
     you.append(el("span", "said-text", question || "…"));
-    const st = el("div", "status"); st.append(el("span", "dot"), el("span", null, (L[guessLang(question || "")] || L.hi).finding));
+    const st = el("div", "status"); st.append(el("span", "dot"), el("span", null, (L[ansLang(question)] || L.hi).finding));
     turn.append(you, st);
     thread.append(turn);
     turn.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
@@ -306,11 +329,12 @@ footer p{margin:0 0 6px}
   }
   function setYou(turn, text) {
     turn.querySelector(".said-text").textContent = text;
-    const st = turn.querySelector(".status span:last-child"); if (st) st.textContent = (L[guessLang(text)] || L.hi).finding;
+    const st = turn.querySelector(".status span:last-child"); if (st) st.textContent = (L[ansLang(text)] || L.hi).finding;
   }
   function renderAnswer(turn, a, question) {
     turn.querySelector(".status")?.remove();
     turn.answer = a;
+    dlog("answer", `${a.kind} ${a.lang}${a.why ? " why=" + a.why : ""}`);
     const t = L[a.lang] || L.en;
     if (a.speech && a.speech.length) {
       const b = el("button", "listen", t.listen); b.type = "button"; b.setAttribute("aria-pressed", "false");
@@ -326,15 +350,24 @@ footer p{margin:0 0 6px}
   }
   function turnError(turn, lang, text) { turn.querySelector(".status")?.remove(); turn.append(el("div", "plain", text || (L[lang] || L.hi).err)); }
 
-  // ---------------------------------------------------------------- audio: one context, started inside a tap
-  // Phones only let audio play from a context that was created or resumed during a tap; everything
-  // afterwards (the answer arriving seconds later) plays through this same context.
-  let actx = null, speechUnlocked = false;
+  // ---------------------------------------------------------------- audio
+  // Answers play through <audio> elements, never through the Web Audio context that records the mic:
+  // once the mic has been used, phones send Web Audio output to the quiet call earpiece. Both elements are
+  // unlocked during the first tap, so answers that arrive seconds later can still play.
+  const player = new Audio(), livePlayer = new Audio();
+  player.preload = "auto";
+  let actx = null, unlocked = false, speechUnlocked = false;
+  function session(type) { try { if (navigator.audioSession) navigator.audioSession.type = type; } catch {} }   // iOS 16.4+
   function unlockAudio() {
     try {
-      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();   // for the microphone (and Live's stream)
       if (actx.state !== "running") actx.resume().catch(() => {});
     } catch {}
+    if (!unlocked) {
+      unlocked = true;
+      const silent = URL.createObjectURL(new Blob([wavFrom([new Int16Array(1600)], 16000)], { type: "audio/wav" }));
+      for (const el2 of [player, livePlayer]) { try { el2.src = silent; const pr = el2.play(); if (pr && pr.catch) pr.catch(() => {}); } catch {} }
+    }
     if (!speechUnlocked && "speechSynthesis" in window) { try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } catch {} speechUnlocked = true; }
     return actx;
   }
@@ -345,34 +378,51 @@ footer p{margin:0 0 6px}
   if ("speechSynthesis" in window) { voices = speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => { voices = speechSynthesis.getVoices(); }; }
 
   async function fetchSpeech(item, lang) {
-    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 20000);
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 25000);
     try {
       const r = await fetch("/api/speak", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: item.text, lang, sig: item.sig }), signal: ctl.signal });
       if (r.status === 204) { ttsDownUntil = Date.now() + 5 * 60000; return null; }
       if (!r.ok) return null;
-      const data = await r.arrayBuffer();
-      return await new Promise((res, rej) => { const p = unlockAudio().decodeAudioData(data, res, rej); if (p && p.catch) p.catch(rej); });
+      return URL.createObjectURL(await r.blob());
     } catch { return null; } finally { clearTimeout(timer); }
   }
-  async function playBuffer(buf, id) {
-    const ctx = unlockAudio();
-    if (ctx.state !== "running") { await Promise.race([ctx.resume().catch(() => {}), new Promise((r) => setTimeout(r, 800))]); }
-    if (ctx.state !== "running" || id !== speakSeq) return false;
+  // one retry, so a single slow piece does not switch the answer to a different voice
+  const fetchPiece = (item, lang) => fetchSpeech(item, lang).then((u) => u || (Date.now() < ttsDownUntil ? null : fetchSpeech(item, lang)));
+
+  function playURL(url, id) {
     return new Promise((res) => {
-      const src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination);
-      const guard = setTimeout(() => res(true), buf.duration * 1000 + 1500);
-      src.onended = () => { clearTimeout(guard); res(true); };
-      if (speaking) speaking.src = src;
-      src.start();
+      if (id !== speakSeq) return res(false);
+      let done = false, guard = 0;
+      const end = (ok) => {
+        if (done) return; done = true; clearTimeout(guard);
+        player.onended = player.onerror = player.onloadedmetadata = null;
+        res(ok);
+      };
+      if (speaking) speaking.end = end;
+      session("playback");
+      player.onended = () => end(true);
+      player.onerror = () => end(false);
+      player.onloadedmetadata = () => { clearTimeout(guard); const d = isFinite(player.duration) ? player.duration : 30; guard = setTimeout(() => end(true), d * 1000 + 3000); };
+      guard = setTimeout(() => end(true), 60000);
+      player.src = url;
+      const pr = player.play();
+      if (pr && pr.catch) pr.catch((e) => { report("voice_error", "play " + (e && e.name)); end(false); });
     });
   }
-  function sayBrowser(text, lang, id) {
+  // The browser's own voice, used only when Gemini's voice is unavailable: one voice for every language
+  // (a Hindi voice also reads English), so the narrator does not change between questions.
+  function browserVoice(text) {
+    const hi = voices.filter((x) => /^hi/i.test(x.lang || ""));
+    const hv = hi.find((x) => /google/i.test(x.name)) || hi[0];
+    if (hv) return hv;
+    return /[ऀ-ॿ]/.test(text) ? null : voices.find((x) => /^en[-_]IN/i.test(x.lang || "")) || null;
+  }
+  function sayBrowser(text, id) {
     return new Promise((res) => {
       if (!("speechSynthesis" in window) || id !== speakSeq) return res();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = lang === "en" ? "en-IN" : "hi-IN";
-      const v = voices.find((x) => x.lang === u.lang) || voices.find((x) => x.lang && x.lang.toLowerCase().startsWith(u.lang.slice(0, 2)));
-      if (v) u.voice = v;
+      session("playback");
+      const u = new SpeechSynthesisUtterance(text), v = browserVoice(text);
+      if (v) { u.voice = v; u.lang = v.lang; } else u.lang = /[ऀ-ॿ]/.test(text) ? "hi-IN" : "en-IN";
       u.rate = 0.95;
       const guard = setTimeout(res, 5000 + text.length * 110);
       u.onend = u.onerror = () => { clearTimeout(guard); res(); };
@@ -384,23 +434,25 @@ footer p{margin:0 0 6px}
     stopSpeaking();
     const id = ++speakSeq, items = a.speech, lang = a.lang;
     const btn = turn.querySelector(".listen"), t = L[lang] || L.en;
-    speaking = { id, turn, src: null };
+    speaking = { id, turn, end: null };
     if (btn) { btn.textContent = t.stop; btn.setAttribute("aria-pressed", "true"); }
     setState("speaking"); vstate("speaking");
     const audio = turn.audio || (turn.audio = []);   // kept for replay
-    const get = (i) => audio[i] || (audio[i] = fetchSpeech(items[i], lang));
+    const get = (i) => audio[i] || (audio[i] = fetchPiece(items[i], lang));
     let browser = Date.now() < ttsDownUntil;
     for (let i = 0; i < items.length && id === speakSeq; i++) {
       if (!browser) { get(i); if (i + 1 < items.length) get(i + 1); }   // the next piece is prepared while this one plays
-      const buf = browser ? null : await audio[i];
+      const url = browser ? null : await audio[i];
       if (id !== speakSeq) return;
-      const played = buf ? await playBuffer(buf, id) : false;
+      const played = url ? await playURL(url, id) : false;
+      if (id !== speakSeq) return;
       if (!played) {
-        if (!browser) { browser = true; report("tts_fallback", buf ? `ctx=${actx && actx.state}` : "no_audio"); }
-        await sayBrowser(items[i].text, lang, id);
+        if (!browser) { browser = true; report("tts_fallback", `${i ? "mid" : "first"} ${url ? "play_failed" : "no_audio"}`); }
+        await sayBrowser(items[i].text, id);
       }
     }
     if (id !== speakSeq) return;
+    dlog("voice", browser ? "browser" : "gemini");
     speaking = null;
     if (btn) { btn.textContent = t.listen; btn.setAttribute("aria-pressed", "false"); }
     setState("idle"); vstate("idle");
@@ -408,8 +460,9 @@ footer p{margin:0 0 6px}
   }
   function stopSpeaking() {
     speakSeq++;
+    try { player.pause(); } catch {}
     if (speaking) {
-      try { speaking.src && speaking.src.stop(); } catch {}
+      const end = speaking.end; speaking.end = null; if (end) end(false);
       const btn = speaking.turn.querySelector(".listen"), t = L[(speaking.turn.answer || {}).lang] || L.en;
       if (btn) { btn.textContent = t.listen; btn.setAttribute("aria-pressed", "false"); }
       speaking = null;
@@ -433,11 +486,11 @@ footer p{margin:0 0 6px}
     if (question.length < 2) { q.focus(); return; }
     if (state === "thinking") return;
     unlockAudio(); stopSpeaking(); if (rec) finish(rec, "cancel");
-    const lang = guessLang(question);
+    const lang = ansLang(question);
     go.disabled = true; setState("thinking"); vstate("finding");
     const turn = newTurn(question, false);
     try {
-      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, history: history.slice(-2) }) });
+      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question, history: history.slice(-2), lang: optLang.value || undefined }) });
       const a = await r.json();
       if (!r.ok && !a.opening) throw new Error(r.status);
       remember(question); q.value = "";
@@ -454,14 +507,17 @@ footer p{margin:0 0 6px}
 
   // ---------------------------------------------------------------- asking (spoken): record, then send
   let rec = null, captureReady = null;
-  const MIC = { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } };
+  // No echo cancellation (or the other call processing): it switches phones into call mode, which makes every
+  // sound quiet. Nothing plays while we record, and Live sends silence while it speaks, so there is no echo.
+  const MIC = { audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false, channelCount: 1 } };
 
   async function startListening(auto = false) {
     const ctx = unlockAudio();
     if (!ctx || !navigator.mediaDevices || !window.AudioWorkletNode) { vstate("voice_unavailable", ERR); return; }
     stopSpeaking();
-    const r = rec = { chunks: [], n: 0, noise: 0.006, loud: 0, peak: 0, speechIdx: -1, lastVoiceIdx: 0, lastVoice: 0, t0: 0, auto };
+    const r = rec = { chunks: [], n: 0, noise: 0.003, loud: 0, peak: 0, speechIdx: -1, lastVoiceIdx: 0, lastVoice: 0, t0: 0, auto };
     setState("listening"); vstate("starting");
+    session("play-and-record");
     let stream;
     try { stream = await navigator.mediaDevices.getUserMedia(MIC); }
     catch (e) { if (rec === r) rec = null; setState("idle"); vstate("mic_denied", ERR); report("voice_error", "mic_denied " + (e && e.name)); return; }
@@ -479,6 +535,9 @@ footer p{margin:0 0 6px}
     vstate(auto ? "again" : "listening");
     r.maxTimer = setTimeout(() => finish(r, "max"), 30000);
     if (ctx.state !== "running") ctx.resume().catch(() => {});
+    setTimeout(() => {   // the microphone never started (e.g. the browser kept audio paused): say so instead of waiting
+      if (rec === r && r.n === 0) { report("voice_error", `no_mic_audio ctx=${ctx.state}`); finish(r, "cancel"); vstate("no_mic", { no_mic: ["माइक शुरू नहीं हुआ · The mic didn't start", "🎙 फिर से दबाएँ"] }); }
+    }, 3000);
   }
 
   // Voice activity: learn the room's noise level, notice speech, and send once the person pauses for ~1.5 s.
@@ -488,7 +547,7 @@ footer p{margin:0 0 6px}
     let e = 0; for (let i = 0; i < pcm.length; i++) e += pcm[i] * pcm[i];
     const lvl = Math.sqrt(e / pcm.length) / 32768, now = performance.now();
     r.peak = Math.max(r.peak, lvl);
-    const thr = Math.min(0.08, Math.max(0.012, r.noise * 3));
+    const thr = Math.min(0.08, Math.max(0.006, r.noise * 3));
     if (lvl > thr) {
       r.loud++; r.lastVoice = now; r.lastVoiceIdx = r.chunks.length;
       if (r.loud >= 3 && r.speechIdx < 0) r.speechIdx = Math.max(0, r.chunks.length - 3);
@@ -514,7 +573,12 @@ footer p{margin:0 0 6px}
     }
     const from = Math.max(0, (r.speechIdx < 0 ? 0 : r.speechIdx) - 10);        // keep ~0.3 s before speech
     const to = r.speechIdx < 0 ? r.chunks.length : Math.min(r.chunks.length, r.lastVoiceIdx + 14);  // and ~0.45 s after
-    sendVoice(wavFrom(r.chunks.slice(from, to), 16000));
+    const parts = r.chunks.slice(from, to);
+    // the mic has no automatic gain now, so bring quiet recordings up to a clear level
+    let peak = 0; for (const c of parts) for (let i = 0; i < c.length; i++) { const x = c[i] < 0 ? -c[i] : c[i]; if (x > peak) peak = x; }
+    const g = peak ? Math.min(8, 29000 / peak) : 1;
+    if (g > 1.1) for (const c of parts) for (let i = 0; i < c.length; i++) c[i] = Math.max(-32768, Math.min(32767, Math.round(c[i] * g)));
+    sendVoice(wavFrom(parts, 16000));
   }
 
   function wavFrom(chunks, rate) {
@@ -543,7 +607,7 @@ footer p{margin:0 0 6px}
     const turn = newTurn("…", true);
     let heard = "", answered = false;
     try {
-      const r = await fetch("/api/voice", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ audio: b64(wav), history: history.slice(-2) }) });
+      const r = await fetch("/api/voice", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ audio: b64(wav), history: history.slice(-2), lang: optLang.value || undefined }) });
       if (!r.ok) { const e = await r.json().catch(() => ({})); throw Object.assign(new Error("http"), { code: e.error || "other" }); }
       for await (const m of ndjson(r)) {
         if (m.error) throw Object.assign(new Error(m.error), { code: m.error });
@@ -559,7 +623,7 @@ footer p{margin:0 0 6px}
     } catch (e) {
       const code = e.code || (e instanceof TypeError ? "network" : "other");
       report("voice_error", code);
-      if (!heard) turn.remove(); else turnError(turn, guessLang(heard));
+      if (!heard) turn.remove(); else turnError(turn, ansLang(heard));
       setState("idle"); vstate(code, ERR);
     }
   }
@@ -597,8 +661,13 @@ footer p{margin:0 0 6px}
     const ctx = unlockAudio();
     if (!ctx || !window.AudioWorkletNode) { vstate("voice_unavailable", ERR); return; }
     stopSpeaking();
+    session("play-and-record");
     const micP = navigator.mediaDevices.getUserMedia(MIC);
-    S = { micP, ready: false, you: null, parth: null, turn: null, playEnd: 0, sent: 0, recv: 0, peak: 0, tok: null, st: newStats(), unknown: new Set(), dropping: false, lang: "hi" };
+    // Live audio is played by an <audio> element (unlocked here, in the tap), not by the context's own output
+    const dest = ctx.createMediaStreamDestination();
+    livePlayer.srcObject = dest.stream;
+    const pr = livePlayer.play(); if (pr && pr.catch) pr.catch((e) => report("voice_error", "live_play " + (e && e.name)));
+    S = { micP, dest, ready: false, you: null, parth: null, turn: null, playEnd: 0, sent: 0, recv: 0, peak: 0, tok: null, st: newStats(), unknown: new Set(), dropping: false, lang: "hi" };
     setState("live"); vstate("live_connecting");
     liveConnect(0).catch((e) => { report("start_error", e && e.message); failLive(String(e && e.message || e)); });
   }
@@ -611,9 +680,10 @@ footer p{margin:0 0 6px}
       s.mic = stream;
       await Promise.all([ctx.audioWorklet.addModule("/static/playback.worklet.js"), captureReady = captureReady || ctx.audioWorklet.addModule("/static/capture.worklet.js")]);
       if (S !== s) return;
-      s.player = new AudioWorkletNode(ctx, "parth-playback"); s.player.connect(ctx.destination);
+      s.player = new AudioWorkletNode(ctx, "parth-playback"); s.player.connect(s.dest);
       s.src = ctx.createMediaStreamSource(stream); s.cap = new AudioWorkletNode(ctx, "parth-capture"); s.mute = ctx.createGain(); s.mute.gain.value = 0;
       s.src.connect(s.cap).connect(s.mute).connect(ctx.destination);
+      s.cap.port.postMessage({ agc: true });   // gentle automatic gain in our worklet instead of the browser's call mode
       s.cap.port.onmessage = ({ data }) => {
         s.peak = Math.max(s.peak, data.level);
         if (!playing()) mic.style.setProperty("--lvl", Math.min(0.5, data.level * 5).toFixed(3));
@@ -739,7 +809,8 @@ footer p{margin:0 0 6px}
         const a = { lang: s.lang, kind: "verses", meaning_label: "" };
         data.verses.forEach((v) => turn.append(verseCard(v, a, null)));
         const brief = data.verses.map((v) => ({ id: v.id, speaker: v.speaker, listener: v.addressed_to, chapter: `${v.chapter} (${v.chapter_name}: ${v.chapter_theme})`,
-          translation: v.translation, translation_by: v.translation_source }));
+          speaker_hindi: v.speaker_hindi, listener_hindi: v.listener_hindi, chapter_hindi: v.chapter_name_sanskrit,
+          translation_english: v.translation, translation_by: v.translation_source }));
         return { id: fc.id, name: fc.name, response: { result: { verses: brief, note: data.note } } };
       } catch (e) { return { id: fc.id, name: fc.name, response: { error: "lookup failed" } }; }
     }));
@@ -761,6 +832,7 @@ footer p{margin:0 0 6px}
     try { s.ws && s.ws.readyState <= 1 && s.ws.close(1000); } catch {}
     s.mic ? s.mic.getTracks().forEach((t) => t.stop()) : s.micP.then((m) => m.getTracks().forEach((t) => t.stop())).catch(() => {});
     try { s.cap && (s.cap.port.onmessage = null); s.src && s.src.disconnect(); s.cap && s.cap.disconnect(); s.player && s.player.disconnect(); } catch {}
+    try { livePlayer.pause(); livePlayer.srcObject = null; } catch {}
     mic.style.setProperty("--lvl", 0);
     setState("idle"); vstate("idle");
   }
