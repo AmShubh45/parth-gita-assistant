@@ -1,3 +1,5 @@
+> **Parth v2 is being rebuilt on the `v2` branch** (Python/FastAPI, grounded answers with exact verse citations, and a 24/7 YouTube live stream). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The original Node.js version is kept on the `legacy-node` branch and still runs from `main`.
+
 # पार्थ - Gita Assistant 🕉️
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
