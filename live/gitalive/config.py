@@ -26,6 +26,9 @@ def load_env(path: Path) -> dict[str, str]:
 
 @dataclass
 class Config:
+    # "cloud": render and stream by ourselves through ffmpeg, vertical 1080x1920 (the EscapeArenaLive way,
+    # for a 24/7 server); "obs": show an overlay page that OBS captures (the laptop way).
+    stream_mode: str = "cloud"
     sarathi_url: str = "https://parth-gita-assistant-1.onrender.com"
     live_token: str = ""
     yt_stream_key: str = ""
@@ -41,10 +44,21 @@ class Config:
     silent_seconds: float = 20.0
     overlay_port: int = 8770
     keep_awake: bool = False
+    data_dir: Path = HERE
     cache_dir: Path = HERE / "cache"
     log_dir: Path = HERE / "logs"
     state_file: Path = HERE / "state.json"
     music_file: Path = HERE / "assets" / "music.mp3"
+    fonts_dir: Path = HERE / "fonts"            # baked into the Docker image, outside the data volume
+    # cloud streaming (same knobs as EscapeArenaLive's .env)
+    rtmp_url: str = "rtmps://a.rtmps.youtube.com/live2"
+    scale: str = "auto"                         # auto | 1 (1080x1920) | 0.6667 (720x1280)
+    fps: int = 30
+    video_bitrate: int = 0                      # 0: 4500 kbps at 1080x1920, 3000 at 720x1280
+    x264_preset: str = "veryfast"
+    ffmpeg: str = "ffmpeg"
+    volume: float = 1.0
+    music_volume: float = 0.12
     extra: dict = field(default_factory=dict)
 
     @property
@@ -55,12 +69,25 @@ class Config:
     def load(cls, env_file: Path | None = None) -> "Config":
         env = {**load_env(env_file or HERE / ".env"), **{k: v for k, v in os.environ.items() if k.isupper()}}
         g = env.get
+        data = Path(g("DATA_DIR", str(HERE)))
+        data = data if data.is_absolute() else HERE / data
         secret = Path(g("GOOGLE_CLIENT_SECRET", "client_secret.json"))
+        music = data / "music.mp3"
+        if not music.exists() and (HERE / "assets" / "music.mp3").exists():
+            music = HERE / "assets" / "music.mp3"
         return cls(
+            stream_mode=g("STREAM_MODE", "cloud").strip().lower(),
             sarathi_url=g("SARATHI_URL", cls.sarathi_url).rstrip("/"),
             live_token=g("LIVE_TOKEN", ""),
-            yt_stream_key=g("YT_STREAM_KEY", ""),
-            google_client_secret=secret if secret.is_absolute() else HERE / secret,
+            yt_stream_key=(g("YT_STREAM_KEY") or g("YOUTUBE_STREAM_KEY") or "").strip(),
+            google_client_secret=secret if secret.is_absolute() else (data / secret if (data / secret).exists() else HERE / secret),
+            token_file=data / "token.json",
+            data_dir=data, cache_dir=data / "cache", log_dir=data / "logs", state_file=data / "state.json",
+            music_file=music, fonts_dir=Path(g("FONTS_DIR", str(HERE / "fonts"))),
+            rtmp_url=g("YOUTUBE_RTMP_URL", cls.rtmp_url).rstrip("/"),
+            scale=g("SCALE", "auto"), fps=int(g("FPS", "30")), video_bitrate=int(g("VIDEO_BITRATE_KBPS", "0") or 0),
+            x264_preset=g("X264_PRESET", "veryfast"), ffmpeg=g("FFMPEG_PATH", "ffmpeg"),
+            volume=float(g("VOLUME", "1.0")), music_volume=float(g("MUSIC_VOLUME", "0.12")),
             obs_ws_url=g("OBS_WS_URL", cls.obs_ws_url),
             obs_ws_password=g("OBS_WS_PASSWORD", ""),
             obs_exe=g("OBS_EXE", ""),
@@ -79,8 +106,8 @@ class Config:
         if not self.live_token:
             out.append("LIVE_TOKEN is empty: the stream would share the website's daily budgets.")
         if need_obs and not self.yt_stream_key:
-            out.append("YT_STREAM_KEY is empty: OBS has nothing to stream to.")
-        if need_obs and not self.obs_ws_password:
+            out.append("YT_STREAM_KEY is empty: there is nothing to stream to (YouTube Studio > Go live > Stream key).")
+        if need_obs and self.stream_mode == "obs" and not self.obs_ws_password:
             out.append("OBS_WS_PASSWORD is empty: enable OBS > Tools > WebSocket Server Settings and copy the password.")
         if need_youtube and not self.token_file.exists():
             out.append("token.json is missing: run `python youtube_auth.py` once to let the stream read chat.")

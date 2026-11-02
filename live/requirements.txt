@@ -1,7 +1,8 @@
-# Gita Sarathi Live: runs on the streaming laptop (Windows, macOS or Linux), not on Render.
+# Gita Sarathi Live: runs on the streaming server or laptop, not on Render.
 fastapi>=0.110
 uvicorn[standard]>=0.29
 httpx>=0.27
 websockets>=12
+pillow>=10.1              # draws the vertical stream (Devanagari shaped with raqm/HarfBuzz)
 tzdata>=2024.1            # time zones on Windows (YouTube's quota day is Pacific time)
 google-auth-oauthlib>=1.2 # only for the one-time YouTube sign-in (youtube_auth.py)

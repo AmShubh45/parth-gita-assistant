@@ -213,11 +213,12 @@ def test_recites_in_order_and_answers_questions_between_verses(tmp_path):
         await c.recite(c.pick())
     run(go())
     kinds = [m["type"] for m in page.sent]
-    assert kinds == ["verse", "queue", "queue", "asking", "answer", "verse"]
+    assert kinds == ["verse", "queue", "queue", "asking", "answer", "queue", "verse"]
     verse, answer = page.sent[0], page.sent[4]
+    assert c.recent == ["Asha"]
     assert verse["verse"]["id"] == "BG 1.1" and verse["audio"] and verse["progress"] == {"index": 1, "total": 3}
     assert answer["name"] == "Asha" and answer["answer"]["verses"][0]["id"] == "BG 2.62" and len(answer["audio"]) == 2
-    assert page.sent[5]["verse"]["id"] == "BG 1.2" and json.loads((tmp_path / "state.json").read_text()) == {"pos": 2}
+    assert page.sent[6]["verse"]["id"] == "BG 1.2" and json.loads((tmp_path / "state.json").read_text()) == {"pos": 2}
     assert sar.asked == ["मुझे बहुत गुस्सा आता है"]
 
 
@@ -387,3 +388,167 @@ def test_local_live_server_preview_and_audio(tmp_path):
     assert client.get("/audio/..%2F..%2Fsecret.wav").status_code == 404
     assert client.get("/music").status_code == 404
     assert client.get("/status").json()["waiting"] == ["Tester"]
+
+
+# ---------------------------------------------------------------- the vertical cloud stream (the EscapeArenaLive way)
+LIVE = Path(__file__).resolve().parents[1] / "live"
+
+
+@pytest.fixture(scope="module")
+def fonts():
+    from gitalive.fonts import ensure
+    from gitalive.render import Fonts
+    try:
+        return Fonts(ensure(LIVE / "fonts", log=lambda m: None))
+    except Exception as exc:  # no network to fetch them
+        pytest.skip(f"fonts unavailable: {exc}")
+
+
+VERSE = {"type": "verse", "id": "v1", "progress": {"index": 84, "total": 701},
+         "verse": {"id": "BG 2.47", "chapter": 2, "verse": 47, "chapter_name": "Sankhya Yoga", "chapter_name_sanskrit": "सांख्ययोग",
+                   "speaker": "Krishna", "addressed_to": "Arjuna", "speaker_hindi": "श्रीकृष्ण", "listener_hindi": "अर्जुन",
+                   "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि।।",
+                   "transliteration": "karmaṇy-evādhikāras te mā phaleṣhu kadāchana", "translation": "Thy right is to work only.",
+                   "translation_source": "Swami Swarupananda (1909)"}}
+
+
+def test_vertical_frames_are_drawn_with_shaped_devanagari(fonts):
+    from PIL import ImageFont
+    from gitalive.render import H, W, Renderer
+    r = Renderer(fonts)
+    idle = r.frame(0.0)
+    assert len(idle) == W * H * 3 == 1080 * 1920 * 3
+    assert len(r.frame(0.0, scale=0.6667)) == 720 * 1280 * 3
+    r.build_scene(VERSE)
+    assert r.frame(0.0) != idle and r.progress == (84, 701, 2) and r.last_fit == 1.0
+    shaped = fonts("sanskrit", 60).getlength("कर्मण्येवाधिकारस्ते")
+    basic = ImageFont.truetype(str(fonts.paths["sanskrit"]), 60, layout_engine=ImageFont.Layout.BASIC).getlength("कर्मण्येवाधिकारस्ते")
+    assert shaped != basic                                   # conjuncts and matras are shaped (raqm/HarfBuzz)
+
+
+def test_text_wraps_inside_its_box_and_long_answers_shrink(fonts):
+    from gitalive.render import Renderer, wrap
+    f = fonts("ui", 32)
+    text = "गुस्सा आना स्वाभाविक है, पर गीता इसकी जड़ दिखाती है। " * 6
+    assert all(f.getlength(line) <= 600 for line in wrap(text, f, 600)) and len(wrap(text, f, 600)) > 3
+    r = Renderer(fonts)
+    long = "विषयों के चिंतन से आसक्ति और आसक्ति से कामना पैदा होती है, और कामना से क्रोध। " * 4
+    card = {"id": "BG 2.62", "chapter": 2, "speaker": "Krishna", "addressed_to": "Arjuna", "sanskrit": VERSE["verse"]["sanskrit"],
+            "meaning": long, "application": long}
+    r.build_scene({"type": "answer", "id": "q1", "name": "Asha", "question": "मुझे बहुत गुस्सा आता है " * 8,
+                   "answer": {"kind": "answer", "lang": "hi", "opening": long, "closing": long, "verses": [card, card]}})
+    assert r.last_fit < 1.0                                  # shrunk to fit the stage
+    r.set_queue(["Asha", "Ravi"], ["Meera"])
+    assert r.waiting == ["Asha", "Ravi"] and r.answered == ["Meera"]
+
+
+def test_mixer_plays_voice_over_music_and_reports_the_end():
+    import array
+    from gitalive.broadcast import Mixer
+    music = array.array("h", [1000] * 24000)
+    m = Mixer(music=music, music_volume=0.12)
+    quiet = array.array("h", m.render(800))
+    assert len(quiet) == 800 and 100 <= max(quiet) <= 130          # music alone, at 12 %
+    ended = []
+    m.play([array.array("h", [8000] * 1200), array.array("h", [8000] * 1200)], lambda: ended.append(1))
+    first = array.array("h", m.render(800))
+    assert min(first) > 7000 and m.level > 0.2 and not ended       # the voice, with the music under it
+    m.render(800)
+    assert not ended
+    m.render(800)
+    assert ended == [1] and not m.busy                              # both clips done
+    for _ in range(40):
+        m.render(800)
+    assert max(array.array("h", m.render(800))) < 140               # music back up once the voice ends
+    replaced = []
+    m.play([array.array("h", [1] * 50000)], lambda: replaced.append("old"))
+    m.play([array.array("h", [1] * 10)], lambda: replaced.append("new"))
+    assert replaced == ["old"]                                      # cutting an item short releases its waiter
+
+
+def test_local_player_plays_through_the_mixer(tmp_path):
+    import threading
+    import time
+    from gitalive.broadcast import LocalPlayer, Mixer
+    (tmp_path / ("b" * 24 + ".wav")).write_bytes(tiny_wav(0.3))
+
+    class FakeRenderer:
+        def __init__(self):
+            self.scenes, self.queues = [], []
+
+        def build_scene(self, item):
+            self.scenes.append(item["type"])
+
+        def set_queue(self, waiting, answered=None):
+            self.queues.append((waiting, answered))
+
+    fr, mixer = FakeRenderer(), Mixer()
+    stop = threading.Event()
+
+    def pump():                       # stands in for the streaming loop: 24 kHz in real time
+        while not stop.is_set():
+            mixer.render(2400)
+            time.sleep(0.1)
+    threading.Thread(target=pump, daemon=True).start()
+    hub = Hub(LocalPlayer(fr, mixer, tmp_path))
+
+    async def go():
+        t0 = time.monotonic()
+        await hub.show({"type": "verse", "id": "v1", "audio": ["/audio/" + "b" * 24 + ".wav"]}, 0.3)
+        voiced = time.monotonic() - t0
+        await hub.announce({"type": "asking", "id": "q1", "name": "Asha", "question": "?"})
+        await hub.queue(["Ravi"], ["Asha"])
+        t0 = time.monotonic()
+        await hub.show({"type": "verse", "id": "v2", "audio": []}, 0.2)
+        return voiced, time.monotonic() - t0
+    voiced, silent = run(go())
+    stop.set()
+    assert 0.3 <= voiced < 3 and 0.2 <= silent < 1
+    assert fr.scenes == ["verse", "asking", "verse"] and fr.queues == [(["Ravi"], ["Asha"])]
+
+
+def test_cloud_settings_like_escape_arena(monkeypatch, tmp_path):
+    from gitalive.config import Config
+    env = tmp_path / ".env"
+    env.write_text("YOUTUBE_STREAM_KEY=abcd-efgh\nDATA_DIR=data\nSCALE=0.6667\n")
+    for k in ("STREAM_MODE", "YT_STREAM_KEY", "DATA_DIR", "SCALE", "YOUTUBE_STREAM_KEY"):
+        monkeypatch.delenv(k, raising=False)
+    c = Config.load(env)
+    assert c.stream_mode == "cloud" and c.yt_stream_key == "abcd-efgh" and c.scale == "0.6667"
+    assert c.data_dir.name == "data" and c.cache_dir == c.data_dir / "cache" and c.token_file == c.data_dir / "token.json"
+    assert c.rtmp_url.startswith("rtmps://") and c.fps == 30
+    assert not any("OBS" in p for p in c.problems(need_youtube=False))   # cloud mode needs no OBS
+
+
+def test_encoder_settings_match_escape_arena():
+    from gitalive.broadcast import Streamer, auto_scale, ffmpeg_args
+    a = ffmpeg_args(1080, 1920, 30, 4500, "veryfast", "rtmps://a.rtmps.youtube.com/live2/KEY", audio_port=5555)
+    j = " ".join(a)
+    assert "-s 1080x1920" in j and "-g 60" in j and "-keyint_min 60" in j and "-c:v libx264" in j and "-preset veryfast" in j
+    assert "-b:v 4500k" in j and "-c:a aac" in j and a[-2:] == ["flv", "rtmps://a.rtmps.youtube.com/live2/KEY"]
+    assert "-probesize 32" in j and "tcp://127.0.0.1:5555" in j
+    assert ffmpeg_args(720, 1280, 30, 3000, "veryfast", "out.mp4")[-1] == "out.mp4"
+    s = Streamer(object(), object(), target="rtmps://a.rtmps.youtube.com/live2", key="SECRET-KEY", scale=0.6667)
+    assert s.target.endswith("/live2/SECRET-KEY") and (s.width, s.height, s.bitrate) == (720, 1280, 3000)
+    assert s.redact("error at rtmps://x/live2/SECRET-KEY") == "error at rtmps://x/live2/****"
+    assert auto_scale("1") == 1.0 and auto_scale("auto") in (1.0, 0.6667)
+
+
+@pytest.mark.skipif(not __import__("shutil").which("ffmpeg"), reason="ffmpeg not installed")
+def test_streamer_records_a_vertical_clip(fonts, tmp_path):
+    import array
+    import subprocess
+    from gitalive.broadcast import Mixer, Streamer
+    from gitalive.render import Renderer
+    r, m = Renderer(fonts), Mixer()
+    r.build_scene(VERSE)
+    m.play([array.array("h", [3000, -3000] * 12000)], lambda: None)
+    out = tmp_path / "clip.mp4"
+    s = Streamer(r, m, target=str(out), fps=30, scale=0.6667, seconds=2)
+    s.run()
+    assert s.error is None and s.frames == 60
+    info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-of", "json", str(out)],
+                                     capture_output=True, text=True).stdout)
+    v = next(x for x in info["streams"] if x["codec_type"] == "video")
+    assert (v["width"], v["height"], v["r_frame_rate"]) == (720, 1280, "30/1")
+    assert any(x["codec_type"] == "audio" and x["codec_name"] == "aac" for x in info["streams"])

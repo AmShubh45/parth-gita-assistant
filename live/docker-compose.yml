@@ -1,0 +1,13 @@
+services:
+  stream:
+    build: .
+    container_name: gita-sarathi-live
+    restart: unless-stopped        # comes back by itself after crashes, network drops and server reboots
+    env_file: .env
+    volumes:
+      - ./data:/app/data           # voices, place in the Gita, token.json and music.mp3 survive updates
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"            # keep logs from filling the disk on a 24/7 run
+        max-file: "3"

@@ -7,6 +7,7 @@ WS   /ws            the conductor <-> overlay pages
 GET  /audio/<file>  cached voices
 GET  /music         optional background music (live/assets/music.mp3)
 GET  /status        what is on air, chat, OBS, quota (JSON)
+GET  /frame.jpg     cloud mode: the frame being streamed right now
 """
 from __future__ import annotations
 
@@ -16,7 +17,7 @@ import uuid
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
 STATIC = Path(__file__).resolve().parent / "static"
@@ -27,7 +28,7 @@ class PreviewAsk(BaseModel):
     text: str = Field(min_length=1, max_length=400)
 
 
-def make_app(conductor, cache_dir: Path, music: Path, status_extra=lambda: {}) -> FastAPI:
+def make_app(conductor, cache_dir: Path, music: Path, status_extra=lambda: {}, renderer=None) -> FastAPI:
     app = FastAPI(title="Gita Sarathi Live", docs_url=None, redoc_url=None)
     hub = conductor.hub
     trigger = conductor.mod.triggers[0] if conductor.mod.triggers else ""
@@ -74,8 +75,17 @@ def make_app(conductor, cache_dir: Path, music: Path, status_extra=lambda: {}) -
             raise HTTPException(404)
         return FileResponse(music)
 
+    @app.get("/frame.jpg")
+    async def frame() -> Response:
+        if renderer is None:
+            raise HTTPException(404)
+        import asyncio
+        data = await asyncio.to_thread(renderer.jpeg, 78, time.monotonic())
+        return Response(data, media_type="image/jpeg", headers={"Cache-Control": "no-store"})
+
     @app.get("/status")
     def status() -> JSONResponse:
-        return JSONResponse({**conductor.snapshot(), **status_extra(), "time": time.strftime("%Y-%m-%d %H:%M:%S")})
+        return JSONResponse({**conductor.snapshot(), **status_extra(), "rendered": renderer is not None,
+                             "time": time.strftime("%Y-%m-%d %H:%M:%S")})
 
     return app

@@ -21,9 +21,12 @@ CARD_FIELDS = ("id", "ref", "chapter", "chapter_name", "chapter_name_sanskrit", 
 
 
 class Hub:
-    """The overlay pages connected over WebSocket."""
+    """Where things go on air. In OBS mode: the overlay pages connected over WebSocket (a page says when it has
+    finished). In cloud mode a player (broadcast.LocalPlayer) renders and voices each item itself; preview pages
+    still receive everything."""
 
-    def __init__(self) -> None:
+    def __init__(self, player=None) -> None:
+        self.player = player
         self.clients: set = set()
         self.current: dict | None = None
         self.queue_msg: dict = {"type": "queue", "waiting": []}
@@ -52,6 +55,10 @@ class Hub:
     async def show(self, item: dict, seconds: float) -> None:
         """Put an item on air and wait until a page has played it (or, with no page, for its length)."""
         self.current = item
+        if self.player:
+            await self.send_all(item)
+            await self.player.play(item, seconds)
+            return
         ev = self._done[item["id"]] = asyncio.Event()
         try:
             await self.send_all(item)
@@ -65,9 +72,18 @@ class Hub:
         finally:
             self._done.pop(item["id"], None)
 
-    async def queue(self, waiting: list[str]) -> None:
+    async def announce(self, item: dict) -> None:
+        """Show something without waiting for it to finish (e.g. "Asha asks …" while the answer is written)."""
+        self.current = item
+        await self.send_all(item)
+        if self.player:
+            await asyncio.to_thread(self.player.r.build_scene, item)
+
+    async def queue(self, waiting: list[str], answered: list[str] | None = None) -> None:
         self.queue_msg = {"type": "queue", "waiting": waiting}
         await self.send_all(self.queue_msg)
+        if self.player:
+            await asyncio.to_thread(self.player.r.set_queue, waiting, answered)
 
 
 def reading_seconds(*texts: str) -> float:
@@ -85,6 +101,7 @@ class Conductor:
         self.n = 0
         self.status = "starting"
         self.answered = 0
+        self.recent: list[str] = []      # who was answered last, newest first (shown on the vertical stream)
 
     # ---- recitation
     async def load(self) -> None:
@@ -140,7 +157,7 @@ class Conductor:
         if q:
             log.info("question from %s queued (%d waiting)", q.author, len(self.mod.queue))
             try:
-                asyncio.get_running_loop().create_task(self.hub.queue(self.mod.waiting()))
+                asyncio.get_running_loop().create_task(self.hub.queue(self.mod.waiting(), self.recent))
             except RuntimeError:   # called outside the event loop: the next item refreshes the queue
                 pass
         return q is not None
@@ -149,9 +166,8 @@ class Conductor:
         self.n += 1
         base = {"id": f"q{self.n}", "name": q.author, "question": q.text}
         self.status = f"answering {q.author}"
-        await self.hub.queue(self.mod.waiting())
-        self.hub.current = {"type": "asking", **base}
-        await self.hub.send_all(self.hub.current)
+        await self.hub.queue(self.mod.waiting(), self.recent)
+        await self.hub.announce({"type": "asking", **base})
         try:
             a = await self.sarathi.ask(q.text)
         except SarathiError as exc:
@@ -171,7 +187,9 @@ class Conductor:
                            "meaning_label": a.get("meaning_label", ""),
                            "verses": [{k: c.get(k, "") for k in CARD_FIELDS} for c in a.get("verses", [])[:2]]}}
         self.answered += 1
+        self.recent = [q.author] + [n for n in self.recent if n != q.author][:5]
         await self.hub.show(item, seconds + 3)
+        await self.hub.queue(self.mod.waiting(), self.recent)
 
     # ---- the loop
     async def run(self) -> None:

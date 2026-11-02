@@ -1,5 +1,6 @@
 pytest>=8
 pyspellchecker>=0.8
+pillow>=10.1
 playwright>=1.45
 websockets>=12
 -r requirements.txt

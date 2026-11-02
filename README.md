@@ -1,4 +1,4 @@
-> **Gita Sarathi · गीता सारथी (Parth v2) lives on the `v2` branch**: ask by voice or text in Hindi, Hinglish or English and hear the answer spoken back, grounded in exact Gita verses (Python/FastAPI). The 24/7 YouTube stream that recites the Gita and answers `@gitalive` chat questions is in [live/](live/README.md). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+> **Gita Sarathi · गीता सारथी (Parth v2) lives on the `v2` branch**: ask by voice or text in Hindi, Hinglish or English and hear the answer spoken back, grounded in exact Gita verses (Python/FastAPI). The vertical 24/7 YouTube stream that recites the Gita and answers `@gitalive` chat questions (streamed like Escape Arena: no OBS, Docker on the free Oracle server) is in [live/](live/README.md). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 >
 > Deploy v2 on Render: New → Blueprint → this repo → it reads `render.yaml` (branch `v2`). Paste the same `GEMINI_API_KEY` Samajh uses; `PARTH_DAILY_AI_LIMIT` (default 300) caps AI answers per day and `PARTH_DAILY_TTS_LIMIT` (default 600) caps spoken pieces, so Samajh's quota is protected.
 >

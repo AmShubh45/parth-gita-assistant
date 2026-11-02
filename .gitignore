@@ -33,3 +33,6 @@ live/token.json
 live/client_secret*.json
 live/assets/*.mp3
 live/.venv/
+live/fonts/
+live/data/*
+!live/data/README.txt

@@ -1,0 +1,11 @@
+.env
+.venv
+data
+cache
+logs
+fonts
+state.json
+token.json
+client_secret*.json
+__pycache__
+*.mp4

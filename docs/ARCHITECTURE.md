@@ -67,8 +67,9 @@ question
   - **Limits:** a daily voice-session cap, a per-visitor rate limit, and 10-minute sessions.
   - **Honest limit:** spoken words are grounded and instructed, not verified word by word like the spoken answers above.
 - **Testing:** `scripts/e2e_voice_mock.py` drives both modes in Chromium with a fake microphone and mocked Gemini: record → auto-stop → transcript → cards → every piece played → conversation mode's second question; and Live's half duplex, echo handling and tool call.
-- **Gita Sarathi Live** (YouTube, 24/7, built: `live/`, setup in [live/README.md](../live/README.md)).
-  - Runs on the laptop next to OBS, like the cricket stream. A local page (`/overlay`, 1920×1080) is the OBS Browser Source; OBS gets its own **GitaLive** profile, scene collection and scene, created over OBS WebSocket, and a watchdog keeps it streaming (and restarts OBS). A Windows Task Scheduler autopilot starts everything at sign-in.
+- **Gita Sarathi Live** (YouTube, 24/7, vertical, built: `live/`, setup in [live/README.md](../live/README.md)).
+  - **Streams the EscapeArenaLive way** (default `STREAM_MODE=cloud`): no OBS and no browser. `render.py` draws the vertical 1080×1920 frame with Pillow (Devanagari shaped by HarfBuzz/raqm) in three layers (static once, scene per item, a few dynamic shapes per frame, about 5 ms), `broadcast.py` mixes the voice over optional music, and ffmpeg gets raw frames on stdin and PCM over TCP (no input probing, separate writer threads so neither pipe blocks the other) and sends H.264 `veryfast` 4500 kbps + AAC to YouTube RTMPS. 720×1280 on small machines (`SCALE`). It runs in Docker with `restart: unless-stopped` on the Oracle Always Free server next to Escape Arena ([live/FREE-DEPLOY.md](../live/FREE-DEPLOY.md)), or on a PC with `start_gitalive.bat`.
+  - **OBS mode** (`STREAM_MODE=obs`, the first version) remains: a 16:9 overlay page as an OBS Browser Source, OBS driven over WebSocket with its own GitaLive profile and scene, a watchdog, and a Task Scheduler autopilot.
   - **The conductor decides what is on air** (the page only plays it): recitation in order, resuming where it stopped; between verses, viewer questions. With no page connected it keeps time itself.
   - **Recitation:** `GET /api/recite` gives every verse with one signed piece (chapter and verse, the Sanskrit, then the verified translation; Sanskrit only while a translation is unverified). Each piece is voiced once through `/api/speak` and kept on the laptop for ever, with a daily ration of new recordings; until all 701 are recorded the stream loops over the recorded ones.
   - **Viewer questions:** a chat message with `@gitalive` (or `!gita`, `#gitalive`) passes moderation (links, abuse, length, repeats, one per viewer every 5 minutes, a per-hour cap, Super Chats and moderators first) and goes through `/api/ask`, the same pipeline as the website. It appears as "Asha asks …", then the answer with its verses, spoken. Crisis questions get helplines.
@@ -108,9 +109,9 @@ A change that lowers any of these does not ship.
 
 1. **Knowledge base L1–L3**: done. Authentic Swarupananda translation (L2): 487/700 verses verified.
 2. **Remaining translations:** review the 213 unverified verses against page images, and add Telang and Besant. Then L4–L6 through the draft → verify → approve pipeline, and the answer engine with tests and evals.
-3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 105 tests (86 for the app, 19 for the live stream), plus browser end-to-end checks for voice and the live overlay.
+3. **Answer engine**: done (`parth/`). Safety triage, Hindi/Hinglish/English, retrieval over verified verses with the situation index, select → compose → verify with code-level guardrails, and an offline fallback. Covered by 112 tests (86 for the app, 26 for the live stream), plus end-to-end checks for voice, the OBS overlay, and a real vertical recording through ffmpeg.
 4. **Web app**: done and deployed on Render as Gita Sarathi, with spoken answers, conversation mode and Live (beta). The Node.js version is kept on the `legacy-node` branch.
-5. **Gita Sarathi Live**: built (`live/`): OBS automation, recitation loop and YouTube chat Q&A. Next: run it on the laptop.
+5. **Gita Sarathi Live**: built (`live/`): vertical 24/7 cloud stream like Escape Arena (OBS mode optional), recitation loop and YouTube chat Q&A. Next: deploy it on the Oracle server.
 6. **Growth**: voice, more languages, sharing cards.
 
 ## 9. Needed from the owner
