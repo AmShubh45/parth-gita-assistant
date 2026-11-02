@@ -43,7 +43,8 @@ def norm(text: str) -> str:
 class Moderator:
     def __init__(self, triggers=("@gitalive", "!gita", "#gitalive"), per_author_s: int = 300,
                  repeat_s: int = 6 * 3600, per_hour: int = 20, queue_max: int = 10, clock=time.time):
-        self.triggers = tuple(t.lower() for t in triggers)
+        self.labels = tuple(t.strip() for t in triggers if t.strip())     # as typed, for the screen
+        self.triggers = tuple(t.lower() for t in self.labels)             # for matching
         self.per_author_s, self.repeat_s, self.per_hour, self.queue_max = per_author_s, repeat_s, per_hour, queue_max
         self.clock = clock
         self.queue: list[Question] = []

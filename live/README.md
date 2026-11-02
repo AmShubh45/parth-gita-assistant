@@ -19,6 +19,9 @@ What viewers see, top to bottom: LIVE · 24/7 and the verse count; **गीत�
 the stage (the verse being recited, or a viewer's question and its answer with verse cards, with a waveform while
 it speaks); **next questions** and **just answered**; the 18 chapters; and "चैट में लिखें @gitalive + अपना सवाल".
 
+**Channel name, logo, banner, thumbnail, descriptions, titles, tags and the growth plan:** see
+**[CHANNEL-KIT.md](CHANNEL-KIT.md)** and the images in `branding/` (redraw with `python branding.py`).
+
 ## 1. Before you start (once)
 
 **Render (the website).** Make a long random secret:
@@ -126,6 +129,7 @@ python run_live.py --check                       check settings, ffmpeg, fonts, 
 | `gitalive/server.py`, `static/preview.html` | Local preview page and status |
 | `Dockerfile`, `docker-compose.yml` | The 24/7 server setup |
 | `youtube_auth.py` | One-time YouTube sign-in |
+| `CHANNEL-KIT.md`, `branding.py`, `branding/` | Channel name, texts, settings, growth plan; logo, banner, thumbnail, watermark |
 | `start_gitalive.bat`, `install_autopilot.ps1` | Running it from a Windows PC |
 
 Tests: `pytest tests/test_live.py` (from the repo root). Recording check: `python scripts/e2e_live_stream.py`.

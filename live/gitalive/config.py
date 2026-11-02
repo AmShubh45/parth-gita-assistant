@@ -91,7 +91,8 @@ class Config:
             obs_ws_url=g("OBS_WS_URL", cls.obs_ws_url),
             obs_ws_password=g("OBS_WS_PASSWORD", ""),
             obs_exe=g("OBS_EXE", ""),
-            triggers=tuple(t.strip().lower() for t in g("CHAT_TRIGGERS", "@gitalive,!gita,#gitalive").split(",") if t.strip()),
+            # kept as typed (the first one is shown on screen); matching ignores case
+            triggers=tuple(t.strip() for t in g("CHAT_TRIGGERS", "@gitalive,!gita,#gitalive").split(",") if t.strip()),
             chat_daily_units=int(g("CHAT_DAILY_UNITS", "9000")),
             answers_per_hour=int(g("ANSWERS_PER_HOUR", "20")),
             recite_tts_per_day=int(g("RECITE_TTS_PER_DAY", "200")),

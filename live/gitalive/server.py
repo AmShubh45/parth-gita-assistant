@@ -31,7 +31,7 @@ class PreviewAsk(BaseModel):
 def make_app(conductor, cache_dir: Path, music: Path, status_extra=lambda: {}, renderer=None) -> FastAPI:
     app = FastAPI(title="Gita Sarathi Live", docs_url=None, redoc_url=None)
     hub = conductor.hub
-    trigger = conductor.mod.triggers[0] if conductor.mod.triggers else ""
+    trigger = conductor.mod.labels[0] if conductor.mod.labels else ""
     hub.config = {"type": "config", "music": music.exists(), "trigger": trigger or "@gitalive"}
 
     @app.get("/overlay")
@@ -44,7 +44,7 @@ def make_app(conductor, cache_dir: Path, music: Path, status_extra=lambda: {}, r
 
     @app.post("/preview/ask")
     async def preview_ask(body: PreviewAsk) -> dict:
-        text = body.text if trigger in body.text.lower() else f"{trigger} {body.text}"
+        text = body.text if trigger.lower() in body.text.lower() else f"{trigger} {body.text}"
         ok = conductor.offer({"id": uuid.uuid4().hex, "author": body.name, "channel": f"preview-{body.name}",
                               "text": text, "staff": True})
         return {"queued": ok, "waiting": conductor.mod.waiting(), "rejected": conductor.mod.rejected}

@@ -552,3 +552,28 @@ def test_streamer_records_a_vertical_clip(fonts, tmp_path):
     v = next(x for x in info["streams"] if x["codec_type"] == "video")
     assert (v["width"], v["height"], v["r_frame_rate"]) == (720, 1280, "30/1")
     assert any(x["codec_type"] == "audio" and x["codec_name"] == "aac" for x in info["streams"])
+
+
+def test_the_trigger_shown_on_screen_keeps_its_case(monkeypatch, tmp_path):
+    from gitalive.config import Config
+    env = tmp_path / ".env"
+    env.write_text("CHAT_TRIGGERS=@GitaSarathiLive,@gitalive,!gita\n")
+    monkeypatch.delenv("CHAT_TRIGGERS", raising=False)
+    c = Config.load(env)
+    assert c.triggers[0] == "@GitaSarathiLive"
+    m = Moderator(c.triggers, clock=Clock())
+    assert m.labels[0] == "@GitaSarathiLive"
+    assert m.offer("1", "Asha", "c1", "@gitasarathilive मन शांत कैसे करूँ?").text == "मन शांत कैसे करूँ?"   # any case matches
+    assert m.offer("2", "Ravi", "c2", "@GITALIVE how to handle exam stress?").text == "how to handle exam stress?"
+
+
+def test_channel_images_have_youtube_sizes(fonts, tmp_path, monkeypatch):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("branding", LIVE / "branding.py")
+    b = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(b)
+    assert b.avatar(fonts).size == (800, 800)
+    assert b.banner(fonts).size == (2560, 1440)
+    assert b.thumbnail(fonts).size == (1280, 720)
+    wm = b.watermark()
+    assert wm.size == (150, 150) and wm.mode == "RGBA" and wm.getpixel((0, 0))[3] == 0     # transparent corners
